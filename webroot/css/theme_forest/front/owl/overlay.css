@@ -1,0 +1,277 @@
+    .overlay{
+         position: absolute;
+         top: 0;
+         left: 0;
+         right: 0;
+         bottom: 0;
+         background-color: rgba(21, 21, 21, 0.85);
+         background: repeat scroll transparent\9;
+         z-index: 9999;
+         color: white;
+    }
+    .navigation-panel{
+        padding-bottom: 170px;
+        padding-top: 50px;
+
+    }
+    .wrapper {
+         background: url(img/overlay/overlay-menu.png) center no-repeat !important;
+         -webkit-background-size: cover;
+         -moz-background-size: cover;
+         -o-background-size: cover;
+         background-size: cover; 
+
+         background-repeat: no-repeat;
+         background-position: center center; 
+    }
+    .left{
+        float:left;
+    }
+    .col-md-6{
+        padding-left:0px !important;
+        padding-right:0px !important;
+    }
+    .center-absolute{
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        left: 20px;
+        right: 0;
+    }
+
+    @media (max-width: 1875px)
+    {
+        .hyper-link {
+            padding-left: 3% !important;
+        }
+        .cont-link{
+            height:51% !important;
+        }
+
+    }
+    @media (max-width: 1770px)
+    {
+        .hyper-link {
+            padding-left: 5% !important;
+        }
+        .center-absolute{
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: 1% !important;
+            right: 0;
+        }
+    }
+    @media (max-width: 1600px)
+    {
+        .hyper-link {
+            padding-left: 4% !important;
+        }
+        .cont-link{
+            height:45% !important;
+        }
+        .navigation-panel{
+            padding-bottom: 100px !important;
+            padding-top: 30px !important;
+       }
+    }
+    @media (max-width: 1445px)
+    {
+        .hyper-link {
+            padding-left: 4% !important;
+        }
+        .cont-link{
+            height:42% !important;
+        }
+
+    }
+    @media (max-width: 1365px)
+    {
+        .hyper-link {
+            padding-left: 4% !important;
+        }
+        .cont-link{
+            height:40% !important;
+        }
+        .navigation-panel{
+            padding-bottom: 10px !important;
+            padding-top: 10px !important;
+        }
+    }
+    @media (max-width: 1305px)
+    {
+        .hyper-link {
+            padding-left: 4% !important;
+        }
+        .cont-link{
+            height:38% !important;
+        }
+    }
+   @media (max-width: 1245px)
+    {
+        .hyper-link {
+            padding-left: 4% !important;
+        }
+        .cont-link{
+            height:36% !important;
+        }
+        .navigation-panel{
+            padding-bottom: 0px !important;
+            padding-top: 0px !important;
+        }
+    }
+    @media (max-width: 1175px)
+    {
+        .hyper-link {
+            padding-left: 4% !important;
+        }
+        .cont-link{
+            height:34% !important;
+        }
+    }
+    @media (max-width: 1120px)
+    {
+        .hyper-link {
+            padding-left: 4% !important;
+        }
+        .cont-link{
+            height:32% !important;
+        }
+    }
+    @media (max-width: 990px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:50% !important;
+        }
+                .navigation-panel{
+            padding-bottom: 100px !important;
+            padding-top: 30px !important;
+       }
+    }
+    @media (max-width: 785px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:47% !important;
+        }
+        .navigation-panel{
+            padding-bottom: 0px !important;
+            padding-top: 0px !important;
+        }
+        .center-absolute{
+            position: absolute;
+            margin-left: auto;
+            margin-right: auto;
+            left: 0px !important;
+            right: 0;
+        }
+        .navigation-panel{
+            height:400px !important;
+        }
+    }
+    @media (max-width: 710px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:43% !important;
+        }
+    }
+    @media (max-width: 660px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:39% !important;
+        }
+    }
+    @media (max-width: 620px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:35% !important;
+        }
+    }
+    @media (max-width: 580px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:32% !important;
+        }
+    }
+    @media (max-width: 510px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:29% !important;
+        }
+    }
+    @media (max-width: 464px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:24% !important;
+        }
+    }
+    @media (max-width: 400px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:21% !important;
+        }
+    }
+    @media (max-width: 350px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:18% !important;
+        }
+    }
+    @media (max-width: 315px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:14% !important;
+        }
+    }
+    @media (max-width: 245px)
+    {
+        .hyper-link {
+            padding-left: 7% !important;
+        }
+        .cont-link{
+            height:10% !important;
+        }
+    }
+    .no-scroll{
+        overflow: hidden;
+    }
+
+
+    .hidden{
+        display: hidden;
+    }
+    .show{
+        display:block;
+    }

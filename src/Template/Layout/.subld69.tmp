@@ -1,0 +1,20 @@
+  <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" src="images/page-banner.jpg" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+        <div class="row">
+        <h1>About Us</h1>
+        <p><a href="#">Home</a> / <a href="#">About Us</a></p>
+        </div>
+            </div>
+          </div>
+        </div>
+
+ 
+        </div>
+      </div>
+    </div><!-- /.carousel -->

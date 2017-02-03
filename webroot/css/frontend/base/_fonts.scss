@@ -1,0 +1,42 @@
+// -----------------------------------------------------------------------------
+// This file contains all @font-face declarations, if any.
+// -----------------------------------------------------------------------------
+
+@include font-face($font-opensans, $base-url + 'fonts/', 'opensans-regular', 'opensans-regular');
+
+
+
+@font-face {
+    font-family: $base-font-bold;
+    src: url('../assets/fonts/phenomena-bold.woff2') format('woff2'),
+         url('../assets/fonts/phenomena-bold.woff') format('woff'),
+         url('../assets/fonts/phenomena-bold.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+@font-face {
+    font-family: $base-font-regular;
+    src: url('../assets/fonts/phenomena-regular.woff2') format('woff2'),
+         url('../assets/fonts/phenomena-regular.woff') format('woff'),
+         url('../assets/fonts/phenomena-regular.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: $base-font-thin;
+    src: url('../assets/fonts/phenomena-thin.woff2') format('woff2'),
+         url('../assets/fonts/phenomena-thin.woff') format('woff'),
+         url('../assets/fonts/phenomena-thin.otf') format('otf');
+    font-weight: normal;
+    font-style: normal;
+
+}

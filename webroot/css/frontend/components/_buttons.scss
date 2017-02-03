@@ -1,0 +1,55 @@
+.btn-primary {
+    background: $dark-bg;
+    color: #fff;
+    padding: 10px 50px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 20px;
+    border: none;
+
+    &:hover, &:focus {
+        background: #f69f01;
+        color: $dark-bg;
+    }
+}
+
+.btn-signup {
+    color: #fff;
+    background: #f69f01;
+    padding: 6px 25px;
+    border-radius: 25px;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
+
+
+
+.cf-loadmore-handler {
+    display: inline-block;
+    width: 100%;
+    background: #f9f2c5;
+
+    .btn {
+        &-loadmore {
+            padding: 15px 25px;
+            display: table;
+            margin: 35px auto;
+            text-transform: uppercase;
+            max-width: 300px;
+            width: 100%;
+
+            &.cf-less, &.cf-more {
+                color: $brand-color;
+                border: 2px solid $brand-color;
+                background: transparent;
+                border-radius: 0;
+
+                @include on-event {
+                    color: $dark-bg;
+                    border: 2px solid $dark-bg;
+                    background: #fff;
+                }
+            }
+        }
+    }
+}

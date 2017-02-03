@@ -1,0 +1,49 @@
+.cp-software {
+    background: $brand-bg;
+
+    .cp-cs-app-content {
+
+        @include respond-to(xs) {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        img {
+            @include respond-to(xs) {
+                margin-bottom: 25px;
+            }
+        }
+
+        h2 {
+            text-transform: capitalize;
+            margin-bottom: 35px;
+        }
+
+        p {
+            margin-bottom: 35px;
+        }
+    }
+
+    .cp-cs-app {
+        margin-top: 50px;
+
+        @include respond-to(xs) {
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 100px;
+            color: $dark-bg;
+
+            @include respond-to(xs) {
+                text-align: left;
+            }
+        }
+
+        img {
+            @include respond-to(xs) {
+                margin-bottom: 25px;
+            }
+        }
+    }
+}

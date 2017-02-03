@@ -1,0 +1,171 @@
+.cp-about-header {
+    background: url('../assets/images/about-banner.jpg') no-repeat center left;
+    background-size: cover;
+    margin-top: 50px;
+    color: $brand-bg;
+
+    p {
+        font-size: 17px;
+        text-shadow: 0px 0px 30px rgb(0, 0, 0);
+        color:$primary-bg;
+        @include respond-to(xs){
+            font-size: 14px;
+        }
+    }
+}
+
+.cp-about-handler {
+    position: relative;
+    background: $primary-bg;
+
+    &:before {
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        background-color: $dark-bg;
+        content: '';
+        position: absolute;
+        z-index: 2;
+
+        @include respond-to(xs) {
+            content: none;
+        }
+    }
+
+    .cp-line-white {
+        position: relative;
+        z-index: 2;
+        @include respond-to(xs){
+            padding-bottom:50px;
+            display:inline-table;
+        }
+        &:before {
+            content: '';
+            background: $primary-bg;
+            height: 5px;
+            width: 50px;
+            position: absolute;
+            left: 0;
+            top: 100px;
+
+            @include respond-to(xs) {
+                content: none;
+            }
+        }
+
+        &:after {
+            content: '';
+            background: $primary-bg;
+            height: 5px;
+            width: 50px;
+            position: absolute;
+            left: 0;
+            bottom: 100px;
+
+            @include respond-to(xs) {
+                content: none;
+            }
+        }
+    }
+
+    .cp-line-black {
+        position: relative;
+
+        @include respond-to(xs) {
+            color: #000;
+            text-align: center;
+        }
+
+        &:before {
+            content: '';
+            background: $dark-bg;
+            height: 5px;
+            width: 50px;
+            position: absolute;
+            right: 0;
+            top: 100px;
+
+            @include respond-to(xs) {
+                content: none;
+            }
+        }
+
+        &:after {
+            content: '';
+            background: $dark-bg;
+            height: 5px;
+            width: 50px;
+            position: absolute;
+            right: 0;
+            bottom: 100px;
+
+            @include respond-to(xs) {
+                content: none;
+            }
+        }
+    }
+
+    .cp-white-p {
+        color: $brand-bg;
+        position: relative;
+
+        @include respond-to(xs) {
+            color: #000;
+            text-align: center;
+        }
+
+        p, h4 {
+            width: 85%;
+            float: right;
+            display: inline-block;
+
+            @include respond-to(xs) {
+                width: 100%;
+            }
+        }
+        /*&:after {
+            content: '';
+            background: #fff;
+            height: 5px;
+            width: 50px;
+            position: absolute;
+            right: -15px;
+            top: 100px;
+        }
+
+        &:nth-child(2) {
+            &:after {
+                bottom: 100px;
+            }
+        }*/
+    }
+
+    .cp-black-p {
+        position: relative;
+        display: inline-block;
+
+        p {
+            width: 80%;
+
+            @include respond-to(xs) {
+                width: 100%;
+            }
+        }
+        /*&:before {
+            content: '';
+            background: $dark-bg;
+            height: 5px;
+            width: 50px;
+            position: absolute;
+            left: -15px;
+            top: 100px;
+        }
+
+        &:nth-child(2) {
+            &:before {
+                bottom: 100px;
+            }
+        }*/
+    }
+}

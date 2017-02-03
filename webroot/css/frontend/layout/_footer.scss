@@ -1,0 +1,64 @@
+footer {
+    background: $dark-bg;
+    color: #696969;
+    padding: 15px 0;
+
+    @include respond-to(xs) {
+        text-align: center;
+    }
+
+    @include respond-to(sm) {
+        font-size: 9px;
+    }
+
+    .cp-copyr {
+
+        @include respond-to(xs) {
+            font-size: 13px;
+        }
+    }
+
+    .cp-social {
+        
+        
+        @include respond-to(xs) {
+            margin: 15px 0;
+        }
+    }
+
+    .cp-logo-foot {
+        img {
+            width: 70px;
+            float: right;
+            margin-top: -37px;
+            z-index: 2;
+            position: relative;
+
+            @include respond-to(xs) {
+                float: none;
+                margin-top: 0;
+            }
+        }
+
+        &:after {
+            content: '';
+            width: 75px;
+            height: 75px;
+            border-radius: 15px 0 0;
+            background: #232225;
+            top: -50px;
+            position: absolute;
+            transform: rotate(45deg);
+            z-index: 1;
+            right: 14px;
+
+            @include respond-to(xs) {
+                content: none;
+            }
+        }
+    }
+
+    ul {
+        margin-bottom: 0;
+    }
+}

@@ -1,0 +1,104 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+/**
+ * Basic styles for links
+ */
+a {
+    color: $brand-color;
+    text-decoration: none;
+
+    @include on-event {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+.btn, a {
+    -moz-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    transition: all .3s ease-in-out;
+}
+
+/**
+ * Basic styles for input fields
+ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-focus-ring-color: none;
+    outline: none;
+
+    &::-webkit-input-placeholder {
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+}
+
+
+.container {
+    @media only screen and (min-width:1200px) and (max-width:1399px) {
+        width: 1170px;
+    }
+
+    @media only screen and (min-width:1400px) and (max-width:1599px) {
+        width: 1370px;
+    }
+
+
+    @media only screen and (min-width:1600px) {
+        width: 1570px;
+    }
+}
+
+.pad-50 {
+    padding: 50px 0;
+}
+
+.pad-100 {
+    padding: 100px 0;
+
+    @include respond-to(xs) {
+        padding: 50px 0;
+    }
+
+    @include respond-to(sm) {
+        padding: 70px 0;
+    }
+}
+
+.cp-height {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+
+    @include respond-to(xs) {
+        display: -webkit-block;
+        display: -webkit-block;
+        display: -ms-block;
+        display: block;
+    }
+}
+
+article {
+    display: none;
+
+    &.cp-active {
+        display: block !important;
+    }
+}

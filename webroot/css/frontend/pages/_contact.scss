@@ -1,0 +1,100 @@
+.cp-contact-header {
+    background: url('../assets/images/contact-bg.jpg') no-repeat center right;
+    background-size: cover;
+    margin-top: 50px;
+    color: #fff;
+    padding: 100px 0 150px;
+
+    @include respond-to(xs) {
+        background: url('../assets/images/contact-bg.jpg') no-repeat left !important;
+        padding: 50px 0;
+    }
+}
+
+.cp-contact-form {
+    /*form {
+        width: 85%;
+
+        @include respond-to(xs) {
+            width: 100%;
+            display: inline-block;
+        }
+
+        .form-group {
+            .form-control {
+                border: 1px solid #232225;
+                height: 45px;
+            }
+
+            textarea {
+                &.form-control {
+                    min-height: 200px;
+                }
+            }
+        }
+    }*/
+    background: $primary-bg;
+
+
+    form {
+        width: 85%;
+
+        @include respond-to(xs) {
+            width: 100%;
+            display: inline-block;
+        }
+
+        input.form-control, textarea.form-control {
+            display: block;
+            border: none;
+            padding: 5px 0;
+            border-bottom: solid 1px #9a9a9a;
+            -webkit-transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+            transition: all 0.3s cubic-bezier(0.64, 0.09, 0.08, 1);
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 96%, $dark-bg 4%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 96%, $dark-bg 4%);
+            background-position: -80em 0%;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            color: $dark-bg;
+            border-radius: 0;
+            box-shadow: none;
+            margin-bottom: 25px;
+
+            &:focus, &:valid {
+                box-shadow: none;
+                outline: none;
+                background-position: 0 0;
+                border: none;
+            }
+
+            &:focus::-webkit-input-placeholder, &:valid::-webkit-input-placeholder {
+                color: $dark-bg;
+                font-size: 15px;
+                -webkit-transform: translateY(-15px);
+                transform: translateY(-15px);
+                visibility: visible !important;
+                z-index: 5;
+                position: relative;
+            }
+        }
+
+        textarea.form-control {
+            min-height: 180px;
+            position: relative;
+            padding: 20px 0;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
+
+    .cp-contact-info {
+        margin-top: 15%;
+
+        @include respond-to(xs) {
+            text-align: center;
+        }
+    }
+}
