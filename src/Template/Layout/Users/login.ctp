@@ -8,19 +8,15 @@
         Comfort Packaging :
         <?= $page_title; ?>
     </title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <?php
         echo $this->Html->meta('icon');
- 
-        echo $this->Html->css('theme_forest/bootstrap.css');
-        echo $this->Html->css('theme_forest/animate.css');
-        echo $this->Html->css('theme_forest/font-awesome.min.css');
-        echo $this->Html->css('theme_forest/icon.css');
-        echo $this->Html->css('theme_forest/font.css');
-        echo $this->Html->css('theme_forest/app.css');
         //echo $this->Html->css('backend.css'); 
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');
+        echo $this->Html->css('frontend/main.min.css');
     ?>
 
     <link rel="shortcut icon" href="ico/favicon.png">
@@ -35,6 +31,7 @@
     <section id="content" class="m-t-lg wrapper-md animated fadeInUp">    
         <?= $this->fetch('content') ?>               
     </section>
+    <br/><br/><br/><br/><br/><br/>
     <!-- footer -->
     <footer id="footer">
         <div class="text-center padder">

@@ -39,13 +39,13 @@
         </div> <!--/.nav-collapse -->
     </div>
 </nav>
-
-<div class="container aside-xl" style="margin-top: 260px;">
-  <a href="<?php echo $this->Url->build("/"); ?>" class="navbar-brand block">Comfort Packaging</a>
+<br style="clear:both;"/>
+<div class="container aside-xl" style="margin-top: 150px;width: 450px;">
+  <a style="color:black;width: 100%;text-align:center;" href="<?php echo $this->Url->build("/"); ?>" class="navbar-brand block">Comfort Packaging</a><br style="clear:both;" /><br style="clear:both;" />
   <section class="m-b-lg">    
     <header class="wrapper text-center">
-      <strong><?php echo __("Sign in to your account"); ?></strong>
-    </header>
+      <strong style="color:#788288;"><?php echo __("Sign in to your account"); ?></strong>
+    </header><br style="clear:both;" />
     <?= $this->Flash->render() ?>
     <?= $this->Flash->render('auth') ?>
     <?= $this->Form->create(null,['class' => 'form-horizontal']) ?>    
@@ -58,7 +58,7 @@
         </div>
         <br />        
       </div>
-      <button type="submit" style="width: 100% !important;" class="btn btn-lg btn-primary btn-block"><?php echo __("Sign In"); ?></button>
+      <button type="submit" style="width: 100% !important;" class="btn btn-lg btn-primary btn-block"><?php echo __("Sign In"); ?></button><br style="clear:both;" />
       <div class="text-center m-t m-b"><?= $this->Html->link('<small>' . __('Forgot password?') . '</small>', ['controller' => 'forgot_password', 'action' => 'index'], ['escape' => false]) ?></div>      
       <div class="line line-dashed"></div>          
     <?= $this->Form->end() ?>
