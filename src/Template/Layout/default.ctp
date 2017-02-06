@@ -39,6 +39,10 @@
 ?>
 <section class="vbox">
     <header class="bg-primary header header-md navbar navbar-fixed-top-xs box-shadow">
+    <div id="ribbon">
+            <span class="content">Beta Testing Mode</span>
+    </div>
+
       <div class="navbar-header aside-md dk">
         <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
           <i class="fa fa-bars"></i>
