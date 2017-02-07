@@ -21,7 +21,7 @@ class ShipmentsController extends AppController
     public function initialize()
     {
         parent::initialize();
-
+        $this->loadComponent('Paginator');
         $session = $this->request->session();    
         $user_data = $session->read('User.data');         
         if( isset($user_data) ){
@@ -41,6 +41,8 @@ class ShipmentsController extends AppController
         $this->Auth->allow();
 
     }
+
+
 
     /**
      * Index method
@@ -278,8 +280,13 @@ class ShipmentsController extends AppController
         $shippingServices = $this->Shipments->ShippingServices->find('list');
         $shippingPurposes = $this->Shipments->shippingPurposes->find('list');        
         $pendingShipments = $this->Shipments->find('all')
-            ->where(['Shipments.status' => 1, 'Shipments.client_id' => $user_data->id])
+            ->where(['Shipments.client_id' => $user_data->id , 'Shipments.status' => 1 ]) 
+            ->orWhere(['Shipments.status' => 3])
+            ->order(['Shipments.id' => 'DESC'])
         ;
+
+        // debug($pendingShipments);
+        // exit;
 
         $optionPendingShipments = array();
         foreach( $pendingShipments as $ps ){
@@ -476,6 +483,10 @@ class ShipmentsController extends AppController
                 }
                     
             }
+
+            if($data['is_correct_quantity'] == 1) {
+                $data['correct_quantity_comment'] = "";
+            }
             
             $shipment->is_sent_to_inventory = 1;
             $this->Shipments->save($shipment);
@@ -496,7 +507,7 @@ class ShipmentsController extends AppController
                 $this->Inventory->save($inventory);
             }
 
-            $email_content = ['shipment_details' => $shipment->item_description, 'client' => $user_data, 'shipment_id' => $shipment->id];
+            $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $data['correct_quantity_comment']  , 'client' => $user_data, 'shipment_id' => $shipment->id];
 
                 $recipient = "comfortapplication@gmail.com";        
                 $email_smtp = new Email('default');

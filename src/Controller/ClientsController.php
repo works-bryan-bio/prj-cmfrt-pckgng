@@ -29,7 +29,7 @@ class ClientsController extends AppController
             if( $user_data->user->group_id == 1 ){ //Company
                 $this->Auth->allow();
             }elseif( $user_data->user->group_id == 2 ){ //Manager
-                $this->Auth->allow(['index','add', 'view']);
+                $this->Auth->allow(['index','add', 'view', 'edit', 'history']);
             }elseif( $user_data->user->group_id == 3 ){ //Employee
                 $this->Auth->allow(['index']);
             }  
@@ -160,5 +160,36 @@ class ClientsController extends AppController
             $this->Flash->error(__('The client could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function history($client_id = null)
+    {
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Inventory = TableRegistry::get('Inventory');
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data'); 
+        
+        if($client_id == null) {
+            return $this->redirect(['action' => 'index']);
+        }
+
+        $client = $this->Clients->get($client_id, [
+            'contain' => []
+        ]);
+
+        $shipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Clients.id' => $client_id])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        $inventories = $this->Inventory->find('all')
+            ->contain(['Shipments'])
+            ->where(['Inventory.client_id' => $client_id])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        $this->set('group_id' , $user_data->user->group_id);
+        $this->set(['shipments' => $shipments, 'client' => $client, 'inventories' => $inventories]);
     }
 }

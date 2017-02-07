@@ -101,15 +101,13 @@ class AppController extends Controller
 
     }
 
+
     /**
      * beforeFilter method
      * ID : CA-02
      * 
      */
-    public function beforeFilter(Event $event)
-    {
-        $this->Auth->allow('login');
-    }
+
 
     /**
      * isAuthorized method
