@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'lg';
-  src: url("/assets/fonts/lg.eot?n1z373");
-  src: url("/assets/fonts/lg.eot?#iefixn1z373") format("embedded-opentype"), url("/assets/fonts/lg.woff?n1z373") format("woff"), url("/assets/fonts/lg.ttf?n1z373") format("truetype"), url("/assets/fonts/lg.svg?n1z373#lg") format("svg");
+  src: url("fonts/lg.eot?n1z373");
+  src: url("fonts/lg.eot?#iefixn1z373") format("embedded-opentype"), url("fonts/lg.woff?n1z373") format("woff"), url("fonts/lg.ttf?n1z373") format("truetype"), url("fonts/lg.svg?n1z373#lg") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -819,7 +819,7 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
   white-space: nowrap;
 }
 .lg-outer .lg-item {
-  background: url("/assets/images/loading.gif") no-repeat scroll center center transparent;
+  background: url("img/loading.gif") no-repeat scroll center center transparent;
   display: none !important;
 }
 .lg-outer.lg-css3 .lg-prev-slide, .lg-outer.lg-css3 .lg-current, .lg-outer.lg-css3 .lg-next-slide {
