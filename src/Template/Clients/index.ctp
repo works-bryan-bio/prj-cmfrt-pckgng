@@ -14,7 +14,7 @@
 <section class="content">
  <div class="ribbon-section">
       <img style="float:left;" src="<?php echo $this->Url->build("/webroot/images/ribbon.png"); ?>">
-      <div class="ribbon-black" style=""><h3 style="margin-left: 65px;color: white;">Users List</h3></div>
+      <div class="ribbon-black" style=""><h3 style="margin-left: 65px;color: white;">Client List</h3></div>
     </div>
     <br style="clear:both;" />
     <div class="panel panel-primary">
@@ -41,6 +41,7 @@
                           <td><?= h($client->email) ?></td>
                           <td><?= h($client->contact_no) ?></td>
                           <td class="actions">
+                            <?= $this->Html->link('<i class="fa fa-list"></i> ' . __('History'), ['action' => 'history', $client->id],['title' => 'History', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>
                             <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $client->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>
                             <?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'edit', $client->id],['title' => 'Edit', 'class' => 'btn btn-sm btn-info','escape' => false]) ?>                            
                             <?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Delete'), '#modal-'. $client->id,['title' => 'Delete', 'class' => 'btn btn-sm btn-danger','data-toggle' => 'modal','escape' => false]) ?>

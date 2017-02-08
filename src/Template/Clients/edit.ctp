@@ -72,7 +72,39 @@ h4{
                         <div class='form-group'>
                             <label for='contact_no' class='col-sm-2 control-label'>" . __('Contact No.') . "</label>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('contact_no', ['class' => 'form-control', 'id' => 'contact_no', 'label' => false]);                
+                            echo $this->Form->input('contact_no', ['class' => 'form-control', 'id' => 'contact_no', 'label' => false, 'maxLength' => 10]);                
+                        echo "<div class='help-block with-errors'></div>
+                         </div></div>";
+
+                          echo "
+                        <div class='form-group'>
+                            <label for='address' class='col-sm-2 control-label'>" . __('Address') . "</label>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('address', ['type' => 'textarea', 'class' => 'form-control', 'id' => 'address', 'label' => false]);                
+                        echo "<div class='help-block with-errors'></div>
+                         </div></div>";   
+
+                         echo "
+                        <div class='form-group'>
+                            <label for='city' class='col-sm-2 control-label'>" . __('City') . "</label>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('city', ['class' => 'form-control', 'id' => 'city', 'label' => false]);                
+                        echo "<div class='help-block with-errors'></div>
+                         </div></div>";
+
+                         echo "
+                        <div class='form-group'>
+                            <label for='state' class='col-sm-2 control-label'>" . __('State') . "</label>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('state', ['class' => 'form-control', 'id' => 'state', 'label' => false]);                
+                        echo "<div class='help-block with-errors'></div>
+                         </div></div>";
+
+                         echo "
+                        <div class='form-group'>
+                            <label for='zip_code' class='col-sm-2 control-label'>" . __('Zip') . "</label>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('zip_code', ['class' => 'form-control', 'id' => 'zip_code', 'label' => false]);                
                         echo "<div class='help-block with-errors'></div>
                          </div></div>";   
                         ?>

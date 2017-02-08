@@ -59,6 +59,24 @@
             <th><?= __('Invoice Date') ?></th>
             <td><?= h($invoice->invoice_date) ?></td>
         </tr>
+         <tr>
+            <th><?= __('Invoice Status') ?></th>
+            <td>
+                <?php 
+                    if( $invoice->status == 1 ){
+                        echo "<span class='label label-warning'>Pending</span>";
+                    }else{
+                        echo "<span class='label label-success'>Paid</span>";
+                    }
+                ?>
+            </td>
+        </tr>
+        <?php if( $invoice->status == 2 ){ ?>
+            <tr>
+                <th><?= __('Date Paid') ?></th>
+                <td><?= $invoice->date_completed->format("Y-m-d") ?></td>
+            </tr>
+        <?php } ?>
         <tr>
             <th><?= __('Due Date') ?></th>
             <td><?= h($invoice->due_date) ?></td>

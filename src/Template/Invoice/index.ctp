@@ -32,6 +32,7 @@
                       <th class=""><?= $this->Paginator->sort('shipments_id') ?></th>
                       <th class=""><?= $this->Paginator->sort('clients_id') ?></th>
                       <th class=""><?= $this->Paginator->sort('terms') ?></th>
+                      <th class=""><?= $this->Paginator->sort('status') ?></th>
                       <th class=""><?= $this->Paginator->sort('invoice_date') ?></th>
                       <th class=""><?= $this->Paginator->sort('due_date') ?></th>
                       <th class=""><?= $this->Paginator->sort('product_services') ?></th>
@@ -42,9 +43,10 @@
                     <?php foreach ($invoice as $invoice): ?>
                     <tr>
                         <td><?= $this->Number->format($invoice->id) ?></td>
-                        <td><?= $invoice->has('shipment') ? $this->Html->link($invoice->shipment->id, ['controller' => 'Shipments', 'action' => 'view', $invoice->shipment->id]) : '' ?></td>
-                        <td><?= $invoice->has('client') ? $this->Html->link($invoice->client->id, ['controller' => 'Clients', 'action' => 'view', $invoice->client->id]) : '' ?></td>
+                        <td><?= $invoice->has('shipment') ? $this->Html->link($invoice->shipment->id ." - ". $invoice->description, ['controller' => 'Shipments', 'action' => 'view', $invoice->shipment->id]) : '' ?></td>
+                        <td><?= $invoice->has('client') ? $this->Html->link($invoice->client->firstname ." ". $invoice->client->lastname , ['controller' => 'Clients', 'action' => 'view', $invoice->client->id]) : '' ?></td>
                         <td><?= h($invoice->terms) ?></td>
+                        <td><?php  if($invoice->status == 1) { echo "Pending"; }else{ echo "Completed"; } ?></td>
                         <td><?= h($invoice->invoice_date) ?></td>
                         <td><?= h($invoice->due_date) ?></td>
                         <td><?= h($invoice->product_services) ?></td>

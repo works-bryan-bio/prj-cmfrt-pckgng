@@ -2,8 +2,8 @@
 <p>Your Shipment : <?php echo $edata['shipment_details']; ?> has been recieved.</p>
 <table border="0">
 	<tr>
-		<td></td>
-		<td></td>
+		<td>Comment:</td>
+		<td> <?php echo $edata['comment']; ?> </td>
 	</tr>	
 </table>
 <br/><br/>

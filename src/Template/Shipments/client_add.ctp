@@ -105,14 +105,14 @@
                         <div class='form-group combine-with-group hidden'>
                             <label for='combine_comment' class='col-sm-2 control-label'>" . __('Remarks') . "</label>
                             <div class='col-sm-6'>";
-                             echo $this->Form->input('combine_comment', ['type' => 'textarea', 'class' => 'form-control', 'id' => 'combine_comment', 'label' => false]);                 
+                             echo $this->Form->input('combine_comment', ['type' => 'text', 'class' => 'form-control', 'id' => 'combine_comment', 'label' => false]);                 
                         echo " </div></div>";
                             
                                     echo "
                         <div class='form-group'>
                             <label for='comments' class='col-sm-2 control-label'>" . __('Comments') . "</label>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('comments', ['class' => 'form-control', 'id' => 'comments', 'label' => false]);                
+                            echo $this->Form->input('comments', ['type' => 'text', 'class' => 'form-control', 'id' => 'comments', 'label' => false]);                
                         echo " </div></div>";    
                         
                                 ?>
