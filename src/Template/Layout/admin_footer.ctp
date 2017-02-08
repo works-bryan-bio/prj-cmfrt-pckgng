@@ -10,6 +10,7 @@
 	echo $this->Html->script('theme_forest/jquery-ui-1.10.3.custom.min.js');
     echo $this->Html->script('ckeditor/ckeditor', array('inline' => false));
     echo $this->Html->script('validator.js');
+    echo $this->Html->script('jquery.dataTables.min');
     echo $this->Html->script('colorbox/jquery.colorbox-min.js');    
     
 	//echo $this->Html->script('backend-application.js');
@@ -18,6 +19,9 @@
 <script type="text/javascript">
         $(function(){
             $(".modalImage").colorbox({transition:"fade"});
+
+            //Datatable
+            $('.zero-config-datatable').DataTable();
 
             //Shipment module
             $("#shipping_carrier_id").change(function(){

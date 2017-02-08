@@ -18,6 +18,7 @@
         echo $this->Html->css('theme_forest/app.css');        
         echo $this->Html->css('theme_forest/datepicker/datepicker.css');
         echo $this->Html->css('colorbox/colorbox.css');
+        echo $this->Html->css('jquery.dataTables.css');
  
         echo $this->fetch('meta');
         echo $this->fetch('css');
