@@ -189,16 +189,17 @@
                             </div>
     <div class="form-group" style="margin-top: 80px;">
     <div class="col-sm-offset-2 col-sm-10">
-        <div class="action-fixed-bottom">              
+        <div class="action-fixed-bottom">  
+          <a href="javascript:void(0);" class="btn btn-warning" onclick="history.go(-1);" ><i class="fa fa-angle-left"> </i> Back To list</a>            
         <?php   
             if( $group_id == 1 ){
-                echo $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'class' => 'btn btn-info','escape' => false]); 
-                echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'index'],['class' => 'btn btn-warning', 'escape' => false]);
+                //echo $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'class' => 'btn btn-info','escape' => false]); 
+                //echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'index'],['class' => 'btn btn-warning', 'escape' => false]);
             }else{
                 if($group_id == 4) {
-                   echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'client'],['class' => 'btn btn-warning', 'escape' => false]);     
+                   //echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'client'],['class' => 'btn btn-warning', 'escape' => false]);     
                  }else{   
-                echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'index'],['class' => 'btn btn-warning', 'escape' => false]);
+                  //echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'index'],['class' => 'btn btn-warning', 'escape' => false]);
                 if($shipment->status <> 2){
                 ?>
                   <a href='#modalReceived-<?php echo $shipment->id; ?>' title="Received" class="btn btn-info" data-toggle="modal" onclick='javascript:updateReceivedOption(<?php echo $shipment->id; ?>);'><i class="fa fa-eye"></i> Update</a>  
@@ -207,7 +208,7 @@
                }
             }
         ?>
-        </div>
+        </div><br>
     </div>
     </div>
 </section>

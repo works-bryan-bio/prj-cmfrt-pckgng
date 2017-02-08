@@ -254,8 +254,21 @@
 
                 $('#inp_shipment_id').val(shipment_id);
                 $('#total_remaining').val(remaining_quantity);
+                $('#dropdown-shipments-list').hide();
+                $('.single-shipment-desc').show();
                 $('.send-new-order-container').show();
                 
+            });
+
+            $('#btn-new-inventory-order-accordion').click(function(){
+                $('#inp_shipment_id').val($('#all_shipment').val());
+                $('.single-shipment-desc').hide();
+                $('#dropdown-shipments-list').show();
+                $('.send-new-order-container').show();
+            });
+
+            $('#all_shipment').change(function(){
+                $('#inp_shipment_id').val($(this).val());
             });
 
             $('.btn-hide-order-form').click(function(){

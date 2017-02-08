@@ -77,8 +77,8 @@
     <div class="form-group" style="margin-top: 80px;">
     <div class="col-sm-offset-2 col-sm-10">
         <div class="action-fixed-bottom">        
-        <?= $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'index'],['class' => 'btn btn-warning', 'escape' => false]) ?>
-        </div>
+        <a href="javascript:void(0);" class="btn btn-warning" onclick="history.go(-1);" ><i class="fa fa-angle-left"> </i> Back To list</a>
+        </div><br>
     </div>
     </div>
     <div class="related">

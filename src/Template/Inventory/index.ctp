@@ -12,7 +12,9 @@ $this->Shipments = TableRegistry::get('Shipments');
                 Action <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Shipments'), ['controller' => 'shipments' , 'action' => 'client_add'], ['escape' => false]) ?></li>
+                <li role="presentation">
+                  <a href="javascript:void(0);" id="btn-new-inventory-order-accordion" ><i class="fa fa-plus"></i> New Inventory Order</a>
+                  <!--<?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Inventory Order'), ['controller' => 'shipments' , 'action' => 'client_add'], ['escape' => false]) ?></li>-->
                        <!--  <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Shipments'), ['controller' => 'Shipments', 'action' => 'index'], ['escape' => false]) ?></li>
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Shipment'), ['controller' => 'Shipments', 'action' => 'add'], ['escape' => false]) ?></li> -->
                     </ul>
@@ -69,7 +71,9 @@ $this->Shipments = TableRegistry::get('Shipments');
 
                       ?>
                     <tr>
-                                <td><?= $this->Number->format($inventory->id) ?></td>
+                                <td>
+                                  <?= $inventory->has('shipment') ? $this->Html->link($inventory->id, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id]) : '' ?>
+                                </td>
                                 <td><?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id ." - ". $inventory->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id]) : '' ?>
 
                                   <?php if($combined_shipment->count() > 0) { ?>

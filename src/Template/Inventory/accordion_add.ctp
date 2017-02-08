@@ -3,16 +3,30 @@
   <div class="col-lg-12">
     <section class="panel panel-primary pos-rlt clearfix">        
         <div class="panel-body clearfix">   
-            <div class="alert alert-info">
-            <b>Shipment:</b> <span class="shipment-desc"></span>
-            <b style="margin-left:120px;">Sent Quantity:</b> <span class="shipment-sent-quantity-desc"></span>
-            <b style="margin-left:120px;">Remaining Quantity:</b> <span class="shipment-remaining-quantity-desc"></span>
-            <b style="margin-left:120px;">Status:</b> <span class="shipment-status-desc"></span>
+            <div class="alert alert-info single-shipment-desc" style="display:none;">
+                <b>Shipment:</b> <span class="shipment-desc"></span>
+                <b style="margin-left:120px;">Sent Quantity:</b> <span class="shipment-sent-quantity-desc"></span>
+                <b style="margin-left:120px;">Remaining Quantity:</b> <span class="shipment-remaining-quantity-desc"></span>
+                <b style="margin-left:120px;">Status:</b> <span class="shipment-status-desc"></span>
             </div>
 
           <?= $this->Form->create($inventoryOrder,[ 'url' => '/inventory_order/add', 'class' => 'form-horizontal']) ?>
                 <input type="hidden" name="shipment_id" value="" id="inp_shipment_id">
-                <fieldset>        
+                <fieldset>
+
+                    <div id="dropdown-shipments-list" style="display:none;">
+                        <div class='form-group'>
+                            <label for='order_number' class='col-sm-2 control-label'>Shipment</label>
+                            <div class='col-sm-6'>
+                                <select id="all_shipment" class="form-control">
+                                    <?php foreach($inventory as $i) { ?>
+                                        <option value="<?= $i->shipment->id; ?>"><?= $i->shipment->id ." - ". $i->shipment->item_description ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
                     <?php                  
                                     echo "
                         <div class='form-group'>
