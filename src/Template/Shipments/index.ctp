@@ -35,21 +35,21 @@
     <div class="tab-content">
       <div class="tab-pane active" id="pending">
           <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
                       <?php if($hdr_user_data->user->group_id <> 4) { ?>
                         <th>Client Name</th>
                       <?php } ?>
-                      <th class="data-id"><?= $this->Paginator->sort('item_description') ?></th>                      
-                      <th class=""><?= $this->Paginator->sort('quantity') ?></th>
-                      <th class=""><?= $this->Paginator->sort('boxes') ?></th>
-                      <th class=""><?= $this->Paginator->sort('shipping_carrier_id', __('Shipping Carrier')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('shipping_service_id', __('Shipping Service')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('shipping_purpose_id', __('Shipping Purpose')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('status') ?></th>
-                      <th class="date-time"><?= $this->Paginator->sort('created') ?></th>
-                      <th class="actions no-border-right" style="width:10% !important;"><?= __('Actions') ?></th>
+                      <th class="data-id">Item Description</th>                      
+                      <th class="">Quantity</th>
+                      <th class="">Boxes</th>
+                      <th class="">Shipping Carrier</th>
+                      <th class="">Shipping Service</th>
+                      <th class="">Shipping Purpose</th>
+                      <th class="">Status</th>
+                      <th class="date-time">Created</th>
+                      <th class="actions no-border-right" style="width:10% !important;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -160,21 +160,11 @@
                                           <div class="col-sm-6">
                                             <div class="input radio">
                                               <label>
-                                                <input class="rbtn-correct-quantity" name="is_correct_quantity" <?= ($shipment->is_correct_quantity == 1 ? "checked='checked'" : ""); ?> value="1" class="" id="is_correct_quantity1" required="required"  type="radio"> Yes
+                                                <input name="is_correct_quantity" <?= ($shipment->is_correct_quantity == 1 ? "checked='checked'" : ""); ?> value="1" class="" id="is_correct_quantity1" required="required"  type="radio"> Yes
                                               </label>
                                               <label style="margin-left:10px">
-                                                <input class="rbtn-correct-quantity" name="is_correct_quantity" <?= ($shipment->is_correct_quantity == 0 ? "checked='checked'" : ""); ?> value="0" class="" id="is_correct_quantity2" required="required"  type="radio" > No
+                                                <input name="is_correct_quantity" <?= ($shipment->is_correct_quantity == 0 ? "checked='checked'" : ""); ?> value="0" class="" id="is_correct_quantity2" required="required"  type="radio" > No
                                               </label>
-                                            </div> 
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="row correct_quantity_container" style="margin-bottom:5px; <?= ($shipment->is_correct_quantity == 1 ? "display:none;" : ""); ?>">
-                                        <div class="form-group">
-                                          <label for="correct_quantity_comment" class="col-sm-4 control-label" style="margin-top:5px">Comment</label>
-                                          <div class="col-sm-6">
-                                            <div class="input text">
-                                              <input name="correct_quantity_comment" value="<?= $shipment->correct_quantity_comment; ?>" class="form-control" id="correct_quantity_comment" type="text">
                                             </div> 
                                           </div>
                                         </div>
@@ -263,35 +253,24 @@
                 </tbody>
             </table>
         </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer> 
       </div>
       <div class="tab-pane" id="completed">
         <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
                       <?php if($hdr_user_data->user->group_id <> 4) { ?>
                         <th>Client Name</th>
                       <?php } ?>
-                      <th class="data-id"><?= $this->Paginator->sort('item_description') ?></th>                      
-                      <th class=""><?= $this->Paginator->sort('quantity') ?></th>
-                      <th class=""><?= $this->Paginator->sort('boxes') ?></th>
-                      <th class=""><?= $this->Paginator->sort('shipping_carrier_id', __('Shipping Carrier')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('shipping_service_id', __('Shipping Service')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('shipping_purpose_id', __('Shipping Purpose')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('status') ?></th>
-                      <th class="date-time"><?= $this->Paginator->sort('created') ?></th>
-                      <th class="actions"><?= __('Actions') ?></th>
+                      <th class="data-id">Item Description</th>                      
+                      <th class="">Quantity</th>
+                      <th class="">Boxes</th>
+                      <th class="">Shipping Carrier</th>
+                      <th class="">Shipping Service</th>
+                      <th class="">Shipping Purpose</th>
+                      <th class="">Status</th>
+                      <th class="date-time">Created</th>
+                      <th class="actions no-border-right" style="width:10% !important;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -366,18 +345,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer> 
+        </div>        
       </div>    
     </div>
   </div>

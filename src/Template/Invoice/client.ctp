@@ -25,18 +25,18 @@ $this->Shipments = TableRegistry::get('Shipments');
     <div class="tab-content">
       <div class="tab-pane active" id="pending">
           <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                      <th class="data-id"><?= $this->Paginator->sort('shipments_id' , __('Shipments')) ?></th>                      
-                      <th class=""><?= $this->Paginator->sort('client_id' , __('Client')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('terms', __('Terms')) ?></th>
-                      <th class="date-time"><?= $this->Paginator->sort('invoice_date', __('Invoice Date')) ?></th>
-                      <th class="date-time"><?= $this->Paginator->sort('due_date', __('Invoice Due Date')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('description') ?></th>
-                      <th class=""><?= $this->Paginator->sort( 'balance_due', __('Total Balance'))  ?></th>
-                      <th class=""><?= $this->Paginator->sort('status') ?></th>
-                      <th class="actions"><?= __('Actions') ?></th>
+                      <th class="data-id">Shipment</th>                      
+                      <th class="">Client</th>
+                      <th class="">Terms</th>
+                      <th class="date-time">Invoice Date</th>
+                      <th class="date-time">Invoice Due Date</th>
+                      <th class="">Description</th>
+                      <th class="">Total Balance</th>
+                      <th class="">Status</th>
+                      <th class="actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -92,33 +92,22 @@ $this->Shipments = TableRegistry::get('Shipments');
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer> 
+        </div>        
       </div>
       <div class="tab-pane" id="completed">
         <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                      <th class="data-id"><?= $this->Paginator->sort('shipments_id' , __('Shipments')) ?></th>                      
-                      <th class=""><?= $this->Paginator->sort('client_id' , __('Client')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('terms', __('Terms')) ?></th>
-                      <th class="date-time"><?= $this->Paginator->sort('invoice_date', __('Invoice Date')) ?></th>
-                      <th class="date-time"><?= $this->Paginator->sort('due_date', __('Invoice Due Date')) ?></th>
-                      <th class=""><?= $this->Paginator->sort('description') ?></th>
-                      <th class=""><?= $this->Paginator->sort( 'balance_due', __('Total Balance'))  ?></th>
-                      <th class=""><?= $this->Paginator->sort('status') ?></th>
-                      <th class="actions"><?= __('Actions') ?></th>
+                      <th class="data-id">Shipment</th>                      
+                      <th class="">Client</th>
+                      <th class="">Terms</th>
+                      <th class="date-time">Invoice Date</th>
+                      <th class="date-time">Invoice Due Date</th>
+                      <th class="">Description</th>
+                      <th class="">Total Balance</th>
+                      <th class="">Status</th>
+                      <th class="actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -152,18 +141,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer> 
+        </div>        
       </div>    
     </div>
   </div>

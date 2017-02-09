@@ -30,17 +30,17 @@
     <div class="tab-content">
       <div class="tab-pane active" id="pending">
           <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                                                        <th class="data-id"><?= $this->Paginator->sort('id') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('date_created', "Order Due Date") ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('order_number') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('order_description') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('order_destination') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('order_quantity') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('order_status') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
+                      <th class="data-id">ID</th>
+                      <th class="">Order Due Date</th>
+                      <th class="">Order Number</th>
+                      <th class="">Order Description</th>
+                      <th class="">Order Destination</th>
+                      <th class="">Order Quantity</th>
+                      <th class="">Order Status</th>
+                      <th class="actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -114,32 +114,21 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer> 
+        </div>        
       </div>
       <div class="tab-pane" id="completed">
         <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                                                        <th class="data-id"><?= $this->Paginator->sort('id') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('shipment_id') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('order_number') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('order_quantity') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('order_status') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('date_created') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('shipping_carrier_id') ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
+                      <th class="data-id">ID</th>
+                      <th class="">Shipment ID</th>
+                      <th class="">Order Number</th>
+                      <th class="">Order Quantity</th>
+                      <th class="">Order Status</th>
+                      <th class="">Date Created</th>
+                      <th class="">Shipping Carrier ID</th>
+                      <th class="actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -185,18 +174,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer> 
+        </div>        
       </div>    
     </div>
   </div>

@@ -36,18 +36,18 @@ $this->Shipments = TableRegistry::get('Shipments');
     <div class="tab-content">
       <div class="tab-pane active" id="pending">
           <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                                                        <th class="data-id"><?= $this->Paginator->sort('id') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('shipment_id') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('sent_quantity') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('remaining_quantity') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('last_sent_order_quantity') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('last_sent_order_date') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('last_sent_destination') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('shipment_id', __('Comments')) ?></th>
-                                <th class="actions no-border-right" style="width:10% !important;"><?= __('Actions') ?></th>
+                      <th class="data-id">ID</th>
+                      <th class="">Shipment ID</th>
+                      <th class="">Sent Quantity</th>
+                      <th class="">Remaining Quantity</th>
+                      <th class="">Last Sent Order Quantity</th>
+                      <th class="">Last Sent Order Date</th>
+                      <th class="">Last Sent Destination</th>
+                      <th class="">Comments</th>
+                      <th class="actions no-border-right" style="width:10% !important;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -120,33 +120,22 @@ $this->Shipments = TableRegistry::get('Shipments');
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer> 
+        </div>        
       </div>
       <div class="tab-pane" id="completed">
         <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                                                        <th class="data-id"><?= $this->Paginator->sort('id') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('shipment_id') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('sent_quantity') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('remaining_quantity') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('last_sent_order_quantity') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('last_sent_order_date') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('last_sent_destination') ?></th>
-                                                        <th class=""><?= $this->Paginator->sort('shipment_id', __('Comments')) ?></th>
-                                <th class="actions"><?= __('Actions') ?></th>
+                      <th class="data-id">ID</th>
+                      <th class="">Shipment ID</th>
+                      <th class="">Sent Quantity</th>
+                      <th class="">Remaining Quantity</th>
+                      <th class="">Last Sent Order Quantity</th>
+                      <th class="">Last Sent Order Date</th>
+                      <th class="">Last Sent Destination</th>
+                      <th class="">Comments</th>
+                      <th class="actions no-border-right" style="width:10% !important;">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -204,18 +193,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer> 
+        </div>        
       </div>    
     </div>
   </div>

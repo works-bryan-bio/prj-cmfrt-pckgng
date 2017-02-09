@@ -25,18 +25,18 @@
     <br style="clear:both;" />
     <div class="panel panel-primary">
         <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                      <th class="data-id"><?= $this->Paginator->sort('id') ?></th>
-                      <th class=""><?= $this->Paginator->sort('shipments_id') ?></th>
-                      <th class=""><?= $this->Paginator->sort('clients_id') ?></th>
-                      <th class=""><?= $this->Paginator->sort('terms') ?></th>
-                      <th class=""><?= $this->Paginator->sort('status') ?></th>
-                      <th class=""><?= $this->Paginator->sort('invoice_date') ?></th>
-                      <th class=""><?= $this->Paginator->sort('due_date') ?></th>
-                      <th class=""><?= $this->Paginator->sort('product_services') ?></th>
-                      <th class="actions"><?= __('Actions') ?></th>
+                      <th class="data-id">ID<?= $this->Paginator->sort('id') ?></th>
+                      <th class="">Shipment ID</th>
+                      <th class="">Client ID</th>
+                      <th class="">Terms</th>
+                      <th class="">Status</th>
+                      <th class="">Invoice Date</th>
+                      <th class="">Due Date</th>
+                      <th class="">Product Services</th>
+                      <th class="actions">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -82,18 +82,7 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer>            
+        </div>            
         </div>        
     </div>    
 </section>
