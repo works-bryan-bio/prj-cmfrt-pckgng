@@ -151,7 +151,7 @@
                             </div>
 
                             <ul id="video-gallery" class="list-unstyled">
-                                <li data-poster="assets/images/testivid_01.jpg" data-sub-html="video caption1" data-html="#testi1">
+                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" data-sub-html="video caption1" data-html="#testi1">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
                                 <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" data-sub-html="video caption2" data-html="#testi2">

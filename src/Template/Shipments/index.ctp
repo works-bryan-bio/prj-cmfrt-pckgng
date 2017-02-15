@@ -41,8 +41,8 @@
                       <?php if($hdr_user_data->user->group_id <> 4) { ?>
                         <th>Client Name</th>
                       <?php } ?>
-                      <th class="data-id">Item Description</th>                      
-                      <th class="">Quantity</th>
+                      <th class="data-id">Item Desc</th>                      
+                      <th class="">Qty</th>
                       <th class="">Boxes</th>
                       <th class="">Shipping Carrier</th>
                       <th class="">Shipping Service</th>
