@@ -52,7 +52,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                 <tbody>
                     <?php foreach ($pendingShipments as $shipment): ?>
                     <tr>
-                        <td><?= $shipment->item_description ?></td>                        
+                        <td><?= $shipment->item_description ." - " .$shipment->id ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>
@@ -166,7 +166,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                 <tbody>
                     <?php foreach ($receivedAndStoredShipments as $shipment): ?>
                     <tr>
-                        <td><?= $shipment->shipment->item_description ?></td>                        
+                        <td><?= $shipment->shipment->item_description ." - ". $shipment->shipment->id ?></td>                        
                         <td><?= $this->Number->precision($shipment->shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->shipment->boxes,2) ?></td>
                         <td>
@@ -252,7 +252,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                 <tbody>
                     <?php foreach ($completedShipments as $shipment): ?>
                     <tr>
-                        <td><?= $shipment->item_description ?></td>                        
+                        <td><?= $shipment->item_description." - ". $shipment->id ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>
@@ -339,7 +339,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                 <tbody>
                     <?php foreach ($allShipments as $shipment): ?>
                     <tr>
-                        <td><?= $shipment->item_description ?></td>                        
+                        <td><?= $shipment->item_description ." - ". $shipment->id ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>

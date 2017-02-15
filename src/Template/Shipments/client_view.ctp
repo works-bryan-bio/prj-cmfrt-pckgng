@@ -42,10 +42,18 @@
          <tr>
             <th><?= __('Additional Information') ?></th>
             <td><?= $this->Text->autoParagraph(h($shipment->additional_information)); ?></td>        
-        </tr>                 
+        </tr>
+        <tr>
+            <th><?= __('Shipping Instruction') ?></th>
+            <td><?= $shipment->shipping_instruction ?></td>        
+        </tr>   
+        <tr>
+            <th><?= __('Shipping Others') ?></th>
+            <td><?= $shipment->shipping_others ?></td>        
+        </tr>                    
         <tr>
             <th><?= __('Comments') ?></th>
-            <td><?= $this->Text->autoParagraph(h($shipment->comments)); ?></td>        
+            <td><?= $this->Text->autoParagraph(h($shipment->comments. "  " . $shipment->combine_comment ." ". $shipment->correct_quantity_comment)); ?></td>        
         </tr>
         <tr>
             <th><?= __('Created') ?></th>

@@ -212,7 +212,7 @@ class UsersController extends AppController
 
                     $this->Auth->setUser($user);
                     $_SESSION['KCEDITOR']['disabled'] = false;
-                    $_SESSION['KCEDITOR']['uploadURL'] = Router::url('/')."webroot/upload";
+                    $_SESSION['KCEDITOR']['uploadURL'] = Router::url('/')."webroot/upload/".$user_data->user_id;
                     
                          
                     if( $user_data->user->group_id == 1 ){ //Company

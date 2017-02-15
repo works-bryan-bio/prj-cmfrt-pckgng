@@ -72,12 +72,12 @@ use Cake\Validation\Validator;
     public function validationDefault(Validator $validator)
     {
         $validator->integer('id')->allowEmpty('id', 'create');
-        $validator->requirePresence('item_description', 'create')->notEmpty('item_description');
+        /*$validator->requirePresence('item_description', 'create')->notEmpty('item_description');
         $validator->integer('quantity')->requirePresence('quantity', 'create')->notEmpty('quantity');
         $validator->integer('boxes')->requirePresence('boxes', 'create')->notEmpty('boxes');
         $validator->allowEmpty('other_shipping_carried');
         $validator->allowEmpty('other_shipping_service');
-        $validator->allowEmpty('comments');
+        $validator->allowEmpty('comments');*/
         return $validator;
     }
 
@@ -90,9 +90,9 @@ use Cake\Validation\Validator;
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['client_id'], 'Clients'));
+        /*$rules->add($rules->existsIn(['client_id'], 'Clients'));
         $rules->add($rules->existsIn(['shipping_carrier_id'], 'ShippingCarriers'));
-        $rules->add($rules->existsIn(['shipping_service_id'], 'ShippingServices'));
+        $rules->add($rules->existsIn(['shipping_service_id'], 'ShippingServices'));*/
 
         return $rules;
     }

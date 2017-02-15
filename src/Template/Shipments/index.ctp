@@ -58,7 +58,7 @@
                         <?php if($hdr_user_data->user->group_id <> 4) { ?>
                           <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
                         <?php } ?>
-                        <td><?= $shipment->item_description ?></td>                        
+                        <td><?= $shipment->item_description .' - '. $shipment->id  ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>
@@ -279,7 +279,7 @@
                         <?php if($hdr_user_data->user->group_id <> 4) { ?>
                           <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
                         <?php } ?>
-                        <td><?= $shipment->item_description ?></td>                        
+                        <td><?= $shipment->item_description ." - ". $shipment->id  ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>

@@ -227,9 +227,9 @@ $this->Shipments = TableRegistry::get('Shipments');
             <div class="row">                            
               <div class="col-sm-12 text-right text-center-xs">                
                  <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
+                 <!--  <?= $this->Paginator->prev('«') ?>
                   <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
+                  <?= $this->Paginator->next('»') ?> -->
                 </ul> 
               </div>
             </div>

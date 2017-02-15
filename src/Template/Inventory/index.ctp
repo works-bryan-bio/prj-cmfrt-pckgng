@@ -72,7 +72,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                       ?>
                     <tr>
                                 <td>
-                                  <?= $inventory->has('shipment') ? $this->Html->link($inventory->id, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id]) : '' ?>
+                                  <?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id]) : '' ?>
                                 </td>
                                 <td><?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id ." - ". $inventory->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id]) : '' ?>
 
@@ -134,7 +134,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                       <th class="data-id">ID</th>
                       <th class="">Shipment ID</th>
                       <th class="">Sent Quantity</th>
-                      <th class="">Remaining Quantity</th>
+                     
                       <th class="">Last Sent Order Quantity</th>
                       <th class="">Last Sent Order Date</th>
                       <th class="">Last Sent Destination</th>
@@ -150,7 +150,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                         
                       ?>
                     <tr>
-                                <td><?= $this->Number->format($inventoryCompleted->id) ?></td>
+                                <td><?= $this->Number->format($inventoryCompleted->shipment->id) ?></td>
                                 <td><?= $inventoryCompleted->has('shipment') ? $this->Html->link($inventoryCompleted->shipment->id ." - ". $inventoryCompleted->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventoryCompleted->shipment->id]) : '' ?>
 
                                   <?php if($combined_shipment->count() > 0) { ?>
@@ -161,7 +161,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                                   <?php } ?>
                                 </td>
                                 <td><?= $this->Number->format($inventoryCompleted->sent_quantity) ?></td>
-                                <td><?= $this->Number->format($inventoryCompleted->remaining_quantity) ?></td>
+                               
                                 <td><?= $this->Number->format($inventoryCompleted->last_sent_order_quantity) ?></td>
                                 <td><?= h($inventoryCompleted->last_sent_order_date) ?></td>
                                 <td><?= h($inventoryCompleted->last_sent_destination) ?></td>

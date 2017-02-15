@@ -79,7 +79,7 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
 
                       ?>
                     <tr>
-                      <td style="text-align:center;"><span class="label label-danger" > <?php echo $shipmentsOrder; ?> </span><br/><?= $this->Number->format($inventory->id) ?></td>
+                      <td style="text-align:center;"><span class="label label-danger" > <?php echo $shipmentsOrder; ?> </span><br/><?= $this->Number->format($inventory->shipment->id) ?></td>
                       <td><?= $inventory->shipment->combine_with_id ?><?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id ." - ". $inventory->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id ]) : '' ?>
 
                         <?php if($combined_shipment->count() > 0) { ?>
@@ -159,7 +159,7 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
                         
                       ?>
                     <tr>
-                                <td><?= $this->Number->format($inventory_completed->id) ?></td>
+                                <td><?= $this->Number->format($inventory_completed->shipment->id) ?></td>
                                 <td><?= $inventory_completed->has('shipment') ? $this->Html->link($inventory_completed->shipment->id ." - ". $inventory_completed->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory_completed->shipment->id]) : '' ?>
 
                                   <?php if($combined_shipment->count() > 0) { ?>

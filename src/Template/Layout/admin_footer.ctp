@@ -47,14 +47,24 @@
                 if( selected == 3 ){
                     $(".send-amazon-group").removeClass('hidden');
                     $(".combine-with-group").addClass('hidden');
+                    $(".send-amazon-only-group").addClass('hidden');  
                 }else if( selected == 5 ){                    
                     $(".combine-with-group").removeClass('hidden');
                     $(".send-amazon-group").addClass('hidden');
+                    $(".send-amazon-only-group").addClass('hidden');  
+                }else if( selected == 2 ){                    
+                    $(".combine-with-group").addClass('hidden');
+                    $(".send-amazon-group").addClass('hidden');
+                    $(".send-amazon-only-group").removeClass('hidden');    
                 }else{
                     $(".send-amazon-group").addClass('hidden');
                     $(".combine-with-group").addClass('hidden');
+                    $(".send-amazon-only-group").addClass('hidden'); 
                 } 
             });
+
+            //tooltip
+            $('[data-toggle="tooltip"]').tooltip(); 
 
             //End shipment module
 
@@ -275,7 +285,7 @@
                 $('.send-new-order-container').hide();
             });
 
-            
+                
 
         });
 
@@ -287,18 +297,41 @@
             width: '600'
         });
 
-        function openKCFinder_textbox(field) {
+        function openKCFinder_textbox(field) {      
+          window.KCFinder = {
+                  callBack: function(url) {
+                    var filename= url.split('/').pop()
+                    var clean_filename = filename.replace(new RegExp("%20", 'g')," ");
+
+                    var extension = clean_filename.split('.').pop().toUpperCase();
+                    if (extension == "PNG" || extension == "JPG" || extension == "JPEG" || extension == "BMP"){
+                      //$(".img-attachment").attr("src",url);
+                    }else{
+                      //$(".img-attachment").attr("src",DEFAULT_IMG);
+                    }
+          
+                    field.val(url);
+                  }
+            };
+
+            window.open(base_url+'js/kcfinder/browse.php?type=files&dir=files', 'kcfinder_textbox',
+                'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
+                'resizable=1, scrollbars=0, width=800, height=600'
+            );
+        }
+
+        /*function openKCFinder_textbox(field) {
             console.log(field);
             window.KCFinder = {
                 callBack: function(url) {
                     field.val(url);
                 }
             };
-            window.open(base_url+'js/kcfinder/browse.php?type=images&dir=images', 'kcfinder_textbox',
+            window.open(base_url+'js/kcfinder/browse.php?type=files&dir=files', 'kcfinder_textbox',
                 'status=0, toolbar=0, location=0, menubar=0, directories=0, ' +
                 'resizable=1, scrollbars=0, width=800, height=600'
             );
-        }
+        }*/
 
         function loadProjectDiscussionAdmin(project_id) {
             $.post(base_url + "clients/load_project_discussion",{project_id:project_id},function(o){
@@ -336,6 +369,15 @@
                     $('.send-to-amazon-container').hide();
                     $('.shipment-combine-container').hide();
                 }     
+        }
+
+        function otherShipmentOptions(){
+              var ship =  $('.shipping-instruction').is(':checked');
+                if(ship == true){
+                   $(".option-shipping-others").removeClass("hidden");
+                }else{
+                   $(".option-shipping-others").addClass("hidden");
+                }
         }
 
     </script>

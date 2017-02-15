@@ -248,6 +248,16 @@ class ShipmentsController extends AppController
                 $this->request->data['other_shipping_service'] = "";
             }
 
+            $this->request->data['shipping_instruction'] = implode(",", $this->request->data['shipping_instruction']);
+
+            if(empty($this->request->data['shipping_instruction'])){
+                $this->request->data['shipping_instruction'] = "";
+            }
+
+            if(empty($this->request->data['shipping_others'])){
+                $this->request->data['shipping_others'] = "";
+            }
+
             $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
             if ($result = $this->Shipments->save($shipment)) {
                 
