@@ -70,8 +70,8 @@ class InventoryController extends AppController
         $inventoryOrders = $this->InventoryOrder->find('list', ['limit' => 200]);
         $this->set(compact('inventoryOrder', 'shippingCarriers', 'shippingServices', 'inventoryOrders'));
 
-        $this->set('inventory', $this->paginate($inventory));
-        $this->set('inventoryCompleted', $this->paginate($inventoryCompleted));
+        $this->set('inventory', $inventory);
+        $this->set('inventoryCompleted', $inventoryCompleted);
         $this->set('_serialize', ['inventory']);
     }
 
@@ -105,8 +105,8 @@ class InventoryController extends AppController
         $this->set(compact('inventoryOrder', 'shippingCarriers', 'shippingServices', 'inventoryOrders'));
 
         $this->set('group_id' , $user_data->user->group_id);
-        $this->set('inventory', $this->paginate($inventory));
-        $this->set('inventory_completed', $this->paginate($inventory_completed));
+        $this->set('inventory', $inventory);
+        $this->set('inventory_completed', $inventory_completed);
         $this->set('_serialize', ['inventory']);
     }
 
@@ -140,8 +140,8 @@ class InventoryController extends AppController
         $this->set(compact('inventoryOrder', 'shippingCarriers', 'shippingServices', 'inventoryOrders'));
 
         $this->set('group_id' , $user_data->user->group_id);
-        $this->set('inventory', $this->paginate($inventory));
-        $this->set('inventory_completed', $this->paginate($inventory_completed));
+        $this->set('inventory', $inventory);
+        $this->set('inventory_completed', $inventory_completed);
         $this->set('_serialize', ['inventory']);
     }
 

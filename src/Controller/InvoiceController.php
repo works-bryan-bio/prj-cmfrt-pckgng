@@ -75,8 +75,8 @@ class InvoiceController extends AppController
             ->order(['Invoice.id' => 'DESC'])
         ;
         
-        $this->set('pendingInvoice', $this->paginate($pendingInvoice));
-        $this->set('completedInvoice', $this->paginate($completedInvoice));
+        $this->set('pendingInvoice', $pendingInvoice);
+        $this->set('completedInvoice', $completedInvoice);
         $this->set('_serialize', ['invoice']);
     }
 
