@@ -109,8 +109,8 @@
                               }
                             ?>
                             <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?><br />
-                            <a class="btn btn-sm btn-info" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a><br />                            
-                            <a class="btn btn-sm btn-info" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a><br />                            
+                            <a class="btn btn-sm btn-info" target="_new" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a><br />                            
+                            <a class="btn btn-sm btn-info" target="_new" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a><br />                            
                             <?php if($hdr_user_data->user->group_id <> 3){?>
                             <?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'class' => 'btn btn-sm btn-info','escape' => false]) ?>                                                        
                             <?php } ?>
@@ -341,8 +341,8 @@
                                 $dl_disable_shipment = 'disabled="disabled"';
                               }
                             ?>
-                            <a class="btn btn-sm btn-info" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a><br />                            
-                            <a class="btn btn-sm btn-info" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a><br />
+                            <a class="btn btn-sm btn-info" target="_new" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a><br />                            
+                            <a class="btn btn-sm btn-info" target="_new" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a><br />
                             <!-- Delete Modal -->
                             <div id="modal-<?=$shipment->id?>" class="modal fade">
                               <div class="modal-dialog">
