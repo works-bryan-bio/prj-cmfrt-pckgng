@@ -78,9 +78,9 @@ class ShipmentsController extends AppController
         }
 
         $this->set(['subShipments' => $subShipments]);
-        $this->set('pendingShipments', $this->paginate($pendingShipments));
-        $this->set('completedShipments', $this->paginate($completedShipments));
-        $this->set('receivedAndStoredShipments', $this->paginate($receivedAndStoredShipments));
+        $this->set('pendingShipments', $pendingShipments);
+        $this->set('completedShipments', $completedShipments);
+        $this->set('receivedAndStoredShipments', $receivedAndStoredShipments);
         $this->set('_serialize', ['shipments']);
     }
 
