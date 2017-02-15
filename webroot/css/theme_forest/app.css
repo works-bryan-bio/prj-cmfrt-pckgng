@@ -639,7 +639,8 @@ td.actions {
   z-index: 1000;
 }
 .mt-80{
-  margin-top: 80px;
+  /*margin-top: 80px;*/
+  margin-top: 10px;
   width: 98% !important;
 }
 body.container {
@@ -3847,3 +3848,16 @@ fieldset[disabled] .i-checks input + i:before {
     right: 0;
     border-width: .5em .5em 0 0;
   }
+
+form.form-horizontal .control-label{
+  font-weight: bold;
+  background-color: #232225;
+  color:#ffffff;
+  padding:10px;
+}
+form.form-horizontal input.form-control{
+  height: 41px;
+}
+form.form-horizontal .col-sm-6{
+  padding-left: 0px;
+}

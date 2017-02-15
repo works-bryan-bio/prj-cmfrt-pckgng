@@ -17,7 +17,7 @@
                     </ul>
         </div>
         <?php } ?>
-        <h1 class="page-header" style="    padding-bottom: 25px !important;margin-top: 100px !important;"><?= __('Shipments') ?></h1>
+        <h1 class="page-header" style="padding-bottom: 25px !important;"><?= __('Shipments') ?></h1>
     </div>
 </div>
  <div class="ribbon-section">
