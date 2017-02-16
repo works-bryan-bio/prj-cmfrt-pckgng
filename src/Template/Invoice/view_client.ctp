@@ -110,13 +110,16 @@
         </div>
       </div>
     </div>
-    <div style="padding-top: 30px;">
+
+    <div class="col-sm-offset-2 col-sm-10" style="padding-top: 30px;">
         <?php  echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'client'],['class' => 'btn btn-warning', 'escape' => false]); ?>
         <?php if($invoice->status <> 2){ ?>
          <?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-'. $invoice->id,['title' => 'Payments', 'class' => 'btn btn-danger','data-toggle' => 'modal','escape' => false]) ?>
             <?php } ?>
     </div>
-    <div class="form-group" style="margin-top: 80px;">
+    <br style="clear: both;" />
+
+    <div class="form-group" style="margin-top: 60px;">
     <div class="col-sm-offset-2 col-sm-10">
         <div class="action-fixed-bottom">        
         <?= $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'client'],['class' => 'btn btn-warning', 'escape' => false]) ?>
