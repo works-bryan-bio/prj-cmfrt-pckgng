@@ -67,7 +67,11 @@ class UserEntitiesController extends AppController
             'contain' => ['Users'],
             'conditions' => ['Users.group_id' => 3]
         ];
-        $this->set('userEntities', $this->paginate($this->UserEntities));
+        $employees = $this->UserEntities->find('all')
+            ->contain(['Users'])
+            ->where(['Users.group_id' => 3])
+        ;
+        $this->set('userEntities', $employees);
         $this->set('_serialize', ['userEntities']);
     }
 

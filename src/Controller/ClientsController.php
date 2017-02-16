@@ -47,11 +47,12 @@ class ClientsController extends AppController
      * @return void
      */
     public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Users']
-        ];
-        $this->set('clients', $this->paginate($this->Clients));
+    {        
+        $clients = $this->Clients->find('all')
+            ->contain(['Users'])
+        ;
+
+        $this->set('clients', $clients);
         $this->set('_serialize', ['clients']);
     }
 

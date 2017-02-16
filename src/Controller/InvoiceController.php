@@ -46,7 +46,7 @@ class InvoiceController extends AppController
         $this->paginate = [
             'contain' => ['Shipments', 'Clients']
         ];
-        $this->set('invoice', $this->paginate($this->Invoice));
+        $this->set('invoice', $this->Invoice);
         $this->set('_serialize', ['invoice']);
     }
 
