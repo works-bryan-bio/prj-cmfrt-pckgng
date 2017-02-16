@@ -204,7 +204,7 @@
                                               <select name="combine_with_id" class="form-control">
                                                 <option value=""></option>
                                                   <?php foreach($subShipments[$shipment->id] as $key => $value ) { ?>
-                                                    <option value="<?= $value['id'] ?>" ><?= $value['id'] . " - " . $value['item_description'] ?></option>
+                                                    <option <?= ($shipment->combine_with_id == $value['id'] ? "selected='selected'" : "" ); ?> value="<?= $value['id'] ?>" ><?= $value['id'] . " - " . $value['item_description'] ?></option>
                                                   <?php } ?>
                                               </select>
                                             </div> 

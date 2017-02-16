@@ -290,8 +290,8 @@ class ShipmentsController extends AppController
         $shippingServices = $this->Shipments->ShippingServices->find('list');
         $shippingPurposes = $this->Shipments->shippingPurposes->find('list');        
         $pendingShipments = $this->Shipments->find('all')
-            ->where(['Shipments.client_id' => $user_data->id , 'Shipments.status' => 1 ]) 
-            ->orWhere(['Shipments.status' => 3])
+            ->where(['Shipments.client_id' => $user_data->id]) 
+            ->andWhere(['Shipments.status IN' => array(1,3) ])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
@@ -437,6 +437,7 @@ class ShipmentsController extends AppController
     public function send_to_received_and_stored()
     {
         $this->Inventory = TableRegistry::get('Inventory');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
         $this->request->allowMethod(['post']);
 
         $session = $this->request->session();    
@@ -456,9 +457,11 @@ class ShipmentsController extends AppController
 
             $remaining_quantity = $shipment->quantity;
 
+            $is_send_part_of_it_to_amazon = false;
             if(!empty($data['quantity_to_send']) && $data['send_option'] == 'send_part_of_it_to_amazon'){
                 $shipment->send_amazon_qty = $data['quantity_to_send'];
                 $remaining_quantity = $remaining_quantity - $data['quantity_to_send'];
+                $is_send_part_of_it_to_amazon = true;
             }
 
             if(empty($data['amazon_confirmation_receipt'])){
@@ -514,7 +517,27 @@ class ShipmentsController extends AppController
                 $inventory_data['sent_quantity'] = $shipment->quantity;
                 $inventory_data['remaining_quantity'] = $remaining_quantity;
                 $inventory = $this->Inventory->patchEntity($inventory, $inventory_data);
-                $this->Inventory->save($inventory);
+                $result_inventory = $this->Inventory->save($inventory);
+            }
+
+            if($is_send_part_of_it_to_amazon){
+
+                $inventory_order = $this->InventoryOrder->newEntity();
+                $inventory_order->shipment_id = $shipment->id;
+                $inventory_order->client_id = $shipment->client_id;
+                $inventory_order->order_number = "0";
+                $inventory_order->order_destination = "Send part of it to Amazon";
+                $inventory_order->order_quantity = $data['quantity_to_send'];
+                $inventory_order->date_created = date('Y-m-d');
+                $inventory_order->shipping_carrier_id = $shipment->shipping_carrier_id;  
+                $inventory_order->shipping_service_id = $shipment->shipping_service_id;
+                $inventory_order->combine_inventory_order_id = 0;
+                $inventory_order->combine_comment = "";
+                $inventory_order->order_status = "Completed";
+                $inventory_order->date_sent = date('Y-m-d');
+                $inventory_order->total_remaining = 0;
+                $this->InventoryOrder->save($inventory_order);
+
             }
 
             $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $data['correct_quantity_comment']  , 'client' => $user_data, 'shipment_id' => $shipment->id];

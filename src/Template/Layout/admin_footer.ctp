@@ -21,7 +21,11 @@
             $(".modalImage").colorbox({transition:"fade"});
 
             //Datatable
-            $('.zero-config-datatable').DataTable();
+            $('.zero-config-datatable').DataTable({
+                "fnDrawCallback": function( settings ) {
+                    redrawnFunction();
+                }
+            });
 
             //Shipment module
             $("#shipping_carrier_id").change(function(){
@@ -218,37 +222,7 @@
                 loadProjectProposalDiscussionClient(<?= $project_proposal->id; ?>);
             <?php } ?>
 
-            $('.send_option').change(function(){
-                var send_option = $(this).val();
-                $('.send-to-amazon-qty-container').hide();
-                if(send_option == 'combine_with_shipment'){
-                    $('.shipment-combine-container').show();
-                    $('.send-to-amazon-container').hide();
-                }else if(send_option == 'send_to_amazon' || send_option == 'send_part_of_it_to_amazon'){
-                    $('.send-to-amazon-container').show();
-                    $('.shipment-combine-container').hide();
-
-                    if(send_option == 'send_part_of_it_to_amazon'){
-                        $('.send-to-amazon-qty-container').show();
-                    }
-                }else{
-                    $('.send-to-amazon-container').hide();
-                    $('.shipment-combine-container').hide();
-                }
-            });
-
-            $('#toggle_combine_inventory').change(function(){
-                var send_option = document.getElementById('toggle_combine_inventory').checked
-                if(send_option == true){
-                    $('#combine_inventory_order_id').show();
-                    $('#combine_comment').show();
-                    $('.combine_inventory').show();
-                }else{
-                    $('#combine_inventory_order_id').hide();
-                    $('#combine_comment').hide();
-                    $('.combine_inventory').hide();
-                }
-            });
+            redrawnFunction();
 
             $('.btn-show-order-form').click(function(){
                 var shipment_id = $(this).attr('data-shipment-id');
@@ -296,6 +270,41 @@
         CKEDITOR.replace( 'ckeditor', {
             width: '600'
         });
+
+        function redrawnFunction()
+        {
+            $('.send_option').change(function(){
+                var send_option = $(this).val();
+                $('.send-to-amazon-qty-container').hide();
+                if(send_option == 'combine_with_shipment'){
+                    $('.shipment-combine-container').show();
+                    $('.send-to-amazon-container').hide();
+                }else if(send_option == 'send_to_amazon' || send_option == 'send_part_of_it_to_amazon'){
+                    $('.send-to-amazon-container').show();
+                    $('.shipment-combine-container').hide();
+
+                    if(send_option == 'send_part_of_it_to_amazon'){
+                        $('.send-to-amazon-qty-container').show();
+                    }
+                }else{
+                    $('.send-to-amazon-container').hide();
+                    $('.shipment-combine-container').hide();
+                }
+            });
+
+            $('#toggle_combine_inventory').change(function(){
+                var send_option = document.getElementById('toggle_combine_inventory').checked
+                if(send_option == true){
+                    $('#combine_inventory_order_id').show();
+                    $('#combine_comment').show();
+                    $('.combine_inventory').show();
+                }else{
+                    $('#combine_inventory_order_id').hide();
+                    $('#combine_comment').hide();
+                    $('.combine_inventory').hide();
+                }
+            });
+        }
 
         function openKCFinder_textbox(field) {      
           window.KCFinder = {
