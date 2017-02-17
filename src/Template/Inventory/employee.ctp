@@ -103,8 +103,27 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
                                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $inventory->id],['title' => 'View', 'escape' => false]) ?></li>
                                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('Inventory Order'), ['controller' => 'inventory_order', 'action' => 'index', $inventory->shipment->id, $inventory->id],['title' => 'View', 'escape' => false]) ?></li>
                                 <li role="presentation"><a href="javascript:void(0);" class="btn-show-order-form" data-shipment-id="<?= $inventory->shipment->id ?>" data-remaining-quantity="<?= $inventory->remaining_quantity ?>" data-shipment-desc="<?= $inventory->shipment->id ." - ". $inventory->shipment->item_description ?>" data-sent-quantity="<?= $inventory->sent_quantity ?>" data-shipment-status="<?= $status; ?>"><i class="fa fa-pencil"></i><span class="text-send"> Send New <br/> Order</span></a></li>
+                                <li role="presentation"><a href='#modalBillLading-<?php echo $inventory->id; ?>' data-toggle="modal">Bill Lading</a></li>
                             </ul>
                           </div>
+
+                          <div id="modalBillLading-<?=$inventory->id?>" class="modal fade">
+                            <div class="modal-dialog modal-lg">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 class="modal-title">Bill Lading</h4>
+                                </div>
+                                <div class="modal-body wrapper-lg">
+                                    <?php include("bill_lading.ctp"); ?>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" class="btn btn-default">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
                           <div id="modal-<?=$inventory->id?>" class="modal fade">
                             <div class="modal-dialog">
                               <div class="modal-content">

@@ -36,6 +36,15 @@
             <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
         </tr>
         <tr>
+            <th><?= __('Supplier') ?></th>
+            <td><?= $shipment->supplier ?></td>
+        </tr>
+        <tr>
+            <th><?= __('FBA Number') ?></th>
+            <td><?= $shipment->fba_number ?></td>
+        </tr>
+
+        <tr>
             <th><?= __('Item Description') ?></th>
             <td><?= $this->Text->autoParagraph(h($shipment->item_description)); ?></td>        
         </tr>

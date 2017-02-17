@@ -243,4 +243,27 @@ class InventoryController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function update_bill_lading()
+    {
+        $data = $this->request->data;
+        $this->request->allowMethod(['post']);
+        $inventory = $this->Inventory->get($data['inventory_id']);
+        $bill_lading = $inventory->bill_lading_details;
+
+        if($bill_lading == "") {
+            $a_bill_lading = array();
+        }else{
+            $a_bill_lading = unserialize($bill_lading);
+        }
+
+        $a_bill_lading[$data['bill_lading_file']]['bill_lading_file'] = $data['bill_lading_file'];
+        $a_bill_lading[$data['bill_lading_file']]['date_upload'] = $data['date_upload'];
+        $a_bill_lading[$data['bill_lading_file']]['remarks'] = $data['remarks'];
+
+        $inventory->bill_lading_details = serialize($a_bill_lading);
+        $this->Inventory->save($inventory);
+        return $this->redirect(['action' => 'employee']);
+
+    }
 }
