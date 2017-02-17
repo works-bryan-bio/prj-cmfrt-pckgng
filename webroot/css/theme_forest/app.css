@@ -3862,3 +3862,26 @@ form.form-horizontal input.form-control{
 form.form-horizontal .col-sm-6{
   padding-left: 0px;
 }
+li.treeview:hover { 
+    background-color: #ffa400 !important;
+    width: 50px !important;
+}
+li.treeview.active{
+    background-color: #ffa400 !important;
+    width: 50px !important; 
+}
+.sptr{
+    background-color: #111111 !important;margin-left: 0px !important;height: 49px !important;z-index: 10 !important;
+}
+.sptrsub{
+    background-color: #111111 !important;margin-left: 0px !important;height: 46px !important;z-index: 10 !important;
+}
+.white{
+  color:white !important;
+}
+section.scrollable.wrapper {
+    padding: 70px !important;
+}
+.dropdown-menu > li > a {
+   color:white !important;
+}

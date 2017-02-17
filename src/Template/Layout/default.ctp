@@ -11,6 +11,7 @@
         echo $this->Html->meta('icon');
     
         echo $this->Html->css('theme_forest/bootstrap.css');
+        echo $this->Html->css('theme_forest/admin-collapse.css');
         echo $this->Html->css('theme_forest/animate.css');
         echo $this->Html->css('theme_forest/font-awesome.min.css');
         echo $this->Html->css('theme_forest/icon.css');
@@ -30,7 +31,7 @@
     </script>
 </head>
 
-<body>
+<body class="skin-blue sidebar-mini wysihtml5-supported sidebar-collapse">
 <?php 
   if( $hdr_user_data->photo != '' ){
       $user_photo = $this->Url->build("/webroot/upload/users/" . $hdr_user_data->id . "/" . $hdr_user_data->photo);            
@@ -38,7 +39,7 @@
       $user_photo = $this->Url->build("/webroot/images/default_user.png");
   }
 ?>
-<section class="vbox">
+<section class="vbox" style=" ">
     <header class="bg-primary header header-md navbar navbar-fixed-top-xs box-shadow">
     <div id="ribbon">
             <span class="content">Beta Testing Mode</span>
@@ -65,14 +66,14 @@
           </a>
           <ul class="dropdown-menu animated fadeInRight" style="width: 321px;">                        
             <li>
-              <?= $this->Html->link('<i class="fa fa-fw fa-user"></i> ' . __('Profile'),["controller" => "profile", "action" => "index"],['escape' => false]); ?>                 
+              <?= $this->Html->link('<i class="fa fa-fw fa-user white"></i> ' . __('Profile'),["controller" => "profile", "action" => "index"],['escape' => false]); ?>                 
             </li>            
             <!-- <li>
               <a href="docs.html">Help</a>
             </li> -->
             <li class="divider"></li>
             <li>
-              <?= $this->Html->link('<i class="i i-logout"></i> ' . __('Logout'),["controller" => "users", "action" => "logout"],["escape" => false]); ?>                    
+              <?= $this->Html->link('<i class="i i-logout white"></i> ' . __('Logout'),["controller" => "users", "action" => "logout"],["escape" => false]); ?>                    
             </li>
           </ul>
         </li>
@@ -81,9 +82,9 @@
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
-        <aside class="bg-black aside-md hidden-print hidden-xs" id="nav">          
+        <aside class="bg-black aside-md hidden-print hidden-xs" style="width:50px;" id="nav">          
           <section class="vbox">
-            <section class="w-f scrollable">
+            <section class="w-f scrollable" style="width: 500px;overflow-y: hidden;">
               <div class="slim-scroll" style="padding-top: 40px;" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
                 <div class="clearfix wrapper dk nav-user hidden-xs" style="display:none;">
                   <div class="dropdown">

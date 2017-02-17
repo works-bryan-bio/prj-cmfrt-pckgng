@@ -1,18 +1,21 @@
 <?php
 	echo $this->Html->script('theme_forest/jquery.min.js');
+
 	echo $this->Html->script('theme_forest/bootstrap.js');
+
 	//echo $this->Html->script('theme_forest/app.js');	
     echo $this->Html->script('theme_forest/datepicker/bootstrap-datepicker.js');
 	echo $this->Html->script('theme_forest/slimscroll/jquery.slimscroll.min.js');
     echo $this->Html->script('theme_forest/app.plugin.js');
 	echo $this->Html->script('theme_forest/jquery.ui.touch-punch.min.js');
+    echo $this->Html->script('app.min.js');
     echo $this->Html->script('theme_forest/file-input/bootstrap-filestyle.min.js');
 	echo $this->Html->script('theme_forest/jquery-ui-1.10.3.custom.min.js');
     echo $this->Html->script('ckeditor/ckeditor', array('inline' => false));
     echo $this->Html->script('validator.js');
     echo $this->Html->script('jquery.dataTables.min');
     echo $this->Html->script('colorbox/jquery.colorbox-min.js');    
-    
+
 	//echo $this->Html->script('backend-application.js');
 	//echo $this->Html->script('ckeditor/ckeditor', array('inline' => false));	
 ?>	
