@@ -61,6 +61,13 @@
 
                          echo "
                         <div class='form-group'>
+                            <label for='boxes' class='col-sm-2 control-label'>" . __('FBA Number') . "</label><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the FBA Number' ></i>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('fba_number', ['type' => 'text', 'class' => 'form-control', 'id' => 'fba_number', 'label' => false]);                
+                        echo " </div></div>";
+
+                         echo "
+                        <div class='form-group'>
                             <label for='upload_label' class='col-sm-2 control-label'>" . __('Upload label') . "</label><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload label' ></i>
                             <div class='col-sm-6'>";
                              echo $this->Form->input('shipment_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
