@@ -3660,8 +3660,7 @@ fieldset[disabled] .i-checks input + i:before {
     float: none !important;
     padding: 3px 0px !important;
   }
-    .aside-md {
-    width: 300px !important;
+  .aside-md {
     height: 100px !important;
   }
   .btn-info {
