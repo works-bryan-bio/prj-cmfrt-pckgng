@@ -5,6 +5,21 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
 ?>
 <style>
 .datepicker { z-index: 10000 !important;}
+.list-icon .col-md-1{
+  padding: 0px;
+}
+.list-icon div{
+    margin-right:42px;
+}
+.list-icon .btn-sm{
+    padding:5px 0px;
+    width:61px !important;
+    margin-right: 42px;
+    display: block;
+}
+.table-actions .btn{
+  width:159px;
+}
 </style>
 <div class="row">
     <div class="col-lg-12 mt-80" style="">
@@ -40,6 +55,7 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
                       <th class="data-id">ID</th>
                       <th class="">Shipment ID</th>
                       <th class="">Shipment Quantity</th>
@@ -47,8 +63,7 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
                       <th class="">Last Sent Order Quantity</th>
                       <th class="">Last Sent Order Date</th>
                       <th class="">Last Sent Destination</th>
-                      <th class="">Comments</th>
-                      <th class="actions">Actions</th>
+                      <th class="">Comments</th>                      
                     </tr>
                 </thead>
                 <tbody>
@@ -79,33 +94,17 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
 
                       ?>
                     <tr>
-                      <td style="text-align:center;"><span class="label label-danger" > <?php echo $shipmentsOrder; ?> </span><br/><?= $this->Number->format($inventory->shipment->id) ?></td>
-                      <td><?= $inventory->shipment->combine_with_id ?><?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id ." - ". $inventory->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id ]) : '' ?>
-
-                        <?php if($combined_shipment->count() > 0) { ?>
-                          <hr>
-                          <?php foreach($combined_shipment as $cs) { ?>
-                            <?= $cs->id; ?> - <?= $cs->item_description ?><br>
-                          <?php } ?>
-                        <?php } ?>
-                      </td>
-                      <td><?= $this->Number->format($inventory->sent_quantity) ?>
-                      </td>
-                      <td><?= $this->Number->format($inventory->remaining_quantity) ?></td>
-                      <td><?= $this->Number->format($inventory->last_sent_order_quantity) ?></td>
-                      <td><?= h($inventory->last_sent_order_date) ?></td>
-                      <td><?= h($inventory->last_sent_destination) ?></td>
-                      <td><?= $inventory->shipment->comments . " " . $inventory->shipment->combine_comment ." ". $inventory->shipment->amazon_shipment_note ?></td>
-                      <td class="actions no-border-right" style="width:20% !important;">
-                          <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $inventory->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?><br/>
-                          <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('Inventory Order'), ['controller' => 'inventory_order', 'action' => 'index', $inventory->shipment->id, $inventory->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>
-                          <br/>
-                          <a href="javascript:void(0);" class="btn btn-sm btn-info btn-show-order-form" data-shipment-id="<?= $inventory->shipment->id ?>" data-remaining-quantity="<?= $inventory->remaining_quantity ?>" data-shipment-desc="<?= $inventory->shipment->id ." - ". $inventory->shipment->item_description ?>" data-sent-quantity="<?= $inventory->sent_quantity ?>" data-shipment-status="<?= $status; ?>"><i class="fa fa-pencil"></i><span class="text-send"> Send New <br/> Order</span></a>    
-                          <?php if($group_id <> 3){ ?>                           
-                          <?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Cancel Order'), [ 'action' => 'View', 
-                          $inventory->id],['title' => 'Cancel Order', 'class' => 'btn btn-sm btn-danger','escape' => false]) ?>  
-                          <?php }?>
-                          <!-- Delete Modal -->
+                      <td class="no-border-right table-actions">
+                          <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $inventory->id],['title' => 'View', 'escape' => false]) ?></li>
+                                <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('Inventory Order'), ['controller' => 'inventory_order', 'action' => 'index', $inventory->shipment->id, $inventory->id],['title' => 'View', 'escape' => false]) ?></li>
+                                <li role="presentation"><a href="javascript:void(0);" class="btn-show-order-form" data-shipment-id="<?= $inventory->shipment->id ?>" data-remaining-quantity="<?= $inventory->remaining_quantity ?>" data-shipment-desc="<?= $inventory->shipment->id ." - ". $inventory->shipment->item_description ?>" data-sent-quantity="<?= $inventory->sent_quantity ?>" data-shipment-status="<?= $status; ?>"><i class="fa fa-pencil"></i><span class="text-send"> Send New <br/> Order</span></a></li>
+                            </ul>
+                          </div>
                           <div id="modal-<?=$inventory->id?>" class="modal fade">
                             <div class="modal-dialog">
                               <div class="modal-content">
@@ -129,6 +128,23 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
                             </div>
                           </div>
                       </td>
+                      <td style="text-align:center;"><span class="label label-danger" > <?php echo $shipmentsOrder; ?> </span><br/><?= $this->Number->format($inventory->shipment->id) ?></td>
+                      <td><?= $inventory->shipment->combine_with_id ?><?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id ." - ". $inventory->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id ]) : '' ?>
+
+                        <?php if($combined_shipment->count() > 0) { ?>
+                          <hr>
+                          <?php foreach($combined_shipment as $cs) { ?>
+                            <?= $cs->id; ?> - <?= $cs->item_description ?><br>
+                          <?php } ?>
+                        <?php } ?>
+                      </td>
+                      <td><?= $this->Number->format($inventory->sent_quantity) ?>
+                      </td>
+                      <td><?= $this->Number->format($inventory->remaining_quantity) ?></td>
+                      <td><?= $this->Number->format($inventory->last_sent_order_quantity) ?></td>
+                      <td><?= h($inventory->last_sent_order_date) ?></td>
+                      <td><?= h($inventory->last_sent_destination) ?></td>
+                      <td><?= $inventory->shipment->comments . " " . $inventory->shipment->combine_comment ." ". $inventory->shipment->amazon_shipment_note ?></td>                      
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
