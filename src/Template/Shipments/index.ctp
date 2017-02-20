@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-lg-12 mt-80" style="">
        <?php if($hdr_user_data->user->group_id <> 3) { ?>
-        <div class="dropdown pull-right" style="margin:-20px 14px 0 0">
+        <div class="dropdown pull-right" style="margin: 0px 14px 0 0">
             <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
                 Action <span class="caret"></span>
             </button>

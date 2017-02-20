@@ -3867,19 +3867,30 @@ li.treeview:hover {
 }
 li.treeview.active{
     background-color: #ffa400 !important;
-    width: 50px !important; 
+    width: 35px !important; 
 }
 .sptr{
-    background-color: #111111 !important;margin-left: 0px !important;height: 49px !important;z-index: 10 !important;
+    background-color: #111111 !important;margin-left: 0px !important;height: 38px !important;z-index: 10 !important;
+    padding-top: 9px !important;
+    padding-right: 9px !important;
+    padding-bottom: 9px !important;
+    padding-left: 15px !important;
 }
 .sptrsub{
-    background-color: #111111 !important;margin-left: 0px !important;height: 46px !important;z-index: 10 !important;
+    background-color: #111111 !important;margin-left: 0px !important;height: 35px !important;z-index: 10 !important;
+    padding-top: 9px !important;
+    padding-right: 9px !important;
+    padding-bottom: 9px !important;
+    padding-left: 15px !important;
 }
 .white{
   color:white !important;
 }
 section.scrollable.wrapper {
-    padding: 70px !important;
+  padding-top: 70px !important;
+  padding-right: 70px !important;
+  padding-bottom: 70px !important;
+  padding-left: 40px !important;
 }
 .dropdown-menu > li > a {
    color:white !important;

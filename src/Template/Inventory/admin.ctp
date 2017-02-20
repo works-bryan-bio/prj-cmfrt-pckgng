@@ -7,7 +7,7 @@ $this->Shipments = TableRegistry::get('Shipments');
 </style>
 <div class="row">
     <div class="col-lg-12 mt-80" style="">
-        <div class="dropdown pull-right" style="margin:-20px 14px 0 0">
+        <div class="dropdown pull-right" style="margin:0px 14px 0 0">
             <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
                 Action <span class="caret"></span>
             </button>
@@ -20,6 +20,7 @@ $this->Shipments = TableRegistry::get('Shipments');
         <h1 class="page-header"><?= __('Inventory') ?></h1>
     </div>
 </div>
+<br/>
 <div id="send-new-order-container" class="send-new-order-container" style="display:none;"><?php include("accordion_add.ctp"); ?></div>
  <div class="ribbon-section">
       <img style="float:left;" src="<?php echo $this->Url->build("/webroot/images/ribbon.png"); ?>">

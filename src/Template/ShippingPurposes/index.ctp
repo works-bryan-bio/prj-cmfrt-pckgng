@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12 mt-80">
-        <div class="dropdown pull-right" style="margin:-20px 14px 0 0">
+        <div class="dropdown pull-right" style="margin:0px 14px 0 0;position: relative;right: 13px;">
             <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
                 Action <span class="caret"></span>
             </button>
@@ -8,7 +8,7 @@
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Shipping Purpose'), ['action' => 'add'], ['escape' => false]) ?></li>
                     </ul>
         </div>
-        <h1 class="page-header"><?= __('Shipping Purposes') ?></h1>
+        <h1 class="page-header"  style="position: relative;left: 17px;"><?= __('Shipping Purposes') ?></h1>
     </div>
 </div>
 <section class="content">

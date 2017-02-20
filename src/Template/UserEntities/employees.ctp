@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12 mt-80">
-        <div class="dropdown pull-right">
+        <div class="dropdown pull-right" style="position: relative;right: 26px;">
             <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
                 Action <span class="caret"></span>
             </button>
@@ -8,7 +8,7 @@
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Employee'), ['action' => 'add_employee'], ['escape' => false]) ?></li>             
             </ul>
         </div>
-        <h1 class="page-header"><?= __('Employees') ?></h1>
+        <h1 class="page-header" style="padding-left: 20px;"><?= __('Employees') ?></h1>
     </div>
 </div>
 <section class="content">

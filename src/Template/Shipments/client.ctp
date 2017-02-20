@@ -7,11 +7,11 @@ $this->Shipments = TableRegistry::get('Shipments');
 </style>
 <div class="row">
     <div class="col-lg-12 mt-80" style="">
-        <div class="dropdown pull-right" style="margin:44px 14px 0 0">
+        <div class="dropdown pull-right" style="margin:0px 14px 55px 0">
             <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
                 Action <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+            <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn" style="right: 0 !important;left: -1px !important;top: 32px !important;width: 179px !important;">        
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Shipment'), ['action' => 'client_add'], ['escape' => false]) ?></li>                
             </ul>
         </div>

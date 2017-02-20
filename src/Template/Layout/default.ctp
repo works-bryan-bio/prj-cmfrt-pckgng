@@ -82,7 +82,7 @@
     <section>
       <section class="hbox stretch">
         <!-- .aside -->
-        <aside class="bg-black aside-md hidden-print hidden-xs" style="width:50px;" id="nav">          
+        <aside class="bg-black aside-md hidden-print hidden-xs" style="width:35px;" id="nav">          
           <section class="vbox">
             <section class="w-f scrollable" style="width: 500px;overflow-y: hidden;">
               <div class="slim-scroll" style="padding-top: 40px;" data-height="auto" data-disable-fade-out="true" data-distance="0" data-size="10px" data-railOpacity="0.2">
