@@ -4,6 +4,25 @@ $this->Shipments = TableRegistry::get('Shipments');
 ?>
 <style>
 .datepicker { z-index: 10000 !important;}
+.list-icon .col-md-1{
+  padding: 0px;
+}
+.list-icon div{
+    margin-right:42px;
+}
+.list-icon .btn-sm{
+    padding:5px 0px;
+    width:61px !important;
+    margin-right: 42px;
+    display: block;
+}
+.table-actions .btn{
+  width:159px;
+}
+hr{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
 </style>
 <div class="row">
     <div class="col-lg-12 mt-80" style="">        
@@ -28,15 +47,15 @@ $this->Shipments = TableRegistry::get('Shipments');
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                      <th class="data-id">Shipment</th>                      
-                      <th class="">Client</th>
-                      <th class="">Terms</th>
-                      <th class="date-time">Invoice Date</th>
-                      <th class="date-time">Invoice Due Date</th>
-                      <th class="">Description</th>
-                      <th class="">Total Balance</th>
-                      <th class="">Status</th>
-                      <th class="actions">Actions</th>
+                      <th style="text-align:center;">Actions</th>
+                      <th class="data-id" style="width:140px;">Shipment</th>                      
+                      <th class="" style="width:140px;">Client</th>
+                      <th class="" style="width:140px;">Terms</th>
+                      <th class="date-time" style="width:140px;">Invoice Date</th>
+                      <th class="date-time" style="width:140px;">Invoice Due Date</th>
+                      <th class="" style="width:140px;">Description</th>
+                      <th class="" style="width:140px;">Total Balance</th>
+                      <th class="" style="width:140px;">Status</th>                      
                     </tr>
                 </thead>
                 <tbody>
@@ -45,25 +64,17 @@ $this->Shipments = TableRegistry::get('Shipments');
                       // exit;
                     ?>
                     <tr>
-                        <td><?= $invoice->shipments_id . " - " . $invoice['shipment']['item_description'] ?></td>                        
-                        <td><?= $invoice['client']['firstname'] ." ".$invoice['client']['lastname'] ?></td>
-                        <td><?= $invoice->terms ?></td>
-                        <td><?= h($invoice->invoice_date) ?></td>
-                        <td><?= h($invoice->due_date) ?></td>
-                        <td><?= $invoice->description ?></td>
-                        <td><?= $invoice->balance_due ?></td>
-                        <td>
-                          <?php 
-                            if( $invoice->status == 1 ){
-                              echo "Pending";
-                            }else{
-                              echo "Completed";
-                            }
-                          ?>
-                        </td>
-                        <td class="actions">
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view_client', $invoice->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>
-                            <?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-'. $invoice->id,['title' => 'Payments', 'class' => 'btn btn-sm btn-danger','data-toggle' => 'modal','escape' => false]) ?>
+                        <td class="no-border-right table-actions">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view_client', $invoice->id],['title' => 'View', 'escape' => false]) ?></li>
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-'. $invoice->id,['title' => 'Payments', 'data-toggle' => 'modal','escape' => false]) ?></li>                                
+                              </ul>
+                            </div>                            
+
                             <!-- Delete Modal -->
                             <div id="modal-<?=$invoice->id?>" class="modal fade">
                               <div class="modal-dialog">
@@ -88,34 +99,6 @@ $this->Shipments = TableRegistry::get('Shipments');
                               </div>
                             </div>
                         </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>        
-      </div>
-      <div class="tab-pane" id="completed">
-        <div class="table-responsive data-content">    
-            <table class="zero-config-datatable display">
-                <thead>
-                    <tr class="heading">
-                      <th class="data-id">Shipment</th>                      
-                      <th class="">Client</th>
-                      <th class="">Terms</th>
-                      <th class="date-time">Invoice Date</th>
-                      <th class="date-time">Invoice Due Date</th>
-                      <th class="">Description</th>
-                      <th class="">Total Balance</th>
-                      <th class="">Status</th>
-                      <th class="actions">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($completedInvoice as $invoice):    
-                      // debug($invoice);
-                      // exit;
-                    ?>
-                    <tr>
                         <td><?= $invoice->shipments_id . " - " . $invoice['shipment']['item_description'] ?></td>                        
                         <td><?= $invoice['client']['firstname'] ." ".$invoice['client']['lastname'] ?></td>
                         <td><?= $invoice->terms ?></td>
@@ -132,10 +115,60 @@ $this->Shipments = TableRegistry::get('Shipments');
                             }
                           ?>
                         </td>
-                        <td class="actions">
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view_client', $invoice->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>
-                           
-                           
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>        
+      </div>
+      <div class="tab-pane" id="completed">
+        <div class="table-responsive data-content">    
+            <table class="zero-config-datatable display">
+                <thead>
+                    <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
+                      <th class="data-id" style="width:140px;">Shipment</th>                      
+                      <th class="" style="width:140px;">Client</th>
+                      <th class="" style="width:140px;">Terms</th>
+                      <th class="date-time" style="width:140px;">Invoice Date</th>
+                      <th class="date-time" style="width:140px;">Invoice Due Date</th>
+                      <th class="" style="width:140px;">Description</th>
+                      <th class="" style="width:140px;">Total Balance</th>
+                      <th class="" style="width:140px;">Status</th>
+                      <th class="actions" style="width:140px;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($completedInvoice as $invoice):    
+                      // debug($invoice);
+                      // exit;
+                    ?>
+                    <tr>
+                        <td class="no-border-right table-actions">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view_client', $invoice->id],['title' => 'View', 'escape' => false]) ?></li>                                  
+                              </ul>
+                            </div>
+                        </td>
+                        <td><?= $invoice->shipments_id . " - " . $invoice['shipment']['item_description'] ?></td>                        
+                        <td><?= $invoice['client']['firstname'] ." ".$invoice['client']['lastname'] ?></td>
+                        <td><?= $invoice->terms ?></td>
+                        <td><?= h($invoice->invoice_date) ?></td>
+                        <td><?= h($invoice->due_date) ?></td>
+                        <td><?= $invoice->description ?></td>
+                        <td><?= $invoice->balance_due ?></td>
+                        <td>
+                          <?php 
+                            if( $invoice->status == 1 ){
+                              echo "Pending";
+                            }else{
+                              echo "Completed";
+                            }
+                          ?>
                         </td>
                     </tr>
                     <?php endforeach; ?>

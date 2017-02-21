@@ -20,6 +20,10 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
 .table-actions .btn{
   width:159px;
 }
+hr{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
 </style>
 <div class="row">
     <div class="col-lg-12 mt-80" style="">
@@ -175,15 +179,15 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
                       <th class="data-id">ID</th>
-                      <th class="">Shipment ID</th>
+                      <th class="" style="width:180px;">Shipment ID</th>
                       <th class="">Shipment Quantity</th>
                       <th class="">Remaining Quantity</th>
-                      <th class="">Last Sent Order Quantity</th>
-                      <th class="">Last Sent Order Date</th>
-                      <th class="">Last Sent Destination</th>
-                      <th class="">Comments</th>
-                      <th class="actions">Actions</th>
+                      <th class="" style="width:120px;">Last Sent Order Quantity</th>
+                      <th class="" style="width:120px;">Last Sent Order Date</th>
+                      <th class="" style="width:120px;">Last Sent Destination</th>
+                      <th class="" style="width:220px;">Comments</th>                      
                     </tr>
                 </thead>
                 <tbody>
@@ -193,27 +197,34 @@ $this->InventoryOrder = TableRegistry::get('InventoryOrder');
                         $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $inventory_completed->shipment->id]);
                         
                       ?>
-                    <tr>
-                                <td><?= $this->Number->format($inventory_completed->shipment->id) ?></td>
-                                <td><?= $inventory_completed->has('shipment') ? $this->Html->link($inventory_completed->shipment->id ." - ". $inventory_completed->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory_completed->shipment->id]) : '' ?>
+                    <tr>  
+                      <td class="no-border-right table-actions">
+                          <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                Action <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $inventory_completed->id],['title' => 'View', 'escape' => false]) ?></li>
+                                <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('Inventory Order'), ['controller' => 'inventory_order', 'action' => 'index', $inventory_completed->shipment->id, $inventory_completed->id],['title' => 'View', 'escape' => false]) ?></li>                                
+                            </ul>
+                          </div>
+                      </td>
+                      <td><?= $this->Number->format($inventory_completed->shipment->id) ?></td>
+                      <td><?= $inventory_completed->has('shipment') ? $this->Html->link($inventory_completed->shipment->id ." - ". $inventory_completed->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory_completed->shipment->id]) : '' ?>
 
-                                  <?php if($combined_shipment->count() > 0) { ?>
-                                    <hr>
-                                    <?php foreach($combined_shipment as $cs) { ?>
-                                      <?= $cs->id; ?> - <?= $cs->item_description ?><br>
-                                    <?php } ?>
-                                  <?php } ?>
-                                </td>
-                                <td><?= $this->Number->format($inventory_completed->sent_quantity) ?></td>
-                                <td><?= $this->Number->format($inventory_completed->remaining_quantity) ?></td>
-                                <td><?= $this->Number->format($inventory_completed->last_sent_order_quantity) ?></td>
-                                <td><?= h($inventory_completed->last_sent_order_date) ?></td>
-                                <td><?= h($inventory_completed->last_sent_destination) ?></td>
-                                <td><?= $inventory_completed->shipment->comments . " " . $inventory_completed->shipment->combine_comment ." ". $inventory_completed->shipment->amazon_shipment_note ?></td>
-                                <td class="actions">
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $inventory_completed->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?><br/>
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('Inventory Order'), ['controller' => 'inventory_order', 'action' => 'index', $inventory_completed->shipment->id, $inventory_completed->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>                         
-                        </td>
+                        <?php if($combined_shipment->count() > 0) { ?>
+                          <hr>
+                          <?php foreach($combined_shipment as $cs) { ?>
+                            <?= $cs->id; ?> - <?= $cs->item_description ?><br>
+                          <?php } ?>
+                        <?php } ?>
+                      </td>
+                      <td><?= $this->Number->format($inventory_completed->sent_quantity) ?></td>
+                      <td><?= $this->Number->format($inventory_completed->remaining_quantity) ?></td>
+                      <td><?= $this->Number->format($inventory_completed->last_sent_order_quantity) ?></td>
+                      <td><?= h($inventory_completed->last_sent_order_date) ?></td>
+                      <td><?= h($inventory_completed->last_sent_destination) ?></td>
+                      <td><?= $inventory_completed->shipment->comments . " " . $inventory_completed->shipment->combine_comment ." ". $inventory_completed->shipment->amazon_shipment_note ?></td>                      
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

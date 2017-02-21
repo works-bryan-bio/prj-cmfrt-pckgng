@@ -4,6 +4,25 @@ $this->Shipments = TableRegistry::get('Shipments');
 ?>
 <style>
 .datepicker { z-index: 10000 !important;}
+.list-icon .col-md-1{
+  padding: 0px;
+}
+.list-icon div{
+    margin-right:42px;
+}
+.list-icon .btn-sm{
+    padding:5px 0px;
+    width:61px !important;
+    margin-right: 42px;
+    display: block;
+}
+.table-actions .btn{
+  width:159px;
+}
+hr{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
 </style>
 <div class="row">
     <div class="col-lg-12 mt-80" style="">
@@ -38,6 +57,7 @@ $this->Shipments = TableRegistry::get('Shipments');
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
                       <th class="">Item Description</th>                      
                       <th class="">Quantity</th>
                       <th class="">Boxes</th>
@@ -45,13 +65,46 @@ $this->Shipments = TableRegistry::get('Shipments');
                       <th class="">Shipping Service</th>
                       <th class="">Shipping Purpose</th>
                       <th class="">Status</th>
-                      <th class="date-time">Created</th>
-                      <th class="actions">Actions</th>
+                      <th class="date-time">Created</th>                      
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($pendingShipments as $shipment): ?>
                     <tr>
+                        <td class="no-border-right table-actions">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View','escape' => false]) ?></li>
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'escape' => false]) ?>      </li>                                
+                              </ul>
+                            </div>                                            
+                            <!-- Delete Modal -->
+                            <div id="modal-<?=$shipment->id?>" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h4 class="modal-title">Delete Confirmation</h4>
+                                  </div>
+                                  <div class="modal-body wrapper-lg">
+                                      <p><?= __('Are you sure you want to delete selected entry?') ?></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                                      <?= $this->Form->postLink(
+                                              'Yes',
+                                              ['action' => 'delete', $shipment->id],
+                                              ['class' => 'btn btn-danger', 'escape' => false]
+                                          )
+                                      ?>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </td>
                         <td><?= $shipment->item_description ." - " .$shipment->id ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
@@ -87,60 +140,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                             }
                           ?>
                         </td>
-                        <td><?= h($shipment->created) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>
-                            <?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'class' => 'btn btn-sm btn-info','escape' => false]) ?>                                                        
-                            <!-- Delete Modal -->
-                            <div id="modal-<?=$shipment->id?>" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                      <h4 class="modal-title">Delete Confirmation</h4>
-                                  </div>
-                                  <div class="modal-body wrapper-lg">
-                                      <p><?= __('Are you sure you want to delete selected entry?') ?></p>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
-                                      <?= $this->Form->postLink(
-                                              'Yes',
-                                              ['action' => 'delete', $shipment->id],
-                                              ['class' => 'btn btn-danger', 'escape' => false]
-                                          )
-                                      ?>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <!--
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('Received'), '#modalReceived-'. $shipment->id,['title' => 'Received', 'class' => 'btn btn-sm btn-info','data-toggle' => 'modal','escape' => false]) ?>                          
-
-                            <div id="modalReceived-<?=$shipment->id?>" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                      <h4 class="modal-title">Confirmation</h4>
-                                  </div>
-                                  <div class="modal-body wrapper-lg">
-                                      <p><?= __('Send to Received and stored?') ?></p>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
-                                      <?= $this->Form->postLink(
-                                              'Yes',
-                                              ['action' => 'send_to_received_and_stored', $shipment->id],
-                                              ['class' => 'btn btn-primary', 'escape' => false]
-                                          )
-                                      ?>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            -->
-                        </td>
+                        <td><?= h($shipment->created) ?></td>                        
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -152,20 +152,30 @@ $this->Shipments = TableRegistry::get('Shipments');
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                      <th class="data-id">Item Description</th>                      
-                      <th class="">Quantity</th>
-                      <th class="">Boxes</th>
-                      <th class="">Shipping Carrier</th>
-                      <th class="">Shipping Service</th>
-                      <th class="">Shipping Purpose</th>
-                      <th class="">Remaining Quantity</th>
-                      <th class="date-time">Created</th>
-                      <th class="actions">Actions</th>
+                      <th style="text-align:center;">Actions</th>
+                      <th class="data-id" style="width:150px;">Item Description</th>                      
+                      <th class="" style="width:150px;">Quantity</th>
+                      <th class="" style="width:150px;">Boxes</th>
+                      <th class="" style="width:150px;">Shipping Carrier</th>
+                      <th class="" style="width:150px;">Shipping Service</th>
+                      <th class="" style="width:150px;">Shipping Purpose</th>
+                      <th class="" style="width:150px;">Remaining Quantity</th>
+                      <th class="date-time" style="width:150px;">Created</th>                     
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($receivedAndStoredShipments as $shipment): ?>
                     <tr>
+                        <td class="no-border-right table-actions">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['controller' => 'inventory_order', 'action' => 'index/'.$shipment->shipment->id.'/'.$shipment->id],['title' => 'View', 'escape' => false]) ?></li>
+                              </ul>
+                            </div>                          
+                        </td>
                         <td><?= $shipment->shipment->item_description ." - ". $shipment->shipment->id ?></td>                        
                         <td><?= $this->Number->precision($shipment->shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->shipment->boxes,2) ?></td>
@@ -195,38 +205,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                         <td>
                           <?= $shipment->remaining_quantity  ?>
                         </td>
-                        <td><?= h($shipment->shipment->created) ?></td>
-                        <td class="actions">
-                          <!--<?php if($shipment->is_sent_to_inventory == 0) { ?>
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('Send to Inventory'), '#modalSendToInventory-'. $shipment->id,['title' => 'Send to Inventory', 'class' => 'btn btn-sm btn-info','data-toggle' => 'modal','escape' => false]) ?>                          
-                            <div id="modalSendToInventory-<?=$shipment->id?>" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                      <h4 class="modal-title">Confirmation</h4>
-                                  </div>
-                                  <div class="modal-body wrapper-lg">
-                                      <p><?= __('Send to inventory?') ?></p>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
-                                      <?= $this->Form->postLink(
-                                              'Yes',
-                                              ['action' => 'send_to_inventory', $shipment->id],
-                                              ['class' => 'btn btn-primary', 'escape' => false]
-                                          )
-                                      ?>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          <?php }else{ ?>
-                            <button class="btn btn-info" required="required">Sent</button>
-                          <?php } ?>-->
-
-                          <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['controller' => 'inventory_order', 'action' => 'index/'.$shipment->shipment->id.'/'.$shipment->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>   
-                        </td>
+                        <td><?= h($shipment->shipment->created) ?></td>                        
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -238,20 +217,53 @@ $this->Shipments = TableRegistry::get('Shipments');
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                      <th class="data-id">Item Description</th>                      
-                      <th class="">Quantity</th>
-                      <th class="">Boxes</th>
-                      <th class="">Shipping Carrier</th>
-                      <th class="">Shipping Service</th>
-                      <th class="">Shipping Purpose</th>
-                      <th class="">Status</th>
-                      <th class="date-time">Created</th>
-                      <th class="actions">Actions</th>
+                      <th style="text-align:center;">Actions</th>
+                      <th class="data-id" style="width:150px;">Item Description</th>                      
+                      <th class="" style="width:150px;">Quantity</th>
+                      <th class="" style="width:150px;">Boxes</th>
+                      <th class="" style="width:150px;">Shipping Carrier</th>
+                      <th class="" style="width:150px;">Shipping Service</th>
+                      <th class="" style="width:150px;">Shipping Purpose</th>
+                      <th class="" style="width:150px;">Status</th>
+                      <th class="date-time" style="width:150px;">Created</th>                      
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($completedShipments as $shipment): ?>
                     <tr>
+                        <td class="no-border-right table-actions">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'escape' => false]) ?></li>
+                              </ul>
+                            </div>
+                            <!-- Delete Modal -->
+                            <div id="modal-<?=$shipment->id?>" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h4 class="modal-title">Delete Confirmation</h4>
+                                  </div>
+                                  <div class="modal-body wrapper-lg">
+                                      <p><?= __('Are you sure you want to delete selected entry?') ?></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                                      <?= $this->Form->postLink(
+                                              'Yes',
+                                              ['action' => 'delete', $shipment->id],
+                                              ['class' => 'btn btn-danger', 'escape' => false]
+                                          )
+                                      ?>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </td>
                         <td><?= $shipment->item_description." - ". $shipment->id ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
@@ -288,8 +300,40 @@ $this->Shipments = TableRegistry::get('Shipments');
                           ?>
                         </td>
                         <td><?= h($shipment->created) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>                            
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>        
+      </div>
+      <div class="tab-pane" id="all_shipment">
+        <div class="table-responsive data-content">    
+            <table class="zero-config-datatable display">
+                <thead>
+                    <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
+                      <th class="data-id" style="width:150px;">Item Description</th>                      
+                      <th class="" style="width:150px;">Quantity</th>
+                      <th class="" style="width:150px;">Boxes</th>
+                      <th class="" style="width:150px;">Shipping Carrier</th>
+                      <th class="" style="width:150px;">Shipping Service</th>
+                      <th class="" style="width:150px;">Shipping Purpose</th>
+                      <th class="" style="width:150px;">Status</th>
+                      <th class="date-time" style="width:150px;">Created</th>                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($allShipments as $shipment): ?>
+                    <tr>
+                        <td class="no-border-right table-actions">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'escape' => false]) ?> </li>                                                          
+                              </ul>
+                            </div>                                                       
                             <!-- Delete Modal -->
                             <div id="modal-<?=$shipment->id?>" class="modal fade">
                               <div class="modal-dialog">
@@ -314,31 +358,6 @@ $this->Shipments = TableRegistry::get('Shipments');
                               </div>
                             </div>
                         </td>
-                    </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        </div>        
-      </div>
-      <div class="tab-pane" id="all_shipment">
-        <div class="table-responsive data-content">    
-            <table class="zero-config-datatable display">
-                <thead>
-                    <tr class="heading">
-                      <th class="data-id">Item Description</th>                      
-                      <th class="">Quantity</th>
-                      <th class="">Boxes</th>
-                      <th class="">Shipping Carrier</th>
-                      <th class="">Shipping Service</th>
-                      <th class="">Shipping Purpose</th>
-                      <th class="">Status</th>
-                      <th class="date-time">Created</th>
-                      <th class="actions">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($allShipments as $shipment): ?>
-                    <tr>
                         <td><?= $shipment->item_description ." - ". $shipment->id ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
@@ -374,33 +393,7 @@ $this->Shipments = TableRegistry::get('Shipments');
                             }
                           ?>
                         </td>
-                        <td><?= h($shipment->created) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?>                            
-                            <!-- Delete Modal -->
-                            <div id="modal-<?=$shipment->id?>" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                      <h4 class="modal-title">Delete Confirmation</h4>
-                                  </div>
-                                  <div class="modal-body wrapper-lg">
-                                      <p><?= __('Are you sure you want to delete selected entry?') ?></p>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
-                                      <?= $this->Form->postLink(
-                                              'Yes',
-                                              ['action' => 'delete', $shipment->id],
-                                              ['class' => 'btn btn-danger', 'escape' => false]
-                                          )
-                                      ?>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </td>
+                        <td><?= h($shipment->created) ?></td>                        
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

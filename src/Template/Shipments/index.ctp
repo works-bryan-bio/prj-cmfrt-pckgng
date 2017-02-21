@@ -1,5 +1,24 @@
 <style>
 .datepicker { z-index: 10000 !important;}
+.list-icon .col-md-1{
+  padding: 0px;
+}
+.list-icon div{
+    margin-right:42px;
+}
+.list-icon .btn-sm{
+    padding:5px 0px;
+    width:61px !important;
+    margin-right: 42px;
+    display: block;
+}
+.table-actions .btn{
+  width:159px;
+}
+hr{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
 </style>
 <div class="row">
     <div class="col-lg-12 mt-80" style="">
@@ -38,6 +57,7 @@
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
                       <?php if($hdr_user_data->user->group_id <> 4) { ?>
                         <th>Client Name</th>
                       <?php } ?>
@@ -48,55 +68,13 @@
                       <th class="">Shipping Service</th>
                       <th class="">Shipping Purpose</th>
                       <th class="">Status</th>
-                      <th class="date-time">Created</th>
-                      <th class="actions no-border-right" style="width:10% !important;">Actions</th>
+                      <th class="date-time">Created</th>                      
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($pendingShipments as $shipment): ?>
                     <tr>
-                        <?php if($hdr_user_data->user->group_id <> 4) { ?>
-                          <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
-                        <?php } ?>
-                        <td><?= $shipment->item_description .' - '. $shipment->id  ?></td>                        
-                        <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
-                        <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
-                        <td>
-                          <?php
-                            if( $shipment->shipping_carrier_id == 4 ){
-                              echo $shipment->shipping_carrier->name . " - " . $shipment->other_shipping_carrier;
-                            }else{
-                              echo $shipment->shipping_carrier->name;
-                            }                            
-                          ?>                          
-                        </td>
-                        <td>
-                          <?php 
-                            if( $shipment->shipping_service_id == 4 ){
-                              echo $shipment->shipping_service->name . " - " . $shipment->other_shipping_service;
-                            }else{
-                              echo $shipment->shipping_service->name;
-                            }                            
-                          ?>
-                        </td>
-                        <td>
-                          <?php 
-                            echo $shipment->shipping_purpose->name;
-                          ?>
-                        </td>
-                        <td>
-                          <?php 
-                            if( $shipment->status == 1 ){
-                              echo "Pending";
-                            }elseif($shipment->status == 4){
-                              echo "Received-Pending";
-                            }else{
-                              echo "Completed";
-                            }
-                          ?>
-                        </td>
-                        <td><?= h($shipment->created) ?></td>
-                        <td class="actions">
+                        <td class="no-border-right table-actions">
                             <?php 
                               $dl_disable_fnsku    = "";
                               $dl_disable_shipment = "";
@@ -108,12 +86,21 @@
                                 $dl_disable_shipment = 'disabled="disabled"';
                               }
                             ?>
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?><br />
-                            <a class="btn btn-sm btn-info" target="_new" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a><br />                            
-                            <a class="btn btn-sm btn-info" target="_new" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a><br />                            
-                            <?php if($hdr_user_data->user->group_id <> 3){?>
-                            <?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'class' => 'btn btn-sm btn-info','escape' => false]) ?>                                                        
-                            <?php } ?>
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><a href='#modalReceived-<?php echo $shipment->id; ?>' title="Received" data-toggle="modal" onclick='javascript:updateReceivedOption(<?php echo $shipment->id; ?>);'><i class="fa fa-eye"></i> Update</a></li>
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'escape' => false]) ?></li>                                
+                                  <li role="presentation"><a target="_new" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a></li>                                
+                                  <li role="presentation"><a target="_new" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a></li>  
+                                  <?php if($hdr_user_data->user->group_id <> 3){?>
+                                    <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'class' => 'btn btn-sm btn-info','escape' => false]) ?></li>
+                                  <?php } ?>                              
+                              </ul>
+                            </div>
+
                             <!-- Delete Modal -->
                             <div id="modal-<?=$shipment->id?>" class="modal fade">
                               <div class="modal-dialog">
@@ -137,9 +124,6 @@
                                 </div>
                               </div>
                             </div>
-
-                            
-                            <a href='#modalReceived-<?php echo $shipment->id; ?>' title="Received" class="btn btn-sm btn-info" data-toggle="modal" onclick='javascript:updateReceivedOption(<?php echo $shipment->id; ?>);'><i class="fa fa-eye"></i> Update</a>
 
                             <!-- Delete Modal -->
                             <div id="modalReceived-<?=$shipment->id?>" class="modal fade">
@@ -261,6 +245,47 @@
                               </div>
                             </div>
                         </td>
+                        <?php if($hdr_user_data->user->group_id <> 4) { ?>
+                          <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
+                        <?php } ?>
+                        <td><?= $shipment->item_description .' - '. $shipment->id  ?></td>                        
+                        <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
+                        <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
+                        <td>
+                          <?php
+                            if( $shipment->shipping_carrier_id == 4 ){
+                              echo $shipment->shipping_carrier->name . " - " . $shipment->other_shipping_carrier;
+                            }else{
+                              echo $shipment->shipping_carrier->name;
+                            }                            
+                          ?>                          
+                        </td>
+                        <td>
+                          <?php 
+                            if( $shipment->shipping_service_id == 4 ){
+                              echo $shipment->shipping_service->name . " - " . $shipment->other_shipping_service;
+                            }else{
+                              echo $shipment->shipping_service->name;
+                            }                            
+                          ?>
+                        </td>
+                        <td>
+                          <?php 
+                            echo $shipment->shipping_purpose->name;
+                          ?>
+                        </td>
+                        <td>
+                          <?php 
+                            if( $shipment->status == 1 ){
+                              echo "Pending";
+                            }elseif($shipment->status == 4){
+                              echo "Received-Pending";
+                            }else{
+                              echo "Completed";
+                            }
+                          ?>
+                        </td>
+                        <td><?= h($shipment->created) ?></td>                        
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -272,23 +297,69 @@
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
                       <?php if($hdr_user_data->user->group_id <> 4) { ?>
-                        <th>Client Name</th>
+                        <th style="width:120px;">Client Name</th>
                       <?php } ?>
-                      <th class="data-id">Item Description</th>                      
+                      <th class="data-id" style="width:200px;">Item Description</th>                      
                       <th class="">Quantity</th>
                       <th class="">Boxes</th>
-                      <th class="">Shipping Carrier</th>
-                      <th class="">Shipping Service</th>
-                      <th class="">Shipping Purpose</th>
+                      <th class="" style="width:120px;">Shipping Carrier</th>
+                      <th class="" style="width:120px;">Shipping Service</th>
+                      <th class="" style="width:120px;">Shipping Purpose</th>
                       <th class="">Status</th>
-                      <th class="date-time">Created</th>
-                      <th class="actions no-border-right" style="width:10% !important;">Actions</th>
+                      <th class="date-time" style="width:120px;">Created</th>                      
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($completedShipments as $shipment): ?>
                     <tr>
+                        <td class="no-border-right table-actions">
+                            <?php 
+                              $dl_disable_fnsku    = "";
+                              $dl_disable_shipment = "";
+                              if( $shipment->fnsku_label == "" ){
+                                $dl_disable_fnsku = 'disabled="disabled"';
+                              }
+
+                              if( $shipment->shipment_label == "" ){
+                                $dl_disable_shipment = 'disabled="disabled"';
+                              }
+                            ?>
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'escape' => false]) ?></li>
+                                  <li role="presentation"><a target="_new" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a></li>   
+                                  <li role="presentation"><a target="_new" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a></li>                             
+                              </ul>
+                            </div> 
+                            <!-- Delete Modal -->
+                            <div id="modal-<?=$shipment->id?>" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h4 class="modal-title">Delete Confirmation</h4>
+                                  </div>
+                                  <div class="modal-body wrapper-lg">
+                                      <p><?= __('Are you sure you want to delete selected entry?') ?></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                                      <?= $this->Form->postLink(
+                                              'Yes',
+                                              ['action' => 'delete', $shipment->id],
+                                              ['class' => 'btn btn-danger', 'escape' => false]
+                                          )
+                                      ?>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </td>
                         <?php if($hdr_user_data->user->group_id <> 4) { ?>
                           <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
                         <?php } ?>
@@ -327,46 +398,7 @@
                             }
                           ?>
                         </td>
-                        <td><?= h($shipment->created) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'class' => 'btn btn-sm btn-info', 'escape' => false]) ?><br />
-                            <?php 
-                              $dl_disable_fnsku    = "";
-                              $dl_disable_shipment = "";
-                              if( $shipment->fnsku_label == "" ){
-                                $dl_disable_fnsku = 'disabled="disabled"';
-                              }
-
-                              if( $shipment->shipment_label == "" ){
-                                $dl_disable_shipment = 'disabled="disabled"';
-                              }
-                            ?>
-                            <a class="btn btn-sm btn-info" target="_new" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a><br />                            
-                            <a class="btn btn-sm btn-info" target="_new" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a><br />
-                            <!-- Delete Modal -->
-                            <div id="modal-<?=$shipment->id?>" class="modal fade">
-                              <div class="modal-dialog">
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                      <h4 class="modal-title">Delete Confirmation</h4>
-                                  </div>
-                                  <div class="modal-body wrapper-lg">
-                                      <p><?= __('Are you sure you want to delete selected entry?') ?></p>
-                                  </div>
-                                  <div class="modal-footer">
-                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
-                                      <?= $this->Form->postLink(
-                                              'Yes',
-                                              ['action' => 'delete', $shipment->id],
-                                              ['class' => 'btn btn-danger', 'escape' => false]
-                                          )
-                                      ?>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                        </td>
+                        <td><?= h($shipment->created) ?></td>                        
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
