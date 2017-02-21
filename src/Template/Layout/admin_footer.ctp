@@ -262,7 +262,10 @@
                 $('.send-new-order-container').hide();
             });
 
-                
+            $('#upc_number').keyup(function(){
+                var upc_number = $('#upc_number').val();
+                loadVerifyUpcPrice(upc_number);
+            });    
 
         });
 
@@ -361,6 +364,23 @@
             $.post(base_url + "clients/load_project_proposal_discussion",{project_proposal_id:project_proposal_id},function(o){
                 $('#chat-container').html(o);
             });
+        }
+
+        function loadVerifyUpcPrice(upc_number) {
+            $.post(base_url + "shipments/load_verify_upc_number",{upc_number:upc_number},function(o){
+                var qty =  $('#quantity').val();
+                //alert(qty);
+                if(qty == ''){
+                    qty = 0;
+                }
+                var total_price = qty * o.per_piece;
+                $('#price').val(total_price);
+                if(total_price == 0){
+                  $('#price_text').html('We will update you on the price as soon as we can.');
+                }else{
+                    $('#price_text').html('');
+                }
+            },"json");
         }
 
         function updateReceivedOption(id){

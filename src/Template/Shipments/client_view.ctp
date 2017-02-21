@@ -45,6 +45,16 @@
         </tr>
 
         <tr>
+            <th><?= __('UPC Number') ?></th>
+            <td><?= $shipment->upc_number ?></td>
+        </tr>
+
+        <tr>
+            <th><?= __('Price') ?></th>
+            <td><?= $shipment->price ?></td>
+        </tr>
+
+        <tr>
             <th><?= __('Item Description') ?></th>
             <td><?= $this->Text->autoParagraph(h($shipment->item_description)); ?></td>        
         </tr>
