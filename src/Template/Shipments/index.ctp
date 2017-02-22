@@ -40,11 +40,10 @@ hr{
     </div>
 </div>
  <div class="ribbon-section">
-      <img style="float:left;" src="<?php echo $this->Url->build("/webroot/images/ribbon.png"); ?>">
       <div class="ribbon-black" style="padding-top:0px !important;">
           <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#pending" data-toggle="tab" style="height: 85px;border: 0px !important;font-size: 22px;color: white;border-radius: 0px;padding:26px;">Pending Shipments</a></li>
-            <li><a href="#completed" data-toggle="tab" style="height: 85px;border: 0px !important;font-size: 22px;color: white;border-radius: 0px;padding:26px;">Completed Shipments</a></li>      
+            <li class="active"><a href="#pending" class="ribbon-li" data-toggle="tab">Pending Shipments</a></li>
+            <li><a href="#completed" data-toggle="tab" class="ribbon-li">Completed Shipments</a></li>      
           </ul>
       </div>
     </div>

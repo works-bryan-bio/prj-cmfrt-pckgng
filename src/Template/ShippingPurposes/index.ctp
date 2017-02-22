@@ -12,9 +12,8 @@
     </div>
 </div>
 <section class="content">
- <div class="ribbon-section">
-      <img style="float:left;" src="<?php echo $this->Url->build("/webroot/images/ribbon.png"); ?>">
-      <div class="ribbon-black" style=""><h3 style="margin-left: 65px;color: white;">Shipping Purposes List</h3></div>
+    <div class="ribbon-section" style="padding-top:0px !important;">
+      <div class="ribbon-black" style=""><h3 class="ribbon-h3">Shipping Purposes List</h3></div>
     </div>
     <br style="clear:both;" />
     <div class="panel panel-primary">
