@@ -244,7 +244,7 @@ class InventoryController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function update_bill_lading()
+    public function save_bill_lading()
     {
         $data = $this->request->data;
         $this->request->allowMethod(['post']);
@@ -257,13 +257,50 @@ class InventoryController extends AppController
             $a_bill_lading = unserialize($bill_lading);
         }
 
+        if($data['edit_mode'] == "on"){
+            unset($a_bill_lading[$data['old_bill_lading_file']]);
+        }
+
         $a_bill_lading[$data['bill_lading_file']]['bill_lading_file'] = $data['bill_lading_file'];
         $a_bill_lading[$data['bill_lading_file']]['date_upload'] = $data['date_upload'];
         $a_bill_lading[$data['bill_lading_file']]['remarks'] = $data['remarks'];
 
         $inventory->bill_lading_details = serialize($a_bill_lading);
-        $this->Inventory->save($inventory);
+        if($this->Inventory->save($inventory)){
+            $this->Flash->success(__('Bill lading has been saved.'));
+        }else{
+            $this->Flash->error(__('Unable to save bill lading. Please, try again.'));
+        }
         return $this->redirect(['action' => 'employee']);
 
     }
+
+    public function delete_bill_lading()
+    {
+        $id = $this->request->data['inventory_id'];
+        $bill_lading_file = $this->request->data['bill_lading_file'];
+        $this->request->allowMethod(['post', 'delete']);
+        $inventory = $this->Inventory->get($id);
+        $bill_lading = $inventory->bill_lading_details;
+
+        if($bill_lading == "") {
+            $a_bill_lading = array();
+        }else{
+            $a_bill_lading = unserialize($bill_lading);
+        }
+
+        if(!empty($a_bill_lading)){
+            unset($a_bill_lading[$bill_lading_file]);
+        }
+
+        $inventory->bill_lading_details = serialize($a_bill_lading);
+        if($this->Inventory->save($inventory)){
+            $this->Flash->success(__('Bill lading has been removed.'));
+        }else{
+            $this->Flash->error(__('Unable to remove bill lading. Please, try again.'));
+        }
+        return $this->redirect(['action' => 'employee']);
+
+    }
+
 }
