@@ -39,14 +39,14 @@ hr{
         <h1 class="page-header" style="padding-bottom: 25px !important;"><?= __('Shipments') ?></h1>
     </div>
 </div>
- <div class="ribbon-section">
+<div class="ribbon-section">
       <div class="ribbon-black" style="padding-top:0px !important;">
           <ul class="nav nav-tabs nav-justified">
             <li class="active"><a href="#pending" class="ribbon-li" data-toggle="tab">Pending Shipments</a></li>
             <li><a href="#completed" data-toggle="tab" class="ribbon-li">Completed Shipments</a></li>      
           </ul>
       </div>
-    </div>
+</div>
     <br style="clear:both;" />  
 <section class="panel panel-default">
   <div class="panel-body">
@@ -89,13 +89,13 @@ hr{
                               <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
                                   Action <span class="caret"></span>
                               </button>
-                              <ul class="dropdown-menu tbl-actions-dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn" style="width: 575px;">        
                                   <li role="presentation"><a href='#modalReceived-<?php echo $shipment->id; ?>' title="Received" data-toggle="modal" onclick='javascript:updateReceivedOption(<?php echo $shipment->id; ?>);'><i class="fa fa-eye"></i> Update</a></li>
                                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'escape' => false]) ?></li>                                
                                   <li role="presentation"><a target="_new" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a></li>                                
                                   <li role="presentation"><a target="_new" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a></li>  
                                   <?php if($hdr_user_data->user->group_id <> 3){?>
-                                    <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'class' => 'btn btn-sm btn-info','escape' => false]) ?></li>
+                                    <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit','escape' => false]) ?></li>
                                   <?php } ?>                              
                               </ul>
                             </div>
