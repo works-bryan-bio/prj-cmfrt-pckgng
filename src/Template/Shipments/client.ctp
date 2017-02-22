@@ -38,16 +38,27 @@ hr{
     </div>
 </div>
  <div class="ribbon-section">
-      <img style="float:left;" src="<?php echo $this->Url->build("/webroot/images/ribbon.png"); ?>">
+      
+
+
       <div class="ribbon-black" style="padding-top:0px !important;">
           <ul class="nav nav-tabs nav-justified">
-            <li class="active"><a href="#pending" data-toggle="tab" style="height: 85px;border: 0px !important;font-size: 22px;color: white;border-radius: 0px;padding:26px;">Pending Shipments</a></li>
-            <li><a href="#received_and_stored" data-toggle="tab" style="height: 85px;border: 0px !important;font-size: 22px;color: white;border-radius: 0px;padding:26px;">Received and Stored</a></li>      
-            <li><a href="#completed" data-toggle="tab" style="height: 85px;border: 0px !important;font-size: 22px;color: white;border-radius: 0px;padding:26px;">Completed Shipments</a></li>
-            <li><a href="#all_shipment" data-toggle="tab" style="height: 85px;border: 0px !important;font-size: 22px;color: white;border-radius: 0px;padding:26px;">All</a></li>       
+            <li class="active"><a href="#pending" data-toggle="tab" class="ribbon-li">Pending Shipments</a></li>
+            <li><a href="#received_and_stored" data-toggle="tab" class="ribbon-li">Received and Stored</a></li>      
+            <li><a href="#completed" data-toggle="tab" class="ribbon-li">Completed Shipments</a></li>
+            <li><a href="#all_shipment" data-toggle="tab" class="ribbon-li">All</a></li>       
           </ul>
       </div>
     </div>
+
+
+
+
+
+
+
+
+
     <br style="clear:both;" />  
 <section class="panel panel-default">
   <div class="panel-body">
