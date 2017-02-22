@@ -57,8 +57,6 @@ hr{
                       <th class="" style="width:150px;">Order Number</th>
                       <th class="" style="width:150px;">Order Description</th>
                       <th class="" style="width:150px;">Order Destination</th>
-                      <th class="" style="width:150px;">Order Quantity</th>
-                      <th class="" style="width:150px;">Order Status</th>                      
                     </tr>
                 </thead>
                 <tbody>
@@ -129,10 +127,8 @@ hr{
                         <td><?= $this->Number->format($inventoryOrder->id) ?></td>                       
                         <td><?= h($inventoryOrder->date_created) ?></td>
                         <td><?= h($inventoryOrder->order_number) ?></td>
-                        <td><?= h($inventoryOrder->order_description) ?></td>
+                        <td><?= h($inventoryOrder->shipment->item_description) ?></td>
                         <td><?= h($inventoryOrder->order_destination) ?></td>
-                        <td><?= $this->Number->format($inventoryOrder->order_quantity) ?></td>
-                        <td><?= h($inventoryOrder->order_status) ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -146,12 +142,10 @@ hr{
                     <tr class="heading">
                       <th style="text-align:center;">Actions</th>
                       <th class="data-id" style="width:100px;">ID</th>
-                      <th class="" style="width:150px;">Shipment ID</th>
+                      <th class="" style="width:150px;">Order Due Date</th>
                       <th class="" style="width:150px;">Order Number</th>
-                      <th class="" style="width:150px;">Order Quantity</th>
-                      <th class="" style="width:150px;">Order Status</th>
-                      <th class="" style="width:150px;">Date Created</th>
-                      <th class="" style="width:150px;">Shipping Carrier ID</th>                      
+                      <th class="" style="width:150px;">Order Description</th>
+                      <th class="" style="width:150px;">Order Destination</th>                     
                     </tr>
                 </thead>
                 <tbody>
@@ -193,13 +187,11 @@ hr{
                               </ul>
                             </div>
                         </td>
-                        <td><?= $this->Number->format($inventoryOrderCompleted->id) ?></td>                       
-                        <td><?= $inventoryOrderCompleted->has('shipment') ? $this->Html->link($inventoryOrderCompleted->shipment->id, ['controller' => 'Shipments', 'action' => 'view', $inventoryOrderCompleted->shipment->id]) : '' ?></td>
-                        <td><?= h($inventoryOrderCompleted->order_number) ?></td>
-                        <td><?= $this->Number->format($inventoryOrderCompleted->order_quantity) ?></td>
-                        <td><?= h($inventoryOrderCompleted->order_status) ?></td>
+                         <td><?= $this->Number->format($inventoryOrderCompleted->id) ?></td>                       
                         <td><?= h($inventoryOrderCompleted->date_created) ?></td>
-                        <td><?= $inventoryOrderCompleted->has('shipping_carrier') ? $this->Html->link($inventoryOrderCompleted->shipping_carrier->name, ['controller' => 'ShippingCarriers', 'action' => 'view', $inventoryOrderCompleted->shipping_carrier->id]) : '' ?></td>
+                        <td><?= h($inventoryOrderCompleted->order_number) ?></td>
+                        <td><?= h($inventoryOrderCompleted->shipment->item_description) ?></td>
+                        <td><?= h($inventoryOrderCompleted->order_destination) ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
