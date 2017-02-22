@@ -105,8 +105,8 @@ hr{
                             <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
                                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $inventory->id],['title' => 'View', 'escape' => false]) ?></li>
                                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('Inventory Order'), ['controller' => 'inventory_order', 'action' => 'index', $inventory->shipment->id, $inventory->id],['title' => 'View', 'escape' => false]) ?></li>
-                                <li role="presentation"><a href="javascript:void(0);" class="btn-show-order-form" data-shipment-id="<?= $inventory->shipment->id ?>" data-remaining-quantity="<?= $inventory->remaining_quantity ?>" data-shipment-desc="<?= $inventory->shipment->id ." - ". $inventory->shipment->item_description ?>" data-sent-quantity="<?= $inventory->sent_quantity ?>" data-shipment-status="<?= $status; ?>"><i class="fa fa-pencil"></i><span class="text-send"> Send New <br/> Order</span></a></li>
-                                <li role="presentation"><a href='#modalBillLading-<?php echo $inventory->id; ?>' data-toggle="modal">Bill Lading</a></li>
+                                <li role="presentation"><a href="javascript:void(0);" class="btn-show-order-form" data-shipment-id="<?= $inventory->shipment->id ?>" data-remaining-quantity="<?= $inventory->remaining_quantity ?>" data-shipment-desc="<?= $inventory->shipment->id ." - ". $inventory->shipment->item_description ?>" data-sent-quantity="<?= $inventory->sent_quantity ?>" data-shipment-status="<?= $status; ?>"><i class="fa fa-pencil"></i><span class="text-send"> Send New Order</span></a></li>
+                                <li role="presentation"><a class="btn-bill-lading" href='#modalBillLading-<?php echo $inventory->id; ?>' data-toggle="modal">Bill Lading</a></li>
                             </ul>
                           </div>
 

@@ -265,7 +265,31 @@
             $('#upc_number').keyup(function(){
                 var upc_number = $('#upc_number').val();
                 loadVerifyUpcPrice(upc_number);
-            });    
+            });  
+
+            $('.btn-edit-bill-lading').click(function(){
+                $('.btn-cancel-edit-bill-lading').show();
+                $('.btn-action-bill-lading').html('Update');
+                $('.edit_mode').val("on");
+                $('.bill_lading_file').val($(this).attr("data-bill-lading-file"));
+                $('.old_bill_lading_file').val($(this).attr("data-bill-lading-file"));
+                $('.date_upload').val($(this).attr("data-date-upload"));
+                $('.remarks').val($(this).attr("data-remarks"));
+            });
+
+            $('.btn-cancel-edit-bill-lading').click(function(){
+                $('.btn-cancel-edit-bill-lading').hide();
+                $('.btn-action-bill-lading').html('Submit');
+                $('.edit_mode').val("off");
+                $('.bill_lading_file').val("");
+                $('.old_bill_lading_file').val("");
+                $('.date_upload').val("");
+                $('.remarks').val("");
+            });
+
+            $('.btn-bill-lading').click(function(){
+                $('.btn-cancel-edit-bill-lading').trigger('click');
+            });
 
         });
 

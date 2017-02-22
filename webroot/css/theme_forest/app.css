@@ -3912,3 +3912,13 @@ section.scrollable.wrapper {
 .dropdown-menu > li > a {
    color:white !important;
 }
+<<<<<<< HEAD
+=======
+.table-actions .dropdown-menu {
+    margin-right:-1000px;
+}
+
+.table-actions .dropdown-menu > li {
+    display: inline-block;
+}
+>>>>>>> 05414cfba5d44a7d18262cea0401e72fdb25de6a
