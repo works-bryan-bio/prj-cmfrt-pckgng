@@ -8,7 +8,7 @@
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Client'), ['action' => 'add'], ['escape' => false]) ?></li>             
             </ul>
         </div>
-        <h1 class="page-header" style="padding-left: 20px;"><?= __('Clients') ?></h1>
+        <h1 class="page-header" style="position: relative;"><?= __('Clients') ?></h1>
     </div>
 </div>
 <section class="content">

@@ -284,11 +284,10 @@ td.actions {
   -moz-box-shadow: -7px 7px 42px -10px rgba(43,41,43,1);
   padding-top: 20px;
   background-color: #f5f1e9;
-  padding-left: 20px;
-  padding-right: 40px;
+  padding-left: 4px;
+  padding-right: 3px;
   padding-bottom: 20px;
-  width: 96.5%;
-  margin-left: 2px;
+  width: 100%;
   position: relative;
   bottom: 19px;
 }
@@ -3653,7 +3652,7 @@ fieldset[disabled] .i-checks input + i:before {
 .ribbon-black{
   background-color: #232225;
   height: 65px;
-  width: 96.5%;
+  width: 100%;
   padding-top: 9px;
 }
 .ribbon-h3{
@@ -3905,9 +3904,9 @@ li.treeview.active{
 }
 section.scrollable.wrapper {
   padding-top: 70px !important;
-  padding-right: 70px !important;
-  padding-bottom: 70px !important;
-  padding-left: 40px !important;
+  padding-right: 0px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
 }
 .dropdown-menu > li > a {
    color:white !important;
@@ -3918,4 +3917,7 @@ section.scrollable.wrapper {
 
 .table-actions .dropdown-menu > li {
     display: inline-block;
+}
+td.actions {
+    width: 110px;
 }
