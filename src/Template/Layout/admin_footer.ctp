@@ -264,8 +264,29 @@
 
             $('#upc_number').keyup(function(){
                 var upc_number = $('#upc_number').val();
-                loadVerifyUpcPrice(upc_number);
-            });  
+                var combine_id = $('.combine_with_id').val();
+               
+
+                var shipping_purpose_id = $('#shipping_purpose_id').val();
+
+                if(shipping_purpose_id == 5){
+                     alert(shipping_purpose_id);
+                    var item_description = $('#item_description').val();
+                    var quantity = $('#quantity').val();
+                    loadVerifyUpcPriceCombine(upc_number,combine_id,item_description,quantity);
+                }else{
+                   loadVerifyUpcPrice(upc_number);
+                }
+
+            });
+
+            $('.combine_with_id').change(function(){
+                var upc_number = $('#upc_number').val();
+                var combine_id = $('.combine_with_id').val();
+                var item_description = $('#item_description').val();
+                var quantity = $('#quantity').val();
+                loadVerifyUpcPriceCombine(upc_number,combine_id,item_description,quantity);
+            });   
 
             $('.btn-edit-bill-lading').click(function(){
                 $('.btn-cancel-edit-bill-lading').show();
@@ -392,6 +413,23 @@
 
         function loadVerifyUpcPrice(upc_number) {
             $.post(base_url + "shipments/load_verify_upc_number",{upc_number:upc_number},function(o){
+                var qty =  $('#quantity').val();
+                //alert(qty);
+                if(qty == ''){
+                    qty = 0;
+                }
+                var total_price = qty * o.per_piece;
+                $('#price').val(total_price);
+                if(total_price == 0){
+                  $('#price_text').html('We will update you on the price as soon as we can.');
+                }else{
+                    $('#price_text').html('');
+                }
+            },"json");
+        }
+
+        function loadVerifyUpcPriceCombine(upc_number,combine_id,item_description,quantity) {
+            $.post(base_url + "shipments/load_verify_upc_number_combine",{upc_number:upc_number, combine_id:combine_id, item_description:item_description, quantity:quantity},function(o){
                 var qty =  $('#quantity').val();
                 //alert(qty);
                 if(qty == ''){

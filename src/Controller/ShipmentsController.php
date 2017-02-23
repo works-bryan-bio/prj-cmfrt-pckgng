@@ -609,4 +609,27 @@ class ShipmentsController extends AppController
         echo json_encode($return);
         exit;
     }
+
+     public function load_verify_upc_number_combine()
+    {
+        $per_piece = 0;
+        $this->request->allowMethod(['post']);
+        $shipment = $this->Shipments->find('all')
+            ->where([ 'upc_number' => $this->request->data['upc_number'] ])
+            ->andWhere(['quantity' =>  $this->request->data['quantity'] , 'item_description' => $this->request->data['item_description']])
+            ->first();
+
+
+
+
+        if($shipment){
+            $price = $shipment->price;
+            $quantity = $shipment->quantity;
+            $per_piece = $price / $quantity;
+        }
+
+        $return['per_piece'] = $per_piece;
+        echo json_encode($return);
+        exit;
+    }
 }
