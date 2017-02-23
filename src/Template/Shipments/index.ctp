@@ -90,7 +90,7 @@ hr{
                               <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
                                   Action <span class="caret"></span>
                               </button>
-                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                              <ul class="dropdown-menu tbl-actions-dropdown-menu" role="menu" aria-labelledby="drpdwn">        
                                   <li role="presentation"><a href='#modalReceived-<?php echo $shipment->id; ?>' title="Received" data-toggle="modal" onclick='javascript:updateReceivedOption(<?php echo $shipment->id; ?>);'><i class="fa fa-eye"></i> Update</a></li>
                                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'escape' => false]) ?></li>                                
                                   <li role="presentation"><a target="_new" <?php echo $dl_disable_shipment; ?> href="<?php echo $shipment->shipment_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> Shipment Label</a></li>                                

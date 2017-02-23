@@ -3895,3 +3895,10 @@ section.scrollable.wrapper {
 .dropdown-menu > li > a {
    color:white !important;
 }
+.dropdown-menu {
+    margin-right:-1000px;
+}
+
+.dropdown-menu > li {
+    display: inline-block;
+}
