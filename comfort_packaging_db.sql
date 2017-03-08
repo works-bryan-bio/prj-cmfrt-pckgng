@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2017 at 03:25 PM
+-- Generation Time: Mar 08, 2017 at 03:12 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.24
 
@@ -62,7 +62,7 @@ CREATE TABLE `acos` (
 --
 
 INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `rght`) VALUES
-(1, NULL, NULL, NULL, 'controllers', 1, 312),
+(1, NULL, NULL, NULL, 'controllers', 1, 398),
 (2, 1, NULL, NULL, 'Groups', 2, 15),
 (3, 2, NULL, NULL, 'index', 3, 4),
 (4, 2, NULL, NULL, 'view', 5, 6),
@@ -87,137 +87,180 @@ INSERT INTO `acos` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (23, 14, NULL, NULL, 'isAuthorized', 43, 44),
 (24, 1, NULL, NULL, 'Acl', 48, 49),
 (25, 1, NULL, NULL, 'Bake', 50, 51),
-(26, 1, NULL, NULL, 'DebugKit', 52, 67),
-(27, 26, NULL, NULL, 'Panels', 53, 58),
-(28, 27, NULL, NULL, 'index', 54, 55),
-(29, 27, NULL, NULL, 'view', 56, 57),
-(30, 26, NULL, NULL, 'Requests', 59, 62),
-(31, 30, NULL, NULL, 'view', 60, 61),
-(32, 26, NULL, NULL, 'Toolbar', 63, 66),
-(33, 32, NULL, NULL, 'clearCache', 64, 65),
-(34, 1, NULL, NULL, 'Migrations', 68, 69),
-(35, 1, NULL, NULL, 'Pages', 70, 93),
-(36, 35, NULL, NULL, 'index', 71, 72),
-(37, 35, NULL, NULL, 'view', 73, 74),
-(38, 35, NULL, NULL, 'add', 75, 76),
-(39, 35, NULL, NULL, 'edit', 77, 78),
-(40, 35, NULL, NULL, 'delete', 79, 80),
-(41, 35, NULL, NULL, 'isAuthorized', 81, 82),
-(42, 1, NULL, NULL, 'Slides', 94, 109),
-(43, 42, NULL, NULL, 'index', 95, 96),
-(44, 42, NULL, NULL, 'view', 97, 98),
-(45, 42, NULL, NULL, 'add', 99, 100),
-(46, 42, NULL, NULL, 'edit', 101, 102),
-(47, 42, NULL, NULL, 'delete', 103, 104),
-(48, 42, NULL, NULL, 'isAuthorized', 105, 106),
-(50, 42, NULL, NULL, 'updatePublish', 107, 108),
-(51, 1, NULL, NULL, 'UserEntities', 110, 131),
-(52, 51, NULL, NULL, 'index', 111, 112),
-(53, 51, NULL, NULL, 'view', 113, 114),
-(54, 51, NULL, NULL, 'add', 115, 116),
-(55, 51, NULL, NULL, 'edit', 117, 118),
-(56, 51, NULL, NULL, 'delete', 119, 120),
-(57, 51, NULL, NULL, 'isAuthorized', 121, 122),
-(79, 1, NULL, NULL, 'Clients', 132, 145),
-(80, 79, NULL, NULL, 'index', 133, 134),
-(81, 79, NULL, NULL, 'view', 135, 136),
-(82, 79, NULL, NULL, 'add', 137, 138),
-(83, 79, NULL, NULL, 'edit', 139, 140),
-(84, 79, NULL, NULL, 'delete', 141, 142),
-(85, 79, NULL, NULL, 'isAuthorized', 143, 144),
-(88, 35, NULL, NULL, 'frontview', 83, 84),
-(89, 35, NULL, NULL, 'ajax_email_inquiry', 85, 86),
-(90, 35, NULL, NULL, 'ajax_email_newsletter', 87, 88),
-(91, 35, NULL, NULL, 'contact_us', 89, 90),
-(95, 1, NULL, NULL, 'Profile', 146, 155),
-(96, 95, NULL, NULL, 'index', 147, 148),
-(97, 95, NULL, NULL, 'isAuthorized', 149, 150),
-(99, 95, NULL, NULL, 'change_password', 151, 152),
-(140, 35, NULL, NULL, 'updatePublish', 91, 92),
-(141, 1, NULL, NULL, 'EndUserOrder', 156, 169),
-(142, 141, NULL, NULL, 'index', 157, 158),
-(143, 141, NULL, NULL, 'view', 159, 160),
-(144, 141, NULL, NULL, 'add', 161, 162),
-(145, 141, NULL, NULL, 'edit', 163, 164),
-(146, 141, NULL, NULL, 'delete', 165, 166),
-(147, 141, NULL, NULL, 'isAuthorized', 167, 168),
-(148, 1, NULL, NULL, 'Invoice', 170, 189),
-(149, 148, NULL, NULL, 'index', 171, 172),
-(150, 148, NULL, NULL, 'client', 173, 174),
-(151, 148, NULL, NULL, 'view', 175, 176),
-(152, 148, NULL, NULL, 'view_client', 177, 178),
-(153, 148, NULL, NULL, 'add', 179, 180),
-(154, 148, NULL, NULL, 'edit', 181, 182),
-(155, 148, NULL, NULL, 'delete', 183, 184),
-(156, 148, NULL, NULL, 'payment', 185, 186),
-(157, 148, NULL, NULL, 'isAuthorized', 187, 188),
-(158, 1, NULL, NULL, 'InvoiceDetails', 190, 203),
-(159, 158, NULL, NULL, 'index', 191, 192),
-(160, 158, NULL, NULL, 'view', 193, 194),
-(161, 158, NULL, NULL, 'add', 195, 196),
-(162, 158, NULL, NULL, 'edit', 197, 198),
-(163, 158, NULL, NULL, 'delete', 199, 200),
-(164, 158, NULL, NULL, 'isAuthorized', 201, 202),
-(165, 95, NULL, NULL, 'edit', 153, 154),
-(166, 1, NULL, NULL, 'Shipments', 204, 227),
-(167, 166, NULL, NULL, 'index', 205, 206),
-(168, 166, NULL, NULL, 'client', 207, 208),
-(169, 166, NULL, NULL, 'view', 209, 210),
-(170, 166, NULL, NULL, 'client_view', 211, 212),
-(171, 166, NULL, NULL, 'add', 213, 214),
-(172, 166, NULL, NULL, 'client_add', 215, 216),
-(173, 166, NULL, NULL, 'edit', 217, 218),
-(174, 166, NULL, NULL, 'client_edit', 219, 220),
-(175, 166, NULL, NULL, 'delete', 221, 222),
-(176, 166, NULL, NULL, 'isAuthorized', 223, 224),
-(177, 1, NULL, NULL, 'ShipmentStatus', 228, 241),
-(178, 177, NULL, NULL, 'index', 229, 230),
-(179, 177, NULL, NULL, 'view', 231, 232),
-(180, 177, NULL, NULL, 'add', 233, 234),
-(181, 177, NULL, NULL, 'edit', 235, 236),
-(182, 177, NULL, NULL, 'delete', 237, 238),
-(183, 177, NULL, NULL, 'isAuthorized', 239, 240),
-(184, 1, NULL, NULL, 'ShippingCarriers', 242, 255),
-(185, 184, NULL, NULL, 'index', 243, 244),
-(186, 184, NULL, NULL, 'view', 245, 246),
-(187, 184, NULL, NULL, 'add', 247, 248),
-(188, 184, NULL, NULL, 'edit', 249, 250),
-(189, 184, NULL, NULL, 'delete', 251, 252),
-(190, 184, NULL, NULL, 'isAuthorized', 253, 254),
-(191, 1, NULL, NULL, 'ShippingPurposes', 256, 269),
-(192, 191, NULL, NULL, 'index', 257, 258),
-(193, 191, NULL, NULL, 'view', 259, 260),
-(194, 191, NULL, NULL, 'add', 261, 262),
-(195, 191, NULL, NULL, 'edit', 263, 264),
-(196, 191, NULL, NULL, 'delete', 265, 266),
-(197, 191, NULL, NULL, 'isAuthorized', 267, 268),
-(198, 1, NULL, NULL, 'ShippingServices', 270, 283),
-(199, 198, NULL, NULL, 'index', 271, 272),
-(200, 198, NULL, NULL, 'view', 273, 274),
-(201, 198, NULL, NULL, 'add', 275, 276),
-(202, 198, NULL, NULL, 'edit', 277, 278),
-(203, 198, NULL, NULL, 'delete', 279, 280),
-(204, 198, NULL, NULL, 'isAuthorized', 281, 282),
-(205, 51, NULL, NULL, 'employees', 123, 124),
-(206, 51, NULL, NULL, 'view_employee', 125, 126),
-(207, 51, NULL, NULL, 'add_employee', 127, 128),
-(208, 51, NULL, NULL, 'edit_employee', 129, 130),
+(34, 1, NULL, NULL, 'Migrations', 52, 53),
+(35, 1, NULL, NULL, 'Pages', 54, 77),
+(36, 35, NULL, NULL, 'index', 55, 56),
+(37, 35, NULL, NULL, 'view', 57, 58),
+(38, 35, NULL, NULL, 'add', 59, 60),
+(39, 35, NULL, NULL, 'edit', 61, 62),
+(40, 35, NULL, NULL, 'delete', 63, 64),
+(41, 35, NULL, NULL, 'isAuthorized', 65, 66),
+(42, 1, NULL, NULL, 'Slides', 78, 93),
+(43, 42, NULL, NULL, 'index', 79, 80),
+(44, 42, NULL, NULL, 'view', 81, 82),
+(45, 42, NULL, NULL, 'add', 83, 84),
+(46, 42, NULL, NULL, 'edit', 85, 86),
+(47, 42, NULL, NULL, 'delete', 87, 88),
+(48, 42, NULL, NULL, 'isAuthorized', 89, 90),
+(50, 42, NULL, NULL, 'updatePublish', 91, 92),
+(51, 1, NULL, NULL, 'UserEntities', 94, 115),
+(52, 51, NULL, NULL, 'index', 95, 96),
+(53, 51, NULL, NULL, 'view', 97, 98),
+(54, 51, NULL, NULL, 'add', 99, 100),
+(55, 51, NULL, NULL, 'edit', 101, 102),
+(56, 51, NULL, NULL, 'delete', 103, 104),
+(57, 51, NULL, NULL, 'isAuthorized', 105, 106),
+(79, 1, NULL, NULL, 'Clients', 116, 131),
+(80, 79, NULL, NULL, 'index', 117, 118),
+(81, 79, NULL, NULL, 'view', 119, 120),
+(82, 79, NULL, NULL, 'add', 121, 122),
+(83, 79, NULL, NULL, 'edit', 123, 124),
+(84, 79, NULL, NULL, 'delete', 125, 126),
+(85, 79, NULL, NULL, 'isAuthorized', 127, 128),
+(88, 35, NULL, NULL, 'frontview', 67, 68),
+(89, 35, NULL, NULL, 'ajax_email_inquiry', 69, 70),
+(90, 35, NULL, NULL, 'ajax_email_newsletter', 71, 72),
+(91, 35, NULL, NULL, 'contact_us', 73, 74),
+(95, 1, NULL, NULL, 'Profile', 132, 141),
+(96, 95, NULL, NULL, 'index', 133, 134),
+(97, 95, NULL, NULL, 'isAuthorized', 135, 136),
+(99, 95, NULL, NULL, 'change_password', 137, 138),
+(140, 35, NULL, NULL, 'updatePublish', 75, 76),
+(141, 1, NULL, NULL, 'EndUserOrder', 142, 155),
+(142, 141, NULL, NULL, 'index', 143, 144),
+(143, 141, NULL, NULL, 'view', 145, 146),
+(144, 141, NULL, NULL, 'add', 147, 148),
+(145, 141, NULL, NULL, 'edit', 149, 150),
+(146, 141, NULL, NULL, 'delete', 151, 152),
+(147, 141, NULL, NULL, 'isAuthorized', 153, 154),
+(148, 1, NULL, NULL, 'Invoice', 156, 175),
+(149, 148, NULL, NULL, 'index', 157, 158),
+(150, 148, NULL, NULL, 'client', 159, 160),
+(151, 148, NULL, NULL, 'view', 161, 162),
+(152, 148, NULL, NULL, 'view_client', 163, 164),
+(153, 148, NULL, NULL, 'add', 165, 166),
+(154, 148, NULL, NULL, 'edit', 167, 168),
+(155, 148, NULL, NULL, 'delete', 169, 170),
+(156, 148, NULL, NULL, 'payment', 171, 172),
+(157, 148, NULL, NULL, 'isAuthorized', 173, 174),
+(158, 1, NULL, NULL, 'InvoiceDetails', 176, 189),
+(159, 158, NULL, NULL, 'index', 177, 178),
+(160, 158, NULL, NULL, 'view', 179, 180),
+(161, 158, NULL, NULL, 'add', 181, 182),
+(162, 158, NULL, NULL, 'edit', 183, 184),
+(163, 158, NULL, NULL, 'delete', 185, 186),
+(164, 158, NULL, NULL, 'isAuthorized', 187, 188),
+(165, 95, NULL, NULL, 'edit', 139, 140),
+(166, 1, NULL, NULL, 'Shipments', 190, 221),
+(167, 166, NULL, NULL, 'index', 191, 192),
+(168, 166, NULL, NULL, 'client', 193, 194),
+(169, 166, NULL, NULL, 'view', 195, 196),
+(170, 166, NULL, NULL, 'client_view', 197, 198),
+(171, 166, NULL, NULL, 'add', 199, 200),
+(172, 166, NULL, NULL, 'client_add', 201, 202),
+(173, 166, NULL, NULL, 'edit', 203, 204),
+(174, 166, NULL, NULL, 'client_edit', 205, 206),
+(175, 166, NULL, NULL, 'delete', 207, 208),
+(176, 166, NULL, NULL, 'isAuthorized', 209, 210),
+(177, 1, NULL, NULL, 'ShipmentStatus', 222, 235),
+(178, 177, NULL, NULL, 'index', 223, 224),
+(179, 177, NULL, NULL, 'view', 225, 226),
+(180, 177, NULL, NULL, 'add', 227, 228),
+(181, 177, NULL, NULL, 'edit', 229, 230),
+(182, 177, NULL, NULL, 'delete', 231, 232),
+(183, 177, NULL, NULL, 'isAuthorized', 233, 234),
+(184, 1, NULL, NULL, 'ShippingCarriers', 236, 249),
+(185, 184, NULL, NULL, 'index', 237, 238),
+(186, 184, NULL, NULL, 'view', 239, 240),
+(187, 184, NULL, NULL, 'add', 241, 242),
+(188, 184, NULL, NULL, 'edit', 243, 244),
+(189, 184, NULL, NULL, 'delete', 245, 246),
+(190, 184, NULL, NULL, 'isAuthorized', 247, 248),
+(191, 1, NULL, NULL, 'ShippingPurposes', 250, 263),
+(192, 191, NULL, NULL, 'index', 251, 252),
+(193, 191, NULL, NULL, 'view', 253, 254),
+(194, 191, NULL, NULL, 'add', 255, 256),
+(195, 191, NULL, NULL, 'edit', 257, 258),
+(196, 191, NULL, NULL, 'delete', 259, 260),
+(197, 191, NULL, NULL, 'isAuthorized', 261, 262),
+(198, 1, NULL, NULL, 'ShippingServices', 264, 277),
+(199, 198, NULL, NULL, 'index', 265, 266),
+(200, 198, NULL, NULL, 'view', 267, 268),
+(201, 198, NULL, NULL, 'add', 269, 270),
+(202, 198, NULL, NULL, 'edit', 271, 272),
+(203, 198, NULL, NULL, 'delete', 273, 274),
+(204, 198, NULL, NULL, 'isAuthorized', 275, 276),
+(205, 51, NULL, NULL, 'employees', 107, 108),
+(206, 51, NULL, NULL, 'view_employee', 109, 110),
+(207, 51, NULL, NULL, 'add_employee', 111, 112),
+(208, 51, NULL, NULL, 'edit_employee', 113, 114),
 (209, 14, NULL, NULL, 'user_dashboard', 45, 46),
-(210, 1, NULL, NULL, 'Inventory', 284, 297),
-(211, 210, NULL, NULL, 'index', 285, 286),
-(212, 210, NULL, NULL, 'view', 287, 288),
-(213, 210, NULL, NULL, 'add', 289, 290),
-(214, 210, NULL, NULL, 'edit', 291, 292),
-(215, 210, NULL, NULL, 'delete', 293, 294),
-(216, 210, NULL, NULL, 'isAuthorized', 295, 296),
-(217, 166, NULL, NULL, 'send_to_inventory', 225, 226),
-(232, 1, NULL, NULL, 'InventoryOrder', 298, 311),
-(233, 232, NULL, NULL, 'index', 299, 300),
-(234, 232, NULL, NULL, 'view', 301, 302),
-(235, 232, NULL, NULL, 'add', 303, 304),
-(236, 232, NULL, NULL, 'edit', 305, 306),
-(237, 232, NULL, NULL, 'delete', 307, 308),
-(238, 232, NULL, NULL, 'isAuthorized', 309, 310);
+(210, 1, NULL, NULL, 'Inventory', 278, 299),
+(211, 210, NULL, NULL, 'index', 279, 280),
+(212, 210, NULL, NULL, 'view', 281, 282),
+(213, 210, NULL, NULL, 'add', 283, 284),
+(214, 210, NULL, NULL, 'edit', 285, 286),
+(215, 210, NULL, NULL, 'delete', 287, 288),
+(216, 210, NULL, NULL, 'isAuthorized', 289, 290),
+(217, 166, NULL, NULL, 'send_to_inventory', 211, 212),
+(232, 1, NULL, NULL, 'InventoryOrder', 300, 315),
+(233, 232, NULL, NULL, 'index', 301, 302),
+(234, 232, NULL, NULL, 'view', 303, 304),
+(235, 232, NULL, NULL, 'add', 305, 306),
+(236, 232, NULL, NULL, 'edit', 307, 308),
+(237, 232, NULL, NULL, 'delete', 309, 310),
+(238, 232, NULL, NULL, 'isAuthorized', 311, 312),
+(239, 1, NULL, NULL, 'About', 316, 323),
+(240, 239, NULL, NULL, 'index', 317, 318),
+(241, 239, NULL, NULL, 'isAuthorized', 319, 320),
+(242, 239, NULL, NULL, 'cell', 321, 322),
+(243, 1, NULL, NULL, 'Contact', 324, 331),
+(244, 243, NULL, NULL, 'index', 325, 326),
+(245, 243, NULL, NULL, 'isAuthorized', 327, 328),
+(246, 243, NULL, NULL, 'cell', 329, 330),
+(247, 1, NULL, NULL, 'CustomSoftware', 332, 339),
+(248, 247, NULL, NULL, 'index', 333, 334),
+(249, 247, NULL, NULL, 'isAuthorized', 335, 336),
+(250, 247, NULL, NULL, 'cell', 337, 338),
+(251, 210, NULL, NULL, 'admin', 291, 292),
+(252, 210, NULL, NULL, 'employee', 293, 294),
+(253, 232, NULL, NULL, 'update_status_to_complete', 313, 314),
+(254, 166, NULL, NULL, 'send_to_received_and_stored', 213, 214),
+(255, 79, NULL, NULL, 'history', 129, 130),
+(256, 210, NULL, NULL, 'save_bill_lading', 295, 296),
+(257, 210, NULL, NULL, 'delete_bill_lading', 297, 298),
+(258, 1, NULL, NULL, 'MessageDetails', 340, 353),
+(259, 258, NULL, NULL, 'index', 341, 342),
+(260, 258, NULL, NULL, 'view', 343, 344),
+(261, 258, NULL, NULL, 'add', 345, 346),
+(262, 258, NULL, NULL, 'edit', 347, 348),
+(263, 258, NULL, NULL, 'delete', 349, 350),
+(264, 258, NULL, NULL, 'isAuthorized', 351, 352),
+(265, 1, NULL, NULL, 'MessageHeader', 354, 367),
+(266, 265, NULL, NULL, 'index', 355, 356),
+(267, 265, NULL, NULL, 'view', 357, 358),
+(268, 265, NULL, NULL, 'add', 359, 360),
+(269, 265, NULL, NULL, 'edit', 361, 362),
+(270, 265, NULL, NULL, 'delete', 363, 364),
+(271, 265, NULL, NULL, 'isAuthorized', 365, 366),
+(272, 166, NULL, NULL, 'load_verify_upc_number', 215, 216),
+(273, 166, NULL, NULL, 'load_verify_upc_number_combine', 217, 218),
+(274, 166, NULL, NULL, 'load_verify_upc_number_order_inventory', 219, 220),
+(275, 1, NULL, NULL, 'DebugKit', 368, 383),
+(276, 275, NULL, NULL, 'Panels', 369, 374),
+(277, 276, NULL, NULL, 'index', 370, 371),
+(278, 276, NULL, NULL, 'view', 372, 373),
+(279, 275, NULL, NULL, 'Requests', 375, 378),
+(280, 279, NULL, NULL, 'view', 376, 377),
+(281, 275, NULL, NULL, 'Toolbar', 379, 382),
+(282, 281, NULL, NULL, 'clearCache', 380, 381),
+(283, 1, NULL, NULL, 'Message', 384, 397),
+(284, 283, NULL, NULL, 'index', 385, 386),
+(285, 283, NULL, NULL, 'view', 387, 388),
+(286, 283, NULL, NULL, 'add', 389, 390),
+(287, 283, NULL, NULL, 'edit', 391, 392),
+(288, 283, NULL, NULL, 'delete', 393, 394),
+(289, 283, NULL, NULL, 'isAuthorized', 395, 396);
 
 -- --------------------------------------------------------
 
@@ -249,7 +292,7 @@ INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (22, 1, 'Users', 17, NULL, 4, 5),
 (25, NULL, 'Groups', 2, NULL, 13, 18),
 (26, NULL, 'Groups', 3, NULL, 19, 30),
-(27, NULL, 'Groups', 4, NULL, 31, 44),
+(27, NULL, 'Groups', 4, NULL, 31, 48),
 (28, 25, 'Users', 2, NULL, 14, 15),
 (29, 26, 'Users', 3, NULL, 20, 21),
 (30, 27, 'Users', 4, NULL, 32, 33),
@@ -260,9 +303,11 @@ INSERT INTO `aros` (`id`, `parent_id`, `model`, `foreign_key`, `alias`, `lft`, `
 (35, 26, 'Users', 9, NULL, 26, 27),
 (36, 27, 'Users', 10, NULL, 38, 39),
 (37, 27, 'Users', 11, NULL, 40, 41),
-(38, 27, 'Users', 12, NULL, 42, 43),
+(38, 27, 'Users', 12, NULL, 44, 45),
 (39, 25, 'Users', 13, NULL, 16, 17),
-(40, 26, 'Users', 14, NULL, 28, 29);
+(40, 26, 'Users', 14, NULL, 28, 29),
+(41, 27, 'Users', 15, NULL, 42, 43),
+(42, 27, 'Users', 16, NULL, 46, 47);
 
 -- --------------------------------------------------------
 
@@ -298,12 +343,16 @@ DROP TABLE IF EXISTS `clients`;
 CREATE TABLE `clients` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
+  `company_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `firstname` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   `middlename` varchar(80) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lastname` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(80) COLLATE utf8_unicode_ci NOT NULL,
   `contact_no` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `address` text COLLATE utf8_unicode_ci,
+  `city` varchar(90) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `state` varchar(90) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `zip_code` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `photo` text COLLATE utf8_unicode_ci,
   `is_active` tinyint(2) DEFAULT '0',
   `is_password_changed` tinyint(2) DEFAULT '0',
@@ -315,11 +364,13 @@ CREATE TABLE `clients` (
 -- Dumping data for table `clients`
 --
 
-INSERT INTO `clients` (`id`, `user_id`, `firstname`, `middlename`, `lastname`, `email`, `contact_no`, `address`, `photo`, `is_active`, `is_password_changed`, `created`, `modified`) VALUES
-(1, 5, 'Sample Client AZ', 'Sample Client A', 'Sample Client A', 'clienta@gmail.com', '12345', 'Sample Address', NULL, 1, 0, '2016-12-29 21:01:26', '2016-12-29 21:13:46'),
-(2, 6, 'Sample Client B', 'Sample Client B', 'Sample Client B', 'clientb@gmail.com', '1345', 'Sample Address', NULL, 1, 0, '2016-12-29 21:02:05', '2016-12-29 21:02:05'),
-(3, 11, 'Client B', 'Client B', 'Client B', 'clientd@gmail.com', '12345', 'Test Address', NULL, 1, 0, '2017-01-03 06:14:19', '2017-01-03 06:14:19'),
-(4, 12, 'client_sample', 'client', 'client', 'client@comfortpackaging.com', '1231231231', 'this is a sample address', NULL, 1, 0, '2017-01-05 14:30:24', '2017-01-05 14:30:24');
+INSERT INTO `clients` (`id`, `user_id`, `company_name`, `firstname`, `middlename`, `lastname`, `email`, `contact_no`, `address`, `city`, `state`, `zip_code`, `photo`, `is_active`, `is_password_changed`, `created`, `modified`) VALUES
+(1, 5, '', 'Sample Client AZ', 'Sample Client A', 'Sample Client A', 'clienta@gmail.com', '12345', 'Sample Address', 'e', 'a', 's', NULL, 1, 0, '2016-12-29 21:01:26', '2017-02-07 15:47:41'),
+(2, 6, '', 'Sample Client B', 'Sample Client B', 'Sample Client B', 'clientb@gmail.com', '1345', 'Sample Address', '', '', '', NULL, 1, 0, '2016-12-29 21:02:05', '2016-12-29 21:02:05'),
+(3, 11, '', 'Client B', 'Client B', 'Client B', 'clientd@gmail.com', '12345', 'Test Address', '', '', '', NULL, 1, 0, '2017-01-03 06:14:19', '2017-01-03 06:14:19'),
+(4, 12, '', 'client_samples', 'clients', 'clients', 'client1@comfortpackaging.com', '1231231231s', 'this is a sample address', '', '', '', NULL, 1, 0, '2017-01-05 14:30:24', '2017-03-06 14:21:00'),
+(5, 15, '', 'client_sample2', '', 'client', 'client2@comfortpackaging.com', '12312312', 'this sample add', 'test', 'test', '40226', NULL, 1, 0, '2017-02-15 07:33:49', '2017-02-15 07:33:49'),
+(6, 16, 'Test Company', 'client_sample3', 'test', 'sample', 'client3@comfortpackaging.com', '2132165465', 'test', 'city', 'NY', '016462', NULL, 1, 0, '2017-03-07 10:38:27', '2017-03-07 10:38:27');
 
 -- --------------------------------------------------------
 
@@ -385,6 +436,7 @@ CREATE TABLE `inventory` (
   `last_sent_order_date` varchar(50) NOT NULL,
   `last_sent_order_quantity` int(11) NOT NULL,
   `last_sent_destination` varchar(190) NOT NULL,
+  `bill_lading_details` text NOT NULL,
   `created` datetime NOT NULL,
   `modified` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -393,13 +445,32 @@ CREATE TABLE `inventory` (
 -- Dumping data for table `inventory`
 --
 
-INSERT INTO `inventory` (`id`, `client_id`, `shipment_id`, `sent_quantity`, `remaining_quantity`, `last_sent_order_date`, `last_sent_order_quantity`, `last_sent_destination`, `created`, `modified`) VALUES
-(4, 4, 13, 10, 0, '2017-01-11 18:56:55', 5, '11', '2017-01-11 14:38:58', '2017-01-11 18:56:55'),
-(5, 4, 14, 50, 0, '2017-01-11 19:18:56', 16, 'test12', '2017-01-11 18:59:05', '2017-01-11 19:18:56'),
-(6, 4, 15, 5, 0, '2017-01-11 19:18:48', 5, 'aaa', '2017-01-11 19:14:10', '2017-01-11 19:18:48'),
-(7, 27, 18, 123, 123, '', 0, '', '2017-01-12 16:24:19', '2017-01-12 16:24:19'),
-(8, 4, 19, 321, 0, '2017-01-12 16:36:09', 321, 'test34', '2017-01-12 16:29:59', '2017-01-12 16:36:09'),
-(9, 4, 20, 50, 50, '', 0, '', '2017-01-13 09:44:04', '2017-01-13 09:44:04');
+INSERT INTO `inventory` (`id`, `client_id`, `shipment_id`, `sent_quantity`, `remaining_quantity`, `last_sent_order_date`, `last_sent_order_quantity`, `last_sent_destination`, `bill_lading_details`, `created`, `modified`) VALUES
+(4, 4, 13, 10, 0, '2017-01-11 18:56:55', 5, '11', '', '2017-01-11 14:38:58', '2017-01-11 18:56:55'),
+(5, 4, 14, 50, 0, '2017-01-11 19:18:56', 16, 'test12', '', '2017-01-11 18:59:05', '2017-01-11 19:18:56'),
+(6, 4, 15, 5, 0, '2017-01-11 19:18:48', 5, 'aaa', '', '2017-01-11 19:14:10', '2017-01-11 19:18:48'),
+(7, 27, 18, 123, 123, '', 0, '', '', '2017-01-12 16:24:19', '2017-01-12 16:24:19'),
+(8, 4, 19, 321, 0, '2017-01-12 16:36:09', 321, 'test34', '', '2017-01-12 16:29:59', '2017-01-12 16:36:09'),
+(9, 4, 20, 50, 50, '', 0, '', '', '2017-01-13 09:44:04', '2017-01-13 09:44:04'),
+(10, 4, 24, 25, 10, '2017-03-08 06:25:25', 10, 'this is for sample ', '', '2017-01-15 17:20:40', '2017-03-08 06:25:25'),
+(11, 4, 23, 50, 50, '', 0, '', '', '2017-01-16 11:37:45', '2017-01-16 14:21:47'),
+(12, 4, 22, 30, 15, '', 0, '', '', '2017-01-16 13:48:10', '2017-01-16 13:48:10'),
+(13, 4, 21, 30, 30, '', 0, '', '', '2017-01-16 14:21:47', '2017-01-16 14:21:47'),
+(14, 3, 9, 3, 3, '', 0, '', '', '2017-01-16 16:18:57', '2017-01-16 16:18:57'),
+(15, 3, 8, 3, 2, '', 0, '', '', '2017-01-16 16:26:50', '2017-01-16 16:29:01'),
+(16, 3, 7, 3, 0, '', 0, '', '', '2017-01-16 17:27:02', '2017-01-16 17:28:11'),
+(17, 3, 6, 5, 5, '', 0, '', '', '2017-01-17 06:04:07', '2017-01-17 06:04:07'),
+(18, 4, 25, 50, 0, '2017-03-08 06:56:12', 123, 'eeeee', '', '2017-01-17 17:12:37', '2017-03-08 06:56:12'),
+(19, 4, 27, 50, 50, '', 0, '', 'a:0:{}', '2017-01-20 10:30:06', '2017-02-21 18:13:07'),
+(20, 4, 28, 25, 25, '', 0, '', 'a:0:{}', '2017-01-20 12:13:50', '2017-02-22 07:58:39'),
+(21, 3, 3, 5, 5, '', 0, '', '', '2017-02-07 14:15:11', '2017-02-07 14:15:11'),
+(22, 4, 60, 30, 20, '', 0, '', 'a:2:{s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";a:3:{s:16:"bill_lading_file";s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";s:11:"date_upload";s:10:"2017-02-28";s:7:"remarks";s:5:"asdfg";}s:0:"";a:3:{s:16:"bill_lading_file";s:0:"";s:11:"date_upload";s:0:"";s:7:"remarks";s:0:"";}}', '2017-02-15 14:37:57', '2017-02-21 17:02:03'),
+(23, 4, 61, 30, 20, '', 0, '', 'a:2:{i:23;a:3:{s:16:"bill_lading_file";s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";s:11:"date_upload";s:10:"2017-02-24";s:7:"remarks";s:3:"asd";}s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";a:3:{s:16:"bill_lading_file";s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";s:11:"date_upload";s:10:"2017-02-19";s:7:"remarks";s:3:"xyz";}}', '2017-02-15 16:13:18', '2017-02-22 08:01:31'),
+(24, 4, 63, 50, 50, '', 0, '', '', '2017-02-22 15:06:44', '2017-02-22 15:06:44'),
+(25, 4, 64, 50, 0, '2017-03-01 04:14:47', 50, 'test destination', '', '2017-02-22 15:07:12', '2017-03-01 04:14:47'),
+(26, 4, 65, 43, 43, '', 0, '', '', '2017-03-06 14:27:23', '2017-03-06 14:27:23'),
+(27, 4, 67, 50, 20, '2017-03-08 06:54:46', 15, 'California ', '', '2017-03-06 17:32:54', '2017-03-08 06:54:46'),
+(28, 4, 66, 50, 35, '2017-03-07', 15, 'Send part of it to Amazon', '', '2017-03-06 17:48:17', '2017-03-06 17:48:17');
 
 -- --------------------------------------------------------
 
@@ -415,6 +486,7 @@ CREATE TABLE `inventory_order` (
   `order_number` varchar(100) NOT NULL,
   `order_destination` text NOT NULL,
   `order_quantity` float NOT NULL,
+  `order_price` float NOT NULL,
   `date_created` date NOT NULL,
   `shipping_carrier_id` int(11) NOT NULL,
   `shipping_service_id` int(11) NOT NULL,
@@ -429,15 +501,25 @@ CREATE TABLE `inventory_order` (
 -- Dumping data for table `inventory_order`
 --
 
-INSERT INTO `inventory_order` (`id`, `client_id`, `shipment_id`, `order_number`, `order_destination`, `order_quantity`, `date_created`, `shipping_carrier_id`, `shipping_service_id`, `combine_inventory_order_id`, `combine_comment`, `order_status`, `date_sent`, `total_remaining`) VALUES
-(1, 4, 13, '1212', '121', 5, '2017-01-11', 1, 1, NULL, 'aa', 'Completed', '2017-01-11', 111),
-(3, 4, 13, '11', '11', 5, '2017-01-11', 1, 1, 1, '11', 'Completed', '2017-01-11', 11),
-(4, 4, 14, '1234', 'Manila', 24, '2017-01-11', 1, 1, 1, '', 'Completed', '2017-01-11', 25),
-(5, 4, 14, '111', 'Makati', 10, '2017-01-11', 1, 1, 1, '', 'Completed', '2017-01-11', 0),
-(6, 4, 14, '1234', 'test12', 16, '2017-01-11', 1, 1, 1, '', 'Completed', '2017-01-11', 0),
-(7, 4, 15, '222', 'aaa', 5, '2017-01-11', 1, 1, 1, 'aa', 'Completed', '2017-01-11', 0),
-(8, 4, 19, '1231', 'test34', 321, '2017-01-12', 1, 1, 1, '', 'Completed', '2017-01-12', 0),
-(9, 4, 20, '1234', 'test 123', 25, '2017-01-13', 1, 1, 1, '', 'Pending', '2017-01-13', 0);
+INSERT INTO `inventory_order` (`id`, `client_id`, `shipment_id`, `order_number`, `order_destination`, `order_quantity`, `order_price`, `date_created`, `shipping_carrier_id`, `shipping_service_id`, `combine_inventory_order_id`, `combine_comment`, `order_status`, `date_sent`, `total_remaining`) VALUES
+(1, 4, 13, '1212', '121', 5, 0, '2017-01-11', 1, 1, NULL, 'aa', 'Completed', '2017-01-11', 111),
+(3, 4, 13, '11', '11', 5, 0, '2017-01-11', 1, 1, 1, '11', 'Completed', '2017-01-11', 11),
+(4, 4, 14, '1234', 'Manila', 24, 0, '2017-01-11', 1, 1, 1, '', 'Completed', '2017-01-11', 25),
+(5, 4, 14, '111', 'Makati', 10, 0, '2017-01-11', 1, 1, 1, '', 'Completed', '2017-01-11', 0),
+(6, 4, 14, '1234', 'test12', 16, 0, '2017-01-11', 1, 1, 1, '', 'Completed', '2017-01-11', 0),
+(7, 4, 15, '222', 'aaa', 5, 0, '2017-01-11', 1, 1, 1, 'aa', 'Completed', '2017-01-11', 0),
+(8, 4, 19, '1231', 'test34', 321, 0, '2017-01-12', 1, 1, 1, '', 'Completed', '2017-01-12', 0),
+(9, 4, 20, '1234', 'test 123', 25, 0, '2017-01-13', 1, 1, 1, '', 'Pending', '2017-01-13', 0),
+(10, 4, 24, 'test123', 'sample only', 5, 0, '2017-01-17', 1, 1, 1, '', 'Completed', '2017-01-17', 0),
+(11, 4, 24, 'test #2', 'this is for sample ', 10, 0, '2017-01-17', 1, 1, 1, '', 'Completed', '2017-01-17', 0),
+(13, 4, 0, 'eeee', 'eee', 123, 0, '2017-01-19', 1, 1, 1, 'ee', 'Pending', '2017-01-19', 0),
+(14, 4, 25, 'eeeeee', 'eeeee', 123, 0, '2017-01-19', 1, 1, 1, 'eee', 'Completed', '2017-01-19', 0),
+(15, 4, 61, '0', 'Amazon', 10, 0, '2017-02-15', 1, 1, 0, '', 'Completed', '2017-02-15', 0),
+(16, 4, 61, '1231', 'chicago', 4, 0, '2017-02-24', 1, 3, 1, '', 'Pending', '2017-02-22', 0),
+(17, 4, 64, 'OR0001', 'test destination', 50, 500, '2017-03-02', 1, 1, 1, '', 'Completed', '2017-03-02', 0),
+(18, 4, 67, '0', 'Send part of it to Amazon', 15, 0, '2017-03-06', 1, 1, 0, '', 'Completed', '2017-03-06', 0),
+(19, 4, 66, '0', 'Send part of it to Amazon', 15, 0, '2017-03-06', 1, 1, 0, '', 'Completed', '2017-03-06', 0),
+(20, 4, 67, 'OR0001', 'California ', 15, 0, '2017-03-09', 1, 1, 1, '', 'Completed', '2017-03-09', 0);
 
 -- --------------------------------------------------------
 
@@ -469,7 +551,7 @@ CREATE TABLE `invoice` (
 --
 
 INSERT INTO `invoice` (`id`, `shipments_id`, `clients_id`, `billing_address`, `terms`, `invoice_date`, `due_date`, `product_services`, `description`, `quantity`, `rate`, `balance_due`, `status`, `date_created`, `date_completed`) VALUES
-(1, 13, 4, 'this is for transfer to FEDex', 'Due on receipt', '2017-01-05', '2017-01-06', 'Transferring of the shipments', 'this is for sample', 1, 500, 500.00, 1, '2017-01-05 14:51:00', NULL);
+(1, 13, 4, 'this is for transfer to FEDex', 'Due on receipt', '2017-01-05', '2017-01-06', 'Transferring of the shipments', 'this is for sample', 1, 500, 500.00, 2, '2017-01-05 14:51:00', '2017-02-15 06:46:58');
 
 -- --------------------------------------------------------
 
@@ -486,6 +568,44 @@ CREATE TABLE `invoice_details` (
   `quantity` double NOT NULL,
   `rate` double NOT NULL,
   `amount` float(11,2) NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `message_subject` text NOT NULL,
+  `date_created` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `message`
+--
+
+INSERT INTO `message` (`id`, `client_id`, `message_subject`, `date_created`) VALUES
+(1, 4, 'this is a test subject', '2017-03-02 16:31:00'),
+(2, 4, 'this is sample header', '2017-03-02 16:41:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `message_details`
+--
+
+DROP TABLE IF EXISTS `message_details`;
+CREATE TABLE `message_details` (
+  `id` int(11) NOT NULL,
+  `message_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `user_group` int(11) NOT NULL,
+  `message_details` text NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -735,6 +855,7 @@ CREATE TABLE `shipments` (
   `id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `item_description` text COLLATE utf8_unicode_ci NOT NULL,
+  `additional_information` text COLLATE utf8_unicode_ci,
   `quantity` int(11) NOT NULL,
   `boxes` int(11) NOT NULL,
   `shipping_carrier_id` int(11) NOT NULL,
@@ -747,13 +868,25 @@ CREATE TABLE `shipments` (
   `other_shipping_service` text COLLATE utf8_unicode_ci,
   `comments` text COLLATE utf8_unicode_ci,
   `status` int(11) NOT NULL COMMENT '1 = Pending / 2 = Completed',
+  `supplier` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `fba_number` varchar(250) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `upc_number` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `price` float NOT NULL,
+  `fnsku_label` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `shipment_label` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `shipping_instruction` varchar(250) COLLATE utf8_unicode_ci NOT NULL,
+  `shipping_others` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `is_sent_to_inventory` smallint(6) NOT NULL DEFAULT '0' COMMENT '1=Yes,0=No',
-  `is_correct_quantity` int(11) DEFAULT NULL,
+  `is_correct_quantity` int(11) NOT NULL,
+  `correct_quantity_comment` text COLLATE utf8_unicode_ci,
   `aisle_number` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `amazon_shipment_date` varchar(90) COLLATE utf8_unicode_ci DEFAULT NULL,
   `amazon_shipment_note` text COLLATE utf8_unicode_ci,
   `amazon_confirmation_receipt` int(11) DEFAULT NULL,
+  `send_option` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created` datetime DEFAULT NULL,
+  `date_completed` datetime DEFAULT NULL,
+  `completion_comment` text COLLATE utf8_unicode_ci,
   `modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -761,27 +894,74 @@ CREATE TABLE `shipments` (
 -- Dumping data for table `shipments`
 --
 
-INSERT INTO `shipments` (`id`, `client_id`, `item_description`, `quantity`, `boxes`, `shipping_carrier_id`, `other_shipping_carrier`, `shipping_service_id`, `shipping_purpose_id`, `send_amazon_qty`, `combine_with_id`, `combine_comment`, `other_shipping_service`, `comments`, `status`, `is_sent_to_inventory`, `is_correct_quantity`, `aisle_number`, `amazon_shipment_date`, `amazon_shipment_note`, `amazon_confirmation_receipt`, `created`, `modified`) VALUES
-(1, 2, 'Sample Description', 2, 2, 4, 'Other Shipping Carrier', 3, 6, 0, 0, '', '', 'test comment', 1, 0, 0, '', '', '', NULL, '2017-01-03 07:06:12', '2017-01-03 07:06:12'),
-(2, 3, 'Test Description', 2, 1, 4, 'Other shipping carrier', 3, 6, 0, 0, '', '', 'test comment', 1, 0, 0, '', '', '', NULL, '2017-01-03 07:08:10', '2017-01-03 07:08:10'),
-(3, 3, 'Test Description 02A', 5, 3, 4, 'Other shipping carrier b', 4, 1, 0, 0, '', 'Other Shipping Service', 'Test comment', 1, 0, 0, '', '', '', NULL, '2017-01-03 07:08:44', '2017-01-03 07:21:48'),
-(4, 3, 'test', 3, 4, 4, 'Other Shipping Carrier', 1, 1, 0, 0, '', '', 'test', 1, 0, 0, '', '', '', NULL, '2017-01-03 07:15:38', '2017-01-03 07:15:38'),
-(5, 3, 'test 2', 6, 7, 2, '', 4, 2, 0, 0, '', 'other service', 'test', 1, 0, 0, '', '', '', NULL, '2017-01-03 07:15:53', '2017-01-03 07:24:07'),
-(6, 3, 'test 3', 5, 7, 1, '', 4, 2, 0, 0, '', 'other shipping service', 'test 2', 1, 0, 0, '', '', '', NULL, '2017-01-03 07:17:15', '2017-01-03 07:17:15'),
-(7, 3, 'test 6', 1, 2, 4, 'other shipping carrier ', 3, 1, 0, 0, '', '', 'test 7', 1, 0, 0, '', '', '', NULL, '2017-01-03 07:17:38', '2017-01-03 07:17:38'),
-(8, 3, 'Test AB', 3, 3, 4, 'Other FEDEXa', 4, 1, 0, 0, '', '5day 1', 'test', 1, 0, 0, '', '', '', NULL, '2017-01-03 07:32:23', '2017-01-03 07:35:05'),
-(9, 3, 'test', 3, 4, 1, '', 1, 1, 0, 0, '', '', 'test', 1, 0, 0, '', '', '', NULL, '2017-01-04 07:45:44', '2017-01-04 07:45:44'),
-(10, 3, 'Sample A', 2, 3, 1, '', 1, 3, 3, 0, '', '', 'test', 1, 0, 0, '', '', '', NULL, '2017-01-05 19:16:52', '2017-01-05 19:29:54'),
-(11, 3, 'Sample B', 5, 3, 1, '', 1, 5, 0, 0, '', '', 'test', 2, 0, 0, '', '', '', NULL, '2017-01-05 19:17:21', '2017-01-05 19:17:21'),
-(12, 3, 'Test D', 5, 10, 1, '', 1, 5, 0, 8, 'Sample combine remarks', '', 'Sample Comments', 2, 0, 0, '', '', '', NULL, '2017-01-05 19:18:38', '2017-01-05 19:18:38'),
-(13, 4, 'Box for Fedex', 10, 10, 2, '', 2, 1, 0, 0, '', '', 'this is a sample comment', 2, 1, 0, '', '', '', NULL, '2017-01-05 14:50:47', '2017-01-11 18:54:50'),
-(14, 4, 'Test', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'Test', 2, 1, 0, '', '', '', NULL, '2017-01-11 18:58:45', '2017-01-11 19:18:56'),
-(15, 4, 'aa', 5, 5, 1, '', 1, 1, 0, 0, '', '', '', 2, 1, 0, '', '', '', NULL, '2017-01-11 19:13:58', '2017-01-11 19:18:48'),
-(16, 4, 'test14212', 50, 50, 2, '', 1, 1, 0, 13, '', '', 'test', 3, 1, 1, '12345', '2017-01-10', 'asdsa', 1, '2017-01-12 13:31:06', '2017-01-12 16:09:56'),
-(17, 4, 'My shipment', 25, 25, 1, '', 1, 1, 0, NULL, '', '', '', 3, 1, 1, 'test 1', '2017-01-16', 'good', 1, '2017-01-12 16:16:17', '2017-01-12 16:17:43'),
-(18, 4, 'test11111111', 123, 123, 1, '', 1, 1, 0, NULL, '', '', '', 3, 1, 1, 'test 12', '2017-01-18', 'good', 1, '2017-01-12 16:23:43', '2017-01-12 16:24:18'),
-(19, 4, 'test2222', 321, 321, 1, '', 1, 1, 0, NULL, '', '', '', 2, 1, 1, 'test 123', '2017-01-18', 'abc123', 1, '2017-01-12 16:28:47', '2017-01-12 16:36:09'),
-(20, 4, 'test1234', 50, 50, 1, '', 1, 1, 0, NULL, '', '', '', 3, 1, 1, 'aisle #1 ', '2016-12-27', 'nice ', 1, '2017-01-13 09:43:10', '2017-01-13 09:44:04');
+INSERT INTO `shipments` (`id`, `client_id`, `item_description`, `additional_information`, `quantity`, `boxes`, `shipping_carrier_id`, `other_shipping_carrier`, `shipping_service_id`, `shipping_purpose_id`, `send_amazon_qty`, `combine_with_id`, `combine_comment`, `other_shipping_service`, `comments`, `status`, `supplier`, `fba_number`, `upc_number`, `price`, `fnsku_label`, `shipment_label`, `shipping_instruction`, `shipping_others`, `is_sent_to_inventory`, `is_correct_quantity`, `correct_quantity_comment`, `aisle_number`, `amazon_shipment_date`, `amazon_shipment_note`, `amazon_confirmation_receipt`, `send_option`, `created`, `date_completed`, `completion_comment`, `modified`) VALUES
+(1, 2, 'Sample Description', NULL, 2, 2, 4, 'Other Shipping Carrier', 3, 6, 0, 0, '', '', 'test comment', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, '', '', '', '', NULL, NULL, '2017-01-03 07:06:12', NULL, '0', '2017-01-03 07:06:12'),
+(2, 3, 'Test Description', NULL, 2, 1, 4, 'Other shipping carrier', 3, 6, 0, 0, '', '', 'test comment', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, '', '', '', '', NULL, NULL, '2017-01-03 07:08:10', NULL, '0', '2017-01-03 07:08:10'),
+(3, 3, 'Test Description 02A', NULL, 5, 3, 4, 'Other shipping carrier b', 4, 1, 0, NULL, '', 'Other Shipping Service', 'Test comment', 3, '', NULL, '', 0, '', NULL, '', '', 1, 0, 'with comment ', '1', '', '', NULL, 'storage', '2017-01-03 07:08:44', NULL, '0', '2017-02-07 14:15:10'),
+(4, 3, 'test', NULL, 3, 4, 4, 'Other Shipping Carrier', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, '', '', '', '', NULL, NULL, '2017-01-03 07:15:38', NULL, '0', '2017-01-03 07:15:38'),
+(5, 3, 'test 2', NULL, 6, 7, 2, '', 4, 2, 0, 0, '', 'other service', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, '', '', '', '', NULL, NULL, '2017-01-03 07:15:53', NULL, '0', '2017-01-03 07:24:07'),
+(6, 3, 'test 3', NULL, 5, 7, 1, '', 4, 2, 0, NULL, '', 'other shipping service', 'test 2', 1, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'aisle #1', '', '', NULL, 'send_to_amazon', '2017-01-03 07:17:15', NULL, '0', '2017-01-17 06:04:07'),
+(7, 3, 'test 6', NULL, 3, 2, 4, 'other shipping carrier ', 3, 1, 0, NULL, '', '', 'test 7', 2, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', '333', '2017-01-01', 'aa', 1, 'send_to_amazon', '2017-01-03 07:17:38', NULL, '0', '2017-01-16 17:28:11'),
+(8, 3, 'Test AB', NULL, 3, 3, 4, 'Other FEDEXa', 4, 1, 1, NULL, '', '5day 1', 'test', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'dsfdsf', '2017-01-13', 'nice', 1, NULL, '2017-01-03 07:32:23', NULL, '0', '2017-01-16 16:29:01'),
+(9, 3, 'test', NULL, 3, 4, 1, '', 1, 1, 0, NULL, '', '', 'test', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'abc123', '2017-01-19', 'dd', 1, NULL, '2017-01-04 07:45:44', NULL, '0', '2017-01-16 16:26:34'),
+(10, 3, 'Sample A', NULL, 2, 3, 1, '', 1, 3, 3, 7, 'Combined with Shipment 7', '', 'test', 2, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'aaa', '', '', NULL, NULL, '2017-01-05 19:16:52', NULL, '0', '2017-01-16 14:26:08'),
+(11, 3, 'Sample B', NULL, 7, 3, 1, '', 1, 5, 0, 0, '', '', 'test', 2, '', NULL, '', 0, '', NULL, '', '', 0, 0, '', '', '', '', NULL, NULL, '2017-01-05 19:17:21', NULL, '0', '2017-01-16 14:24:11'),
+(12, 3, 'Test D', NULL, 8, 10, 1, '', 1, 5, 0, 8, 'Sample combine remarks', '', 'Sample Comments', 2, '', NULL, '', 0, '', NULL, '', '', 0, 0, '', '', '', '', NULL, NULL, '2017-01-05 19:18:38', NULL, '0', '2017-01-16 14:23:51'),
+(13, 4, 'Box for Fedex', NULL, 10, 10, 2, '', 2, 1, 0, 0, '', '', 'this is a sample comment', 2, '', NULL, '', 0, '', NULL, '', '', 1, 0, '', '', '', '', NULL, NULL, '2017-01-05 14:50:47', NULL, '0', '2017-01-11 18:54:50'),
+(14, 4, 'Test', NULL, 50, 50, 1, '', 1, 1, 0, 0, '', '', 'Test', 2, '', NULL, '', 0, '', NULL, '', '', 1, 0, '', '', '', '', NULL, NULL, '2017-01-11 18:58:45', NULL, '0', '2017-01-11 19:18:56'),
+(15, 4, 'aa', NULL, 5, 5, 1, '', 1, 1, 0, 0, '', '', '', 2, '', NULL, '', 0, '', NULL, '', '', 1, 0, '', '', '', '', NULL, NULL, '2017-01-11 19:13:58', NULL, '0', '2017-01-11 19:18:48'),
+(16, 4, 'test14212', NULL, 50, 50, 2, '', 1, 1, 0, 13, '', '', 'test', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', '12345', '2017-01-10', 'asdsa', 1, NULL, '2017-01-12 13:31:06', NULL, '0', '2017-01-12 16:09:56'),
+(17, 4, 'My shipment', NULL, 25, 25, 1, '', 1, 1, 0, NULL, '', '', '', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'test 1', '2017-01-16', 'good', 1, NULL, '2017-01-12 16:16:17', NULL, '0', '2017-01-12 16:17:43'),
+(18, 4, 'test11111111', NULL, 123, 123, 1, '', 1, 1, 0, NULL, '', '', '', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'test 12', '2017-01-18', 'good', 1, NULL, '2017-01-12 16:23:43', NULL, '0', '2017-01-12 16:24:18'),
+(19, 4, 'test2222', NULL, 321, 321, 1, '', 1, 1, 0, NULL, '', '', '', 2, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'test 123', '2017-01-18', 'abc123', 1, NULL, '2017-01-12 16:28:47', NULL, '0', '2017-01-12 16:36:09'),
+(20, 4, 'test1234', NULL, 50, 50, 1, '', 1, 1, 0, NULL, '', '', '', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'aisle #1 ', '2016-12-27', 'nice ', 1, NULL, '2017-01-13 09:43:10', NULL, '0', '2017-01-13 09:44:04'),
+(21, 4, 'this is a sample inventory', NULL, 30, 30, 1, '', 1, 1, 0, 23, 'Combined with Shipment 23', '', 'test', 2, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'asd', '', '', NULL, NULL, '2017-01-13 18:03:12', NULL, '0', '2017-01-16 14:21:47'),
+(22, 4, 'test shipment with email', NULL, 30, 30, 1, '', 1, 1, 15, NULL, '', '', '', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'aaa', '2017-01-18', 'asdsa', 1, NULL, '2017-01-13 18:05:22', NULL, '0', '2017-01-16 13:48:10'),
+(23, 4, 'Send to amazon', NULL, 50, 20, 2, '', 2, 2, 0, NULL, '', '', 'this is sample comment ', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'aisle #1', '2017-01-18', 'good', 1, NULL, '2017-01-15 08:21:12', NULL, '0', '2017-01-16 14:21:47'),
+(24, 4, 'For amazon sending #1', NULL, 25, 25, 1, '', 1, 2, 0, NULL, '', '', 'this is for sending to amazon', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'test 1', '2017-01-03', 'test', NULL, NULL, '2017-01-15 17:15:56', NULL, '0', '2017-01-15 17:20:40'),
+(25, 4, 'Combine Here the shipments ', NULL, 50, 50, 1, '', 1, 1, 0, NULL, '', '', 'this is for the base ', 2, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'aisle #1', '', '', NULL, 'storage', '2017-01-17 17:10:05', '2017-03-08 00:00:00', NULL, '2017-03-08 06:56:12'),
+(26, 4, 'Combine to #1 ', NULL, 40, 40, 1, '', 1, 5, 0, 25, 'this is for storage', '', 'Combine with the shipments #1', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, '', NULL, NULL, NULL, NULL, NULL, '2017-01-17 17:11:51', NULL, '0', '2017-01-17 17:11:51'),
+(27, 4, 'sugar', NULL, 50, 50, 1, '', 1, 1, 0, NULL, '', '', 'test', 3, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'aisle #1', '', '', NULL, 'storage', '2017-01-20 09:46:07', NULL, '0', '2017-01-20 10:32:48'),
+(28, 4, 'sugar #2', NULL, 25, 25, 1, '', 1, 1, 0, NULL, '', '', 'test', 4, '', NULL, '', 0, '', NULL, '', '', 1, 1, '', 'aisle #1', '', '', NULL, 'send_to_amazon', '2017-01-20 10:47:57', NULL, '0', '2017-01-20 12:14:56'),
+(29, 4, 'test with Additional info', 'test with additional info 123', 50, 50, 1, '', 1, 1, NULL, 0, '', '', 'this is a sample ', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, '', NULL, NULL, NULL, NULL, NULL, '2017-01-24 15:12:41', NULL, '0', '2017-01-24 15:13:29'),
+(30, 4, 'sugar #1', 'this is a additional info', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:20:58', NULL, '0', '2017-02-06 14:20:58'),
+(31, 4, 'sugar #2', 'test', 60, 60, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:22:35', NULL, '0', '2017-02-06 14:22:35'),
+(32, 4, 'sugar #3', 'test ', 56, 56, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:23:11', NULL, '0', '2017-02-06 14:23:11'),
+(33, 4, 'sugar #4', 'test', 55, 55, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:36:16', NULL, '0', '2017-02-06 14:36:16'),
+(34, 4, 'sugar #5 ', 'test', 123, 123, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:36:43', NULL, '0', '2017-02-06 14:36:43'),
+(35, 4, 'sugar #6', 'test', 12, 12, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:37:19', NULL, '0', '2017-02-06 14:37:19'),
+(36, 4, 'sugar #7', 'test', 123, 123, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:37:44', NULL, '0', '2017-02-06 14:37:44'),
+(37, 4, 'sugar #8', 'test', 123, 123, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:38:07', NULL, '0', '2017-02-06 14:38:07'),
+(38, 4, 'sugar #9', 'test', 123, 123, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:38:27', NULL, '0', '2017-02-06 14:38:27'),
+(39, 4, 'sugar #10', 'test', 123, 123, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-06 14:38:50', NULL, '0', '2017-02-06 14:38:50'),
+(40, 4, 'sugar #11', 'test', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-07 16:46:37', NULL, '0', '2017-02-07 16:46:37'),
+(41, 4, 'sugar #12', 'test', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-07 16:47:18', NULL, '0', '2017-02-07 16:47:18'),
+(42, 4, 'sugar #13', 'test', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-07 16:48:11', NULL, '0', '2017-02-07 16:48:11'),
+(43, 4, 'Sugar #14', 'test', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-07 16:49:08', NULL, '0', '2017-02-07 16:49:08'),
+(44, 4, 'this have an upload', 'this is for upload', 50, 50, 1, '', 1, 2, 0, 0, '', '', 'with upload', 1, 'test supplier', NULL, '', 0, 'Screenshot.png', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-09 16:03:22', NULL, '0', '2017-02-09 16:03:22'),
+(45, 26, 'e2', 'e2e', 2, 2, 1, '', 1, 1, 0, 0, '', '', '', 1, '2', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-09 17:28:17', NULL, '0', '2017-02-09 17:28:17'),
+(46, 26, 'eeee', 'eeeee', 2222, 2222, 1, '', 1, 2, 0, 0, '', '', '', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-09 17:46:01', NULL, '0', '2017-02-09 17:46:01'),
+(47, 26, 'eeee', 'eeeee', 2222, 2222, 1, '', 1, 2, 0, 0, '', '', '', 1, '', NULL, '', 0, '', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-09 17:46:24', NULL, '0', '2017-02-09 17:46:24'),
+(48, 26, 'rrr', 'rrr', 55, 55, 1, '', 1, 2, 0, 0, '', '', '', 1, '55', NULL, '', 0, '/dov/comfort_packaging2/webroot/upload/13/files/shipping_purposes.sql', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-09 17:46:49', NULL, '0', '2017-02-09 17:46:49'),
+(49, 4, 'test', 'test', 15, 15, 1, '', 1, 2, NULL, 0, '', '', 'test', 1, '', NULL, '', 0, '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', NULL, '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, 'send_part_of_it_to_amazon', '2017-02-10 15:30:32', NULL, '0', '2017-02-10 15:31:25'),
+(50, 4, 'test with shipment upload', 'this is additional info', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test', 1, 'test supplier', NULL, '', 0, '/dov/comfort_packaging2/webroot/upload/12/files/15748873_1765351187120556_1167823114_o.png', '', '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-13 15:06:41', NULL, '0', '2017-02-13 15:06:41'),
+(51, 4, 'test upload', 'test upload', 50, 50, 1, '', 1, 2, 0, 0, 'this is a sample comment combine', '', 'test', 1, '50', NULL, '', 0, '/dov/comfort_packaging2/webroot/upload/12/files/15748873_1765351187120556_1167823114_o.png', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', '', '', 0, 0, 'this is a test correct quantity', NULL, NULL, NULL, NULL, NULL, '2017-02-13 15:32:51', NULL, '0', '2017-02-13 15:32:51'),
+(52, 4, 'test with shipping instruction', 'with shipping instruction ', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test comment', 1, 'test supplier', NULL, '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-14 15:59:35', NULL, '0', '2017-02-14 15:59:35'),
+(53, 4, 'test with shipping instruction', 'with shipping instruction ', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test comment', 1, 'test supplier', NULL, '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', '', '', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-14 15:59:49', NULL, '0', '2017-02-14 15:59:49'),
+(54, 4, 'test with shipping instruction', 'with shipping instruction ', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test comment', 1, 'test supplier', NULL, '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Others', 'test with other', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-14 16:03:45', NULL, '0', '2017-02-14 16:03:45'),
+(55, 4, 'test with shipping instruction', 'with shipping instruction ', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test comment', 1, 'test supplier', NULL, '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', '', 'test with other', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-14 16:04:57', NULL, '0', '2017-02-14 16:04:57'),
+(56, 4, 'test with shipping instruction', 'with shipping instruction ', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'test comment', 1, 'test supplier', NULL, '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Poly Bags,Staples,Others,Paper Wrap', 'test with other', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-14 16:07:58', NULL, '0', '2017-02-14 16:07:58'),
+(57, 4, 'this is for combine shipment', 'this is for combine ', 50, 50, 1, '', 1, 5, 0, 30, 'this is for combination on Sugar #1 ', '', 'test comment', 1, 'test supplier', NULL, '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Others', 'test with other', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-15 05:51:43', NULL, '0', '2017-02-15 05:51:43'),
+(58, 4, 'for combination #2 on sugar #2', 'for combination #2 on sugar #2', 30, 30, 1, '', 1, 5, 0, 31, 'Combined with Shipment 31', '', 'test comment', 1, 'test supplier', NULL, '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples,Others', 'for wrapping of paper', 1, 1, NULL, '1', '', '', NULL, 'combine_with_shipment', '2017-02-15 06:03:07', NULL, '0', '2017-02-15 15:06:42'),
+(59, 4, 'test', 'test', 21, 21, 1, '', 1, 1, 0, 0, '', '', 'test comment', 1, 'test supplier', 'tes155465454t', '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Shrink Wrap,Poly Bags,Staples,Others,Paper Wrap', 'test with other', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-15 14:29:28', NULL, '0', '2017-02-15 14:29:28'),
+(60, 4, 'test with part to amazon #1', 'test with part to amazon #1 ', 30, 30, 1, '', 1, 3, 10, NULL, '', '', 'test with part to amazon #1 ', 3, 'test supplier', 'tes155465454t', '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Shrink Wrap,Poly Bags,Staples,Others,Paper Wrap', 'test with other', 1, 1, NULL, '1', '2017-02-15', 'FEdex', 1, 'send_part_of_it_to_amazon', '2017-02-15 14:36:33', NULL, '0', '2017-02-15 14:37:56'),
+(61, 4, 'test with transfer part to amazon #2', 'test with transfer part to amazon #2', 30, 30, 1, '', 1, 3, 10, NULL, '', '', 'test comment', 3, 'test supplier', 'tes155465454t', '', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Shrink Wrap,Poly Bags,Staples,Others,Paper Wrap', 'test with other', 1, 0, NULL, '1', '2017-02-16', 'FEdex', 1, 'send_part_of_it_to_amazon', '2017-02-15 16:11:04', NULL, '0', '2017-02-15 16:13:17'),
+(62, 4, 'with UPC number and price', 'with UPC number and price', 50, 50, 1, '', 1, 1, 0, 0, '', '', 'this is a comment', 1, '', 'LK0001', 'T0001', 500, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Others', 'test with other', 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, '2017-02-20 14:35:20', NULL, '0', '2017-02-20 14:35:20'),
+(63, 4, 'Component#1', 'for combine', 50, 50, 1, '', 1, 1, 0, NULL, '', '', 'test comment', 3, 'test supplier', 'test1234', 'test1234', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples,Others', 'test with other', 1, 1, NULL, '1', '', '', NULL, 'storage', '2017-02-22 15:01:46', NULL, '0', '2017-02-22 15:06:44'),
+(64, 4, 'Component#1-1', 'combine Items', 50, 50, 1, '', 1, 5, 0, 63, 'combine#1-1', '', 'for combine ', 2, 'test supplier', 'test1234', 'test1234', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples,Others', 'test with other', 1, 1, NULL, '1', '', '', NULL, 'storage', '2017-02-22 15:05:12', '2017-03-01 00:00:00', 'test123', '2017-03-01 04:14:47'),
+(65, 4, 'Component#1', 'combine', 43, 45, 1, '', 1, 1, 0, NULL, '', '', 'test comment', 3, 'test supplier', 'test1234', 'test1234', 450, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples,Others', 'test with other', 1, 0, '2 damaged items', '1', '', '', NULL, 'storage', '2017-02-22 15:22:18', NULL, '0', '2017-03-06 14:27:23'),
+(66, 4, 'with send part of it to amazon #1\r\n', 'with send part of it to amazon #1\r\n', 50, 50, 1, '', 1, 3, 15, NULL, '', '', 'this is a comment', 3, 'test supplier', 'test1234', 'test001', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Others', 'test with other', 1, 1, '', '1', '2017-03-07', 'Test', 1, 'send_part_of_it_to_amazon', '2017-03-06 15:56:11', NULL, NULL, '2017-03-06 17:48:17'),
+(67, 4, 'with send part of it to amazon #1', 'with send part of it to amazon #1', 50, 50, 1, '', 1, 3, 15, NULL, '', '', 'test comment', 3, 'test supplier', 'KL0001', 'test001', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Others', 'test with other', 1, 1, '', '1', '2017-03-07', 'teset', 1, 'send_part_of_it_to_amazon', '2017-03-06 16:04:41', NULL, NULL, '2017-03-06 17:32:54');
 
 -- --------------------------------------------------------
 
@@ -804,7 +984,8 @@ CREATE TABLE `shipment_status` (
 INSERT INTO `shipment_status` (`id`, `name`, `created`, `modified`) VALUES
 (1, 'Pending', '2017-01-03 15:35:14', '2017-01-03 15:35:14'),
 (2, 'Completed', '2017-01-03 15:35:14', '2017-01-03 15:35:14'),
-(3, 'Received and Stored', '2017-01-10 13:54:58', '2017-01-10 13:54:58');
+(3, 'Received and Stored', '2017-01-10 13:54:58', '2017-01-10 13:54:58'),
+(4, 'Received-Pending', '2017-01-20 12:03:31', '2017-01-20 12:03:31');
 
 -- --------------------------------------------------------
 
@@ -853,8 +1034,7 @@ INSERT INTO `shipping_purposes` (`id`, `name`, `created`, `modified`) VALUES
 (2, 'Send to amazon', '2017-01-04 21:18:33', '2017-01-04 21:18:33'),
 (3, 'Send part of it to amazon', '2017-01-04 21:18:37', '2017-01-04 21:18:37'),
 (4, 'Store until further notice', '2017-01-04 21:18:41', '2017-01-04 21:18:41'),
-(5, 'Combine with other shipment etc', '2017-01-04 21:18:45', '2017-01-04 21:18:45'),
-(6, 'End user shipment', '2017-01-04 21:18:51', '2017-01-04 21:18:51');
+(5, 'Combine with other shipment etc', '2017-01-04 21:18:45', '2017-01-04 21:18:45');
 
 -- --------------------------------------------------------
 
@@ -961,9 +1141,11 @@ INSERT INTO `users` (`id`, `username`, `password`, `group_id`, `created`, `modif
 (8, 'employeeb@gmail.com', '$2y$10$h5QcFzaIHtbwBBA2nWEOQ.j4/haEm/FGO6kagPG5GU286xS82kU4e', 3, '2016-12-30 00:45:05', '2016-12-30 00:45:05'),
 (9, 'employeec', '$2y$10$V0LPvaoDcvNcb2FFsLXw8eTQMdP5v6P86GeKm7I.VUwMMdBWM3v4G', 3, '2016-12-30 00:45:46', '2016-12-30 00:45:46'),
 (11, 'clientc', '$2y$10$Psop.15BdjCZ82QcDBAaPO0Hq5o1evHLUmf0npdwQSh9J66Tciq8.', 4, '2017-01-03 06:14:19', '2017-01-03 06:14:19'),
-(12, 'client_sample', '$2y$10$Gv4fSUM5xkpiNEOtqwggm.gcHZoefFeEN4mVcqsPsO5.MbMZNAmom', 4, '2017-01-05 14:30:23', '2017-01-05 14:30:23'),
+(12, 'client_sample', '$2y$10$Gab0zjE6hdaJiIXyTnoHz.qF6sY6UQR0NDEwnGyIfC/3iEagSostW', 4, '2017-01-05 14:30:23', '2017-03-06 14:45:25'),
 (13, 'manager_sample', '$2y$10$s/ysD4uJNcVxMRYTLB2NFelLRJdkjZr31Pts1N0ExQEV0wTyHcRSO', 2, '2017-01-05 14:40:19', '2017-01-05 14:40:19'),
-(14, 'employee_sample', '$2y$10$3iGgtjgo2C7wl2nfGQdkK.X98ZwXWWmBbmCOF8Iff8jwe1h3xn6Ne', 3, '2017-01-05 14:41:19', '2017-01-05 14:41:19');
+(14, 'employee_sample', '$2y$10$3iGgtjgo2C7wl2nfGQdkK.X98ZwXWWmBbmCOF8Iff8jwe1h3xn6Ne', 3, '2017-01-05 14:41:19', '2017-01-05 14:41:19'),
+(15, 'client_sample2', '$2y$10$IJ28My1i9uH7utcE4tht4.telV7/1TRbF0PLnADQ482XSFdEeDDS6', 4, '2017-02-15 07:33:47', '2017-02-15 07:33:47'),
+(16, 'client_sample3', '$2y$10$xaFspNeFseSkeDUUogLTU.jtSxLJUU8Z2MlIKPrxoBHcHLhhJxvWm', 4, '2017-03-07 10:38:25', '2017-03-07 10:38:25');
 
 -- --------------------------------------------------------
 
@@ -1074,6 +1256,18 @@ ALTER TABLE `invoice`
 -- Indexes for table `invoice_details`
 --
 ALTER TABLE `invoice_details`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `message`
+--
+ALTER TABLE `message`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `message_details`
+--
+ALTER TABLE `message_details`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1192,12 +1386,12 @@ ALTER TABLE `user_entities`
 -- AUTO_INCREMENT for table `acos`
 --
 ALTER TABLE `acos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=239;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=290;
 --
 -- AUTO_INCREMENT for table `aros`
 --
 ALTER TABLE `aros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 --
 -- AUTO_INCREMENT for table `aros_acos`
 --
@@ -1207,7 +1401,7 @@ ALTER TABLE `aros_acos`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `end_user_order`
 --
@@ -1222,12 +1416,12 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `inventory_order`
 --
 ALTER TABLE `inventory_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `invoice`
 --
@@ -1237,6 +1431,16 @@ ALTER TABLE `invoice`
 -- AUTO_INCREMENT for table `invoice_details`
 --
 ALTER TABLE `invoice_details`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `message`
+--
+ALTER TABLE `message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `message_details`
+--
+ALTER TABLE `message_details`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `pages`
@@ -1287,12 +1491,12 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `shipments`
 --
 ALTER TABLE `shipments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 --
 -- AUTO_INCREMENT for table `shipment_status`
 --
 ALTER TABLE `shipment_status`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `shipping_carriers`
 --
@@ -1302,7 +1506,7 @@ ALTER TABLE `shipping_carriers`
 -- AUTO_INCREMENT for table `shipping_purposes`
 --
 ALTER TABLE `shipping_purposes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `shipping_services`
 --
@@ -1322,7 +1526,7 @@ ALTER TABLE `testimonials`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- AUTO_INCREMENT for table `user_entities`
 --
