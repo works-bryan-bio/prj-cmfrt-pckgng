@@ -119,6 +119,15 @@ class InventoryController extends AppController
     {
         $session = $this->request->session();    
         $user_data = $session->read('User.data');  
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Pending'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        
 
         $inventory = $this->Inventory->find('all')
             ->contain(['Shipments'])
@@ -132,7 +141,7 @@ class InventoryController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
-        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+        
         $inventoryOrder = $this->InventoryOrder->newEntity();
         $shippingCarriers = $this->InventoryOrder->ShippingCarriers->find('list', ['limit' => 200]);
         $shippingServices = $this->InventoryOrder->ShippingServices->find('list', ['limit' => 200]);
@@ -140,6 +149,7 @@ class InventoryController extends AppController
         $this->set(compact('inventoryOrder', 'shippingCarriers', 'shippingServices', 'inventoryOrders'));
 
         $this->set('group_id' , $user_data->user->group_id);
+        $this->set('inventory_order', $inventory_order);
         $this->set('inventory', $inventory);
         $this->set('inventory_completed', $inventory_completed);
         $this->set('_serialize', ['inventory']);

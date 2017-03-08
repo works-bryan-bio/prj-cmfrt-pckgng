@@ -11,7 +11,6 @@
         </ol>       
     </div>
 </div>
-
 <section class="content">   
     <table class="table table-striped table-bordered table-hover">
     <tbody>
@@ -47,14 +46,15 @@
             <th><?= __('Order Quantity') ?></th>
             <td><?= $this->Number->format($inventoryOrder->order_quantity) ?></td>
         </tr>
-        <tr>
-            <th><?= __('Inventory Order Id') ?></th>
-            <td><?= $this->Number->format($inventoryOrder->inventory_order_id) ?></td>
-        </tr>
+       
+        <?php if($inventoryOrder->order_status <> "Completed") {?>
         <tr>
             <th><?= __('Total Remaining') ?></th>
             <td><?= $this->Number->format($inventoryOrder->total_remaining) ?></td>
         </tr>
+        <?php } ?>
+
+
     <tr>
         <th><?= __('Order Destination') ?></th>
         <td><?= $this->Text->autoParagraph(h($inventoryOrder->order_destination)); ?></td>        

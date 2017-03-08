@@ -156,11 +156,31 @@ hr{
                                           <div class="col-sm-6">
                                             <div class="input radio">
                                               <label>
-                                                <input name="is_correct_quantity" <?= ($shipment->is_correct_quantity == 1 ? "checked='checked'" : ""); ?> value="1" class="" id="is_correct_quantity1" required="required"  type="radio"> Yes
+                                                <input class="rbtn-correct-quantity" name="is_correct_quantity" <?= ($shipment->is_correct_quantity == 1 ? "checked='checked'" : ""); ?> value="1" class="" id="is_correct_quantity1" required="required"  type="radio"> Yes
                                               </label>
                                               <label style="margin-left:10px">
-                                                <input name="is_correct_quantity" <?= ($shipment->is_correct_quantity == 0 ? "checked='checked'" : ""); ?> value="0" class="" id="is_correct_quantity2" required="required"  type="radio" > No
+                                                <input class="rbtn-correct-quantity" name="is_correct_quantity" <?= ($shipment->is_correct_quantity == 0 ? "checked='checked'" : ""); ?> value="0" class="" id="is_correct_quantity2" required="required"  type="radio" > No
                                               </label>
+                                            </div> 
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row correct_quantity_container" style="margin-bottom:5px; <?= ($shipment->is_correct_quantity == 1 ? "display:none;" : ""); ?>">
+                                        <div class="form-group">
+                                          <label for="new_correct_quantity" class="col-sm-4 control-label" style="margin-top:5px">New Correct Quantity</label>
+                                          <div class="col-sm-6">
+                                            <div class="input text">
+                                              <input name="new_correct_quantity" value="<?= $shipment->quantity; ?>" class="form-control" id="new_correct_quantity" type="text">
+                                            </div> 
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row correct_quantity_container" style="margin-bottom:5px; <?= ($shipment->is_correct_quantity == 1 ? "display:none;" : ""); ?>">
+                                        <div class="form-group">
+                                          <label for="correct_quantity_comment" class="col-sm-4 control-label" style="margin-top:5px">Comment</label>
+                                          <div class="col-sm-6">
+                                            <div class="input text">
+                                              <input name="correct_quantity_comment" value="<?= $shipment->correct_quantity_comment; ?>" class="form-control" id="correct_quantity_comment" type="text">
                                             </div> 
                                           </div>
                                         </div>

@@ -35,8 +35,16 @@ h4{
                 <fieldset>        
                     <?php
 
-                        echo "
+                         echo "
                         <h4>User Information</h4>
+                        <div class='form-group'>
+                            <label for='firstname' class='col-sm-2 control-label'>" . __('Company Name<span style="color:red">*</span>') . "</label>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('company_name', ['class' => 'form-control', 'id' => 'company_name', 'label' => false]);                
+                        echo "<div class='help-block with-errors'></div>
+                         </div></div>";    
+
+                        echo "
                         <div class='form-group'>
                             <label for='firstname' class='col-sm-2 control-label'>" . __('First Name<span style="color:red">*</span>') . "</label>
                             <div class='col-sm-6'>";

@@ -59,6 +59,50 @@
                             echo $this->Form->input('boxes', ['type' => 'text', 'class' => 'form-control', 'id' => 'boxes', 'label' => false]);                
                         echo " </div></div>";    
                         
+                                   echo "
+                        <div class='form-group'>
+                            <label for='boxes' class='col-sm-2 control-label'>" . __('Supplier') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the supplier name' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('supplier', ['type' => 'text', 'class' => 'form-control', 'id' => 'supplier', 'label' => false]);                
+                        echo " </div></div>";
+
+                         echo "
+                        <div class='form-group'>
+                            <label for='boxes' class='col-sm-2 control-label'>" . __('Asin Number') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the FBA Number' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('fba_number', ['type' => 'text', 'class' => 'form-control', 'id' => 'fba_number', 'label' => false]);                
+                        echo " </div></div>";
+
+                          echo "
+                        <div class='form-group'>
+                            <label for='boxes' class='col-sm-2 control-label'>" . __('UPC Number') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the UPC Number' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('upc_number', ['type' => 'text', 'class' => 'form-control', 'id' => 'upc_number', 'label' => false, 'autocomplete' => false]);                
+                        echo " </div></div>"; 
+
+                        echo "
+                        <div class='form-group'>
+                            <label for='boxes' class='col-sm-2 control-label'>" . __('Price') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Price' ></i></span>
+                            <div class='col-sm-6'>";
+                       if($user_group == 4){
+                            echo $this->Form->input('price', ['readonly' => 'true', 'type' => 'text', 'class' => 'form-control', 'id' => 'price', 'label' => false]);                
+                       }else{
+                            echo $this->Form->input('price', ['type' => 'text', 'class' => 'form-control', 'id' => 'price', 'label' => false]);                
+                       }
+                       
+
+                        echo "<span id='price_text' ></span> </div></div>";
+
+                         echo "
+                        <div class='form-group'>
+                            <label for='upload_label' class='col-sm-2 control-label'>" . __('Upload label') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload label' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('shipment_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
+                                            
+                        echo " </div></div>";
+
+
+                        
                                     echo "
                         <div class='form-group'>
                             <label for='shipping_carrier_id' class='col-sm-2 control-label'>" . __('Shipping Carrier') . "</label>
@@ -115,7 +159,7 @@
                             
                                     echo "
                         <div class='form-group'>
-                            <label for='comments' class='col-sm-2 control-label'>" . __('Comments') . "</label>
+                            <label for='comments' class='col-sm-2 control-label'>" . __('Detailed Shipment Instruction') . "</label>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('comments', ['class' => 'form-control', 'id' => 'comments', 'label' => false]);                
                         echo " </div></div>";    
@@ -125,8 +169,15 @@
                 <div class="form-group" style="margin-top: 80px;">
                     <div class="col-sm-offset-2 col-sm-10">
                         <div class="action-fixed-bottom">
-                            <?= $this->Form->button('<i class="fa fa-save"></i> ' . __('Update Shipment'),['name' => 'save', 'value' => 'save', 'class' => 'btn btn-success', 'escape' => false]) ?>                            
+                           
+                            <?= $this->Form->button('<i class="fa fa-save"></i> ' . __('Update Shipment'),['name' => 'save', 'value' => 'save', 'class' => 'btn btn-success', 'escape' => false]) ?>    
+
+                            <?php if($user_group==2){?>
+                            <?= $this->Html->link('<i class="fa fa-angle-left"> </i> ' . __('Back To list'), ['controller' => 'shipments'],['class' => 'btn btn-warning', 'escape' => false]) ?>
+                            <?php }else{?>
                             <?= $this->Html->link('<i class="fa fa-angle-left"> </i> ' . __('Back To list'), ['action' => 'client'],['class' => 'btn btn-warning', 'escape' => false]) ?>
+                            <?php }?>
+
                         </div>
                     </div>
                 </div>    

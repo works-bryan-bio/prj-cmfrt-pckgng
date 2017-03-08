@@ -11,6 +11,11 @@
         </ol>       
     </div>
 </div>
+<?php 
+    // debug($shipment);
+    // exit;
+?>
+
 
 <section class="content">   
     <table class="table table-striped table-bordered table-hover">
@@ -23,6 +28,10 @@
             <td><?= __('Shipping Service') ?></th>
             <td><?= $shipment->has('shipping_service') ? $this->Html->link($shipment->shipping_service->name, ['controller' => 'ShippingServices', 'action' => 'view', $shipment->shipping_service->id]) : '' ?></td>
         </tr>
+        <tr>
+            <td><?= __('Shipping Purpose') ?></th>
+            <td><?= $shipment->shipping_purpose->name ?></td>
+        </tr> 
         <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($shipment->id) ?></td>
@@ -39,6 +48,27 @@
             <th><?= __('Boxes') ?></th>
             <td><?= $this->Number->format($shipment->boxes) ?></td>
         </tr>
+
+         <tr>
+            <th><?= __('Supplier') ?></th>
+            <td><?= $shipment->supplier ?></td>
+        </tr>
+        <tr>
+            <th><?= __('FBA Number') ?></th>
+            <td><?= $shipment->fba_number ?></td>
+        </tr>
+
+        <tr>
+            <th><?= __('UPC Number') ?></th>
+            <td><?= $shipment->upc_number ?></td>
+        </tr>
+        <?php if($group_id <> 3) {?>
+        <tr>
+            <th><?= __('Price') ?></th>
+            <td><?= $shipment->price ?></td>
+        </tr>
+        <?php } ?>
+
     <tr>
         <th><?= __('Item Description') ?></th>
         <td><?= $this->Text->autoParagraph(h($shipment->item_description)); ?></td>        
@@ -51,10 +81,55 @@
         <th><?= __('Other Shipping Service') ?></th>
         <td><?= $this->Text->autoParagraph(h($shipment->other_shipping_service)); ?></td>        
     </tr>
+
+    <tr>
+        <th><?= __('Shipping Instruction') ?></th>
+        <td><?= $shipment->shipping_instruction ?></td>        
+    </tr>   
+    <tr>
+        <th><?= __('Shipping Others') ?></th>
+        <td><?= $shipment->shipping_others ?></td>        
+    </tr>                    
     <tr>
         <th><?= __('Comments') ?></th>
-        <td><?= $this->Text->autoParagraph(h($shipment->comments)); ?></td>        
+        <td><?= $this->Text->autoParagraph(h($shipment->comments. "  " . $shipment->combine_comment ." ". $shipment->correct_quantity_comment)); ?></td>        
     </tr>
+
+     <?php if($shipment->send_option == 'send_part_of_it_to_amazon') { ?>
+      <tr>
+        <th><?= __('Quantity to send to amazon') ?></th>
+        <td>
+          <?php if($shipment->send_amazon_qty > 0) { ?>
+            <?= $shipment->send_amazon_qty; ?>
+          <?php } ?>
+        </td>
+      </tr>
+    <?php } ?>
+    <?php if(!empty($shipment->fnsku_label)) { ?>
+      <tr>
+        <th><?= __('FNSKU label') ?></th>
+        <td>
+            <a href="<?= $shipment->fnsku_label; ?>"><?= $shipment->fnsku_label; ?></a>
+        </td>
+      </tr>
+    <?php } ?>
+    <tr>
+      <th><?= __('Uploaded shipment label') ?></th>
+      <td>
+        <?php if(!empty($shipment->shipment_label)) { ?>
+          <a href="<?= $shipment->shipment_label; ?>"><?= $shipment->shipment_label; ?></a>
+        <?php } ?>
+      </td>
+    </tr>
+    <tr>
+      <th><?= __('Uploaded shipment label') ?></th>
+      <td>
+        <?php if(!empty($shipment->shipment_label)) { ?>
+          <a href="<?= $shipment->shipment_label; ?>"><?= $shipment->shipment_label; ?></a>
+        <?php } ?>
+      </td>
+    </tr>
+    
         <tr>
             <th><?= __('Created') ?></th>
             <td><?= h($shipment->created) ?></td>

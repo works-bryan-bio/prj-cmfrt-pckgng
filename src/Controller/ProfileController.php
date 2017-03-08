@@ -99,27 +99,44 @@ class ProfileController extends AppController
     public function edit()
     {
         $this->UserEntities = TableRegistry::get("UserEntities");
+        $this->Clients = TableRegistry::get("Clients");
 
         $session = $this->request->session();    
         $user_data = $session->read('User.data');
 
-        $userEntity = $this->UserEntities->get($user_data->id, [
-            'contain' => []
-        ]);
+        if($user_data->user->group_id == 4) {
+            $userEntity = $this->Clients->get($user_data->id, [
+                'contain' => []
+            ]);
+            $obj = "Clients";
+        }else{
+            $userEntity = $this->UserEntities->get($user_data->id, [
+                'contain' => []
+            ]);
+            $obj = "UserEntities";
+        }
         
         if ($this->request->is(['patch', 'post', 'put'])) {            
 
             //Update user entity data            
-            $userEntity    = $this->UserEntities->patchEntity($userEntity, $this->request->data);
-            if ($this->UserEntities->save($userEntity)) {
+            $userEntity    = $this->$obj->patchEntity($userEntity, $this->request->data);
+            if ($this->$obj->save($userEntity)) {
                 $this->Flash->success(__('Profile has been updated.'));
 
                 //Update user session
-                $userEntity = $this->UserEntities->find()
-                    ->contain(['Users'])             
-                    ->where(['UserEntities.id' => $user_data->id])
-                    ->first()
-                ;
+                if( $user_data->user->group_id == 4 ){                 
+                    $userEntity = $this->Clients->find()   
+                        ->contain(['Users'])             
+                        ->where(['Clients.user_id' => $user_data->user_id])
+                        ->first()
+                    ; 
+                }else{
+                    $userEntity = $this->Users->UserEntities->find()   
+                        ->contain(['Users'])             
+                        ->where(['UserEntities.user_id' => $user_data->user_id])
+                        ->first()
+                    ; 
+                }  
                 $session  = $this->request->session();  
                 $session->write('User.data', $userEntity); 
                 return $this->redirect(['action' => 'index']);

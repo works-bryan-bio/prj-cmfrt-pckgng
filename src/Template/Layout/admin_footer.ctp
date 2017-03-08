@@ -87,8 +87,6 @@
                 });
             });
 
-            $('.dt-default').datepicker({"format" : "yyyy-mm-dd"});
-
             $('.has-tiny-mce').removeAttr('required');
             
             $('.btn-publish-update').click(function(){
@@ -227,41 +225,6 @@
 
             redrawnFunction();
 
-            $('.btn-show-order-form').click(function(){
-                var shipment_id = $(this).attr('data-shipment-id');
-                var remaining_quantity = $(this).attr('data-remaining-quantity');
-                var shipment_desc = $(this).attr('data-shipment-desc');
-                var sent_quantity = $(this).attr('data-sent-quantity');
-                var status = $(this).attr('data-shipment-status');
-
-                $('.shipment-desc').html(shipment_desc);
-                $('.shipment-sent-quantity-desc').html(sent_quantity);
-                $('.shipment-remaining-quantity-desc').html(remaining_quantity);
-                $('.shipment-status-desc').html(status);
-
-                $('#inp_shipment_id').val(shipment_id);
-                $('#total_remaining').val(remaining_quantity);
-                $('#dropdown-shipments-list').hide();
-                $('.single-shipment-desc').show();
-                $('.send-new-order-container').show();
-                
-            });
-
-            $('#btn-new-inventory-order-accordion').click(function(){
-                $('#inp_shipment_id').val($('#all_shipment').val());
-                $('.single-shipment-desc').hide();
-                $('#dropdown-shipments-list').show();
-                $('.send-new-order-container').show();
-            });
-
-            $('#all_shipment').change(function(){
-                $('#inp_shipment_id').val($(this).val());
-            });
-
-            $('.btn-hide-order-form').click(function(){
-                $('.send-new-order-container').hide();
-            });
-
             $('#upc_number').keyup(function(){
                 var upc_number = $('#upc_number').val();
                 var combine_id = $('.combine_with_id').val();
@@ -277,6 +240,51 @@
                 }else{
                    loadVerifyUpcPrice(upc_number);
                 }
+
+            });
+
+             $('#all_shipment').change(function(){
+                var shipment_id = $('#all_shipment').val();
+                 loadVerifyUpcOrderPrice(shipment_id);
+                // var shipping_purpose_id = $('#shipping_purpose_id').val();
+
+                // if(shipping_purpose_id == 5){
+                //     var item_description = $('#item_description').val();
+                //     var quantity = $('#quantity').val();
+                //     loadVerifyUpcPriceCombine(upc_number,combine_id,item_description,quantity);
+                // }else{
+                //    loadVerifyUpcPrice(upc_number);
+                // }
+
+            });
+
+             $('#order_quantity').keyup(function(){
+                var shipment_id = $('#all_shipment').val();
+                loadVerifyUpcOrderPrice(shipment_id);
+                // var shipping_purpose_id = $('#shipping_purpose_id').val();
+
+                // if(shipping_purpose_id == 5){
+                //     var item_description = $('#item_description').val();
+                //     var quantity = $('#quantity').val();
+                //     loadVerifyUpcPriceCombine(upc_number,combine_id,item_description,quantity);
+                // }else{
+                //    loadVerifyUpcPrice(upc_number);
+                // }
+
+            });
+
+              $('#order_quantity').change(function(){
+                var shipment_id = $('#all_shipment').val();
+                 loadVerifyUpcOrderPrice(shipment_id);
+                // var shipping_purpose_id = $('#shipping_purpose_id').val();
+
+                // if(shipping_purpose_id == 5){
+                //     var item_description = $('#item_description').val();
+                //     var quantity = $('#quantity').val();
+                //     loadVerifyUpcPriceCombine(upc_number,combine_id,item_description,quantity);
+                // }else{
+                //    loadVerifyUpcPrice(upc_number);
+                // }
 
             });
 
@@ -324,6 +332,8 @@
 
         function redrawnFunction()
         {
+            $('.dt-default').datepicker({"format" : "yyyy-mm-dd"});
+
             $('.send_option').change(function(){
                 var send_option = $(this).val();
                 $('.send-to-amazon-qty-container').hide();
@@ -353,6 +363,52 @@
                     $('#combine_inventory_order_id').hide();
                     $('#combine_comment').hide();
                     $('.combine_inventory').hide();
+                }
+            });
+
+            $('.btn-show-order-form').click(function(){
+                var shipment_id = $(this).attr('data-shipment-id');
+                var remaining_quantity = $(this).attr('data-remaining-quantity');
+                var shipment_desc = $(this).attr('data-shipment-desc');
+                var sent_quantity = $(this).attr('data-sent-quantity');
+                var status = $(this).attr('data-shipment-status');
+
+                
+                $('#all_shipment').val(shipment_id);
+                $('.shipment-desc').html(shipment_desc);
+                $('.shipment-sent-quantity-desc').html(sent_quantity);
+                $('.shipment-remaining-quantity-desc').html(remaining_quantity);
+                $('.shipment-status-desc').html(status);
+
+                $('#inp_shipment_id').val(shipment_id);
+                $('#total_remaining').val(remaining_quantity);
+                $('#dropdown-shipments-list').hide();
+                $('.single-shipment-desc').show();
+                $('.send-new-order-container').show();
+                
+            });
+
+            $('#btn-new-inventory-order-accordion').click(function(){
+                $('#inp_shipment_id').val($('#all_shipment').val());
+                $('.single-shipment-desc').hide();
+                $('#dropdown-shipments-list').show();
+                $('.send-new-order-container').show();
+            });
+
+            $('#all_shipment').change(function(){
+                $('#inp_shipment_id').val($(this).val());
+            });
+
+            $('.btn-hide-order-form').click(function(){
+                $('.send-new-order-container').hide();
+            });
+
+            $('.rbtn-correct-quantity').change(function(){
+                var val = $(this).val();
+                if(val == 1) {
+                    $('.correct_quantity_container').hide();
+                }else{
+                    $('.correct_quantity_container').show();
                 }
             });
         }
@@ -421,7 +477,7 @@
                 var total_price = qty * o.per_piece;
                 $('#price').val(total_price);
                 if(total_price == 0){
-                  $('#price_text').html('We will update you on the price as soon as we can.');
+                  $('#price_text').html('We will update you on price soon.');
                 }else{
                     $('#price_text').html('');
                 }
@@ -438,7 +494,25 @@
                 var total_price = qty * o.per_piece;
                 $('#price').val(total_price);
                 if(total_price == 0){
-                  $('#price_text').html('We will update you on the price as soon as we can.');
+                  $('#price_text').html('We will update you on price soon.');
+                }else{
+                    $('#price_text').html('');
+                }
+            },"json");
+        }
+
+        function loadVerifyUpcOrderPrice(shipment_id) {
+            $.post(base_url + "shipments/load_verify_upc_number_order_inventory",{shipment_id:shipment_id},function(o){
+                var qty =  $('#order_quantity').val();
+                //alert(qty);
+                if(qty == ''){
+                    qty = 0;
+                }
+                var total_price = qty * o.per_piece;
+                $('#order_price').val(total_price);
+
+                if(total_price == 0){
+                  $('#price_text').html('We will update you on price soon.');
                 }else{
                     $('#price_text').html('');
                 }

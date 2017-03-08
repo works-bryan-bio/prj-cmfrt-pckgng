@@ -20,6 +20,10 @@
             <td><?= $client->has('user') ? $this->Html->link($client->user->id, ['controller' => 'Users', 'action' => 'view', $client->user->id]) : '' ?></td>
         </tr>
         <tr>
+            <th><?= __('Company Name') ?></th>
+            <td><?= h($client->company_name) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Firstname') ?></th>
             <td><?= h($client->firstname) ?></td>
         </tr>

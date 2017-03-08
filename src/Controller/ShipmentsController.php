@@ -151,8 +151,12 @@ class ShipmentsController extends AppController
     public function view($id = null)
     {
         $shipment = $this->Shipments->get($id, [
-            'contain' => ['ShippingCarriers', 'ShippingServices']
+            'contain' => ['ShippingCarriers', 'ShippingServices' , 'ShippingPurposes']
         ]);
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');     
+        $group_id  = $user_data->user->group_id;
+        $this->set(['group_id' => $group_id]); 
         $this->set('shipment', $shipment);
         $this->set('_serialize', ['shipment']);
     }
@@ -224,7 +228,8 @@ class ShipmentsController extends AppController
         $session = $this->request->session();    
         $user_data = $session->read('User.data'); 
 
-        if ($this->request->is('post')) {            
+        if ($this->request->is('post')) {         
+
 
             $this->request->data['client_id'] = $user_data->id;
             $this->request->data['status']    = 1;
@@ -265,7 +270,7 @@ class ShipmentsController extends AppController
 
 
 
-                $recipient = "comfortapplication@gmail.com";        
+                $recipient = "comfortpackaging@gmail.com";        
                 $email_smtp = new Email('default');
                 $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
                     ->template('shipment')
@@ -274,6 +279,16 @@ class ShipmentsController extends AppController
                     ->subject('Comfort Packaging : Shipment Add')
                     ->viewVars(['edata' => $email_content])
                     ->send();    
+                //send email to client
+                $recipient1 = $user_data->email;        
+                $email_smtp = new Email('default');
+                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                    ->template('shipment')
+                    ->emailFormat('html')
+                    ->to($recipient1)                                                                                                     
+                    ->subject('Comfort Packaging : Shipment Add')
+                    ->viewVars(['edata' => $email_content])
+                    ->send();       
 
                 $this->Flash->success(__('The shipment has been saved.'));
                 $action = $this->request->data['save'];
@@ -354,6 +369,11 @@ class ShipmentsController extends AppController
      */
     public function client_edit($id = null)
     {
+
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+        
+       
         $shipment = $this->Shipments->get($id, [
             'contain' => []
         ]);
@@ -411,6 +431,8 @@ class ShipmentsController extends AppController
         foreach( $pendingShipments as $ps ){
             $optionPendingShipments[$ps->id] = $ps->item_description;
         }
+
+        $this->set(['user_group' =>  $user_data->user->group_id]);
         $this->set(compact('shipment', 'shippingCarriers', 'shippingServices', 'shippingPurposes', 'optionPendingShipments'));
         $this->set('_serialize', ['shipment']);
     }
@@ -438,6 +460,7 @@ class ShipmentsController extends AppController
     {
         $this->Inventory = TableRegistry::get('Inventory');
         $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+        $this->Clients = TableRegistry::get('Clients');
         $this->request->allowMethod(['post']);
 
         $session = $this->request->session();    
@@ -445,6 +468,13 @@ class ShipmentsController extends AppController
 
         $data = $this->request->data;
         $shipment = $this->Shipments->get($data['shipment_id']);
+        
+        $client_id = $shipment->client_id;
+        $client = $this->Clients->get($client_id);                        
+        $client_email = $client->email;
+        $employee_email = $user_data->email;
+
+
        
         if (!empty($shipment)) {
             $this->Flash->success(__('Shipment has been successfully sent to inventory.'));  
@@ -499,6 +529,11 @@ class ShipmentsController extends AppController
 
             if($data['is_correct_quantity'] == 1) {
                 $data['correct_quantity_comment'] = "";
+            }else{
+                if(!empty($data['new_correct_quantity']) && $data['new_correct_quantity'] >= 0) {
+                    $shipment->quantity = $data['new_correct_quantity'];
+                    $remaining_quantity = $shipment->quantity - $data['quantity_to_send'];
+                }
             }
             
             $shipment->is_sent_to_inventory = 1;
@@ -516,6 +551,13 @@ class ShipmentsController extends AppController
                 $inventory_data['shipment_id'] = $shipment->id;
                 $inventory_data['sent_quantity'] = $shipment->quantity;
                 $inventory_data['remaining_quantity'] = $remaining_quantity;
+
+                if($is_send_part_of_it_to_amazon) {
+                    $inventory_data['last_sent_order_date'] = $data['amazon_shipment_date'];
+                    $inventory_data['last_sent_order_quantity'] = $data['quantity_to_send'];
+                    $inventory_data['last_sent_destination'] = "Send part of it to Amazon";
+                }
+
                 $inventory = $this->Inventory->patchEntity($inventory, $inventory_data);
                 $result_inventory = $this->Inventory->save($inventory);
             }
@@ -536,13 +578,16 @@ class ShipmentsController extends AppController
                 $inventory_order->order_status = "Completed";
                 $inventory_order->date_sent = date('Y-m-d');
                 $inventory_order->total_remaining = 0;
-                $this->InventoryOrder->save($inventory_order);
+               $order = $this->InventoryOrder->save($inventory_order);
 
             }
 
+
+
             $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $data['correct_quantity_comment']  , 'client' => $user_data, 'shipment_id' => $shipment->id];
 
-                $recipient = "comfortapplication@gmail.com";        
+                //send origin
+                $recipient = "comfortpackaging@gmail.com";        
                 $email_smtp = new Email('default');
                 $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
                     ->template('employee_received')
@@ -550,7 +595,29 @@ class ShipmentsController extends AppController
                     ->to($recipient)                                                                                                     
                     ->subject('Comfort Packaging : Shipment received')
                     ->viewVars(['edata' => $email_content])
-                    ->send();  
+                    ->send();
+
+                //send to employee
+                $recipient1 = $employee_email;        
+                $email_smtp = new Email('default');
+                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                    ->template('employee_received')
+                    ->emailFormat('html')
+                    ->to($recipient1)                                                                                                     
+                    ->subject('Comfort Packaging : Shipment received')
+                    ->viewVars(['edata' => $email_content])
+                    ->send();
+
+                // send to client    
+                $recipient2 = $client_email;        
+                $email_smtp = new Email('default');
+                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                    ->template('employee_received')
+                    ->emailFormat('html')
+                    ->to($recipient2)                                                                                                     
+                    ->subject('Comfort Packaging : Shipment received')
+                    ->viewVars(['edata' => $email_content])
+                    ->send();      
         } else {
             $this->Flash->error(__('The shipment could not be saved. Please, try again.'));
         }
@@ -597,6 +664,7 @@ class ShipmentsController extends AppController
         $this->request->allowMethod(['post']);
         $shipment = $this->Shipments->find('all')
             ->where([ 'upc_number' => $this->request->data['upc_number'] ])
+            ->andWhere(['price <>' => 0])
             ->first();
 
         if($shipment){
@@ -617,10 +685,34 @@ class ShipmentsController extends AppController
         $shipment = $this->Shipments->find('all')
             ->where([ 'upc_number' => $this->request->data['upc_number'] ])
             ->andWhere(['quantity' =>  $this->request->data['quantity'] , 'item_description' => $this->request->data['item_description']])
+            ->andWhere(['price <>' => 0])
             ->first();
 
+        
 
 
+        if($shipment){
+            $price = $shipment->price;
+            $quantity = $shipment->quantity;
+            $per_piece = $price / $quantity;
+        }
+
+        $return['per_piece'] = $per_piece;
+        echo json_encode($return);
+        exit;
+    }
+
+    public function load_verify_upc_number_order_inventory()
+    {
+        $per_piece = 0;
+        $this->request->allowMethod(['post']);
+        $shipment = $this->Shipments->get($this->request->data['shipment_id']);
+        $shipment_upc = $shipment->upc_number;
+
+        $shipment = $this->Shipments->find('all')
+            ->where([ 'upc_number' => $shipment_upc ])
+            ->andWhere(['price <>' => 0])
+            ->first();
 
         if($shipment){
             $price = $shipment->price;

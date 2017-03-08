@@ -100,7 +100,10 @@ class InventoryOrderController extends AppController
      */
     public function add($shipment_id = null)
     {
-    
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+        $client_email = $user_data->email;
+
         $inventoryOrder = $this->InventoryOrder->newEntity();
         $remaining_quantity = "";
         if($shipment_id) {
@@ -134,7 +137,7 @@ class InventoryOrderController extends AppController
                  $email_content = ['client' => $user_data, 'shipment_id' => $shipment_id, 'order_id' => $result->id];
 
                 
-                $recipient = "comfortapplication@gmail.com";        
+                $recipient = "comfortpackaging@gmail.com";        
                 $email_smtp = new Email('default');
                 $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
                     ->template('order')
@@ -143,6 +146,17 @@ class InventoryOrderController extends AppController
                     ->subject('Comfort Packaging : Shipment Add order')
                     ->viewVars(['edata' => $email_content])
                     ->send();  
+
+                //sent to Client 
+                $recipient = $client_email;        
+                $email_smtp = new Email('default');
+                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                    ->template('order')
+                    ->emailFormat('html')
+                    ->to($recipient)                                                                                                     
+                    ->subject('Comfort Packaging : Shipment Add order')
+                    ->viewVars(['edata' => $email_content])
+                    ->send();     
 
                 $action = $this->request->data['save'];
                 if( $action == 'save' ){
@@ -220,7 +234,25 @@ class InventoryOrderController extends AppController
     public function update_status_to_complete($inventory_order_id = null, $inventory_id = null)
     {
         $this->request->allowMethod(['post']);
-        $inventory_order = $this->InventoryOrder->get($inventory_order_id);
+
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Clients = TableRegistry::get('Clients');
+        if(isset($this->request->data['completion_comment'])){
+            $completion_comment = $this->request->data['completion_comment'];
+            $send_to_client = $this->request->data['send_to_client'];
+        }else{
+            $completion_comment ="";
+
+        }
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+        $inventory_order = $this->InventoryOrder->get($inventory_order_id);  
+        $shipment = $this->Shipments->get($inventory_order->shipment_id);       
+        $client_id = $shipment->client_id;
+        $client = $this->Clients->get($client_id); 
+        $client_email = $client->email;
+        $employee_email = $user_data->email;
+
        
         if (!empty($inventory_order)) {
             $this->Flash->success(__('Inventory order has been successfully updated the status.'));  
@@ -242,12 +274,90 @@ class InventoryOrderController extends AppController
                 $this->Inventory->save($inventory);                
                 
                 if($remaining_quantity <= 0) {
+
+                    $completion_comment = $this->request->data['completion_comment'];
+                    $send_to_client = $this->request->data['send_to_client'];
+                    
                     $shipment_id = $inventory->shipment_id;
                     $this->Shipments = TableRegistry::get('Shipments');
                     $shipment = $this->Shipments->get($shipment_id);
                     $shipment->status = 2;
+                    $shipment->date_completed = date('Y-m-d');
+                    $shipment->completion_comment = $completion_comment;
                     $this->Shipments->save($shipment);
 
+                    if(isset($send_to_client)){
+                        //sending of email for complete shipments
+                         $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $completion_comment  , 'shipment_id' => $shipment->id];
+                         //send origin
+                        $recipient = "comfortpackaging@gmail.com";        
+                        $email_smtp = new Email('default');
+                        $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                            ->template('shipment_completion')
+                            ->emailFormat('html')
+                            ->to($recipient)                                                                                                     
+                            ->subject('Comfort Packaging : Shipment Completed')
+                            ->viewVars(['edata' => $email_content])
+                            ->send();
+
+                        //send to employee
+                        $recipient1 = $employee_email;   
+                        $email_smtp = new Email('default');
+                        $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                            ->template('shipment_completion')
+                            ->emailFormat('html')
+                            ->to($recipient1)                                                                                                     
+                            ->subject('Comfort Packaging : Shipment Completed')
+                            ->viewVars(['edata' => $email_content])
+                            ->send();
+
+                        // send to client    
+                        $recipient2 = $client_email;        
+                        $email_smtp = new Email('default');
+                        $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                            ->template('shipment_completion')
+                            ->emailFormat('html')
+                            ->to($recipient2)                                                                                                     
+                            ->subject('Comfort Packaging : Shipment Completed')
+                            ->viewVars(['edata' => $email_content])
+                            ->send();      
+                    }
+
+                }else{
+                     //sending of email for order updates
+                     $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $completion_comment  , 'shipment_id' => $shipment->id];
+                     //send origin
+                    $recipient = "comfortpackaging@gmail.com";        
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('order_completion')
+                        ->emailFormat('html')
+                        ->to($recipient)                                                                                                     
+                        ->subject('Comfort Packaging :Order was sent')
+                        ->viewVars(['edata' => $email_content])
+                        ->send();
+
+                    //send to employee
+                    $recipient1 = $employee_email;   
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('order_completion')
+                        ->emailFormat('html')
+                        ->to($recipient1)                                                                                                     
+                        ->subject('Comfort Packaging : Order was sent')
+                        ->viewVars(['edata' => $email_content])
+                        ->send();
+
+                    // send to client    
+                    $recipient2 = $client_email;        
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('order_completion')
+                        ->emailFormat('html')
+                        ->to($recipient2)                                                                                                     
+                        ->subject('Comfort Packaging : Order was sent')
+                        ->viewVars(['edata' => $email_content])
+                        ->send();                              
                 }
             }
 

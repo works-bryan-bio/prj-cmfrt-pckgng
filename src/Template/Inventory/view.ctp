@@ -44,6 +44,10 @@
             <td><?= $this->Number->format($inventory->last_sent_order_quantity) ?></td>
         </tr>
         <tr>
+            <th><?= __('Comments/Remarks') ?></th>
+            <td><?= $this->Text->autoParagraph(h($inventory->shipment->comments. "  " . $inventory->shipment->combine_comment ." ". $inventory->shipment->correct_quantity_comment)); ?></td>
+        </tr>
+        <tr>
             <th><?= __('Created') ?></th>
             <td><?= h($inventory->created) ?></td>
         </tr>

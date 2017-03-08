@@ -11,10 +11,19 @@
         </ol>       
     </div>
 </div>
+<?php 
+  // debug($shipment);
+  // exit;
+  
 
+?>
 <section class="content">   
     <table class="table table-striped table-bordered table-hover">
     <tbody>
+        <tr>
+            <td><?= __('Shipping ID') ?></th>
+            <td><?= $shipment->id ?></td>
+        </tr>
         <tr>
             <td><?= __('Shipping Carrier') ?></th>
             <td><?= $shipment->shipping_carrier->name ?></td>
@@ -40,7 +49,7 @@
             <td><?= $shipment->supplier ?></td>
         </tr>
         <tr>
-            <th><?= __('FBA Number') ?></th>
+            <th><?= __('Asin Number') ?></th>
             <td><?= $shipment->fba_number ?></td>
         </tr>
 
@@ -48,11 +57,12 @@
             <th><?= __('UPC Number') ?></th>
             <td><?= $shipment->upc_number ?></td>
         </tr>
-
+        <?php if($group_id <> 3) {?>
         <tr>
             <th><?= __('Price') ?></th>
             <td><?= $shipment->price ?></td>
         </tr>
+        <?php } ?>
 
         <tr>
             <th><?= __('Item Description') ?></th>
@@ -71,8 +81,42 @@
             <td><?= $shipment->shipping_others ?></td>        
         </tr>                    
         <tr>
-            <th><?= __('Comments') ?></th>
+            <th><?= __('Detailed shipment instruction') ?></th>
             <td><?= $this->Text->autoParagraph(h($shipment->comments. "  " . $shipment->combine_comment ." ". $shipment->correct_quantity_comment)); ?></td>        
+        </tr>
+        <?php if($shipment->shipping_purpose_id == 3) { ?>
+          <tr>
+            <th><?= __('Quantity to send to amazon') ?></th>
+            <td>
+              <?php if($shipment->send_amazon_qty > 0) { ?>
+                <?= $shipment->send_amazon_qty; ?>
+              <?php } ?>
+            </td>
+          </tr>
+        <?php } ?>
+        <?php if(!empty($shipment->fnsku_label)) { ?>
+          <tr>
+            <th><?= __('FNSKU label') ?></th>
+            <td>
+                <a href="<?= $shipment->fnsku_label; ?>"><?= $shipment->fnsku_label; ?></a>
+            </td>
+          </tr>
+        <?php } ?>
+        <tr>
+          <th><?= __('Uploaded shipment label') ?></th>
+          <td>
+            <?php if(!empty($shipment->shipment_label)) { ?>
+              <a href="<?= $shipment->shipment_label; ?>"><?= $shipment->shipment_label; ?></a>
+            <?php } ?>
+          </td>
+        </tr>
+        <tr>
+          <th><?= __('Uploaded shipment label') ?></th>
+          <td>
+            <?php if(!empty($shipment->shipment_label)) { ?>
+              <a href="<?= $shipment->shipment_label; ?>"><?= $shipment->shipment_label; ?></a>
+            <?php } ?>
+          </td>
         </tr>
         <tr>
             <th><?= __('Created') ?></th>
