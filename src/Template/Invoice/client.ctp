@@ -133,8 +133,7 @@ hr{
                       <th class="date-time" style="width:140px;">Invoice Due Date</th>
                       <th class="" style="width:140px;">Description</th>
                       <th class="" style="width:140px;">Total Balance</th>
-                      <th class="" style="width:140px;">Status</th>
-                      <th class="actions" style="width:140px;">Actions</th>
+                      <th class="" style="width:140px;">Status</th>                      
                     </tr>
                 </thead>
                 <tbody>

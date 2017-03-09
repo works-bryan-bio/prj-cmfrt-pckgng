@@ -1,24 +1,20 @@
+<style>
+table{
+    text-align: left !important;
+    margin:10px;
+}
+</style>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('View Shipment') ?></h1>
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-dashboard"></i> <?= __('Shipments') ?>
-            </li>
-            <li class="active">
-                <i class="fa fa-eye"></i> <?= __('View') ?>
-            </li>
-        </ol>       
+        <h1 class="page-header"><?= __('View Shipment') ?></h1>        
     </div>
 </div>
-<?php 
-  // debug($shipment);
-  // exit;
-  
-
-?>
-<section class="content">   
-    <table class="table table-striped table-bordered table-hover">
+<br/>
+<div class="row">   
+  <div class="col-lg-12">
+    <section class="panel panel-primary pos-rlt clearfix">          
+        <div class="panel-body clearfix"> 
+        <table class="table table-striped table-bordered table-hover">
     <tbody>
         <tr>
             <td><?= __('Shipping ID') ?></th>
@@ -281,5 +277,8 @@
         ?>
         </div><br>
     </div>
-    </div>
-</section>
+    </div>    
+        </div>
+    </section>
+  </div>
+</div>

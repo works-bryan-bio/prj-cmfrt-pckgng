@@ -1,18 +1,20 @@
+<style>
+table{
+    text-align: left !important;
+    margin:10px;
+}
+</style>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header"><?= __('View Inventory Order') ?></h1>
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-dashboard"></i> <?= __('Inventory Order') ?>
-            </li>
-            <li class="active">
-                <i class="fa fa-eye"></i> <?= __('View') ?>
-            </li>
-        </ol>       
+        <h1 class="page-header"><?= __('View Inventory Order') ?></h1>        
     </div>
 </div>
-<section class="content">   
-    <table class="table table-striped table-bordered table-hover">
+<br/>
+<div class="row">   
+  <div class="col-lg-12">
+    <section class="panel panel-primary pos-rlt clearfix">          
+        <div class="panel-body clearfix"> 
+        <table class="table table-striped table-bordered table-hover">
     <tbody>
         <tr>
             <td><?= __('Client') ?></th>
@@ -73,65 +75,76 @@
         </tr>
     </tbody>
     </table>
-
-    <div class="form-group" style="margin-top: 80px;">
+    <br />
+    <div class="related">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"><?= __('Related Inventory Order') ?></h1>        
+            </div>
+        </div>
+        <br/>           
+        <?php if (!empty($inventoryOrder->inventory_order)): ?>
+        <div class="row">   
+          <div class="col-lg-12">
+            <section class="panel panel-primary pos-rlt clearfix">          
+                <div class="panel-body clearfix">
+                  <table class="table table-striped table-bordered table-hover">
+                  <tbody>
+                  <tr>
+                      <th><?= __('Id') ?></th>
+                      <th><?= __('Client Id') ?></th>
+                      <th><?= __('Shipment Id') ?></th>
+                      <th><?= __('Order Number') ?></th>
+                      <th><?= __('Order Destination') ?></th>
+                      <th><?= __('Order Quantity') ?></th>
+                      <th><?= __('Date Created') ?></th>
+                      <th><?= __('Shipping Carrier Id') ?></th>
+                      <th><?= __('Shipping Service Id') ?></th>
+                      <th><?= __('Inventory Order Id') ?></th>
+                      <th><?= __('Combine Comment') ?></th>
+                      <th><?= __('Order Status') ?></th>
+                      <th><?= __('Date Sent') ?></th>
+                      <th><?= __('Total Remaining') ?></th>
+                      <th class="actions"><?= __('Actions') ?></th>
+                  </tr>
+                  <?php foreach ($inventoryOrder->inventory_order as $inventoryOrder): ?>
+                  <tr>
+                      <td><?= h($inventoryOrder->id) ?></td>
+                      <td><?= h($inventoryOrder->client_id) ?></td>
+                      <td><?= h($inventoryOrder->shipment_id) ?></td>
+                      <td><?= h($inventoryOrder->order_number) ?></td>
+                      <td><?= h($inventoryOrder->order_destination) ?></td>
+                      <td><?= h($inventoryOrder->order_quantity) ?></td>
+                      <td><?= h($inventoryOrder->date_created) ?></td>
+                      <td><?= h($inventoryOrder->shipping_carrier_id) ?></td>
+                      <td><?= h($inventoryOrder->shipping_service_id) ?></td>
+                      <td><?= h($inventoryOrder->inventory_order_id) ?></td>
+                      <td><?= h($inventoryOrder->combine_comment) ?></td>
+                      <td><?= h($inventoryOrder->order_status) ?></td>
+                      <td><?= h($inventoryOrder->date_sent) ?></td>
+                      <td><?= h($inventoryOrder->total_remaining) ?></td>
+                      <td class="actions">
+                          <?= $this->Html->link('<i class="fa fa-eye"></i>', ['controller' => 'InventoryOrder', 'action' => 'view', $inventoryOrder->id], ['class' => 'btn btn-info', 'escape' => false]) ?>
+                          <?= $this->Html->link('<i class="fa fa-pencil"></i>', ['controller' => 'InventoryOrder', 'action' => 'edit', $inventoryOrder->id], ['class' => 'btn btn-success', 'escape' => false]) ?>
+                          <?= $this->Form->postLink('<i class="fa fa-trash"></i>', ['controller' => 'InventoryOrder', 'action' => 'delete', $inventoryOrder->id], ['class' => 'btn btn-danger', 'escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $inventoryOrder->id)]) ?>
+                      </td>
+                  </tr>
+                  <?php endforeach; ?>      
+                  </tbody>      
+              </table>
+                </div>
+            </section>
+          </div>
+        </div>        
+    <?php endif; ?>
+        </div>
+        <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
         <div class="action-fixed-bottom">        
         <a href="javascript:void(0);" class="btn btn-warning" onclick="history.go(-1);" ><i class="fa fa-angle-left"> </i> Back To list</a>
         </div><br>
     </div>
     </div>
-    <div class="related">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title"><?= __('Related Inventory Order') ?></h3>
-            </div>
-        </div>        
-        <?php if (!empty($inventoryOrder->inventory_order)): ?>
-        <table class="table table-striped table-bordered table-hover">
-            <tbody>
-            <tr>
-                <th><?= __('Id') ?></th>
-                <th><?= __('Client Id') ?></th>
-                <th><?= __('Shipment Id') ?></th>
-                <th><?= __('Order Number') ?></th>
-                <th><?= __('Order Destination') ?></th>
-                <th><?= __('Order Quantity') ?></th>
-                <th><?= __('Date Created') ?></th>
-                <th><?= __('Shipping Carrier Id') ?></th>
-                <th><?= __('Shipping Service Id') ?></th>
-                <th><?= __('Inventory Order Id') ?></th>
-                <th><?= __('Combine Comment') ?></th>
-                <th><?= __('Order Status') ?></th>
-                <th><?= __('Date Sent') ?></th>
-                <th><?= __('Total Remaining') ?></th>
-                <th class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($inventoryOrder->inventory_order as $inventoryOrder): ?>
-            <tr>
-                <td><?= h($inventoryOrder->id) ?></td>
-                <td><?= h($inventoryOrder->client_id) ?></td>
-                <td><?= h($inventoryOrder->shipment_id) ?></td>
-                <td><?= h($inventoryOrder->order_number) ?></td>
-                <td><?= h($inventoryOrder->order_destination) ?></td>
-                <td><?= h($inventoryOrder->order_quantity) ?></td>
-                <td><?= h($inventoryOrder->date_created) ?></td>
-                <td><?= h($inventoryOrder->shipping_carrier_id) ?></td>
-                <td><?= h($inventoryOrder->shipping_service_id) ?></td>
-                <td><?= h($inventoryOrder->inventory_order_id) ?></td>
-                <td><?= h($inventoryOrder->combine_comment) ?></td>
-                <td><?= h($inventoryOrder->order_status) ?></td>
-                <td><?= h($inventoryOrder->date_sent) ?></td>
-                <td><?= h($inventoryOrder->total_remaining) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link('<i class="fa fa-eye"></i>', ['controller' => 'InventoryOrder', 'action' => 'view', $inventoryOrder->id], ['class' => 'btn btn-info', 'escape' => false]) ?>
-                    <?= $this->Html->link('<i class="fa fa-pencil"></i>', ['controller' => 'InventoryOrder', 'action' => 'edit', $inventoryOrder->id], ['class' => 'btn btn-success', 'escape' => false]) ?>
-                    <?= $this->Form->postLink('<i class="fa fa-trash"></i>', ['controller' => 'InventoryOrder', 'action' => 'delete', $inventoryOrder->id], ['class' => 'btn btn-danger', 'escape' => false], ['confirm' => __('Are you sure you want to delete # {0}?', $inventoryOrder->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>      
-            </tbody>      
-        </table>
-    <?php endif; ?>
-    </div>
-</section>
+    </section>
+  </div>
+</div>
