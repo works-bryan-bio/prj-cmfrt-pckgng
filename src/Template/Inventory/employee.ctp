@@ -39,6 +39,9 @@ hr{
                     </ul>
         </div>
         <h1 class="page-header"><?= __('Inventory') ?></h1>
+       <div class="modal-body wrapper-lg">
+          <label class="col-sm-2 control-label"> Order overdue date: <span class="number-of-order-due label label-danger"></span></label>
+       </div>
     </div>
 </div>
 <div id="send-new-order-container" class="send-new-order-container" style="display:none;"><?php include("accordion_add.ctp"); ?></div>
@@ -65,7 +68,7 @@ hr{
                       <th class="">Client</th>
                       <th class="">Item Description</th>
                       <th class="">Order Destination</th>
-                      <th class="">Order Date</th>
+                      <th class="">Order to be sent</th>
                     </tr>
                 </thead>
                 <tbody>

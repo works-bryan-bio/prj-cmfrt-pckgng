@@ -481,6 +481,7 @@ class ShipmentsController extends AppController
             $shipment = $this->Shipments->patchEntity($shipment, $data);
             if($data['send_option'] == "send_to_amazon"){
                 $shipment->status = 4;
+                $shipment->date_completed = date('Y-m-d H:i:s');
             }else{
                 $shipment->status = 3;
             }
@@ -724,4 +725,20 @@ class ShipmentsController extends AppController
         echo json_encode($return);
         exit;
     }
+
+    public function load_verify_order_due()
+    {
+        $per_piece = 0;
+        $this->request->allowMethod(['post']);
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+        $shipment = $this->InventoryOrder->find('all')
+            ->where([ 'order_status' => 'Pending' ])
+            ->andWhere(['date_created <=' => date('Y-m-d')])
+            ->count();
+
+        $return['quantity'] = $shipment;
+        echo json_encode($return);
+        exit;
+    }
+
 }

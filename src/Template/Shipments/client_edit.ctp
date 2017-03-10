@@ -137,6 +137,22 @@
                         echo " </div></div>";
 
                         echo "
+                        <div class='form-group send-amazon-only-group hidden'>
+                            <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('add FNSKU labels') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload FNSKU labels' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('fnsku_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
+                                      
+                        echo " </div></div>";
+
+                        echo "
+                        <div class='form-group send-amazon-group hidden'>
+                            <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('add FNSKU labels') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload FNSKU labels' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('fnsku_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
+                                      
+                        echo " </div></div>";
+
+                        echo "
                         <div class='form-group send-amazon-group " . $add_amazon_group_class . "'>
                             <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('How many?') . "</label>
                             <div class='col-sm-6'>";

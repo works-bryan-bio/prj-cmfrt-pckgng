@@ -14,7 +14,11 @@
     echo $this->Html->script('ckeditor/ckeditor', array('inline' => false));
     echo $this->Html->script('validator.js');
     echo $this->Html->script('jquery.dataTables.min');
-    echo $this->Html->script('colorbox/jquery.colorbox-min.js');    
+    echo $this->Html->script('colorbox/jquery.colorbox-min.js');   
+
+    if(isset($load_message_script)){
+        echo $this->Html->script('message.js');     
+    } 
 
 	//echo $this->Html->script('backend-application.js');
 	//echo $this->Html->script('ckeditor/ckeditor', array('inline' => false));	
@@ -22,6 +26,9 @@
 <script type="text/javascript">
         $(function(){
             $(".modalImage").colorbox({transition:"fade"});
+            refreshShippingPurpose();
+            loadVerifyOrderDue();
+
 
             //Datatable
             $('.zero-config-datatable').DataTable({
@@ -322,6 +329,8 @@
 
         });
 
+        
+
         $(function(){
             //$.fn.modalmanager.defaults.resize = true;  
         });
@@ -548,4 +557,38 @@
                 }
         }
 
+        function refreshShippingPurpose(){
+            
+             var selected = $("#shipping_purpose_id").val();
+                if( selected == 3 ){
+                    $(".send-amazon-group").removeClass('hidden');
+                    $(".combine-with-group").addClass('hidden');
+                    $(".send-amazon-only-group").addClass('hidden');  
+                }else if( selected == 5 ){                    
+                    $(".combine-with-group").removeClass('hidden');
+                    $(".send-amazon-group").addClass('hidden');
+                    $(".send-amazon-only-group").addClass('hidden');  
+                }else if( selected == 2 ){                    
+                    $(".combine-with-group").addClass('hidden');
+                    $(".send-amazon-group").addClass('hidden');
+                    $(".send-amazon-only-group").removeClass('hidden');    
+                }else{
+                    $(".send-amazon-group").addClass('hidden');
+                    $(".combine-with-group").addClass('hidden');
+                    $(".send-amazon-only-group").addClass('hidden'); 
+                } 
+
+        }
+
+        function loadVerifyOrderDue() {
+                       
+            $.post(base_url + "shipments/load_verify_order_due",{},function(o){
+                
+                $('.number-of-order-due').html(o.quantity);
+            },"json");
+
+
+        }
+
+        
     </script>

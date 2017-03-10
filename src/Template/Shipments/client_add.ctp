@@ -130,6 +130,15 @@
 
                         echo "
                         <div class='form-group send-amazon-group hidden'>
+                            <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('add FNSKU labels') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload FNSKU labels' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('fnsku_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
+                                      
+                        echo " </div></div>";
+
+                        
+                        echo "
+                        <div class='form-group send-amazon-group hidden'>
                             <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('How many?') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Quantity of items you want to send to amazon' ></i></span>
                             <div class='col-sm-6'>";
                              echo $this->Form->input('send_amazon_qty', ['type' => 'text', 'class' => 'form-control', 'id' => 'send_amazon_qty', 'label' => false]);                 
