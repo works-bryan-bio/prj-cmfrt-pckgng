@@ -127,8 +127,6 @@ class InventoryController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
-        
-
         $inventory = $this->Inventory->find('all')
             ->contain(['Shipments'])
             ->where(['Inventory.remaining_quantity <>' => '> 0'])

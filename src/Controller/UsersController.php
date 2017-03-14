@@ -36,7 +36,7 @@ class UsersController extends AppController
             }elseif( $user_data->user->group_id == 3 ){ //Employee
                 $this->Auth->allow(['user_dashboard']);
             }elseif( $user_data->user->group_id == 4 ){ //Client
-                $this->Auth->allow(['user_dashboard']);
+                $this->Auth->allow(['client_dashboard']);
             }      
         }
         $this->set('nav_selected', $nav_selected);
@@ -72,7 +72,49 @@ class UsersController extends AppController
      * @return void
      */
     public function dashboard()
-    {        
+    {   
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Inventory = TableRegistry::get('Inventory');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+
+        $pendingShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 1])
+            ->orWhere(['Shipments.status' => 4])            
+        ;
+
+        $completedShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 2])            
+        ;
+
+        $receivedAndStoredShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 3])         
+        ;
+
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Pending'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        $this->set([
+            'pendingShipments' => $pendingShipments,
+            'completedShipments' => $completedShipments,
+            'receivedAndStoredShipments' => $receivedAndStoredShipments,
+            'inventory_order' => $inventory_order
+        ]);
+
+        $this->set('page_title', 'Dashboard');
+    }
+
+    /**
+     * Client Dashboard method     
+     * @return void
+     */
+    public function client_dashboard()
+    {   
         $this->set('page_title', 'Dashboard');
     }
 
@@ -82,6 +124,39 @@ class UsersController extends AppController
      */
     public function user_dashboard()
     {        
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Inventory = TableRegistry::get('Inventory');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+
+        $pendingShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 1])
+            ->orWhere(['Shipments.status' => 4])            
+        ;
+
+        $completedShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 2])            
+        ;
+
+        $receivedAndStoredShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 3])         
+        ;
+
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Pending'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        $this->set([
+            'pendingShipments' => $pendingShipments,
+            'completedShipments' => $completedShipments,
+            'receivedAndStoredShipments' => $receivedAndStoredShipments,
+            'inventory_order' => $inventory_order
+        ]);
+
         $this->set('page_title', 'Dashboard');
     }   
 
@@ -217,6 +292,8 @@ class UsersController extends AppController
                          
                     if( $user_data->user->group_id == 1 ){ //Company
                         return $this->redirect($this->Auth->redirectUrl());      
+                    }elseif( $user_data->user->group_id == 4 ){ // client
+                        return $this->redirect(['action' => 'client_dashboard']);
                     }else{
                         return $this->redirect(['action' => 'user_dashboard']);
                     }        

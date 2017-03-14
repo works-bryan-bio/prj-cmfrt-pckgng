@@ -100,7 +100,7 @@
     <?php }elseif($hdr_user_data->user->group_id == 4) { ?>                                       
         <li class="treeview <?= $nav_selected["dashboard"] ?>">
  
-          <?= $this->Html->link('<i class="glyphicon glyphicon-dashboard icon icon-big white"></i><span class="sptr">Dashboard</span>',["controller" => "users", "action" => "dashboard"],["class" => "auto", "escape" => false]) ?>
+          <?= $this->Html->link('<i class="glyphicon glyphicon-dashboard icon icon-big white"></i><span class="sptr">Dashboard</span>',["controller" => "users", "action" => "client_dashboard"],["class" => "auto", "escape" => false]) ?>
     
         </li>
         <li class="treeview <?= $nav_selected["shipments"] ?>">
