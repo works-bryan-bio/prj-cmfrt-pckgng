@@ -115,6 +115,32 @@ class UsersController extends AppController
      */
     public function client_dashboard()
     {   
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Invoice   = TableRegistry::get('Invoice');
+
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');  
+
+        $pendingShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 1])
+            ->orWhere(['Shipments.status' => 4])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        $completedShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 2])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        $pendingInvoice = $this->Invoice->find('all')
+            ->contain(['Clients', 'Shipments'])
+            ->where(['Invoice.clients_id' => $user_data->id, 'Invoice.status' => 1])
+            ->order(['Invoice.id' => 'DESC'])
+        ;
+
+        $this->set(['pendingShipments' => $pendingShipments, 'completedShipments' => $completedShipments, 'pendingInvoice' => $pendingInvoice]);
         $this->set('page_title', 'Dashboard');
     }
 
