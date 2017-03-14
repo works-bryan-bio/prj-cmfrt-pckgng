@@ -1,3 +1,25 @@
+<style>
+.datepicker { z-index: 10000 !important;}
+.list-icon .col-md-1{
+  padding: 0px;
+}
+.list-icon div{
+    margin-right:42px;
+}
+.list-icon .btn-sm{
+    padding:5px 0px;
+    width:61px !important;
+    margin-right: 42px;
+    display: block;
+}
+.table-actions .btn{
+  width:159px;
+}
+hr{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
+</style>
 <div class="row">
     <div class="col-lg-12 mt-80">
         <div class="dropdown pull-right" style="margin:0px 14px 0 0;position: relative;right: 13px;">
@@ -8,37 +30,38 @@
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('Add New'), ['action' => 'add'], ['escape' => false]) ?></li>
                     </ul>
         </div>
-        <h1 class="page-header" style="position: relative;left: 17px;"><?= __('Groups') ?></h1>
+        <h1 class="page-header" style="padding-bottom: 25px !important;"><?= __('Groups') ?></h1>
     </div>
 </div>
-<section class="content">
-    <div class="ribbon-section" style="padding-top:0px !important;">
-      <div class="ribbon-black" style=""><h3 class="ribbon-h3">Groups List</h3></div>
-    </div>
-    <br style="clear:both;" />
-    <div class="panel panel-primary">
-        <div class="table-responsive data-content">    
-            <table class="table table-striped b-t b-light">
+<section class="panel panel-default">
+  <div class="panel-body">
+    <div class="tab-content">
+      <div class="tab-pane active" id="pending_orders">
+          <div class="table-responsive data-content">    
+            <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                        <th><?= $this->Paginator->sort('id') ?></th>
-                        <th><?= $this->Paginator->sort('name') ?></th>
-                        <th><?= $this->Paginator->sort('created') ?></th>
-                        <th><?= $this->Paginator->sort('modified') ?></th>
-                        <th class="actions no-border-right"><?= __('Actions') ?></th>
+                      <th style="text-align:center;">Actions</th>                      
+                      <th class="">Name</th>
+                      <th class="">Created</th>
+                      <th class="">Modified</th>                      
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($groups as $group): ?>
                     <tr>
-                        <td><?= $this->Number->format($group->id) ?></td>
-                        <td><?= h($group->name) ?></td>                        
-                        <td><?= date("Y-m-d H:i:s",strtotime($group->created)) ?></td>
-                        <td><?= date("Y-m-d H:i:s",strtotime($group->modified)) ?></td>
-                        <td class="actions">
-                            <?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $group->id],['class' => 'btn btn-sm btn-info','escape' => false]) ?>
-                            <?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'edit', $group->id],['class' => 'btn btn-sm btn-info', 'escape' => false]) ?>
-                            <?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Delete'), '#modal-'.$group->id,['data-toggle' => 'modal', 'class' => 'btn btn-sm btn-danger', 'escape' => false]) ?>
+                      <td class="no-border-right table-actions">
+
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">   
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $group->id],['title' => 'View', 'escape' => false]) ?></li>
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'edit', $group->id],['title' => 'Edit', 'escape' => false]) ?></li>                         
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Delete'), '#modal-'. $group->id,['title' => 'Delete', 'data-toggle' => 'modal','escape' => false]) ?></li>
+                              </ul>
+                            </div>
                             <!-- Delete Modal -->
                             <div id="modal-<?=$group->id?>" class="modal fade">
                               <div class="modal-dialog">
@@ -62,23 +85,16 @@
                                 </div>
                               </div>
                             </div>
-                        </td>
+                      </td>                      
+                      <td style="width:60%;"><?= h($group->name) ?></td>
+                      <td style="width:20%;"><?= h($group->created) ?></td>
+                      <td style="width:20%;"><?= h($group->modified) ?></td>
                     </tr>
                     <?php endforeach; ?>
                 </tbody>
             </table>
-        </div>
-        <footer class="panel-footer">
-            <div class="row">                            
-              <div class="col-sm-12 text-right text-center-xs">                
-                <ul class="pagination pagination-sm m-t-none m-b-none">
-                  <?= $this->Paginator->prev('«') ?>
-                  <?= $this->Paginator->numbers() ?>
-                  <?= $this->Paginator->next('»') ?>
-                </ul>
-              </div>
-            </div>
-        </footer>            
         </div>        
-    </div>        
+      </div>    
+    </div>
+  </div>
 </section>
