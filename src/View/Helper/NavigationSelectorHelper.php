@@ -47,6 +47,7 @@ class NavigationSelectorHelper extends Helper
             "home" => "",
             "about" => "",
             "contact" => "",
+            "message" => "",
             "custom_software" => "",                            
         );
         $navigation[$selected] = "active";

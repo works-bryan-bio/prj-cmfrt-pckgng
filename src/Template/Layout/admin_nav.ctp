@@ -69,6 +69,13 @@
             <?= $this->Html->link('<i class="fa fa-fw fa-user icon icon-big white"></i><span class="sptrsub">Clients</span>',["controller" => "clients", "action" => "index"],["class" => "auto", "escape" => false]) ?>
         
         </li>
+
+         <li class="treeview <?= $nav_selected["message"] ?>">
+
+            <?= $this->Html->link('<i class="fa fa-fw fa-inbox icon icon-big white"></i> <span class="sptr">Messages</span>',["controller" => "message", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+
+        </li>
+        
     <?php }elseif($hdr_user_data->user->group_id == 3) { ?>
         <li class="treeview <?= $nav_selected["dashboard"] ?>">
      
@@ -122,6 +129,13 @@
             <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i> <span class="sptr">Inventory</span>',["controller" => "inventory", "action" => "index"],["class" => "auto", "escape" => false]) ?>
 
         </li>
+
+        <li class="treeview <?= $nav_selected["message"] ?>">
+
+            <?= $this->Html->link('<i class="fa fa-fw fa-inbox icon icon-big white"></i> <span class="sptr">Messages</span>',["controller" => "message", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+
+        </li>
+
 
     <?php } ?>
   </ul>
