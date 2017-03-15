@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 08, 2017 at 03:12 PM
+-- Generation Time: Mar 15, 2017 at 04:29 PM
 -- Server version: 10.1.19-MariaDB
 -- PHP Version: 5.6.24
 
@@ -451,7 +451,7 @@ INSERT INTO `inventory` (`id`, `client_id`, `shipment_id`, `sent_quantity`, `rem
 (6, 4, 15, 5, 0, '2017-01-11 19:18:48', 5, 'aaa', '', '2017-01-11 19:14:10', '2017-01-11 19:18:48'),
 (7, 27, 18, 123, 123, '', 0, '', '', '2017-01-12 16:24:19', '2017-01-12 16:24:19'),
 (8, 4, 19, 321, 0, '2017-01-12 16:36:09', 321, 'test34', '', '2017-01-12 16:29:59', '2017-01-12 16:36:09'),
-(9, 4, 20, 50, 50, '', 0, '', '', '2017-01-13 09:44:04', '2017-01-13 09:44:04'),
+(9, 4, 20, 50, 25, '2017-03-10 09:00:43', 25, 'test 123', '', '2017-01-13 09:44:04', '2017-03-10 09:00:43'),
 (10, 4, 24, 25, 10, '2017-03-08 06:25:25', 10, 'this is for sample ', '', '2017-01-15 17:20:40', '2017-03-08 06:25:25'),
 (11, 4, 23, 50, 50, '', 0, '', '', '2017-01-16 11:37:45', '2017-01-16 14:21:47'),
 (12, 4, 22, 30, 15, '', 0, '', '', '2017-01-16 13:48:10', '2017-01-16 13:48:10'),
@@ -465,12 +465,18 @@ INSERT INTO `inventory` (`id`, `client_id`, `shipment_id`, `sent_quantity`, `rem
 (20, 4, 28, 25, 25, '', 0, '', 'a:0:{}', '2017-01-20 12:13:50', '2017-02-22 07:58:39'),
 (21, 3, 3, 5, 5, '', 0, '', '', '2017-02-07 14:15:11', '2017-02-07 14:15:11'),
 (22, 4, 60, 30, 20, '', 0, '', 'a:2:{s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";a:3:{s:16:"bill_lading_file";s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";s:11:"date_upload";s:10:"2017-02-28";s:7:"remarks";s:5:"asdfg";}s:0:"";a:3:{s:16:"bill_lading_file";s:0:"";s:11:"date_upload";s:0:"";s:7:"remarks";s:0:"";}}', '2017-02-15 14:37:57', '2017-02-21 17:02:03'),
-(23, 4, 61, 30, 20, '', 0, '', 'a:2:{i:23;a:3:{s:16:"bill_lading_file";s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";s:11:"date_upload";s:10:"2017-02-24";s:7:"remarks";s:3:"asd";}s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";a:3:{s:16:"bill_lading_file";s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";s:11:"date_upload";s:10:"2017-02-19";s:7:"remarks";s:3:"xyz";}}', '2017-02-15 16:13:18', '2017-02-22 08:01:31'),
+(23, 4, 61, 30, 16, '2017-03-10 09:00:27', 4, 'chicago', 'a:2:{i:23;a:3:{s:16:"bill_lading_file";s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";s:11:"date_upload";s:10:"2017-02-24";s:7:"remarks";s:3:"asd";}s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";a:3:{s:16:"bill_lading_file";s:62:"/dov/comfort_packaging2/webroot/upload/14/files/Screenshot.png";s:11:"date_upload";s:10:"2017-02-19";s:7:"remarks";s:3:"xyz";}}', '2017-02-15 16:13:18', '2017-03-10 09:00:27'),
 (24, 4, 63, 50, 50, '', 0, '', '', '2017-02-22 15:06:44', '2017-02-22 15:06:44'),
 (25, 4, 64, 50, 0, '2017-03-01 04:14:47', 50, 'test destination', '', '2017-02-22 15:07:12', '2017-03-01 04:14:47'),
 (26, 4, 65, 43, 43, '', 0, '', '', '2017-03-06 14:27:23', '2017-03-06 14:27:23'),
 (27, 4, 67, 50, 20, '2017-03-08 06:54:46', 15, 'California ', '', '2017-03-06 17:32:54', '2017-03-08 06:54:46'),
-(28, 4, 66, 50, 35, '2017-03-07', 15, 'Send part of it to Amazon', '', '2017-03-06 17:48:17', '2017-03-06 17:48:17');
+(28, 4, 66, 50, 35, '2017-03-07', 15, 'Send part of it to Amazon', '', '2017-03-06 17:48:17', '2017-03-06 17:48:17'),
+(29, 4, 68, 50, 50, '', 0, '', '', '2017-03-09 07:56:22', '2017-03-09 07:56:22'),
+(30, 4, 69, 50, 0, '', 0, '', '', '2017-03-09 09:57:30', '2017-03-09 10:03:10'),
+(31, 4, 70, 500, 500, '', 0, '', '', '2017-03-09 15:45:56', '2017-03-09 15:45:56'),
+(32, 4, 71, 50, 0, '', 0, '', '', '2017-03-10 15:59:13', '2017-03-10 16:15:28'),
+(33, 4, 73, 50, 0, '', 0, '', '', '2017-03-10 16:40:59', '2017-03-10 16:40:59'),
+(34, 4, 72, 100, 80, '2017-03-12', 20, 'Send part of it to Amazon', '', '2017-03-10 16:48:58', '2017-03-10 16:48:58');
 
 -- --------------------------------------------------------
 
@@ -509,17 +515,21 @@ INSERT INTO `inventory_order` (`id`, `client_id`, `shipment_id`, `order_number`,
 (6, 4, 14, '1234', 'test12', 16, 0, '2017-01-11', 1, 1, 1, '', 'Completed', '2017-01-11', 0),
 (7, 4, 15, '222', 'aaa', 5, 0, '2017-01-11', 1, 1, 1, 'aa', 'Completed', '2017-01-11', 0),
 (8, 4, 19, '1231', 'test34', 321, 0, '2017-01-12', 1, 1, 1, '', 'Completed', '2017-01-12', 0),
-(9, 4, 20, '1234', 'test 123', 25, 0, '2017-01-13', 1, 1, 1, '', 'Pending', '2017-01-13', 0),
+(9, 4, 20, '1234', 'test 123', 25, 0, '2017-01-13', 1, 1, 1, '', 'Completed', '2017-01-13', 0),
 (10, 4, 24, 'test123', 'sample only', 5, 0, '2017-01-17', 1, 1, 1, '', 'Completed', '2017-01-17', 0),
 (11, 4, 24, 'test #2', 'this is for sample ', 10, 0, '2017-01-17', 1, 1, 1, '', 'Completed', '2017-01-17', 0),
-(13, 4, 0, 'eeee', 'eee', 123, 0, '2017-01-19', 1, 1, 1, 'ee', 'Pending', '2017-01-19', 0),
 (14, 4, 25, 'eeeeee', 'eeeee', 123, 0, '2017-01-19', 1, 1, 1, 'eee', 'Completed', '2017-01-19', 0),
 (15, 4, 61, '0', 'Amazon', 10, 0, '2017-02-15', 1, 1, 0, '', 'Completed', '2017-02-15', 0),
-(16, 4, 61, '1231', 'chicago', 4, 0, '2017-02-24', 1, 3, 1, '', 'Pending', '2017-02-22', 0),
+(16, 4, 61, '1231', 'chicago', 4, 0, '2017-02-24', 1, 3, 1, '', 'Completed', '2017-02-22', 0),
 (17, 4, 64, 'OR0001', 'test destination', 50, 500, '2017-03-02', 1, 1, 1, '', 'Completed', '2017-03-02', 0),
 (18, 4, 67, '0', 'Send part of it to Amazon', 15, 0, '2017-03-06', 1, 1, 0, '', 'Completed', '2017-03-06', 0),
 (19, 4, 66, '0', 'Send part of it to Amazon', 15, 0, '2017-03-06', 1, 1, 0, '', 'Completed', '2017-03-06', 0),
-(20, 4, 67, 'OR0001', 'California ', 15, 0, '2017-03-09', 1, 1, 1, '', 'Completed', '2017-03-09', 0);
+(20, 4, 67, 'OR0001', 'California ', 15, 0, '2017-03-09', 1, 1, 1, '', 'Completed', '2017-03-09', 0),
+(21, 4, 70, 'OR0001', 'test', 20, 209.302, '2017-03-10', 1, 3, 1, '', 'Pending', '2017-03-10', 0),
+(22, 4, 70, 'OR0002', 'test', 20, 209.302, '2017-03-10', 1, 1, 1, '', 'Pending', '2017-03-10', 0),
+(23, 4, 70, 'OR0003', 'trest', 20, 209.302, '2017-03-10', 1, 1, 1, '', 'Pending', '2017-03-10', 0),
+(24, 4, 70, 'OR0004', 'tetst', 20, 209.302, '2017-03-11', 1, 1, 1, '', 'Pending', '2017-03-11', 0),
+(25, 4, 72, '0', 'Send part of it to Amazon', 20, 0, '2017-03-10', 1, 1, 0, '', 'Completed', '2017-03-10', 0);
 
 -- --------------------------------------------------------
 
@@ -582,16 +592,19 @@ CREATE TABLE `message` (
   `id` int(11) NOT NULL,
   `client_id` int(11) NOT NULL,
   `message_subject` text NOT NULL,
-  `date_created` datetime NOT NULL
+  `date_created` datetime NOT NULL,
+  `date_modified` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `message`
 --
 
-INSERT INTO `message` (`id`, `client_id`, `message_subject`, `date_created`) VALUES
-(1, 4, 'this is a test subject', '2017-03-02 16:31:00'),
-(2, 4, 'this is sample header', '2017-03-02 16:41:00');
+INSERT INTO `message` (`id`, `client_id`, `message_subject`, `date_created`, `date_modified`) VALUES
+(1, 4, 'this is a test subject', '2017-03-02 16:31:00', NULL),
+(2, 4, 'this is sample header', '2017-03-02 16:41:00', NULL),
+(3, 4, 'test123', '2017-03-13 16:12:58', NULL),
+(4, 3, 'ddddddddddddd', '2017-03-14 17:45:33', NULL);
 
 -- --------------------------------------------------------
 
@@ -608,6 +621,18 @@ CREATE TABLE `message_details` (
   `message_details` text NOT NULL,
   `date_created` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `message_details`
+--
+
+INSERT INTO `message_details` (`id`, `message_id`, `user_id`, `user_group`, `message_details`, `date_created`) VALUES
+(1, 3, 12, 4, 'asdf', '2017-03-14 15:59:19'),
+(2, 3, 12, 4, 'test asd asd asd asdsad  dsadasdasdasd sadasdasdasdsad asdasdsad asd asdasdasdasdas das das dasdsadasd', '2017-03-14 16:10:56'),
+(3, 3, 13, 2, 'asdfghjkl', '2017-03-14 17:11:38'),
+(4, 3, 12, 4, 'ggggg', '2017-03-14 17:27:35'),
+(5, 3, 13, 2, 'asd123', '2017-03-14 17:31:11'),
+(6, 4, 13, 2, 'hehehe', '2017-03-14 17:45:44');
 
 -- --------------------------------------------------------
 
@@ -961,7 +986,13 @@ INSERT INTO `shipments` (`id`, `client_id`, `item_description`, `additional_info
 (64, 4, 'Component#1-1', 'combine Items', 50, 50, 1, '', 1, 5, 0, 63, 'combine#1-1', '', 'for combine ', 2, 'test supplier', 'test1234', 'test1234', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples,Others', 'test with other', 1, 1, NULL, '1', '', '', NULL, 'storage', '2017-02-22 15:05:12', '2017-03-01 00:00:00', 'test123', '2017-03-01 04:14:47'),
 (65, 4, 'Component#1', 'combine', 43, 45, 1, '', 1, 1, 0, NULL, '', '', 'test comment', 3, 'test supplier', 'test1234', 'test1234', 450, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples,Others', 'test with other', 1, 0, '2 damaged items', '1', '', '', NULL, 'storage', '2017-02-22 15:22:18', NULL, '0', '2017-03-06 14:27:23'),
 (66, 4, 'with send part of it to amazon #1\r\n', 'with send part of it to amazon #1\r\n', 50, 50, 1, '', 1, 3, 15, NULL, '', '', 'this is a comment', 3, 'test supplier', 'test1234', 'test001', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Others', 'test with other', 1, 1, '', '1', '2017-03-07', 'Test', 1, 'send_part_of_it_to_amazon', '2017-03-06 15:56:11', NULL, NULL, '2017-03-06 17:48:17'),
-(67, 4, 'with send part of it to amazon #1', 'with send part of it to amazon #1', 50, 50, 1, '', 1, 3, 15, NULL, '', '', 'test comment', 3, 'test supplier', 'KL0001', 'test001', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Others', 'test with other', 1, 1, '', '1', '2017-03-07', 'teset', 1, 'send_part_of_it_to_amazon', '2017-03-06 16:04:41', NULL, NULL, '2017-03-06 17:32:54');
+(67, 4, 'with send part of it to amazon #1', 'with send part of it to amazon #1', 50, 50, 1, '', 1, 3, 15, NULL, '', '', 'test comment', 3, 'test supplier', 'KL0001', 'test001', 0, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Others', 'test with other', 1, 1, '', '1', '2017-03-07', 'teset', 1, 'send_part_of_it_to_amazon', '2017-03-06 16:04:41', NULL, NULL, '2017-03-06 17:32:54'),
+(68, 4, 'this is for Send to amazon#8 ', 'this is for Send to amazon#8', 50, 50, 1, '', 1, 2, NULL, NULL, '', '', 'this is a detailed shipment instruction', 4, 'test supplier', 'LK0001', 'TEST1234', 523.256, '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Others', 'test with other', 1, 1, '', '1', '2017-03-10', 'test ', NULL, 'send_to_amazon', '2017-03-09 07:52:16', NULL, NULL, '2017-03-09 07:56:22'),
+(69, 4, 'send-amazon-group #1', 'send-amazon-group #1', 50, 50, 1, '', 1, 2, NULL, NULL, '', '', 'test comment', 2, 'test supplier', 'KL0001', 'test1234', 523.256, '/dov/comfort_packaging2/webroot/upload/12/files/fallout_lockscreen_2-960x544.jpg', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples', '', 1, 1, '', '1', '2017-03-10', 'Test', 1, 'send_to_amazon', '2017-03-09 09:36:24', NULL, NULL, '2017-03-09 10:03:10'),
+(70, 4, 'for storage supply stash', 'for storage supply stash', 500, 500, 1, '', 1, 1, 0, NULL, '', '', 'for storage supply stash', 3, 'test supplier', 'LK0001', 'test1234', 5232.56, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples,Paper Wrap', '', 1, 1, '', '1', '', '', NULL, 'storage', '2017-03-09 15:43:58', NULL, NULL, '2017-03-09 15:45:56'),
+(71, 4, 'for send to amazon#9', 'for send to amazon#9', 50, 50, 1, '', 1, 2, 0, NULL, '', '', 'test for send to amazon#9', 2, 'test supplier', 'KL0001', 'test1234', 523.256, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Poly Bags,Staples', '', 1, 1, '', '1', '2017-03-10', 'good', 1, 'send_to_amazon', '2017-03-10 15:42:30', '0000-00-00 00:00:00', NULL, '2017-03-10 16:17:56'),
+(72, 4, 'for send part of it to amazon#10', 'for send to amazon#10', 100, 100, 1, '', 1, 3, 20, NULL, '', '', 'for send to amazon#10', 3, 'test supplier', 'LK0001', 'test1234', 1046.51, '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Shrink Wrap', '', 1, 1, '', '1', '2017-03-12', 'FEdex', 1, 'send_part_of_it_to_amazon', '2017-03-10 15:51:48', NULL, NULL, '2017-03-10 16:48:58'),
+(73, 4, 'send to amazon #11', 'send to amazon #11', 50, 50, 1, '', 1, 2, 0, NULL, '', '', 'send to amazon #11', 2, 'test supplier', 'LK0001', 'test1234', 523.256, '', '/dov/comfort_packaging2/webroot/upload/12/files/Screenshot.png', 'Bubble Wrap,Staples', '', 1, 1, '', '1', '2017-03-11', 'Test', 1, 'send_to_amazon', '2017-03-10 16:38:15', '2017-03-10 16:40:58', NULL, '2017-03-10 16:40:58');
 
 -- --------------------------------------------------------
 
@@ -1416,12 +1447,12 @@ ALTER TABLE `groups`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 --
 -- AUTO_INCREMENT for table `inventory_order`
 --
 ALTER TABLE `inventory_order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `invoice`
 --
@@ -1436,12 +1467,12 @@ ALTER TABLE `invoice_details`
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `message_details`
 --
 ALTER TABLE `message_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `pages`
 --
@@ -1491,7 +1522,7 @@ ALTER TABLE `services`
 -- AUTO_INCREMENT for table `shipments`
 --
 ALTER TABLE `shipments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 --
 -- AUTO_INCREMENT for table `shipment_status`
 --
