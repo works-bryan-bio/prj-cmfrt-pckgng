@@ -1,3 +1,31 @@
+<style>
+.message-desc{
+    font-size: 15px;color: #696868;
+}
+.msg-pic{
+    max-width: 95px;
+    border-radius: 500px;
+    margin-left: 40px;
+}
+.comment-pic{
+    max-width: 60px;
+    border-radius: 500px;
+    margin-left: 40px;
+}
+.right{
+    float:right;
+}
+.clr-div{
+    position: relative;
+    left: 0px;
+}
+.text-right{
+    text-align: right;padding-right: 18px;
+}
+.justify{
+    text-align: justify !important;
+}
+</style>
 <?php 
   if( $hdr_user_data->photo != '' ){
       $user_photo = $this->Url->build("/webroot/upload/" . $hdr_user_data->user_id . "/" . $hdr_user_data->photo);            
@@ -5,43 +33,83 @@
       $user_photo = $this->Url->build("/webroot/images/default_user.png");
   }
 ?>
+<div class="row" style="padding-left: 25px;">
+    <div class="col-md-12">
+        <div class="col-md-1 left" style="">
+            <img class="profile-picture msg-pic" src="<?php echo $this->Url->build("/webroot/images/manager_icon.png"); ?>" alt="Member Photo">
+        </div>
+        <div class="col-md-9 left">
+            <h4><span style="margin-right:10px;">></span><strong>This is a test subjectM</strong></h4>
+            <hr/>
+            <div style="margin-left:20px;" class="details">
+                <div class="col-md-7 left clr-div">
+                    <span style="margin-right:10px;">Sent by : <strong>John Smith</strong></span><span style="color: #4ab14a;">&lt;manager@gmail.com&gt;</span>
+                </div>
+                <div class="col-md-2 right text-right">
+                    <i class="fa fa-clock-o" style="margin-right:4px;"></i><span>Mar 14, 2017 17:45:00</span>
+                </div>
+                <br/><br/>
+                <span class="message-desc justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
+                <br/><br/>
 
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<!--
 <h4>
     Subject: <?= $message_header->message_subject; ?>
     <a href="javascript:void(0);" title="Refresh" alt="Refresh" class="btn btn-default btn-refresh-body-message" style="width:50%; display:inline" data-message-id="<?= $message_header->id; ?>" ><i class="fa fa-refresh"></i></a>
 </h4> 
 <br><br>
-
-<div class="box-body chat" id="chat-box">
-    <?php if($message_details->count() == 0) { ?>
-        <div class="text-center" style="padding:15px;">Start discussion now.</div>
-    <?php } ?>  
-    <?php foreach($message_details as $discussion) { ?>
-        <div class="item" style="padding-top:5px;">
-            <!-- <span class="thumb avatar pull-left m-r">
-                <img style="height:50px;" src="<?= $user_photo; ?>" class="dker" alt="...">
-
-            </span> -->
-
-            <p class="message" style="margin-left:0px !important;">
-                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <?= date("M d, Y H:i:s", strtotime($discussion->date_created)) ?></small>
-                    <?php if($hdr_user_data->user->id == $discussion->user_id) { ?>
-                        <b><i>You</i></b>
-                    <?php }else{ ?>
-                        <?php if($discussion->user_group == 2) { ?>
-                            <b><?php echo $discussion->user->user_entities[0]->firstname; ?> <?= $discussion->user->user_entities[0]->lastname; ?></b>
-                        <?php }else{ ?>
-                            <b><?php echo $discussion->message->client->firstname; ?> <?= $discussion->message->client->lastname; ?></b>
-                        <?php } ?>
-                        
-                    <?php } ?>
-                <br><div style="margin-left:20px;"><?= $discussion->message_details; ?></div>
-            </p>
-            <hr>
+-->
+<br/><br/>
+<?php if($message_details->count() == 0) { ?>
+    <!-- <div class="text-center" style="padding:15px;">Start discussion now.</div> -->
+<?php } ?>  
+<?php foreach($message_details as $discussion) { ?>
+<div class="row" style="margin-left: 130px;">
+        <div class="col-md-1 left" style="text-align: right;">
+            <img class="profile-picture comment-pic" src="<?php echo $this->Url->build("/webroot/images/user_icon.jpg"); ?>" alt="Member Photo">
         </div>
-        <div class="clearfix"></div>
-    <?php } ?>                    
+        <div class="col-md-10 left" id="chat-box">
+                <div class="item col-md-9 left" style="padding-top:5px;">
+                    <!-- <span class="thumb avatar pull-left m-r">
+                        <img style="height:50px;" src="<?= $user_photo; ?>" class="dker" alt="...">
+
+                    </span> -->
+
+                    <p class="message" style="margin-left:0px !important;">
+                            <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <?= date("M d, Y H:i:s", strtotime($discussion->date_created)) ?></small>
+                            <?php if($hdr_user_data->user->id == $discussion->user_id) { ?>
+                                <b><i>You</i></b>
+                            <?php }else{ ?>
+                                <?php if($discussion->user_group == 2) { ?>
+                                    <b><?php echo $discussion->user->user_entities[0]->firstname; ?> <?= $discussion->user->user_entities[0]->lastname; ?></b>
+                                <?php }else{ ?>
+                                    <b><?php echo $discussion->message->client->firstname; ?> <?= $discussion->message->client->lastname; ?></b>
+                                <?php } ?>
+                                
+                            <?php } ?>
+                        <br><div style=""><?= $discussion->message_details; ?></div>
+                    </p>
+                    <hr>
+                    <br/>
+                </div>
+                <div class="clearfix"></div>
+                              
+        </div>
 </div>
+<?php } ?>  
 <!-- /.chat -->
 <div class="box-footer" style="margin-top:10px;padding-top:10px">
     <form id="frm-send-message" onsubmit="return false;" data-toggle="validator" role="form">
@@ -51,16 +119,21 @@
 
         </div>
 
-        <div class="input-group">
-            <input class="form-control" placeholder="Type message..." name="message_details" required="required" >
-
-            <!-- <div class="input-group-btn">
-                <button type="button" class="btn btn-default has-ck-finder" title="Attach File"><i class="fa fa-paperclip"></i></button>
-            </div> -->
-            <div class="input-group-btn">
-                <button type="submit" class="btn btn-success btn-send-message" title="Send Message"><i class="fa fa-paper-plane"></i></button>
+        <div class="row" style="margin-left: 35px;">
+            <div class="col-md-1 left">
             </div>
-        
+
+            <div class="col-md-9 left input-group" style="">
+                <input class="form-control" placeholder="Type message..." name="message_details" required="required" >
+
+                <!-- <div class="input-group-btn">
+                    <button type="button" class="btn btn-default has-ck-finder" title="Attach File"><i class="fa fa-paperclip"></i></button>
+                </div> -->
+                <div class="input-group-btn">
+                    <button type="submit" class="btn btn-success btn-send-message" title="Send Message"><i class="fa fa-paper-plane"></i></button>
+                </div>
+            
+            </div>
         </div>
     </form>
 </div>
