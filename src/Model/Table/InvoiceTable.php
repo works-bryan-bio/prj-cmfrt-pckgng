@@ -92,8 +92,8 @@ use Cake\Validation\Validator;
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['shipments_id'], 'Shipments'));
-        $rules->add($rules->existsIn(['clients_id'], 'Clients'));
+        //$rules->add($rules->existsIn(['shipments_id'], 'Shipments'));
+        //$rules->add($rules->existsIn(['clients_id'], 'Clients'));
 
         return $rules;
     }
