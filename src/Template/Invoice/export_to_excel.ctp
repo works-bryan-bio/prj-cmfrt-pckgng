@@ -9,20 +9,29 @@
           <th class="">Status</th>
           <th class="">Invoice Date</th>
           <th class="">Due Date</th>
-          <th class="">Product Services</th>                     
+          <th class="">Product Services</th>      
+          <th class="">Description</th>                     
+          <th class="">Quantity</th>                     
+          <th class="">Rate</th>                     
+          <th class="">Balance Due</th>                                       
+
         </tr>
     </thead>
     <tbody>
         <?php foreach ($invoiceList as $invoice): ?>
         <tr>         
           <td><?= $this->Number->format($invoice->id) ?></td>
-          <td><?= $invoice->has('shipment') ? $this->Html->link($invoice->shipment->id ." - ". $invoice->description, ['controller' => 'Shipments', 'action' => 'view', $invoice->shipment->id]) : '' ?></td>
-          <td><?= $invoice->has('client') ? $this->Html->link($invoice->client->firstname ." ". $invoice->client->lastname , ['controller' => 'Clients', 'action' => 'view', $invoice->client->id]) : '' ?></td>
+          <td><?= $invoice->shipment->id ." - ". $invoice->description ?></td>
+          <td><?= $invoice->client->firstname ." ". $invoice->client->lastname ?></td>
           <td><?= h($invoice->terms) ?></td>
           <td><?php  if($invoice->status == 1) { echo "Pending"; }else{ echo "Completed"; } ?></td>
           <td><?= h($invoice->invoice_date) ?></td>
           <td><?= h($invoice->due_date) ?></td>
           <td><?= h($invoice->product_services) ?></td>
+          <td><?= h($invoice->description) ?></td>
+          <td><?= $this->Number->precision($invoice->quantity,2) ?></td>
+          <td><?= $this->Number->precision($invoice->rate,2) ?></td>
+          <td><?= $this->Number->precision($invoice->balance_due,2) ?></td>
         </tr>
         <?php endforeach; ?>
     </tbody>
