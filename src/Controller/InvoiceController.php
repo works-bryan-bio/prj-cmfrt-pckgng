@@ -43,13 +43,19 @@ class InvoiceController extends AppController
      */
     public function index()
     {
-        $this->paginate = [
-            'contain' => ['Shipments', 'Clients']
-        ];
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data'); 
 
+        $enable_export = false;
+        if( $user_data->user->group_id == 2 || $user_data->user->group_id == 1 ){
+            $enable_export = true;
+        } 
+        
         $invoiceList = $this->Invoice->find('all')
             ->contain(['Shipments', 'Clients'])
         ;        
+
+        $this->set(['enable_export' => $enable_export]);
         $this->set('invoiceList', $invoiceList);
         $this->set('_serialize', ['invoice']);
     }
@@ -233,6 +239,22 @@ class InvoiceController extends AppController
         $clients = $this->Invoice->Clients->find('list', ['limit' => 200]);
         $this->set(compact('invoice', 'shipments', 'clients'));
         $this->set('_serialize', ['invoice']);
+    }
+
+    /**
+     * Export to excel method
+     *
+     * @return download excel
+     */
+    public function export_to_excel()
+    {
+        $invoiceList = $this->Invoice->find('all')
+            ->contain(['Shipments', 'Clients'])
+        ;        
+        
+        $this->set('invoiceList', $invoiceList);
+        $this->set('_serialize', ['invoice']);
+        $this->viewBuilder()->layout('');  
     }
 
 }

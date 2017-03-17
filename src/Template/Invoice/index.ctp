@@ -31,6 +31,9 @@ hr{
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Client'), ['controller' => 'Clients', 'action' => 'add'], ['escape' => false]) ?></li>
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Invoice Details'), ['controller' => 'InvoiceDetails', 'action' => 'index'], ['escape' => false]) ?></li>
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Invoice Detail'), ['controller' => 'InvoiceDetails', 'action' => 'add'], ['escape' => false]) ?></li>
+                <?php if( $enable_export ){ ?>
+                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-file-excel-o"></i> ' . __('Export Data'), ['action' => 'export_to_excel'], ['escape' => false]) ?></li>
+                <?php } ?>
             </ul>
         </div>
         <h1 class="page-header" style="padding-bottom: 25px !important;"><?= __('Groups') ?></h1>
