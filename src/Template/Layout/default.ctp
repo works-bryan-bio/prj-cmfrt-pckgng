@@ -53,7 +53,9 @@
         <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".user">
           <i class="fa fa-cog" style="color: orange;"></i>
         </a>
-      </div>            
+      </div>    
+      
+
       <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">                
         <li class="dropdown" style="height:100%;width: 100%;">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height:100%; width: 100%;">
@@ -77,7 +79,31 @@
             </li>
           </ul>
         </li>
+      </ul> 
+
+       <!-- notification -->        
+      <ul class="nav navbar-nav navbar-notification m-n hidden-xs nav-user user">                
+        <li class="dropdown" style="height:100%;width: 20%;">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height:100%; width: 100%;">
+            <div class="profile-name" style="margin-top: 20px;margin-left: 90px;">
+              <span class="label label-danger total-notification" style="font-size: 16px;"><?php // echo 8; ?></span> 
+            </div>
+          </a>
+          <ul class="dropdown-menu animated fadeInRight" style="width: 200x;">                        
+            <li>
+              <?= $this->Html->link('<i class="fa fa-inbox white"></i> Shipment overdue: <span class="shipment-order-due label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],['escape' => false]); ?>                 
+            </li>            
+           
+            <li class="divider"></li>
+            <li>
+              <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
+Order overdue: <span class="number-of-order-due label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],["escape" => false]); ?>                    
+            </li>
+          </ul>
+        </li>
       </ul>      
+      <!-- notification --> 
+
     </header>
     <section>
       <section class="hbox stretch">

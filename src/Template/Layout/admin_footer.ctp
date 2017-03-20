@@ -28,7 +28,7 @@
             $(".modalImage").colorbox({transition:"fade"});
             refreshShippingPurpose();
             loadVerifyOrderDue();
-
+            loadVerifyDue();
 
             //Datatable
             $('.zero-config-datatable').DataTable({
@@ -585,6 +585,18 @@
             $.post(base_url + "shipments/load_verify_order_due",{},function(o){
                 
                 $('.number-of-order-due').html(o.quantity);
+            },"json");
+
+
+        }
+
+         function loadVerifyDue() {
+               
+            $.post(base_url + "shipments/load_verify_due",{},function(o){
+                
+                $('.shipment-order-due').html(o.shipment_quantity);
+                $('.number-of-order-due').html(o.quantity);
+                $('.total-notification').html(o.total_notification);
             },"json");
 
 

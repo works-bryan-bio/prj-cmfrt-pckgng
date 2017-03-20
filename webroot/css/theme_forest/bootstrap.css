@@ -4555,6 +4555,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     height: 100px;
     width:320px;
   }
+  .navbar-notification {
+    float: right !important;
+    margin-right: -15px;
+    height: 100px;
+    width: 149px;
+  }
   .navbar-right ~ .navbar-right {
     margin-right: 0;
   }

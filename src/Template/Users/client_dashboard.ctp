@@ -40,8 +40,8 @@ table.dataTable{
  <div class="col-lg-4 col-xs-6 block-client">
   <!-- small box -->
   <div class="small-box bg-aqua">
-    <div class="inner">
-      <h3><?php echo $pendingShipments->count(); ?></h3>
+    <div class="inner ">
+      <h3 class="shipment-order-due"><?php //echo $pendingShipments->count(); ?></h3>
 
       <p>Total Pending Shipments</p>
     </div>

@@ -741,4 +741,43 @@ class ShipmentsController extends AppController
         exit;
     }
 
+    public function load_verify_due()
+    {   
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+
+        $per_piece = 0;
+        $this->request->allowMethod(['post']);
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+        $order = $this->InventoryOrder->find('all')
+            ->where([ 'order_status' => 'Pending' ])
+            ->andWhere(['date_created <=' => date('Y-m-d')])
+            ->count();
+        
+      if($user_data->user->group_id == 4){
+         $shipment = $this->Shipments->find('all')
+            ->where([ 'status' => 1 ])
+            ->andWhere(['client_id' => $user_data->id])
+            ->count();
+
+      }else{
+         $shipment = $this->Shipments->find('all')
+            ->where([ 'status' => 1 ])
+            ->count();
+      }
+
+
+      // debug($shipment);
+      // debug($order);
+      // exit;
+       
+
+        $return['quantity'] = $order;
+        $return['shipment_quantity'] = $shipment;
+        $return['total_notification'] = $order + $shipment;
+        echo json_encode($return);
+        exit;
+    }
+
+
 }
