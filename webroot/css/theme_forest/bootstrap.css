@@ -3587,6 +3587,28 @@ tbody.collapse.in {
 .dropdown-toggle:focus {
   outline: 0;
 }
+.dropdown-notification{
+    position: relative;
+    top: 20px;
+    right: 160px;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    font-size: 14px;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    -webkit-background-clip: padding-box;
+            background-clip: padding-box;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
 .dropdown-menu {
   position: absolute;
   top: 100%;
@@ -4553,13 +4575,13 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     float: right !important;
     margin-right: -15px;
     height: 100px;
-    width:320px;
+    max-width:350px;
   }
   .navbar-notification {
     float: right !important;
     margin-right: -15px;
     height: 100px;
-    width: 149px;
+    width: 54px;
   }
   .navbar-right ~ .navbar-right {
     margin-right: 0;

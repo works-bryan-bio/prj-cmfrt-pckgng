@@ -54,7 +54,7 @@
           <i class="fa fa-cog" style="color: orange;"></i>
         </a>
       </div>    
-      
+   
 
       <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">                
         <li class="dropdown" style="height:100%;width: 100%;">
@@ -66,7 +66,7 @@
               <span style="font-size: 16px;"><?php echo $hdr_user_data->firstname; ?></span> <b class="caret"></b>
             </div>
           </a>
-          <ul class="dropdown-menu animated fadeInRight" style="width: 321px;">                        
+          <ul class="dropdown-menu animated fadeInRight" style="width: 254px;">                        
             <li>
               <?= $this->Html->link('<i class="fa fa-fw fa-user white"></i> ' . __('Profile'),["controller" => "profile", "action" => "index"],['escape' => false]); ?>                 
             </li>            
@@ -80,16 +80,17 @@
           </ul>
         </li>
       </ul> 
+      
 
-       <!-- notification -->        
-      <ul class="nav navbar-nav navbar-notification m-n hidden-xs nav-user user">                
+    <!-- notification -->        
+      <ul class="navbar-nav navbar-notification m-n hidden-xs nav-user user" style="padding-left: 10px;margin-bottom: 0;list-style: none;">                
         <li class="dropdown" style="height:100%;width: 20%;">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="height:100%; width: 100%;">
-            <div class="profile-name" style="margin-top: 20px;margin-left: 90px;">
+            <div class="profile-name" style="margin-top: 20px;">
               <span class="label label-danger total-notification" style="font-size: 16px;"><?php // echo 8; ?></span> 
             </div>
           </a>
-          <ul class="dropdown-menu animated fadeInRight" style="width: 200x;">                        
+          <ul class="dropdown-menu animated fadeInRight" style="width: 200x;position: relative !important;top: 20px !important;left: -155px !important;">                        
             <li>
               <?= $this->Html->link('<i class="fa fa-inbox white"></i> Shipment overdue: <span class="shipment-order-due label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],['escape' => false]); ?>                 
             </li>            
@@ -103,7 +104,6 @@ Order overdue: <span class="number-of-order-due label label-danger"></span> ' . 
         </li>
       </ul>      
       <!-- notification --> 
-
     </header>
     <section>
       <section class="hbox stretch">
