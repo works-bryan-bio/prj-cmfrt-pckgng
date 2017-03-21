@@ -17,7 +17,7 @@
     <tbody>
         <tr>
             <td><?= __('Shipment') ?></th>
-            <td><?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id]) : '' ?></td>
+            <td><?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id . " - " . $inventory->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id]) : '' ?></td>
         </tr>
         <tr>
             <th><?= __('Last Sent Order Date') ?></th>
@@ -55,6 +55,12 @@
             <th><?= __('Modified') ?></th>
             <td><?= h($inventory->modified) ?></td>
         </tr>
+        <?php if($inventory->shipment->status == 2){?>
+        <tr>
+            <th><?= __('Completed') ?></th>
+            <td><?= h($inventory->shipment->date_completed) ?></td>
+        </tr>
+        <?php }?>
     </tbody>
     </table>
 

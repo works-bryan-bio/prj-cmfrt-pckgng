@@ -597,6 +597,7 @@
                 $('.shipment-order-due').html(o.shipment_quantity);
                 $('.number-of-order-due').html(o.quantity);
                 $('.total-notification').html(o.total_notification);
+               
             },"json");
 
 

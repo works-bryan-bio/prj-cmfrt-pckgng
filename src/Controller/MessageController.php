@@ -179,7 +179,7 @@ class MessageController extends AppController
         $this->viewBuilder()->layout('');
         $id = $this->request->data['message_id'];
         $message_header = $this->Message->get($id, [
-            'contain' => []
+            'contain' => ['Clients']
         ]);
 
         $this->MessageDetails = TableRegistry::get('MessageDetails');

@@ -39,19 +39,17 @@
             <img class="profile-picture msg-pic" src="<?php echo $this->Url->build("/webroot/images/manager_icon.png"); ?>" alt="Member Photo">
         </div>
         <div class="col-md-9 left">
-            <h4><span style="margin-right:10px;">></span><strong>This is a test subjectM</strong></h4>
+            <h4><span style="margin-right:10px;">></span><strong><?php echo $message_header->message_subject; ?></strong></h4>
             <hr/>
             <div style="margin-left:20px;" class="details">
                 <div class="col-md-7 left clr-div">
-                    <span style="margin-right:10px;">Sent by : <strong>John Smith</strong></span><span style="color: #4ab14a;">&lt;manager@gmail.com&gt;</span>
+                    <span style="margin-right:10px;">Sent by : <strong><?php echo $message_header->client->firstname ." ". $message_header->client->lastname; ?></strong></span><span style="color: #4ab14a;">&lt;<?php echo $message_header->client->email; ?>&gt;</span>
                 </div>
-                <div class="col-md-2 right text-right">
-                    <i class="fa fa-clock-o" style="margin-right:4px;"></i><span>Mar 14, 2017 17:45:00</span>
+                <div class="col-md-3 right text-right">
+                    <i class="fa fa-clock-o" style="margin-right:4px;"></i><span> <?php echo date("M d, Y h:i a", strtotime($message_header->date_created)); ?> </span>
                 </div>
                 <br/><br/>
-                <span class="message-desc justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>
-                <br/><br/>
-
+             
             </div>
 
         </div>
@@ -59,7 +57,10 @@
 </div>
 
 
+<?php 
+   // debug($message_header);
 
+?>
 
 
 

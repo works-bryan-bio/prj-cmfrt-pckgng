@@ -122,6 +122,13 @@ table{
             <th><?= __('Modified') ?></th>
             <td><?= h($shipment->modified)   ?></td>
         </tr>
+        <?php if($shipment->status == 2){ ?>
+        <tr>
+            <th><?= __('Completed') ?></th>
+            <td><?= h($shipment->date_completed)   ?></td>
+        </tr> 
+        <?php } ?>
+
     </tbody>
     </table>
         <?php $stat = $shipment->status; ?>

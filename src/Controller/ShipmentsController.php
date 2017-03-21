@@ -480,8 +480,11 @@ class ShipmentsController extends AppController
             $this->Flash->success(__('Shipment has been successfully sent to inventory.'));  
             $shipment = $this->Shipments->patchEntity($shipment, $data);
             if($data['send_option'] == "send_to_amazon"){
+
+
                 $shipment->status = 4;
                 $shipment->date_completed = date('Y-m-d H:i:s');
+
             }else{
                 $shipment->status = 3;
             }
@@ -609,7 +612,21 @@ class ShipmentsController extends AppController
                     ->viewVars(['edata' => $email_content])
                     ->send();
 
+                if($data['amazon_confirmation_receipt']){    
                 // send to client    
+                $recipient2 = $client_email;        
+                $email_smtp = new Email('default');
+                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                    ->template('employee_received')
+                    ->emailFormat('html')
+                    ->to($recipient2)                                                                                                     
+                    ->subject('Comfort Packaging : your amazon shipment was sent on: '. date("M d, Y", strtotime(  $data['amazon_shipment_date']))  )
+                    ->viewVars(['edata' => $email_content])
+                    ->send();
+
+                
+                }else{
+                 // send to client    
                 $recipient2 = $client_email;        
                 $email_smtp = new Email('default');
                 $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
@@ -618,7 +635,12 @@ class ShipmentsController extends AppController
                     ->to($recipient2)                                                                                                     
                     ->subject('Comfort Packaging : Shipment received')
                     ->viewVars(['edata' => $email_content])
-                    ->send();      
+                    ->send();  
+
+                }       
+
+
+
         } else {
             $this->Flash->error(__('The shipment could not be saved. Please, try again.'));
         }
@@ -749,10 +771,23 @@ class ShipmentsController extends AppController
         $per_piece = 0;
         $this->request->allowMethod(['post']);
         $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+    
+
+     if($user_data->user->group_id == 4){
         $order = $this->InventoryOrder->find('all')
             ->where([ 'order_status' => 'Pending' ])
             ->andWhere(['date_created <=' => date('Y-m-d')])
-            ->count();
+            ->andWhere(['client_id' => $user_data->id])
+            ->count();   
+
+      }else{
+          $order = $this->InventoryOrder->find('all')
+            ->where([ 'order_status' => 'Pending' ])
+            ->andWhere(['date_created <=' => date('Y-m-d')])
+            ->count(); 
+      }  
+
+       
         
       if($user_data->user->group_id == 4){
          $shipment = $this->Shipments->find('all')
