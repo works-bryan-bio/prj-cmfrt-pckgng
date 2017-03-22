@@ -43,16 +43,22 @@
                 <li class="<?= $nav_selected["custom_software"] ?>"><a href="<?= $base_url; ?>custom_software">Our Custom Software</a></li>
                 <li><a href="<?= $base_url; ?>users/login">Customer Login</a></li>
                 <li>
-                    <form class="cp-search-box" role="search">
+                    <?= $this->Form->create(null,[
+                                'type' => 'post',  
+                                'class' => 'cp-search-box',
+                                'role' => 'search',              
+                                'url' => ['controller' => 'Pages', 'action' => 'search']
+                            ]
+                        ) 
+                    ?>                    
                         <div class="input-group">
                             <div class="input-group-btn">
                                 <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                             </div>
-                            <input type="text" class="form-control" placeholder="Search">
+                            <input type="text" class="form-control" placeholder="Search" name="query">
                         </div>
 
-                    </form>
-
+                    <?= $this->Form->end() ?>
                 </li>
             </ul>
         </div> <!--/.nav-collapse -->

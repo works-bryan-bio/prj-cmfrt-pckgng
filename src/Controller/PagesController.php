@@ -29,7 +29,7 @@ class PagesController extends AppController
     
         // Add the selected sidebar-menu 'active' class
         // Valid value can be found in NavigationSelectorHelper
-        $this->Auth->allow(['frontview','contact_us','ajax_email_inquiry','ajax_email_newsletter']);
+        $this->Auth->allow(['frontview','contact_us','ajax_email_inquiry','ajax_email_newsletter','search']);
         $nav_selected = ["pages"];
         $this->set('nav_selected', $nav_selected);
 
@@ -293,5 +293,23 @@ class PagesController extends AppController
 
         echo json_encode($return);
         exit;
+    }
+
+    /**
+     * Frontend : Search method
+     *
+     * @return void
+     */
+    public function search()
+    {   
+        $pages = array();
+        if ($this->request->is('post')) {
+            $data  = $this->request->data;
+            $pages = $this->Pages->find('all')
+                ->where(['Pages.body LIKE' => '%' . $data['query'] . '%'])
+            ; 
+        }        
+        $this->set(['pages' => $pages]);
+        $this->viewBuilder()->layout('frontend/default');  
     }
 }
