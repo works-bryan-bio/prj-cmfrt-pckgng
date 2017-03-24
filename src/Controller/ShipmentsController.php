@@ -7,6 +7,8 @@ use Cake\Network\Exception\NotFoundException;
 use Cake\Collection\Collection;
 use Cake\ORM\TableRegistry;
 use Cake\Mailer\Email;
+use Cake\Datasource\ConnectionManager;
+
 
 /**
  * Shipments Controller
@@ -801,15 +803,42 @@ class ShipmentsController extends AppController
             ->count();
       }
 
+      $conn = ConnectionManager::get('default');
+      if($user_data->user->group_id == 4){
+        $sql = 'SELECT * ,(SELECT message_details.user_group FROM message_details WHERE message_details.message_id = message.id ORDER BY message_details.date_created DESC LIMIT 1 ) AS user_group FROM message WHERE message.client_id = '.$user_data->id .' ';
 
-      // debug($shipment);
-      // debug($order);
-      // exit;
-       
+         $stmt       = $conn->query($sql);        
+         $message_count = $stmt->fetchAll('assoc');
+
+         $message = 0;
+         foreach ($message_count as $value) {
+            if($value['user_group'] == 2){
+                $message++;
+            }
+         }
+      }else{
+
+         $sql = 'SELECT * ,(SELECT message_details.user_group FROM message_details WHERE message_details.message_id = message.id ORDER BY message_details.date_created DESC LIMIT 1 ) AS user_group FROM message';
+
+         $stmt       = $conn->query($sql);        
+         $message_count = $stmt->fetchAll('assoc');
+
+         $message = 0;
+         foreach ($message_count as $value) {
+            if($value['user_group'] == 4){
+                $message++;
+            }
+         }
+      }
 
         $return['quantity'] = $order;
         $return['shipment_quantity'] = $shipment;
-        $return['total_notification'] = $order + $shipment;
+        $return['message'] = $message;
+        if($user_data->user->group_id == 3){
+            $return['total_notification'] = $order + $shipment;
+        }else{
+            $return['total_notification'] = $order + $shipment + $message;     
+        }
         echo json_encode($return);
         exit;
     }

@@ -100,6 +100,13 @@
               <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
 Order overdue: <span class="number-of-order-due label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],["escape" => false]); ?>                    
             </li>
+            <?php if($hdr_user_data->user->group_id != 3){ ?>
+            <li class="divider"></li>
+            <li>
+              <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
+Unanswered Messages: <span class="number-of-message label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],["escape" => false]); ?>                    
+            </li>
+            <?php }?>
           </ul>
         </li>
       </ul>      
