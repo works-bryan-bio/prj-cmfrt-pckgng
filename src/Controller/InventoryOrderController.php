@@ -366,4 +366,58 @@ class InventoryOrderController extends AppController
         }
         return $this->redirect(['controller' => 'inventory', 'action' => 'admin']);
     }
+
+    /**
+     * Bundle Add method
+     *
+     * @return void Redirects on successful add, renders view otherwise.
+     */
+    public function bundle_add()
+    {
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+        $client_email = $user_data->email;
+
+        if ($this->request->is('post')) {
+            $data = $this->request->data;            
+            $this->request->data['client_id'] = $user_data->id;
+            foreach( $data['bundle'] as $b ){
+                if( $b['shipment_id'] > 0 && $b['quantity'] > 0 ){
+                    $this->request->data['shipment_id']    = $b['shipment_id'];
+                    $this->request->data['order_quantity'] = $b['quantity'];
+                    $this->request->data['order_status']   = "Pending";
+
+                    $inventoryOrder = $this->InventoryOrder->newEntity();        
+                    $inventoryOrder = $this->InventoryOrder->patchEntity($inventoryOrder, $this->request->data);
+                                        
+                    if ($result = $this->InventoryOrder->save($inventoryOrder)) {
+                        $email_content = ['client' => $user_data, 'shipment_id' => $b['shipment_id'], 'order_id' => $result->id];
+                        /*$recipient = "comfortpackaging@gmail.com";        
+                        $email_smtp = new Email('default');
+                        $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                            ->template('order')
+                            ->emailFormat('html')
+                            ->to($recipient)                                                                                                     
+                            ->subject('Comfort Packaging : Shipment Add order')
+                            ->viewVars(['edata' => $email_content])
+                            ->send();  
+
+                        //sent to Client 
+                        $recipient = $client_email;        
+                        $email_smtp = new Email('default');
+                        $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                            ->template('order')
+                            ->emailFormat('html')
+                            ->to($recipient)                                                                                                     
+                            ->subject('Comfort Packaging : Shipment Add order')
+                            ->viewVars(['edata' => $email_content])
+                            ->send();*/     
+                    }
+                }                
+            }
+            $this->Flash->success(__('The inventory order has been saved.'));
+            return $this->redirect(['action' => 'index']);
+        }
+        return $this->redirect(['action' => 'index']);
+    }
 }

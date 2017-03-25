@@ -33,6 +33,7 @@ hr{
             <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn" style="right: 0 !important;left: -1px !important;top: 32px !important;width: 179px !important;">          
                 <li role="presentation">
                   <a href="javascript:void(0);" id="btn-new-inventory-order-accordion" ><i class="fa fa-plus"></i> New Inventory Order</a>
+                  <a href="javascript:void(0);" id="btn-new-bundle-inventory-order-accordion" ><i class="fa fa-plus"></i> New Bundle Inventory Order</a>
                   <!--<?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Inventory Order'), ['controller' => 'shipments' , 'action' => 'client_add'], ['escape' => false]) ?></li>-->
                        <!--  <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Shipments'), ['controller' => 'Shipments', 'action' => 'index'], ['escape' => false]) ?></li>
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Shipment'), ['controller' => 'Shipments', 'action' => 'add'], ['escape' => false]) ?></li> -->
@@ -42,6 +43,7 @@ hr{
     </div>
 </div>
 <div id="send-new-order-container" class="send-new-order-container" style="display:none;"><?php include("accordion_add.ctp"); ?></div>
+<div id="send-new-bundle-order-container" class="send-new-bundle-order-container" style="display:none;"><?php include("accordion_bundle_add.ctp"); ?></div>
  <div class="ribbon-section">
       <div class="ribbon-black" style="padding-top:0px !important;">
           <ul class="nav nav-tabs nav-justified">

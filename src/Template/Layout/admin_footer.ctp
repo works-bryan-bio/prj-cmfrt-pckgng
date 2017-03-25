@@ -404,12 +404,23 @@
                 $('.send-new-order-container').show();
             });
 
+            $('#btn-new-bundle-inventory-order-accordion').click(function(){
+                $('#inp_shipment_id').val($('#all_shipment').val());
+                $('.single-shipment-desc').hide();
+                $('#dropdown-bundle-shipments-list').show();
+                $('.send-new-bundle-order-container').show();
+            });
+
             $('#all_shipment').change(function(){
                 $('#inp_shipment_id').val($(this).val());
             });
 
             $('.btn-hide-order-form').click(function(){
                 $('.send-new-order-container').hide();
+            });
+
+            $('.btn-hide-bundle-order-form').click(function(){
+                $('.send-new-bundle-order-container').hide();
             });
 
             $('.rbtn-correct-quantity').change(function(){
