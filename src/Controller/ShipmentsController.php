@@ -794,12 +794,14 @@ class ShipmentsController extends AppController
       if($user_data->user->group_id == 4){
          $shipment = $this->Shipments->find('all')
             ->where([ 'status' => 1 ])
+            //->orWhere([ 'status' => 4 ])
             ->andWhere(['client_id' => $user_data->id])
             ->count();
 
       }else{
          $shipment = $this->Shipments->find('all')
             ->where([ 'status' => 1 ])
+            //->orWhere([ 'status' => 4 ])
             ->count();
       }
 
@@ -831,11 +833,28 @@ class ShipmentsController extends AppController
          }
       }
 
+      
+      if($user_data->user->group_id != 4){
+          $date = date('Y-m-d');
+          $sql_send_to_amazon = 'SELECT * FROM `shipments` WHERE status IN(3,4) AND shipping_purpose_id = 2 AND  `amazon_shipment_date` <= "'. $date .'" ';
+      
+          $stmt       = $conn->query($sql_send_to_amazon);        
+          $send_to_amazon_count = $stmt->fetchAll('assoc');
+          $amazon_count = 0;
+          foreach ($send_to_amazon_count as $value) {
+                    $amazon_count++;
+          }
+
+      }else{
+          $amazon_count = 0;
+      }
+
         $return['quantity'] = $order;
         $return['shipment_quantity'] = $shipment;
         $return['message'] = $message;
+        $return['amazon_count'] = $amazon_count;
         if($user_data->user->group_id == 3){
-            $return['total_notification'] = $order + $shipment;
+            $return['total_notification'] = $order + $shipment + $amazon_count;
         }else{
             $return['total_notification'] = $order + $shipment + $message;     
         }

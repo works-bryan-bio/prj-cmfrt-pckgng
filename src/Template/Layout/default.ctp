@@ -92,7 +92,7 @@
           </a>
           <ul class="dropdown-menu animated fadeInRight" style="width: 200x;position: relative !important;top: 20px !important;left: -155px !important;">                        
             <li>
-              <?= $this->Html->link('<i class="fa fa-inbox white"></i> Shipment overdue: <span class="shipment-order-due label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],['escape' => false]); ?>                 
+              <?= $this->Html->link('<i class="fa fa-inbox white"></i> Shipment overdue: <span class="shipment-order-due label label-danger"></span> ' . __(''),["controller" => "users", "action" => "user_shipment_overdue_dashboard"],['escape' => false]); ?>                 
             </li>            
            
             <li class="divider"></li>
@@ -105,6 +105,14 @@ Order overdue: <span class="number-of-order-due label label-danger"></span> ' . 
             <li>
               <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
 Unanswered Messages: <span class="number-of-message label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],["escape" => false]); ?>                    
+            </li>
+            <?php }?>
+
+            <?php if($hdr_user_data->user->group_id != 4){ ?>
+            <li class="divider"></li>
+            <li>
+              <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
+For send to amazon: <span class="number-of-amazon label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],["escape" => false]); ?>                    
             </li>
             <?php }?>
           </ul>

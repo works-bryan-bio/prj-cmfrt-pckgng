@@ -604,12 +604,11 @@
          function loadVerifyDue() {
                
             $.post(base_url + "shipments/load_verify_due",{},function(o){
-                
                 $('.shipment-order-due').html(o.shipment_quantity);
                 $('.number-of-order-due').html(o.quantity);
                 $('.number-of-message').html(o.message);
                 $('.total-notification').html(o.total_notification);
-               
+                $('.number-of-amazon').html(o.amazon_count);
             },"json");
 
 

@@ -159,6 +159,7 @@ class UsersController extends AppController
             ->where(['Shipments.status' => 1])
             ->orWhere(['Shipments.status' => 4])            
         ;
+       
 
         $completedShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
@@ -185,6 +186,55 @@ class UsersController extends AppController
 
         $this->set('page_title', 'Dashboard');
     }   
+
+      /**
+     * User Dashboard method     
+     * @return void
+     */
+    public function user_shipment_overdue_dashboard()
+    {        
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Inventory = TableRegistry::get('Inventory');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+
+        $pendingShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 1])
+            ->orWhere(['Shipments.status' => 4])            
+        ;
+       
+
+        $completedShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 2])            
+        ;
+
+        $receivedAndStoredShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 3])         
+        ;
+
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Pending'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        $shipment_overdue = $this->Shipments->find('all')
+            ->contain(['Clients','ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
+            ->where([ 'status' => 1 ]);
+         
+
+        $this->set([
+            'pendingShipments' => $pendingShipments,
+            'completedShipments' => $completedShipments,
+            'receivedAndStoredShipments' => $receivedAndStoredShipments,
+            'inventory_order' => $inventory_order,
+            'shipment_overdue' => $shipment_overdue
+        ]);
+
+        $this->set('page_title', 'Dashboard');
+    }
 
     /**
      * View method     
