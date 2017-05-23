@@ -232,6 +232,9 @@ class ShipmentsController extends AppController
 
         if ($this->request->is('post')) {         
 
+            if(!isset($this->request->data['is_correct_quantity'])){
+                $this->request->data['is_correct_quantity'] = 0;
+            }
 
             $this->request->data['client_id'] = $user_data->id;
             $this->request->data['status']    = 1;
@@ -271,8 +274,8 @@ class ShipmentsController extends AppController
                 $email_content = ['shipment_details' => $this->request->data, 'client' => $user_data, 'shipment_id' => $result->id];
 
 
-
-                $recipient = "comfortpackaging@gmail.com";        
+                $recipient = "rossel.dev@gmail.com";
+                //$recipient = "comfortpackaging@gmail.com";        
                 $email_smtp = new Email('default');
                 $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
                     ->template('shipment')

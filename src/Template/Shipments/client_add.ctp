@@ -146,7 +146,7 @@
 
                         echo "
                         <div class='form-group combine-with-group hidden'>
-                            <label for='combine_with_id' class='col-sm-2 control-label'>" . __('Client Pending Shipments') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Select Pending Shipments on the list' ></i></span>
+                            <label for='combine_with_id' class='col-sm-2 control-label'>" . __('Client Shipments') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Select Shipments on the list' ></i></span>
                             <div class='col-sm-6'>";
                              echo $this->Form->input('combine_with_id', ['class' => 'combine_with_id form-control', 'id' => 'combine_with_id', 'label' => false, 'options' => $optionPendingShipments]);                 
                         echo " </div></div>";
