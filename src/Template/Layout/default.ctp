@@ -98,13 +98,13 @@
             <li class="divider"></li>
             <li>
               <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
-Order overdue: <span class="number-of-order-due label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],["escape" => false]); ?>                    
+Order overdue: <span class="number-of-order-due label label-danger"></span> ' . __(''),["controller" => "users", "action" => "user_order_overdue_dashboard"],["escape" => false]); ?>                    
             </li>
             <?php if($hdr_user_data->user->group_id != 3){ ?>
             <li class="divider"></li>
             <li>
               <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
-Unanswered Messages: <span class="number-of-message label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],["escape" => false]); ?>                    
+Unanswered Messages: <span class="number-of-message label label-danger"></span> ' . __(''),["controller" => "message", "action" => ""],["escape" => false]); ?>                    
             </li>
             <?php }?>
 
@@ -112,7 +112,7 @@ Unanswered Messages: <span class="number-of-message label label-danger"></span> 
             <li class="divider"></li>
             <li>
               <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
-For send to amazon: <span class="number-of-amazon label label-danger"></span> ' . __(''),["controller" => "", "action" => ""],["escape" => false]); ?>                    
+For send to amazon: <span class="number-of-amazon label label-danger"></span> ' . __(''),["controller" => "users", "action" => "user_send_to_amazon_dashboard"],["escape" => false]); ?>                    
             </li>
             <?php }?>
           </ul>

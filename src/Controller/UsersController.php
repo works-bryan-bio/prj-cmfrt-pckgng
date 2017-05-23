@@ -6,6 +6,7 @@ use Cake\ORM\TableRegistry;
 use Cake\Event\Event;
 use Cake\Network\Exception\NotFoundException;
 use Cake\Routing\Router;
+use Cake\Datasource\ConnectionManager;
 /**
  * Users Controller
  *
@@ -41,7 +42,7 @@ class UsersController extends AppController
         }
         $this->set('nav_selected', $nav_selected);
 
-        //$this->Auth->allow();
+        $this->Auth->allow();
     }
 
     /**
@@ -222,15 +223,237 @@ class UsersController extends AppController
 
         $shipment_overdue = $this->Shipments->find('all')
             ->contain(['Clients','ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
-            ->where([ 'status' => 1 ]);
+            ->where([ 'shipments.status' => 1 ]);
          
+        
 
+         
+            
         $this->set([
             'pendingShipments' => $pendingShipments,
             'completedShipments' => $completedShipments,
             'receivedAndStoredShipments' => $receivedAndStoredShipments,
             'inventory_order' => $inventory_order,
             'shipment_overdue' => $shipment_overdue
+        ]);
+
+        $this->set('page_title', 'Dashboard');
+    }
+
+      /**
+     * User Dashboard method     
+     * @return void
+     */
+    public function user_order_overdue_dashboard()
+    {        
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Inventory = TableRegistry::get('Inventory');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+
+        $pendingShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 1])
+            ->orWhere(['Shipments.status' => 4])            
+        ;
+       
+
+        $completedShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 2])            
+        ;
+
+        $receivedAndStoredShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 3])         
+        ;
+
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Pending'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+         $order_overdue = $this->InventoryOrder->find('all')
+            ->contain(['Clients', 'Shipments'])
+            ->where([ 'order_status' => 'Pending' ])
+            ->andWhere(['date_created <=' => date('Y-m-d')])
+            ; 
+         
+       
+        
+        // foreach ($order_overdue as $order_overdue) {
+        //     debug($order_overdue);
+        //     exit;
+        // }
+
+         
+            
+        $this->set([
+            'pendingShipments' => $pendingShipments,
+            'completedShipments' => $completedShipments,
+            'receivedAndStoredShipments' => $receivedAndStoredShipments,
+            'inventory_order' => $inventory_order,
+            'order_overdue' => $order_overdue
+        ]);
+
+        $this->set('page_title', 'Dashboard');
+    }
+
+      /**
+     * User Dashboard method     
+     * @return void
+     */
+    public function user_unanswered_messages_dashboard()
+    {        
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Inventory = TableRegistry::get('Inventory');
+        $this->Message = TableRegistry::get('Message');
+
+        $pendingShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 1])
+            ->orWhere(['Shipments.status' => 4])            
+        ;
+       
+        $completedShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 2])            
+        ;
+
+        $receivedAndStoredShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 3])         
+        ;
+
+       
+         $conn = ConnectionManager::get('default');
+        if($user_data->user->group_id == 4){
+            echo "test";
+            $sql = 'SELECT * ,(SELECT message_details.user_group FROM message_details WHERE message_details.message_id = message.id ORDER BY message_details.date_created DESC LIMIT 1 ) AS user_group FROM message WHERE message.client_id = '.$user_data->id .' ';
+
+            $stmt       = $conn->query($sql);        
+            $message_count = $stmt->fetchAll('assoc');
+
+            $message = 0;
+            foreach ($message_count as $value) {
+                if($value['user_group'] == 2){
+                    $message++;
+                }
+            }
+        }else{
+
+            $sql = 'SELECT * ,(SELECT message_details.user_group FROM message_details WHERE message_details.message_id = message.id ORDER BY message_details.date_created DESC LIMIT 1 ) AS user_group FROM message';
+
+            $stmt       = $conn->query($sql);        
+            $message_count = $stmt->fetchAll('assoc');
+
+            $message = 0;
+            foreach ($message_count as $value) {
+                if($value['user_group'] == 4){
+                    $message++;
+                }
+            }
+        }
+
+        debug($message_count);
+        exit;
+
+
+
+         // $order_overdue = $this->InventoryOrder->find('all')
+         //    ->contain(['Clients', 'Shipments'])
+         //    ->where([ 'order_status' => 'Pending' ])
+         //    ->andWhere(['date_created <=' => date('Y-m-d')])
+         //    ; 
+         
+       
+        
+        // foreach ($order_overdue as $order_overdue) {
+        //     debug($order_overdue);
+        //     exit;
+        // }
+
+         
+            
+        $this->set([
+            'pendingShipments' => $pendingShipments,
+            'completedShipments' => $completedShipments,
+            'receivedAndStoredShipments' => $receivedAndStoredShipments,
+            'inventory_order' => $inventory_order,
+            'order_overdue' => $order_overdue
+        ]);
+
+        $this->set('page_title', 'Dashboard');
+    }
+
+
+        /**
+     * User Dashboard method     
+     * @return void
+     */
+    public function user_send_to_amazon_dashboard()
+    {        
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->Inventory = TableRegistry::get('Inventory');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+        $conn = ConnectionManager::get('default');
+
+        $pendingShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 1])
+            ->orWhere(['Shipments.status' => 4])            
+        ;
+       
+
+        $completedShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 2])            
+        ;
+
+        $receivedAndStoredShipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 3])         
+        ;
+
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Pending'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+          $date = date('Y-m-d');
+          // $sql_send_to_amazon = 'SELECT * FROM `shipments` WHERE status IN(3,4) AND shipping_purpose_id = 2 AND  `amazon_shipment_date` <= "'. $date .'" ';
+          // echo $sql_send_to_amazon
+          // $stmt       = $conn->query($sql_send_to_amazon);        
+          // $send_to_amazon_count = $stmt->fetchAll('assoc');
+
+          $ids = array('3','4');
+         $send_to_amazon = $this->Shipments->find('all')
+            ->contain(['Clients', 'ShippingCarriers', 'ShippingServices', 'ShippingPurposes'])
+            ->where(['Shipments.status IN' => $ids])
+            ->andWhere(['Shipments.shipping_purpose_id' => 2])
+            ->andWhere(['Shipments.amazon_shipment_date <' => $date])
+         ;
+
+          //debug($send_to_amazon);
+            // exit; 
+       
+        
+        foreach ($send_to_amazon as $sta) {
+            debug($sta);
+           // exit;
+        }
+
+         exit;
+            
+        $this->set([
+            'pendingShipments' => $pendingShipments,
+            'completedShipments' => $completedShipments,
+            'receivedAndStoredShipments' => $receivedAndStoredShipments,
+            'inventory_order' => $inventory_order,
+            'send_to_amazon' => $send_to_amazon
         ]);
 
         $this->set('page_title', 'Dashboard');

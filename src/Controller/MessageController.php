@@ -7,7 +7,7 @@ use Cake\Network\Exception\NotFoundException;
 use Cake\Collection\Collection;
 use Cake\ORM\TableRegistry;
 use Cake\Mailer\Email;
-
+use Cake\Datasource\ConnectionManager;
 /**
  * Message Controller
  *
@@ -161,14 +161,37 @@ class MessageController extends AppController
         $user_data = $session->read('User.data'); 
         $message_header = array();
         $is_manager = false;        
+
+
+          $conn = ConnectionManager::get('default');
+        
+           
+           
+
+
         if( isset($user_data) ){
             if( $user_data->user->group_id == 2 ){ //Manager
                 $is_manager = true;
                 $message_header = $this->Message->find('all')
                     ->contain(['Clients'])
                     ->order(['Message.date_created' => 'DESC']);
+
+                $sql = 'SELECT * , message.id AS m_id , clients.id AS c_id  ,(SELECT message_details.user_id FROM message_details WHERE message_details.message_id = message.id ORDER BY message_details.date_created DESC LIMIT 1 ) AS last_user_id FROM message LEFT JOIN clients ON  clients.id = message.client_id ORDER BY message.date_created DESC ';
+
+                    $stmt       = $conn->query($sql);        
+                    $message_header = $stmt->fetchAll('assoc');                    
+                  
+
             }elseif( $user_data->user->group_id == 4 ){ //Client
-                $message_header = $this->Message->find('all')->where(['Message.client_id' => $user_data->id])->order(['Message.date_created' => 'DESC']);
+              //  $message_header = $this->Message->find('all')->where(['Message.client_id' => $user_data->id])->order(['Message.date_created' => 'DESC']);
+
+                 $sql = 'SELECT * , message.id AS m_id , clients.id AS c_id  ,(SELECT message_details.user_id FROM message_details WHERE message_details.message_id = message.id ORDER BY message_details.date_created DESC LIMIT 1 ) AS last_user_id FROM message LEFT JOIN clients ON  clients.id = message.client_id WHERE message.client_id = '.$user_data->id .' ORDER BY message.date_created DESC ';
+
+        
+                    $stmt       = $conn->query($sql);        
+                    $message_header = $stmt->fetchAll('assoc');
+                    
+                   
             }
         }
         $this->set(['message_header' => $message_header, 'is_manager' => $is_manager]);
@@ -186,7 +209,7 @@ class MessageController extends AppController
         $message_details = $this->MessageDetails->find('all')
             ->contain(['Message' => ['Clients'], 'Users' => ['UserEntities'] ])
             ->where(['MessageDetails.message_id' => $id])
-            ->order(['MessageDetails.date_created' => 'DESC']);
+            ->order(['MessageDetails.date_created' => 'ASC']);
 
         $this->set(['message_header' => $message_header, 'message_details' => $message_details]);
     }
