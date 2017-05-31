@@ -45,11 +45,12 @@
         </tr>
         <tr>
             <th><?= __('Rate') ?></th>
-            <td><?= $this->Number->format($invoice->rate) ?></td>
+             <?php $currency = "USD"; ?>
+            <td><?= $this->Number->currency($invoice->rate, $currency) ?></td>
         </tr>
         <tr>
             <th><?= __('Balance Due') ?></th>
-            <td><?= $this->Number->format($invoice->balance_due) ?></td>
+            <td><?= $this->Number->currency($invoice->balance_due,$currency) ?></td>
         </tr>
     <tr>
         <th><?= __('Billing Address') ?></th>

@@ -175,8 +175,13 @@ class UsersController extends AppController
         $inventory_order = $this->InventoryOrder->find('all')
             ->contain(['Shipments', 'Clients'])
             ->where(['InventoryOrder.order_status' => 'Pending'])
-            ->order(['Shipments.id' => 'DESC'])
+            ->order(['InventoryOrder.date_created' => 'DESC'])
         ;
+
+
+        // debug($inventory_order);
+
+        // exit;
 
         $this->set([
             'pendingShipments' => $pendingShipments,
@@ -441,12 +446,12 @@ class UsersController extends AppController
             // exit; 
        
         
-        foreach ($send_to_amazon as $sta) {
-            debug($sta);
-           // exit;
-        }
+        // foreach ($send_to_amazon as $sta) {
+        //     debug($sta);
+        //    // exit;
+        // }
 
-         exit;
+        //  exit;
             
         $this->set([
             'pendingShipments' => $pendingShipments,

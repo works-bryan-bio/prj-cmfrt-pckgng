@@ -37,7 +37,7 @@ table.dataTable{
       <div class="panel" style="box-shadow: none;background-color: #ffa400;padding-top: 3px !important;padding-bottom: 5px !important;">
         <div class="row m-n">
           <div class="col-md-4 b-b b-r" style="padding-left: 10px;border: 0px;">
-            <a href="#" class="block padder-v hover">
+            <a href="<?php echo $base_url ."shipments#pending"; ?>" class="block padder-v hover">
               <span class="i-s i-s-2x pull-left m-r-sm">
                 <i class="i i-hexagon2 i-s-base text-danger hover-rotate"></i>
                 <i class="fa fa-fw fa-truck icon icon-big white"></i>
@@ -49,7 +49,7 @@ table.dataTable{
             </a>
           </div>
           <div class="col-md-4 b-b" style="padding-left: 30px;border: 0px;">
-            <a href="#" class="block padder-v hover">
+            <a href="<?php echo $base_url ."shipments#completed"; ?>" class="block padder-v hover">
               <span class="i-s i-s-2x pull-left m-r-sm">
                 <i class="i i-hexagon2 i-s-base text-success-lt hover-rotate"></i>
                 <i class="fa fa-fw fa-truck icon icon-big white"></i>
@@ -61,7 +61,7 @@ table.dataTable{
             </a>
           </div>
           <div class="col-md-4 b-b b-r" style="padding-left: 10px;border: 0px;">
-            <a href="#" class="block padder-v hover">
+            <a href="<?php echo $base_url ."inventory/employee#pending"; ?>" class="block padder-v hover">
               <span class="i-s i-s-2x pull-left m-r-sm">
                 <i class="i i-hexagon2 i-s-base text-info hover-rotate"></i>
                 <i class="fa fa-fw fa-truck icon icon-big white"></i>
@@ -88,7 +88,7 @@ table.dataTable{
 	      <h4 style="margin-top: 0px;color: #524742;margin-left: 6px;font-weight: 600;">Sample Data Table</h4>
 	    </div>    -->
           <div class="table-responsive data-content">    
-              <table class="zero-config-datatable display">
+              <table class="zero-config-datatable-user-dash display">
                   <thead>
                       <tr class="heading">                      
                         <th class="data-id">Order ID</th>

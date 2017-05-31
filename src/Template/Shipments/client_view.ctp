@@ -56,7 +56,8 @@ table{
         <?php if($group_id <> 3) {?>
         <tr>
             <th><?= __('Price') ?></th>
-            <td><?= $shipment->price ?></td>
+            <?php $currency = "USD"; ?>
+            <td><?=  $this->Number->currency($shipment->price, $currency);  ?></td>
         </tr>
         <?php } ?>
 

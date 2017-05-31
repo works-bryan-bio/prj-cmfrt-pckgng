@@ -8,6 +8,7 @@ use Cake\Collection\Collection;
 use Cake\ORM\TableRegistry;
 use Cake\Mailer\Email;
 use Cake\Datasource\ConnectionManager;
+use Cake\I18n\Number;
 
 
 /**

@@ -104,7 +104,8 @@ hr{
                         <td><?= h($invoice->invoice_date) ?></td>
                         <td><?= h($invoice->due_date) ?></td>
                         <td><?= $invoice->description ?></td>
-                        <td><?= $invoice->balance_due ?></td>
+                        <?php $currency = "USD"; ?>
+                        <td><?= $this->Number->currency($invoice->balance_due, $currency) ?></td>
                         <td>
                           <?php 
                             if( $invoice->status == 1 ){
@@ -158,7 +159,7 @@ hr{
                         <td><?= h($invoice->invoice_date) ?></td>
                         <td><?= h($invoice->due_date) ?></td>
                         <td><?= $invoice->description ?></td>
-                        <td><?= $invoice->balance_due ?></td>
+                        <td><?= $this->Number->currency($invoice->balance_due,$currency) ?></td>
                         <td>
                           <?php 
                             if( $invoice->status == 1 ){
