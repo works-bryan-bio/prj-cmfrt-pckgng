@@ -228,17 +228,19 @@ class UsersController extends AppController
 
         $shipment_overdue = $this->Shipments->find('all')
             ->contain(['Clients','ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
-            ->where([ 'shipments.status' => 1 ]);
+            ->where([ 'Shipments.status' => 1 ])
+        ;
          
         
-
+        // debug($shipment_overdue);
+        // exit;
          
             
         $this->set([
             'pendingShipments' => $pendingShipments,
             'completedShipments' => $completedShipments,
             'receivedAndStoredShipments' => $receivedAndStoredShipments,
-            'inventory_order' => $inventory_order,
+             'inventory_order' => $inventory_order,
             'shipment_overdue' => $shipment_overdue
         ]);
 

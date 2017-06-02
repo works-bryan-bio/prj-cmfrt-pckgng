@@ -220,6 +220,10 @@ class InvoiceController extends AppController
      */
     public function payment($id = null)
     {
+
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data'); 
+
         $invoice = $this->Invoice->get($id, [
             'contain' => []
         ]);
@@ -230,7 +234,12 @@ class InvoiceController extends AppController
             $invoice = $this->Invoice->patchEntity($invoice, $this->request->data);
             if ($this->Invoice->save($invoice)) {
                
+                if( $user_data->user->group_id == 4 ){ //Client
                     return $this->redirect(['action' => 'client']);
+                }else{
+                    return $this->redirect(['controller' => 'invoice']);
+                }
+                    
                
             } else {
                 $this->Flash->error(__('The invoice could not be saved. Please, try again.'));
