@@ -60,7 +60,7 @@ hr{
     <div class="tab-content">
       <div class="tab-pane active" id="pending_orders">
           <div class="table-responsive data-content">    
-            <table class="zero-config-datatable display">
+            <table class="zero-config-datatable-5-desc display">
                 <thead>
                     <tr class="heading">
                       <th style="text-align:center;">Actions</th>

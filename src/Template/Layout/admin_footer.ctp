@@ -54,7 +54,21 @@
             });
 
             $('.zero-config-datatable-user-dash').DataTable({
-                
+                "order": [[ 4, "desc" ]],
+                "fnDrawCallback": function( settings ) {
+                    redrawnFunction();
+                }
+            });
+
+            $('.zero-config-datatable-5-desc').DataTable({
+                "order": [[ 5, "desc" ]],
+                "fnDrawCallback": function( settings ) {
+                    redrawnFunction();
+                }
+            });
+
+            $('.zero-config-datatable-pending-shipment').DataTable({
+                "order": [[ 8, "desc" ]],
                 "fnDrawCallback": function( settings ) {
                     redrawnFunction();
                 }

@@ -118,7 +118,7 @@ table.dataTable{
               <div class="ribbon-section" style="padding-top:0px !important;">
                 <div class="ribbon-black" style="background-color: #1d89cf;"><h3 class="ribbon-h3" style="margin-left: 25px;">Pending Shipments</h3></div>
               </div>
-                <table class="zero-config-datatable display">
+                <table class="zero-config-datatable-pending-shipment display">
                 <thead>
                     <tr class="heading">                      
                       <?php if($hdr_user_data->user->group_id <> 4) { ?>
