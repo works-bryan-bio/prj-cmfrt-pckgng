@@ -54,6 +54,9 @@
           <i class="fa fa-cog" style="color: orange;"></i>
         </a>
       </div>    
+
+
+
    
 
       <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">                
@@ -80,7 +83,9 @@
           </ul>
         </li>
       </ul> 
-      
+
+
+       
 
     <!-- notification -->        
       <ul class="navbar-nav navbar-notification m-n hidden-xs nav-user user" style="padding-left: 10px;margin-bottom: 0;list-style: none;">                
@@ -119,6 +124,31 @@ For send to amazon: <span class="number-of-amazon label label-danger"></span> ' 
         </li>
       </ul>      
       <!-- notification --> 
+
+      <!-- Search general -->
+      <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">
+          <li>  
+             <?= $this->Form->create(null,[
+                          'type' => 'post',  
+                          'class' => 'cp-search-box',
+                          'role' => 'search',              
+                          'url' => ['controller' => 'Pages', 'action' => 'search']
+                      ]
+                  ) 
+              ?>                    
+                  <div class="input-group">
+                      <div class="input-group-btn">
+                          <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                      </div>
+                      <input type="text" class="form-control" placeholder="Search" name="query">
+                  </div>
+
+              <?= $this->Form->end() ?>
+
+         </li>
+      </ul>
+     <!-- end search -->       
+
     </header>
     <section>
       <section class="hbox stretch">
