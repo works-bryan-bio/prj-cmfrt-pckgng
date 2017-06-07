@@ -3921,3 +3921,48 @@ section.scrollable.wrapper {
 td.actions {
     width: 110px;
 }
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}
+.input-group-btn {
+    position: relative;
+    font-size: 0;
+    white-space: nowrap;
+}      
+button.btn.btn-default{
+    background: #09090a;
+    border: none;
+    border-radius: 15px 0 0 15px;
+    height: 30px;
+    padding: 6px 5px 6px 12px;
+}
+.btn {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857;
+    border-radius: 4px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.search-box-black {
+    background: #09090a;
+    border: none;
+    border-radius: 0 15px 15px 0;
+    height: 30px;
+    padding: 6px 12px 6px 5px;
+    float: none;
+}

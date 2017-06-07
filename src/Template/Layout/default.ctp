@@ -25,7 +25,6 @@
         echo $this->fetch('css');
         echo $this->fetch('script');
     ?>
-
     <script>
         var base_url = '<?= $this->Url->build("/") ?>';
     </script>
@@ -136,11 +135,11 @@ For send to amazon: <span class="number-of-amazon label label-danger"></span> ' 
                       ]
                   ) 
               ?>                    
-                  <div class="input-group">
+                  <div class="input-group" style="margin-top: 34px;margin-right: 18px;">
                       <div class="input-group-btn">
-                          <button class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+                          <button class="btn btn-default" style="width: auto !important;" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                       </div>
-                      <input type="text" class="form-control" placeholder="Search" name="query">
+                      <input type="text" class="search-box-black form-control" placeholder="Search" name="query">
                   </div>
 
               <?= $this->Form->end() ?>
