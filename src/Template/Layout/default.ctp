@@ -131,7 +131,7 @@ For send to amazon: <span class="number-of-amazon label label-danger"></span> ' 
                           'type' => 'post',  
                           'class' => 'cp-search-box',
                           'role' => 'search',              
-                          'url' => ['controller' => 'Pages', 'action' => 'search']
+                          'url' => ['controller' => 'Pages', 'action' => 'search_admin']
                       ]
                   ) 
               ?>                    

@@ -98,7 +98,7 @@
                         <div class='form-group hidden other-shipping-carrier'>
                             <label for='other_shipping_carrier' class='col-sm-2 control-label'>" . __('Other Shipping Carrier') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Select Other Shipping Carrier on the list' ></i></span>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('other_shipping_carrier', ['class' => 'form-control', 'id' => 'other_shipping_carrier', 'label' => false]);                
+                            echo $this->Form->input('other_shipping_carrier', ['type' => 'text', 'class' => 'form-control', 'id' => 'other_shipping_carrier', 'label' => false]);                
                         echo " </div></div>";    
                         
                                     echo "
@@ -111,7 +111,7 @@
                         <div class='form-group hidden other-shipping-service'>
                             <label for='other_shipping_service' class='col-sm-2 control-label'>" . __('Other Shipping Service') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Select Other Shipping Service on the list' ></i></span>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('other_shipping_service', ['class' => 'form-control', 'id' => 'other_shipping_service', 'label' => false]);                
+                            echo $this->Form->input('other_shipping_service', ['type' => 'text' , 'class' => 'form-control', 'id' => 'other_shipping_service', 'label' => false]);                
                         echo " </div></div>";    
                         echo "
                         <div class='form-group'> 

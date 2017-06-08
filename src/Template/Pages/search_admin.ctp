@@ -33,7 +33,8 @@
 
                         </li>
                     <?php } ?>
-                     <?php if(isset($user_data)){ foreach ($shipments as $shipment) { ?>
+
+                    <?php foreach ($shipments as $shipment) { ?>
                         <li>
                             <h2 class="title"><?php echo $shipment->item_description; ?></h2>
                             
@@ -47,8 +48,7 @@
                             
                             <a href="<?php echo $this->Url->build("/inventory_order/view/" . $order->id);  ?>" class="btn btn-primary read-more-btn">Read more</a>                            
                          </li>   
-                      <?php  }  
-                           } ?>
+                      <?php  }?>
 
                     </ul>
                 </div>

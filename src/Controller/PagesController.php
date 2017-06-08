@@ -29,7 +29,7 @@ class PagesController extends AppController
     
         // Add the selected sidebar-menu 'active' class
         // Valid value can be found in NavigationSelectorHelper
-        $this->Auth->allow(['frontview','contact_us','ajax_email_inquiry','ajax_email_newsletter','search']);
+        $this->Auth->allow(['frontview','contact_us','ajax_email_inquiry','ajax_email_newsletter','search', 'search_admin']);
         $nav_selected = ["pages"];
         $this->set('nav_selected', $nav_selected);
 
@@ -302,14 +302,85 @@ class PagesController extends AppController
      */
     public function search()
     {   
+
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+
         $pages = array();
         if ($this->request->is('post')) {
             $data  = $this->request->data;
             $pages = $this->Pages->find('all')
                 ->where(['Pages.body LIKE' => '%' . $data['query'] . '%'])
             ; 
-        }        
-        $this->set(['pages' => $pages]);
+
+            if(isset($user_data)){
+                $shipments = $this->Shipments->find('all')
+                    ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+                    ->where(['Shipments.client_id' => $user_data->id ,'Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                ;
+
+                $inventory_order = $this->InventoryOrder->find('all')
+                    ->contain(['Shipments', 'Clients'])
+                    ->where(['Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                    ->orWhere(['InventoryOrder.order_number LIKE' => '%' . $data['query'] . '%'])
+                    ->order(['Shipments.id' => 'DESC'])
+                ;
+            }    
+        }    
+
+        if(isset($user_data)){    
+            $this->set(['pages' => $pages,
+                        'shipments' => $shipments,
+                        'inventory_order' => $inventory_order,
+                        'user_data' => $user_data
+            ]);
+        }else{
+            $this->set(['pages' => $pages]); 
+        }
+
         $this->viewBuilder()->layout('frontend/default');  
+    }
+
+     /**
+     * Frontend : Search method
+     *
+     * @return void
+     */
+    public function search_admin()
+    {   
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+
+        $pages = array();
+        if ($this->request->is('post')) {
+            $data  = $this->request->data;
+            $pages = $this->Pages->find('all')
+                ->where(['Pages.body LIKE' => '%' . $data['query'] . '%'])
+            ; 
+
+        $shipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.client_id' => $user_data->id ,'Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+        ;
+
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+            ->orWhere(['InventoryOrder.order_number LIKE' => '%' . $data['query'] . '%'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        }     
+
+        $this->set(['pages' => $pages,
+                    'shipments' => $shipments,
+                    'inventory_order' => $inventory_order
+        ]);
+ 
     }
 }

@@ -154,7 +154,7 @@ class ShipmentsController extends AppController
     public function view($id = null)
     {
         $shipment = $this->Shipments->get($id, [
-            'contain' => ['ShippingCarriers', 'ShippingServices' , 'ShippingPurposes']
+            'contain' => ['ShippingCarriers', 'ShippingServices' , 'ShippingPurposes','Clients']
         ]);
         $session = $this->request->session();    
         $user_data = $session->read('User.data');     
@@ -174,7 +174,7 @@ class ShipmentsController extends AppController
     public function client_view($id = null)
     {
         $shipment = $this->Shipments->get($id, [
-            'contain' => ['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith']
+            'contain' => ['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients']
         ]);
 
         $session = $this->request->session();    
@@ -321,8 +321,13 @@ class ShipmentsController extends AppController
 
         $optionPendingShipments = array();
         foreach( $pendingShipments as $ps ){
-            $optionPendingShipments[$ps->id] = $ps->item_description;
+
+
+
+            $optionPendingShipments[$ps->id] = $ps->id ." - " . $ps->item_description;
         }
+
+        
         $this->set(compact('shipment', 'shippingCarriers', 'shippingServices', 'shippingPurposes', 'optionPendingShipments'));
         $this->set('_serialize', ['shipment']);
     }
@@ -865,6 +870,8 @@ class ShipmentsController extends AppController
         echo json_encode($return);
         exit;
     }
+
+ 
 
 
 }
