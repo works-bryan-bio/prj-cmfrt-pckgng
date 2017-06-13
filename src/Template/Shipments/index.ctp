@@ -96,8 +96,32 @@ hr{
                                   <li role="presentation"><a target="_new" <?php echo $dl_disable_fnsku; ?> href="<?php echo $shipment->fnsku_label; ?>" title="Download"><i class="glyphicon glyphicon-cloud-download"></i> FNSKU Label</a></li>  
                                   <?php if($hdr_user_data->user->group_id <> 3){?>
                                     <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit','escape' => false]) ?></li>
-                                  <?php } ?>                              
+                                  <?php } ?> 
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-ban"></i> ' . __('Cancel Shipment'), '#modalCancel-'.$shipment->id,['title' => 'Cancel', 'escape' => false, 'data-toggle' => 'modal']) ?>      </li>                              
                               </ul>
+                            </div>
+
+                            <div id="modalCancel-<?=$shipment->id?>" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h4 class="modal-title">Cancel Shipment</h4>
+                                  </div>
+                                  <div class="modal-body wrapper-lg">
+                                      <p><?= __('Are you sure you want to cancel selected entry?') ?></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                                      <?= $this->Form->postLink(
+                                              'Yes',
+                                              ['action' => 'cancel', $shipment->id],
+                                              ['class' => 'btn btn-danger', 'escape' => false]
+                                          )
+                                      ?>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
 
                             <!-- Delete Modal -->

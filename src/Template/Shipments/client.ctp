@@ -89,9 +89,34 @@ hr{
                               </button>
                               <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
                                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View','escape' => false]) ?></li>
-                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'escape' => false]) ?>      </li>                                
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'client_edit', $shipment->id],['title' => 'Edit', 'escape' => false]) ?>      </li>   
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-ban"></i> ' . __('Cancel Shipment'), '#modalCancel-'.$shipment->id,['title' => 'Cancel', 'escape' => false, 'data-toggle' => 'modal']) ?>      </li>                              
                               </ul>
-                            </div>                                            
+                            </div>  
+
+                            <div id="modalCancel-<?=$shipment->id?>" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h4 class="modal-title">Cancel Shipment</h4>
+                                  </div>
+                                  <div class="modal-body wrapper-lg">
+                                      <p><?= __('Are you sure you want to cancel selected entry?') ?></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                                      <?= $this->Form->postLink(
+                                              'Yes',
+                                              ['action' => 'cancel', $shipment->id],
+                                              ['class' => 'btn btn-danger', 'escape' => false]
+                                          )
+                                      ?>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
                             <!-- Delete Modal -->
                             <div id="modal-<?=$shipment->id?>" class="modal fade">
                               <div class="modal-dialog">

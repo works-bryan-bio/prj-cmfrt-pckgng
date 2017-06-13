@@ -27,7 +27,7 @@ class InventoryOrderController extends AppController
             }elseif( $user_data->user->group_id == 2 ){ //Manager
                 $this->Auth->allow(['index','add']);
             }elseif( $user_data->user->group_id == 4 ){ //Client
-                $this->Auth->allow(['client', 'client_add', 'client_edit', 'client_view']);
+                $this->Auth->allow(['client', 'client_add', 'client_edit', 'client_view', 'cancel']);
             }  
         }
     
@@ -229,6 +229,32 @@ class InventoryOrderController extends AppController
             $this->Flash->error(__('The inventory order could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function cancel($id = null, $inventory_id = null)
+    {
+        $this->request->allowMethod(['post']);
+        $inventoryOrder = $this->InventoryOrder->get($id);
+        $inventoryOrder->order_status = "Cancelled";
+        if ($this->InventoryOrder->save($inventoryOrder)) {
+            $this->Flash->success(__('The order has been cancelled.'));
+        } else {
+            $this->Flash->error(__('The order could not be cancelled. Please, try again.'));
+        }
+
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');         
+        if( isset($user_data) ){
+            if( $user_data->user->group_id == 1 ){ //Company
+            }elseif( $user_data->user->group_id == 2 ){ //Manager
+            }elseif( $user_data->user->group_id == 4 ){ //Client
+                return $this->redirect(['action' => 'index/'.$inventoryOrder->shipment_id.'/'.$inventory_id]);
+            }else{
+                return $this->redirect(['controller' => 'inventory', 'action' => 'employee']);
+            }
+        }
+        return $this->redirect(['controller' => 'inventory', 'action' => 'employee']);
+        
     }
 
     public function update_status_to_complete($inventory_order_id = null, $inventory_id = null)

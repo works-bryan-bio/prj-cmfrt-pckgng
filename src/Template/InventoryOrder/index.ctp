@@ -51,7 +51,7 @@ hr{
             <table class="zero-config-datatable display">
                 <thead>
                     <tr class="heading">
-                      <th style="text-align:center;">Actions</th>
+                      <th style="text-align:center; width:50px;">Actions</th>
                       <th class="data-id" style="width:120px;">ID</th>
                       <th class="" style="width:150px;">Order Due Date</th>
                       <th class="" style="width:150px;">Order Number</th>
@@ -75,8 +75,33 @@ hr{
 
                                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $inventoryOrder->id],['title' => 'View', 'escape' => false]) ?></li>                       
                                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Delete'), '#modal-'. $inventoryOrder->id,['title' => 'Delete', 'data-toggle' => 'modal','escape' => false]) ?></li>
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-ban"></i> ' . __('Cancel Order'), '#modalCancel-'.$inventoryOrder->id,['title' => 'Cancel', 'escape' => false, 'data-toggle' => 'modal']) ?>      </li> 
                               </ul>
                             </div>
+
+                            <div id="modalCancel-<?=$inventoryOrder->id?>" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h4 class="modal-title">Cancel Order</h4>
+                                  </div>
+                                  <div class="modal-body wrapper-lg">
+                                      <p><?= __('Are you sure you want to cancel selected entry?') ?></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                                      <?= $this->Form->postLink(
+                                              'Yes',
+                                              ['action' => 'cancel', $inventoryOrder->id, $inventory->id],
+                                              ['class' => 'btn btn-danger', 'escape' => false]
+                                          )
+                                      ?>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
                             <!-- Delete Modal -->
                             <div id="modal-<?=$inventoryOrder->id?>" class="modal fade">
                               <div class="modal-dialog">

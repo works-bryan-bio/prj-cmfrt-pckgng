@@ -467,6 +467,31 @@ class ShipmentsController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    public function cancel($id = null)
+    {
+        $this->request->allowMethod(['post']);
+        $shipment = $this->Shipments->get($id);
+        $shipment->status = 5;
+        if ($this->Shipments->save($shipment)) {
+            $this->Flash->success(__('The shipment has been cancelled.'));
+        } else {
+            $this->Flash->error(__('The shipment could not be cancelled. Please, try again.'));
+        }
+
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');         
+        if( isset($user_data) ){
+            if( $user_data->user->group_id == 1 ){ //Company
+            }elseif( $user_data->user->group_id == 2 ){ //Manager
+            }elseif( $user_data->user->group_id == 4 ){ //Client
+                return $this->redirect(['action' => 'client']);
+            }else{
+                return $this->redirect(['action' => 'index']);
+            }
+        }
+        return $this->redirect(['action' => 'index']);
+    }
+
     public function send_to_received_and_stored()
     {
         $this->Inventory = TableRegistry::get('Inventory');
