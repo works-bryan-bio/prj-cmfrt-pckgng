@@ -81,7 +81,7 @@ table.dataTable{
 <section class="content" style="padding-top: 0px !important;padding-bottom: 0px !important;">
  
     <div class="ribbon-section" style="padding-top:0px !important;">
-      <div class="ribbon-black" style="background-color: #1d89cf;"><h3 class="ribbon-h3" style="margin-left: 25px;">Shipment Overdue</h3></div>
+      <div class="ribbon-black" style="background-color: #1d89cf;"><h3 class="ribbon-h3" style="margin-left: 25px;">Order  Overdue</h3></div>
     </div>
  
     <br style="clear:both;" />
@@ -106,7 +106,10 @@ table.dataTable{
                   <tbody>
                       <?php foreach ($order_overdue as $order_overdue): ?>
                       <tr>
-                        <td><?= $order_overdue->order_number ?></td>
+                        <td><?=  
+                              $this->Html->link($order_overdue->order_number, [ 'controller' => 'inventory_order' , 'action' => 'view', $order_overdue->id],['class' => '','escape' => false])
+                              
+                        ?></td>
                         <td><?= $order_overdue->client->firstname ." ". $order_overdue->client->lastname ?></td>
                         <td><?= $order_overdue->shipment->item_description ?></td>
                         <td><?= $order_overdue->order_destination ?></td>

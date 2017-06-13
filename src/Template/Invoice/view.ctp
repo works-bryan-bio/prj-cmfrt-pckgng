@@ -87,35 +87,35 @@
                 </tbody>
             </table>
 
-    <div id="modal-<?=$invoice->id?>" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title">Payment Confirmation</h4>
-          </div>
-          <div class="modal-body wrapper-lg">
-              <p><?= __('Are you sure you want to pay selected entry?') ?></p>
-          </div>
-          <div class="modal-footer">
-              <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
-              <?= $this->Form->postLink(
-                      'Yes',
-                      ['action' => 'payment', $invoice->id],
-                      ['class' => 'btn btn-danger', 'escape' => false]
-                  )
-              ?>
-          </div>
-        </div>
-      </div>
-    </div>
+            <div id="modal-<?=$invoice->id?>" class="modal fade">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                      <h4 class="modal-title">Payment Confirmation</h4>
+                  </div>
+                  <div class="modal-body wrapper-lg">
+                      <p><?= __('Are you sure you want to pay selected entry?') ?></p>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                      <?= $this->Form->postLink(
+                              'Yes',
+                              ['action' => 'payment', $invoice->id],
+                              ['class' => 'btn btn-danger', 'escape' => false]
+                          )
+                      ?>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-    <div class="col-sm-offset-2 col-sm-10" style="padding-top: 30px;">
-        <?php  echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['controller' => 'invoice'],['class' => 'btn btn-warning', 'escape' => false]); ?>
-        <?php if($invoice->status <> 2){ ?>
-         <?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-'. $invoice->id,['title' => 'Payments', 'class' => 'btn btn-danger','data-toggle' => 'modal','escape' => false]) ?>
-            <?php } ?>
-    </div>
+            <div class="col-sm-offset-2 col-sm-10" style="padding-top: 30px;">
+                <?php  echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['controller' => 'invoice'],['class' => 'btn btn-warning', 'escape' => false]); ?>
+                <?php if($invoice->status <> 2){ ?>
+                 <?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-'. $invoice->id,['title' => 'Payments', 'class' => 'btn btn-danger','data-toggle' => 'modal','escape' => false]) ?>
+                    <?php } ?>
+            </div>
 
 
 

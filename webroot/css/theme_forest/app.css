@@ -3683,7 +3683,7 @@ fieldset[disabled] .i-checks input + i:before {
     width: 89px !important;
   }
   .btn-danger {
-    width: 89px !important;
+    width: 167px !important;
   }
 }
 @media (max-width: 1299px) {

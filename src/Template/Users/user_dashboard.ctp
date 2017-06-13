@@ -105,7 +105,9 @@ table.dataTable{
 
                         ?>
                       <tr>
-                        <td style="text-align:center;"><?= $inventory_order->order_number ?></td>
+                        <td style="text-align:center;"><?= 
+                            $this->Html->link($inventory_order->order_number, [ 'controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['class' => '','escape' => false])
+                         ?></td>
                         <td><?= $inventory_order->client->firstname ." ". $inventory_order->client->lastname ?></td>
                         <td><?= $inventory_order->shipment_id ." - ". $inventory_order->shipment->item_description ?></td>
                         <td><?= $inventory_order->order_destination ?></td>
@@ -140,7 +142,10 @@ table.dataTable{
                         <?php if($hdr_user_data->user->group_id <> 4) { ?>
                           <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
                         <?php } ?>
-                        <td><?= $shipment->item_description .' - '. $shipment->id  ?></td>                        
+                        <td><?= 
+                             $this->Html->link($shipment->item_description .' - '. $shipment->id , [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false])
+                             
+                         ?></td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>

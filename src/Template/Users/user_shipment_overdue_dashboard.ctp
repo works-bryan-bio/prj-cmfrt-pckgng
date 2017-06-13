@@ -111,7 +111,9 @@ table.dataTable{
                       <?php foreach ($shipment_overdue as $shipment_overdue): ?>
                       <tr>
                         <td><?= $shipment_overdue->client->firstname . " " . $shipment_overdue->client->lastname ?></td>
-                        <td><?= $shipment_overdue->id ." - ". $shipment_overdue->item_description ?></td>
+                        <td><?=  
+                               $this->Html->link($shipment_overdue->id ." - ". $shipment_overdue->item_description , [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment_overdue->id],['class' => '','escape' => false])
+                        ?></td>
                         <td><?= $shipment_overdue->quantity ?></td>
                         <td><?= $shipment_overdue->boxes ?></td>
                         <td><?= $shipment_overdue->shipping_carrier->name ?></td>

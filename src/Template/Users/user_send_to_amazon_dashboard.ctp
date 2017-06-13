@@ -111,7 +111,9 @@ table.dataTable{
                       <?php foreach ($send_to_amazon as $send_to_amazon): ?>
                       <tr>
                         <td><?= $send_to_amazon->client->firstname . " " . $send_to_amazon->client->lastname ?></td>
-                        <td><?= $send_to_amazon->id ." - ". $send_to_amazon->item_description ?></td>
+                        <td><?=
+                        $this->Html->link($send_to_amazon->id ." - ". $send_to_amazon->item_description, [ 'controller' => 'shipments' , 'action' => 'client_view', $send_to_amazon->id],['class' => '','escape' => false])
+                        ?></td>
                         <td><?= $send_to_amazon->quantity ?></td>
                         <td><?= $send_to_amazon->boxes ?></td>
                         <td><?= $send_to_amazon->shipping_carrier->name ?></td>
