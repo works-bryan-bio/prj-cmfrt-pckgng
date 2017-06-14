@@ -62,6 +62,12 @@ class InventoryOrderController extends AppController
             ->order(['InventoryOrder.id' => 'DESC'])
         ;
 
+        $cancelledOrder = $this->InventoryOrder->find('all')
+            ->contain(['Clients', 'Shipments', 'ShippingCarriers', 'ShippingServices'])
+            ->where(['InventoryOrder.shipment_id' => $shipment_id , 'InventoryOrder.order_status' => 'Cancelled'])
+            ->order(['InventoryOrder.id' => 'DESC'])
+        ;
+
         $inventory = array();
         $this->Inventory = TableRegistry::get('Inventory');
         if($inventory_id != null) {
@@ -73,6 +79,7 @@ class InventoryOrderController extends AppController
         $group_id  = $user_data->user->group_id;
         $this->set(['inventory' => $inventory, 'group_id' => $group_id]);
         $this->set('inventoryOrder', $this->paginate($InventoryOrder));
+        $this->set('cancelledOrder', $this->paginate($cancelledOrder));
         $this->set('inventoryOrderCompleted', $this->paginate($inventoryOrderCompleted));
         $this->set('_serialize', ['inventoryOrder']);
     }

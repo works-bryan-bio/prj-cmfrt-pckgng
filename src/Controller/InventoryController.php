@@ -139,6 +139,12 @@ class InventoryController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
+        $cancelled_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Cancelled'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
         
         $inventoryOrder = $this->InventoryOrder->newEntity();
         $shippingCarriers = $this->InventoryOrder->ShippingCarriers->find('list', ['limit' => 200]);
@@ -147,6 +153,7 @@ class InventoryController extends AppController
         $this->set(compact('inventoryOrder', 'shippingCarriers', 'shippingServices', 'inventoryOrders'));
 
         $this->set('group_id' , $user_data->user->group_id);
+        $this->set('cancelled_order', $cancelled_order);
         $this->set('inventory_order', $inventory_order);
         $this->set('inventory', $inventory);
         $this->set('inventory_completed', $inventory_completed);

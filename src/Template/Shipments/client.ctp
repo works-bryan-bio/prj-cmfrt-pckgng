@@ -46,7 +46,8 @@ hr{
             <li class="active"><a href="#pending" data-toggle="tab" class="ribbon-li">Pending Shipments</a></li>
             <li><a href="#received_and_stored" data-toggle="tab" class="ribbon-li">Received and Stored</a></li>      
             <li><a href="#completed" data-toggle="tab" class="ribbon-li">Completed Shipments</a></li>
-            <li><a href="#all_shipment" data-toggle="tab" class="ribbon-li">All</a></li>       
+            <li><a href="#all_shipment" data-toggle="tab" class="ribbon-li">All</a></li>     
+            <li><a href="#cancelled_shipment" data-toggle="tab" class="ribbon-li"><i class="fa fa-ban"></i></a></li>       
           </ul>
       </div>
     </div>
@@ -435,7 +436,91 @@ hr{
                 </tbody>
             </table>
         </div>        
-      </div>  
+      </div> 
+      <div class="tab-pane" id="cancelled_shipment">
+        <div class="table-responsive data-content">    
+            <table class="zero-config-datatable display">
+                <thead>
+                    <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
+                      <th class="data-id" style="width:150px;">Item Description</th>                      
+                      <th class="" style="width:150px;">Quantity</th>
+                      <th class="" style="width:150px;">Boxes</th>
+                      <th class="" style="width:150px;">Shipping Carrier</th>
+                      <th class="" style="width:150px;">Shipping Service</th>
+                      <th class="" style="width:150px;">Shipping Purpose</th>
+                      <th class="date-time" style="width:150px;">Created</th>                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($cancelled_shipments as $shipment): ?>
+                    <tr>
+                        <td class="no-border-right table-actions">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'client_view', $shipment->id],['title' => 'View', 'escape' => false]) ?> </li>                                                          
+                              </ul>
+                            </div>                                                       
+                            <!-- Delete Modal -->
+                            <div id="modal-<?=$shipment->id?>" class="modal fade">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                      <h4 class="modal-title">Delete Confirmation</h4>
+                                  </div>
+                                  <div class="modal-body wrapper-lg">
+                                      <p><?= __('Are you sure you want to delete selected entry?') ?></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                                      <?= $this->Form->postLink(
+                                              'Yes',
+                                              ['action' => 'delete', $shipment->id],
+                                              ['class' => 'btn btn-danger', 'escape' => false]
+                                          )
+                                      ?>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </td>
+                        <td><?= $shipment->item_description ." - ". $shipment->id ?></td>                        
+                        <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
+                        <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
+                        <td>
+                          <?php
+                            if( $shipment->shipping_carrier_id == 4 ){
+                              echo $shipment->shipping_carrier->name . " - " . $shipment->other_shipping_carrier;
+                            }else{
+                              echo $shipment->shipping_carrier->name;
+                            }                            
+                          ?>                          
+                        </td>
+                        <td>
+                          <?php 
+                            if( $shipment->shipping_service_id == 4 ){
+                              echo $shipment->shipping_service->name . " - " . $shipment->other_shipping_service;
+                            }else{
+                              echo $shipment->shipping_service->name;
+                            }                            
+                          ?>
+                        </td>
+                        <td>
+                          <?php 
+                            echo $shipment->shipping_purpose->name;
+                          ?>
+                        </td>
+                        <td><?= h($shipment->created) ?></td>                        
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>        
+      </div> 
     </div>
        
     </div>

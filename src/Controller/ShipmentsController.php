@@ -73,6 +73,12 @@ class ShipmentsController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
+        $cancelled_shipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+            ->where(['Shipments.status' => 5])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
         $subShipments = array();
         foreach($pendingShipments as $shipment) {
             $client_id = $shipment->client_id;
@@ -80,6 +86,7 @@ class ShipmentsController extends AppController
             $subShipments[$shipment->id] = $this->Shipments->find('all')->where(['Shipments.client_id' => $client_id])->toArray();
         }
 
+        $this->set(['cancelled_shipments' => $cancelled_shipments]);
         $this->set(['subShipments' => $subShipments]);
         $this->set('pendingShipments', $pendingShipments);
         $this->set('completedShipments', $completedShipments);
@@ -137,9 +144,16 @@ class ShipmentsController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
+        $cancelled_shipments = $this->Shipments->find('all')
+            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
+            ->where(['Shipments.client_id' => $user_data->id, 'Shipments.status' => 5])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
         $this->set('pendingShipments', $pendingShipments);
         $this->set('completedShipments', $completedShipments);
         $this->set('allShipments', $allShipments);
+        $this->set('cancelled_shipments', $cancelled_shipments);
         $this->set('receivedAndStoredShipments', $receivedAndStoredShipments);
         $this->set('_serialize', ['shipments']);
     }

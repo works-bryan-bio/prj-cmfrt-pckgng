@@ -38,7 +38,8 @@ hr{
       <div class="ribbon-black" style="padding-top:0px !important;">
           <ul class="nav nav-tabs nav-justified">
             <li class="active"><a href="#pending" data-toggle="tab" class="ribbon-li">Pending Orders</a></li>
-            <li><a href="#completed" data-toggle="tab" class="ribbon-li">Completed Orders</a></li>      
+            <li><a href="#completed" data-toggle="tab" class="ribbon-li">Completed Orders</a></li>   
+            <li><a href="#cancelled" data-toggle="tab" class="ribbon-li"><i class="fa fa-ban"></i></a></li>      
           </ul>
       </div>
     </div>
@@ -234,6 +235,69 @@ hr{
             </table>
         </div>        
       </div>    
+      <div class="tab-pane" id="cancelled">
+        <div class="table-responsive data-content">    
+            <table class="zero-config-datatable display">
+                <thead>
+                    <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
+                      <th class="data-id" style="width:100px;">ID</th>
+                      <th class="" style="width:150px;">Order Due Date</th>
+                      <th class="" style="width:150px;">Order Number</th>
+                      <th class="" style="width:150px;">Order Description</th>
+                      <th class="" style="width:150px;">Order Destination</th>                     
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($cancelledOrder as $inventoryOrderCompleted): ?>
+                    <tr>
+                        <td class="no-border-right table-actions">
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $inventoryOrderCompleted->id],['title' => 'View', 'escape' => false]) ?> </li>
+                                  <?php if( $group_id == 1 ){ ?>
+                                    <li role="presentation"><?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Delete'), '#modal-'. $inventoryOrderCompleted->id,['title' => 'Delete', 'data-toggle' => 'modal','escape' => false]) ?></li>
+                                    <!-- Delete Modal -->
+                                    <div id="modal-<?=$inventoryOrderCompleted->id?>" class="modal fade">
+                                      <div class="modal-dialog">
+                                        <div class="modal-content">
+                                          <div class="modal-header">
+                                              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                              <h4 class="modal-title">Delete Confirmation</h4>
+                                          </div>
+                                          <div class="modal-body wrapper-lg">
+                                              <p><?= __('Are you sure you want to delete selected entry?') ?></p>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                                              <?= $this->Form->postLink(
+                                                      'Yes',
+                                                      ['action' => 'delete', $inventoryOrderCompleted->id],
+                                                      ['class' => 'btn btn-danger', 'escape' => false]
+                                                  )
+                                              ?>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  <?php } ?>                                 
+                              </ul>
+                            </div>
+                        </td>
+                         <td><?= $this->Number->format($inventoryOrderCompleted->id) ?></td>                       
+                        <td><?= h($inventoryOrderCompleted->date_created) ?></td>
+                        <td><?= h($inventoryOrderCompleted->order_number) ?></td>
+                        <td><?= h($inventoryOrderCompleted->shipment->item_description) ?></td>
+                        <td><?= h($inventoryOrderCompleted->order_destination) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>        
+      </div>  
     </div>
   </div>
 </section>

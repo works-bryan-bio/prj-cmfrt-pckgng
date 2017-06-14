@@ -50,7 +50,8 @@ hr{
           <ul class="nav nav-tabs nav-justified">
             <li class="active"><a href="#pending_orders" class="ribbon-li" data-toggle="tab">View Pending Orders</a></li>
             <li><a href="#pending" class="ribbon-li" data-toggle="tab">Stored Shipments</a></li>
-            <li><a href="#completed" data-toggle="tab" class="ribbon-li">Completed Shipments</a></li>      
+            <li><a href="#completed" data-toggle="tab" class="ribbon-li">Completed Shipments</a></li>
+            <li><a href="#cancelled" data-toggle="tab" class="ribbon-li"><i class="fa fa-ban"></i></a></li>     
           </ul>
       </div>
 </div>
@@ -367,7 +368,53 @@ hr{
                 </tbody>
             </table>
         </div>        
-      </div>    
+      </div>   
+      <div class="tab-pane active" id="cancelled">
+          <div class="table-responsive data-content">    
+            <table class="zero-config-datatable-5-desc display">
+                <thead>
+                    <tr class="heading">
+                      <th style="text-align:center;">Actions</th>
+                      <th class="data-id">Order ID</th>
+                      <th class="">Client</th>
+                      <th class="">Item Description</th>
+                      <th class="">Order Destination</th>
+                      <th class="">Order to be sent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($cancelled_order as $inventory_order):
+                          $inventory_info = array();
+                          $inventory_info = $this->Inventory->find('all')->where(['Inventory.shipment_id' => $inventory_order->shipment->id])->first();
+
+                      ?>
+                    <tr>
+                      <td class="no-border-right table-actions">
+
+                            <div class="dropdown">
+                              <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
+                                  Action <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">      
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['title' => 'View', 'escape' => false]) ?></li>                       
+                              </ul>
+                            </div>
+
+                        
+                      </td>
+
+
+                      <td style="text-align:center;"><?= $inventory_order->order_number ?></td>
+                      <td><?= $inventory_order->client->firstname ." ". $inventory_order->client->lastname ?></td>
+                      <td><?= $inventory_order->shipment_id ." - ". $inventory_order->shipment->item_description ?></td>
+                      <td><?= $inventory_order->order_destination ?></td>
+                      <td><?= h($inventory_order->date_created) ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>        
+      </div>  
     </div>
   </div>
 </section>
