@@ -105,13 +105,11 @@ table.dataTable{
 
                         ?>
                       <tr>
-                        <td style="text-align:center;"><?= 
-                            $this->Html->link($inventory_order->order_number, [ 'controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['class' => '','escape' => false])
-                         ?></td>
-                        <td><?= $inventory_order->client->firstname ." ". $inventory_order->client->lastname ?></td>
-                        <td><?= $inventory_order->shipment_id ." - ". $inventory_order->shipment->item_description ?></td>
-                        <td><?= $inventory_order->order_destination ?></td>
-                        <td><?= h($inventory_order->date_created) ?></td>
+                        <td style="text-align:center;"><?= $this->Html->link($inventory_order->order_number, [ 'controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['class' => '','escape' => false]) ?></td>
+                        <td><?= $this->Html->link($inventory_order->client->firstname ." ". $inventory_order->client->lastname, [ 'controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['class' => '','escape' => false]) ?></td>
+                        <td><?= $this->Html->link($inventory_order->shipment_id ." - ". $inventory_order->shipment->item_description, [ 'controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['class' => '','escape' => false]) ?></td>
+                        <td><?= $this->Html->link($inventory_order->order_destination, [ 'controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['class' => '','escape' => false]) ?></td>
+                        <td><?= $this->Html->link(h($inventory_order->date_created), [ 'controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['class' => '','escape' => false]) ?></td>
                       </tr>
                       <?php endforeach; ?>
                   </tbody>
@@ -140,49 +138,46 @@ table.dataTable{
                     <?php foreach ($pendingShipments as $shipment): ?>
                     <tr>                        
                         <?php if($hdr_user_data->user->group_id <> 4) { ?>
-                          <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
+                          <td><?= $this->Html->link($shipment->client->firstname .' '. $shipment->client->lastname , [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]) ?></td>
                         <?php } ?>
-                        <td><?= 
-                             $this->Html->link($shipment->item_description .' - '. $shipment->id , [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false])
-                             
-                         ?></td>                        
-                        <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
-                        <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
+                        <td><?= $this->Html->link($shipment->item_description .' - '. $shipment->id , [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]) ?></td>                        
+                        <td><?= $this->Html->link($this->Number->precision($shipment->quantity,2) , [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]) ?></td>
+                        <td><?= $this->Html->link($this->Number->precision($shipment->boxes,2) , [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]) ?></td>
                         <td>
                           <?php
                             if( $shipment->shipping_carrier_id == 4 ){
-                              echo $shipment->shipping_carrier->name . " - " . $shipment->other_shipping_carrier;
+                              echo $this->Html->link($shipment->shipping_carrier->name . " - " . $shipment->other_shipping_carrier, [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]);
                             }else{
-                              echo $shipment->shipping_carrier->name;
+                              echo $this->Html->link($shipment->shipping_carrier->name, [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]);
                             }                            
                           ?>                          
                         </td>
                         <td>
                           <?php 
                             if( $shipment->shipping_service_id == 4 ){
-                              echo $shipment->shipping_service->name . " - " . $shipment->other_shipping_service;
+                              echo $this->Html->link($shipment->shipping_service->name . " - " . $shipment->other_shipping_service, [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]);
                             }else{
-                              echo $shipment->shipping_service->name;
+                              echo $this->Html->link($shipment->shipping_service->name, [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]);                              
                             }                            
                           ?>
                         </td>
                         <td>
                           <?php 
-                            echo $shipment->shipping_purpose->name;
+                            echo $this->Html->link($shipment->shipping_purpose->name, [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]);
                           ?>
                         </td>
                         <td>
                           <?php 
                             if( $shipment->status == 1 ){
-                              echo "Pending";
+                              echo $this->Html->link("Pending", [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]);                              
                             }elseif($shipment->status == 4){
-                              echo "Received-Pending";
+                              echo $this->Html->link("Received-Pending", [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]);                              
                             }else{
-                              echo "Completed";
+                              echo $this->Html->link("Completed", [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]);                              
                             }
                           ?>
                         </td>
-                        <td><?= h($shipment->created) ?></td>                        
+                        <td><?= $this->Html->link(h($shipment->created), [ 'controller' => 'shipments' , 'action' => 'client_view', $shipment->id],['class' => '','escape' => false]) ?></td>                        
                     </tr>
                     <?php endforeach; ?>
                 </tbody>

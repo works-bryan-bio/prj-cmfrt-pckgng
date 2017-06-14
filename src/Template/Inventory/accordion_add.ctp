@@ -54,7 +54,7 @@
                         <div class='form-group'>
                             <label for='boxes' class='col-sm-2 control-label'>" . __('Order Price') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Auto Suggest Pricing from the shipment' ></i></span>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('order_price', ['type' => 'text', 'class' => 'form-control', 'id' => 'order_price', 'label' => false]);                
+                            echo $this->Form->input('order_price', ['disabled' => 'disabled', 'type' => 'text', 'class' => 'form-control', 'id' => 'order_price', 'label' => false]);                
                         echo "<span id='price_text' ></span> </div></div>";    
                         
                                     echo "

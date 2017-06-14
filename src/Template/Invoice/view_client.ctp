@@ -113,7 +113,9 @@
     </div>
 
     <div class="col-sm-offset-2 col-sm-10" style="padding-top: 30px;">
-        <?php  echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'client'],['class' => 'btn btn-warning', 'escape' => false]); ?>
+        <?php  
+            echo $this->Html->link('<i class="fa fa-angle-left"> </i> Back To list', ['action' => 'client'],['class' => 'btn btn-warning', 'escape' => false]); 
+        ?>
         <?php if($invoice->status <> 2){ ?>
          <?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-'. $invoice->id,['title' => 'Payments', 'class' => 'btn btn-danger','data-toggle' => 'modal','escape' => false]) ?>
             <?php } ?>
