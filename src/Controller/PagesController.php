@@ -316,17 +316,32 @@ class PagesController extends AppController
             ; 
 
             if(isset($user_data)){
-                $shipments = $this->Shipments->find('all')
-                    ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
-                    ->where(['Shipments.client_id' => $user_data->id ,'Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
-                ;
+                if( $user_data->user->group_id == 4 ){  
+                    $shipments = $this->Shipments->find('all')
+                        ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+                        ->where(['Shipments.client_id' => $user_data->id ,'Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                    ;
 
-                $inventory_order = $this->InventoryOrder->find('all')
-                    ->contain(['Shipments', 'Clients'])
-                    ->where(['Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
-                    ->orWhere(['InventoryOrder.order_number LIKE' => '%' . $data['query'] . '%'])
-                    ->order(['Shipments.id' => 'DESC'])
-                ;
+                    $inventory_order = $this->InventoryOrder->find('all')
+                        ->contain(['Shipments', 'Clients'])
+                        ->where(['Shipments.client_id' => $user_data->id ,'Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                        ->orWhere(['InventoryOrder.order_number LIKE' => '%' . $data['query'] . '%'])
+                        ->order(['Shipments.id' => 'DESC'])
+                    ;
+                }else{
+                    $shipments = $this->Shipments->find('all')
+                        ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+                        ->where(['Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                    ;
+
+                    $inventory_order = $this->InventoryOrder->find('all')
+                        ->contain(['Shipments', 'Clients'])
+                        ->where(['Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                        ->orWhere(['InventoryOrder.order_number LIKE' => '%' . $data['query'] . '%'])
+                        ->order(['Shipments.id' => 'DESC'])
+                    ;
+
+                }
             }    
         }    
 
@@ -363,18 +378,34 @@ class PagesController extends AppController
                 ->where(['Pages.body LIKE' => '%' . $data['query'] . '%'])
             ; 
 
-        $shipments = $this->Shipments->find('all')
-            ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
-            ->where(['Shipments.client_id' => $user_data->id ,'Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
-        ;
+            if( $user_data->user->group_id == 4 ){   
 
-        $inventory_order = $this->InventoryOrder->find('all')
-            ->contain(['Shipments', 'Clients'])
-            ->where(['Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
-            ->orWhere(['InventoryOrder.order_number LIKE' => '%' . $data['query'] . '%'])
-            ->order(['Shipments.id' => 'DESC'])
-        ;
+                $shipments = $this->Shipments->find('all')
+                    ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+                    ->where(['Shipments.client_id' => $user_data->id ,'Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                ;
 
+                $inventory_order = $this->InventoryOrder->find('all')
+                    ->contain(['Shipments', 'Clients'])
+                    ->where(['Shipments.client_id' => $user_data->id, 'Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                    ->orWhere(['InventoryOrder.order_number LIKE' => '%' . $data['query'] . '%'])
+                    ->order(['Shipments.id' => 'DESC'])
+                ;
+
+             }else{
+                 $shipments = $this->Shipments->find('all')
+                    ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
+                    ->where(['Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                ;
+
+                $inventory_order = $this->InventoryOrder->find('all')
+                    ->contain(['Shipments', 'Clients'])
+                    ->where(['Shipments.item_description LIKE' => '%' . $data['query'] . '%'])
+                    ->orWhere(['InventoryOrder.order_number LIKE' => '%' . $data['query'] . '%'])
+                    ->order(['Shipments.id' => 'DESC'])
+                ;
+
+             }   
         }     
 
         $this->set(['pages' => $pages,

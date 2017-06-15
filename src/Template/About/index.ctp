@@ -26,7 +26,7 @@ was born!
                 <div class="cp-about-para cp-black-p pad-50">
                     <h4>Our Location</h4>
                     <p class="content-paragraph">
-                         We have a beautiful facility located in Newark, New Jersey that boasts 10,000 square feet of
+                         We have a beautiful facility located in Newark, New Jersey that boasts 20,000 square feet of
 beautiful machinery and shelving. Every customer has their own zone in our warehouse where
 only his products are kept so there is no confusion with inventory. We hold over 1 million dollars
 worth of inventory and have the best security system on the market to protect our customers'
