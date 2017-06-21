@@ -145,10 +145,17 @@
                             </div>
                             <div style="display:none;" id="testi2">
                                 <video class="lg-video-object lg-html5" controls preload="none">
-                                    <source src="<?php echo $this->Url->build("/webroot/frontend/testimonials/testimonial2.mp4"); ?>" type="video/mp4">
+                                    <source src="<?php echo $this->Url->build("/webroot/frontend/testimonials/testimonial4.mp4"); ?>" type="video/mp4">
                                     Your browser does not support HTML5 video.
                                 </video>
                             </div>
+                            <div style="display:none;" id="testi3">
+                                <video class="lg-video-object lg-html5" controls preload="none">
+                                    <source src="<?php echo $this->Url->build("/webroot/frontend/testimonials/testimonial5.mp4"); ?>" type="video/mp4">
+                                    Your browser does not support HTML5 video.
+                                </video>
+                            </div>
+
 
                             <ul id="video-gallery" class="list-unstyled">
                                 <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" data-sub-html="video caption1" data-html="#testi1">
@@ -157,7 +164,7 @@
                                 <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" data-sub-html="video caption2" data-html="#testi2">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
-                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" data-sub-html="video caption2" data-html="#testi2">
+                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" data-sub-html="video caption3" data-html="#testi3">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
                             </ul>
@@ -257,6 +264,8 @@
         </h2>
     </div>
 </section>
+
+<!-- Whole Gallery
 <section class="cp-gallery">
     <ul class="list-unstyled" id="cp-gallery-list">
         <li data-src="<?php echo $this->Url->build("/webroot/frontend/assets/images/images/1-f.jpg"); ?>">
@@ -572,3 +581,5 @@
         <a class="btn btn-loadmore cf-less">Show less</a>
     </div>
 </section>
+
+  -->
