@@ -58,6 +58,7 @@ class ShipmentsController extends AppController
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
             ->orWhere(['Shipments.status' => 4])
+            ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
@@ -108,6 +109,7 @@ class ShipmentsController extends AppController
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
             ->where(['Shipments.client_id' => $user_data->id])
             ->andWhere(['Shipments.status' => 1 ." AND Shipments.status =4"])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
@@ -141,15 +143,15 @@ class ShipmentsController extends AppController
         $allShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
             ->where(['Shipments.client_id' => $user_data->id])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
             ->order(['Shipments.id' => 'DESC'])
         ;
-
-        $cancelled_shipments = $this->Shipments->find('all')
+ 		
+		$cancelled_shipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
             ->where(['Shipments.client_id' => $user_data->id, 'Shipments.status' => 5])
             ->order(['Shipments.id' => 'DESC'])
         ;
-
         $this->set('pendingShipments', $pendingShipments);
         $this->set('completedShipments', $completedShipments);
         $this->set('allShipments', $allShipments);
@@ -176,6 +178,10 @@ class ShipmentsController extends AppController
         $this->set(['group_id' => $group_id]); 
         $this->set('shipment', $shipment);
         $this->set('_serialize', ['shipment']);
+
+
+        // debug($shipment);
+        // exit;
     }
 
     /**
@@ -289,7 +295,7 @@ class ShipmentsController extends AppController
                 $email_content = ['shipment_details' => $this->request->data, 'client' => $user_data, 'shipment_id' => $result->id];
 
 
-                $recipient = "rossel.dev@gmail.com";
+                $recipient = "works.bryan.bio@gmail.com";
                 //$recipient = "comfortpackaging@gmail.com";        
                 $email_smtp = new Email('default');
                 $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
@@ -527,7 +533,11 @@ class ShipmentsController extends AppController
 
        
         if (!empty($shipment)) {
-            $this->Flash->success(__('Shipment has been successfully sent to inventory.'));  
+            if($data['send_option'] == 'send_to_amazon' || $data['send_option'] == 'send_part_of_it_to_amazon'){
+                $this->Flash->success(__('Your shipment has been successfully sent to Amazon.'));
+            }else{
+                $this->Flash->success(__('Shipment has been successfully sent to inventory.'));
+            }
             $shipment = $this->Shipments->patchEntity($shipment, $data);
             if($data['send_option'] == "send_to_amazon"){
 
@@ -821,14 +831,20 @@ class ShipmentsController extends AppController
         $per_piece = 0;
         $this->request->allowMethod(['post']);
         $this->InventoryOrder = TableRegistry::get('InventoryOrder');
-    
 
+        $invoices = 0;
      if($user_data->user->group_id == 4){
         $order = $this->InventoryOrder->find('all')
             ->where([ 'order_status' => 'Pending' ])
             ->andWhere(['date_created <=' => date('Y-m-d')])
             ->andWhere(['client_id' => $user_data->id])
-            ->count();   
+            ->count();
+
+         $this->Invoice = TableRegistry::get('Invoice');
+         $invoices = $this->Invoice->find('all')
+             ->where([ 'status' => '1' ])
+             ->where([ 'clients_id' => $user_data->id ])
+             ->count();
 
       }else{
           $order = $this->InventoryOrder->find('all')
@@ -903,14 +919,16 @@ class ShipmentsController extends AppController
         $return['amazon_count'] = $amazon_count;
         if($user_data->user->group_id == 3){
             $return['total_notification'] = $order + $shipment + $amazon_count;
-        }else{
+        }
+        else if($user_data->user->group_id == 4){
+            $return['total_notification'] = $order + $shipment + $message + $invoices;
+        }
+        else{
             $return['total_notification'] = $order + $shipment + $message;     
         }
         echo json_encode($return);
         exit;
     }
-
- 
 
 
 }

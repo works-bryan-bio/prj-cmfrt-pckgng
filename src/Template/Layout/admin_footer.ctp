@@ -31,6 +31,11 @@
             loadVerifyOrderDue();
             loadVerifyDue();
 
+            //
+            $('.btn-success').click(function(){
+                
+                $('.btn-success').prop('disabled', true);
+            });
 
             // Javascript to enable link to tab
             var url = document.location.toString();
@@ -49,6 +54,14 @@
 
             //Datatable
             $('.zero-config-datatable').DataTable({
+                
+                "fnDrawCallback": function( settings ) {
+                    redrawnFunction();
+                }
+            });
+
+            $('.zero-config-datatable-employee-pending').DataTable({
+                "order": [[ 10, "desc" ]],
                 "fnDrawCallback": function( settings ) {
                     redrawnFunction();
                 }

@@ -38,7 +38,7 @@
         </tr>
         <tr>
             <th><?= __('Client Id') ?></th>
-            <td><?= $this->Number->format($shipment->client_id) ?></td>
+            <td><?= $this->Number->format($shipment->client_id) . " - " . $shipment->client->firstname . " " . $shipment->client->lastname  ?></td>
         </tr>
         <tr>
             <th><?= __('Quantity') ?></th>
@@ -72,6 +72,10 @@
     <tr>
         <th><?= __('Item Description') ?></th>
         <td><?= $this->Text->autoParagraph(h($shipment->item_description)); ?></td>        
+    </tr> 
+     <tr>
+        <th><?= __('Additional Information') ?></th>
+        <td><?= $this->Text->autoParagraph(h($shipment->additional_information)); ?></td>        
     </tr>
     <tr>
         <th><?= __('Other Shipping Carried') ?></th>

@@ -54,7 +54,7 @@ hr{
     <div class="tab-content">
       <div class="tab-pane active" id="pending">
           <div class="table-responsive data-content">    
-            <table class="zero-config-datatable display">
+            <table class="zero-config-datatable-employee-pending display">
                 <thead>
                     <tr class="heading">
                       <th style="text-align:center;">Actions</th>

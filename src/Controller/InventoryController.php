@@ -86,13 +86,13 @@ class InventoryController extends AppController
         $user_data = $session->read('User.data');  
 
         $inventory = $this->Inventory->find('all')
-            ->contain(['Shipments'])
+            ->contain(['Shipments', 'Clients'])
             ->where(['Inventory.remaining_quantity <>' => '> 0'])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
         $inventory_completed = $this->Inventory->find('all')
-            ->contain(['Shipments'])
+            ->contain(['Shipments', 'Clients'])
             ->where(['Inventory.remaining_quantity' => '0'])
             ->order(['Shipments.id' => 'DESC'])
         ;
