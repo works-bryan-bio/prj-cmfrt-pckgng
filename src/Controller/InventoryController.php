@@ -180,6 +180,9 @@ class InventoryController extends AppController
         $this->set(['group_id' => $group_id]);
         $this->set('inventory', $inventory);
         $this->set('_serialize', ['inventory']);
+
+        // debug($inventory);
+        // exit;
     }
 
     /**

@@ -244,7 +244,7 @@ hr{
                                           <label for="amazon_shipment_date" class="col-sm-4 control-label" style="margin-top:5px">Amazon Shipment Date</label>
                                           <div class="col-sm-6">
                                             <div class="input text required">
-                                              <input name="amazon_shipment_date" value="<?= $shipment->amazon_shipment_date; ?>" class="form-control dt-default" id="amazon_shipment_date" type="text">
+                                              <input name="amazon_shipment_date" value="<?= $shipment->amazon_shipment_date == ""?date('Y-m-d'):$shipment->amazon_shipment_date; ?>" class="form-control dt-default" id="amazon_shipment_date" type="text">
                                             </div> 
                                           </div>
                                         </div>
@@ -292,7 +292,23 @@ hr{
                         <?php if($hdr_user_data->user->group_id <> 4) { ?>
                           <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
                         <?php } ?>
-                        <td><?= $shipment->item_description .' - '. $shipment->id  ?></td>                        
+                        <td>
+                            <?= $shipment->item_description .' - '. $shipment->id  ?>
+
+                            <?php
+                                $this->Shipments = Cake\ORM\TableRegistry::get('Shipments');
+                                $combined_shipment = array();
+                                $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $shipment->id]);
+                                if($combined_shipment->count() > 0) {
+                                    echo "<hr>";
+                                    foreach($combined_shipment as $cs) {
+                                        echo $cs->item_description . " - " . $cs->id . "<br>";
+//                                        echo $cs->id . " - " . $cs->item_description . "<br>";
+                                    }
+                                }
+                            ?>
+
+                        </td>
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>
@@ -407,7 +423,21 @@ hr{
                         <?php if($hdr_user_data->user->group_id <> 4) { ?>
                           <td><?= $shipment->client->firstname ?> <?= $shipment->client->lastname ?></td>
                         <?php } ?>
-                        <td><?= $shipment->item_description ." - ". $shipment->id  ?></td>                        
+                        <td>
+                            <?= $shipment->item_description ." - ". $shipment->id  ?>
+                            <?php
+                                $this->Shipments = Cake\ORM\TableRegistry::get('Shipments');
+                                $combined_shipment = array();
+                                $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $shipment->id]);
+                                if($combined_shipment->count() > 0) {
+                                    echo "<hr>";
+                                    foreach($combined_shipment as $cs) {
+                                        echo $cs->item_description . " - " . $cs->id . "<br>";
+    //                                        echo $cs->id . " - " . $cs->item_description . "<br>";
+                                    }
+                                }
+                            ?>
+                        </td>
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>
@@ -500,7 +530,21 @@ hr{
                               </div>
                             </div>
                         </td>
-                        <td><?= $shipment->item_description ." - ". $shipment->id ?></td>                        
+                        <td>
+			<?= $shipment->item_description ." - ". $shipment->id ?>
+			<?php
+                                $this->Shipments = Cake\ORM\TableRegistry::get('Shipments');
+                                $combined_shipment = array();
+                                $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $shipment->id]);
+                                if($combined_shipment->count() > 0) {
+                                    echo "<hr>";
+                                    foreach($combined_shipment as $cs) {
+                                        echo $cs->item_description . " - " . $cs->id . "<br>";
+    //                                        echo $cs->id . " - " . $cs->item_description . "<br>";
+                                    }
+                                }
+                            ?>
+			</td>                        
                         <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
                         <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
                         <td>

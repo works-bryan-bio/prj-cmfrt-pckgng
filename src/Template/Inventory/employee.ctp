@@ -158,10 +158,17 @@ hr{
                                         <p>Current Order Quantity: <?= $inventory_order->order_quantity; ?></p> 
                                         <p>Remaining Quantity: <?= $inventory_info->remaining_quantity; ?></p> 
                                          <form   id="inventory-order-<?php echo $inventory_order->id; ?>" method="post" action="<?= $base_url; ?>inventory_order/update_status_to_complete/<?php echo $inventory_order->id; ?>/<?php echo $inventory_info->id; ?>" >
-                                        <?php  if($inventory_info->remaining_quantity == $inventory_order->order_quantity) { ?>
-                                       
+                                        <?php  if($inventory_info->remaining_quantity <= $inventory_order->order_quantity) { ?>
+                                           
+
+                                        <?php  if($inventory_info->remaining_quantity <= $inventory_order->order_quantity) { ?>       
+                                         <span style="font-weight:40; color:#ff0000;" > Note: only the remaining quantity will be sent on the order. </span>                                    
+                                        <?php } ?>  
+
                                         <p> <label><input id="send_to_client" name="send_to_client" type="checkbox" value="yes" /> Send to client?</label> </p>
-                                        <p> <textarea id="completion_comment" name="completion_comment" cols="50" rows="2" placeholder="Completion Comment"></textarea></p>
+                                        <p> <textarea id="completion_comment" name="completion_comment" cols="50" rows="2" placeholder="Completion Comment"><?php  if($inventory_info->remaining_quantity <= $inventory_order->order_quantity){ echo "Remaining qty: ". $inventory_info->remaining_quantity . " - Ordered Qty: ". $inventory_order->order_quantity ." send only the remaining qty.";
+                                             } ?>
+                                        </textarea></p>
                                         
                                         <?php } ?>
                                     </div>

@@ -178,10 +178,6 @@ class ShipmentsController extends AppController
         $this->set(['group_id' => $group_id]); 
         $this->set('shipment', $shipment);
         $this->set('_serialize', ['shipment']);
-
-
-        // debug($shipment);
-        // exit;
     }
 
     /**
@@ -441,7 +437,7 @@ class ShipmentsController extends AppController
             $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
             if ($this->Shipments->save($shipment)) {
                 $this->Flash->success(__('The shipment has been saved.'));
-                $action = $this->request->data['save'];
+                $action = 'save';
                 if( $action == 'save' ){
                     return $this->redirect(['action' => 'client']);
                 }else{
