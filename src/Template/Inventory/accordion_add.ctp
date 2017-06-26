@@ -76,23 +76,9 @@
                             <div class='col-sm-6'>";
                              echo $this->Form->input('shipping_service_id', ['class' => 'form-control', 'id' => 'shipping_service_id', 'label' => false, 'options' => $shippingServices]);  
 
-                        echo " <br /> <label><input type='checkbox' id='toggle_combine_inventory' checked /> Combine order </label> <span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Check If Combine order' ></i></span>
+                        echo " 
                               </div></div>";    
-                        echo "
-                        <div class='form-group combine_inventory'>
-                            <label for='combine_inventory_order_id' class='col-sm-2 control-label'>" . __('Combine Inventory Order') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Select the Combine Inventory Order' ></i></span>
-                            <div class='col-sm-6'>";
-                            echo $this->Form->input('combine_inventory_order_id', [ 'options' => $inventoryOrders, 'class' => 'form-control', 'id' => 'combine_inventory_order_id', 'label' => false ]);
-                        echo " </div></div>";    
-                        
-                                    echo "
-                        <div class='form-group combine_inventory'>
-                            <label for='combine_comment' class='col-sm-2 control-label'>" . __('Combine Comment') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Combine Comment' ></i></span>
-                            <div class='col-sm-6'>";
-                            echo $this->Form->input('combine_comment', ['class' => 'form-control', 'id' => 'combine_comment', 'label' => false]);                
-                        echo " </div></div>";    
-                        
-                        
+
                                     echo "
                         <div class='form-group'>
                             <label for='date_sent' class='col-sm-2 control-label'>" . __('Date Sent') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Date sent' ></i></span>
