@@ -55,7 +55,11 @@
             <th><?= __('Modified') ?></th>
             <td><?= h($inventory->modified) ?></td>
         </tr>
-        <?php if($inventory->shipment->status == 2){?>
+        <?php if($inventory->shipment->status == 2){?>   
+        <tr>
+            <th><?= __('Completed Remarks') ?></th>
+            <td><?= h($inventory->shipment->completion_comment) ?></td>
+        </tr>
         <tr>
             <th><?= __('Completed') ?></th>
             <td><?= h($inventory->shipment->date_completed) ?></td>

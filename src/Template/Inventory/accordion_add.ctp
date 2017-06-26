@@ -61,7 +61,7 @@
                         <div class='form-group'>
                             <label for='date_created' class='col-sm-2 control-label'>" . __('Order to be sent on') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Order to be sent on' ></i></span>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('date_created', ['type' => 'text', 'class' => 'form-control dt-default', 'id' => 'date_created', 'label' => false]);                
+                            echo $this->Form->input('date_created', ['type' => 'text', 'class' => 'form-control dt-default', 'id' => 'date_created', 'label' => false , 'value' => date('Y-m-d') ]);                
                         echo " </div></div>";   
                            
                                     echo "

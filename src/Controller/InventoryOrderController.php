@@ -272,7 +272,9 @@ class InventoryOrderController extends AppController
         $this->Clients = TableRegistry::get('Clients');
         if(isset($this->request->data['completion_comment'])){
             $completion_comment = $this->request->data['completion_comment'];
-            $send_to_client = $this->request->data['send_to_client'];
+            if(isset($this->request->data['send_to_client'])){
+                $send_to_client = $this->request->data['send_to_client'];
+            }
         }else{
             $completion_comment ="";
 
@@ -309,8 +311,10 @@ class InventoryOrderController extends AppController
                 if($remaining_quantity <= 0) {
 
                     $completion_comment = $this->request->data['completion_comment'];
-                    $send_to_client = $this->request->data['send_to_client'];
-                    
+                     if(isset($this->request->data['send_to_client'])){
+                        $send_to_client = $this->request->data['send_to_client'];
+                     }
+                                        
                     $shipment_id = $inventory->shipment_id;
                     $this->Shipments = TableRegistry::get('Shipments');
                     $shipment = $this->Shipments->get($shipment_id);

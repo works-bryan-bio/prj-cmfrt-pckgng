@@ -58,7 +58,7 @@ class ShipmentsController extends AppController
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
             ->orWhere(['Shipments.status' => 4])
-            ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
+            //->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
@@ -109,7 +109,7 @@ class ShipmentsController extends AppController
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
             ->where(['Shipments.client_id' => $user_data->id])
             ->andWhere(['Shipments.status' => 1 ." AND Shipments.status =4"])
-               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
+            //->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
@@ -178,10 +178,6 @@ class ShipmentsController extends AppController
         $this->set(['group_id' => $group_id]); 
         $this->set('shipment', $shipment);
         $this->set('_serialize', ['shipment']);
-
-
-        // debug($shipment);
-        // exit;
     }
 
     /**
@@ -255,6 +251,10 @@ class ShipmentsController extends AppController
 
             if(!isset($this->request->data['is_correct_quantity'])){
                 $this->request->data['is_correct_quantity'] = 0;
+            }
+
+            if(!isset($this->request->data['price'])){
+                $this->request->data['price'] = 0;
             }
 
             $this->request->data['client_id'] = $user_data->id;
@@ -441,7 +441,7 @@ class ShipmentsController extends AppController
             $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
             if ($this->Shipments->save($shipment)) {
                 $this->Flash->success(__('The shipment has been saved.'));
-                $action = $this->request->data['save'];
+                $action = 'save';
                 if( $action == 'save' ){
                     return $this->redirect(['action' => 'client']);
                 }else{
@@ -523,6 +523,7 @@ class ShipmentsController extends AppController
         $user_data = $session->read('User.data');
 
         $data = $this->request->data;
+
         $shipment = $this->Shipments->get($data['shipment_id']);
         
         $client_id = $shipment->client_id;
@@ -610,7 +611,15 @@ class ShipmentsController extends AppController
                 if(!$inventory){
                     $inventory = $this->Inventory->newEntity();
                 }
-                
+
+                if(!isset($inventory_data['last_sent_order_date'])) {
+                    $inventory_data['last_sent_order_date'] = "";
+                }
+
+                if(!isset($inventory_data['last_sent_order_quantity'])) {
+                    $inventory_data['last_sent_order_quantity'] = 0;
+                }
+
                 $inventory_data['client_id'] = $shipment->client_id;
                 $inventory_data['shipment_id'] = $shipment->id;
                 $inventory_data['sent_quantity'] = $shipment->quantity;
