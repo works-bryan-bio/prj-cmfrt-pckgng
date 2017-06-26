@@ -228,7 +228,7 @@ hr{
 
                       <?php 
                         $combined_shipment = array();
-                        $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $inventory->shipment->id]);
+                        $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $inventory->shipment->id, 'Shipments.status' => 3]);
                         
                         $status = "";
                           if($inventory->shipment->status == "1") {
@@ -376,7 +376,7 @@ hr{
             </table>
         </div>        
       </div>   
-      <div class="tab-pane active" id="cancelled">
+      <div class="tab-pane" id="cancelled">
           <div class="table-responsive data-content">    
             <table class="zero-config-datatable-5-desc display">
                 <thead>

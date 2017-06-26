@@ -300,9 +300,9 @@ hr{
                                 $combined_shipment = array();
                                 $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $shipment->id]);
                                 if($combined_shipment->count() > 0) {
-                                    echo "<hr>";
+                                    //echo "<hr>";
                                     foreach($combined_shipment as $cs) {
-                                        echo $cs->item_description . " - " . $cs->id . "<br>";
+                                        //echo $cs->item_description . " - " . $cs->id . "<br>";
 //                                        echo $cs->id . " - " . $cs->item_description . "<br>";
                                     }
                                 }

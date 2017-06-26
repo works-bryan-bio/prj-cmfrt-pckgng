@@ -58,7 +58,7 @@ class ShipmentsController extends AppController
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
             ->orWhere(['Shipments.status' => 4])
-            ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
+            //->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
@@ -109,7 +109,7 @@ class ShipmentsController extends AppController
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
             ->where(['Shipments.client_id' => $user_data->id])
             ->andWhere(['Shipments.status' => 1 ." AND Shipments.status =4"])
-               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
+               //->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
