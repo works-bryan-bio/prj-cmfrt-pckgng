@@ -51,7 +51,36 @@
                             <label for='boxes' class='col-sm-2 control-label'>" . __('Boxes') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the quantity of boxes included' ></i></span>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('boxes', ['type' => 'text', 'class' => 'form-control', 'id' => 'boxes', 'label' => false]);                
-                        echo " </div></div>";    
+                        echo " </div></div>"; 
+
+                          echo "
+                        <div class='form-group'>
+                            <label for='comments' class='col-sm-2 control-label'>" . __('Combine in a pack') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Click check box to show breakdown of item in the pack' ></i></span>
+                            <div class='col-sm-6'>";
+                            
+                            ?>
+                            <table class="widht:100%" >
+                                   <tr>
+                                        <td style="padding: 8px 10px;"><label><input type="checkbox" id="combine_in_pack" name="combine_in_pack" onclick="javascript:shipmentCombineOptions();" class="shipping-combine" value="yes"> Combine in pack </label></td>
+                                        <td style="padding: 8px 10px;"></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="padding: 8px 10px;"><label class="option-shipping-combine hidden"> Quantity per pack </label> <input type="text" class="option-shipping-combine form-control hidden" id="quantity_per_pack" name="quantity_per_pack" value="">  </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2" style="padding: 8px 10px;"> <label class="option-shipping-combine hidden">  Packs per shipment</label> <input type="text" class="option-shipping-combine form-control hidden" id="packs_per_shipment" name="packs_per_shipment" value="">  </td>
+                                        
+                                    </tr>
+                            </table>
+
+
+                            <?php 
+
+
+                        echo " </div></div>";
+
+
                                    echo "
                         <div class='form-group'>
                             <label for='boxes' class='col-sm-2 control-label'>" . __('Supplier') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the supplier name' ></i></span>

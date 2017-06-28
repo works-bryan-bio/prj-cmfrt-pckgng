@@ -81,7 +81,7 @@
 
                                     echo "
                         <div class='form-group'>
-                            <label for='date_sent' class='col-sm-2 control-label'>" . __('Date Sent') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Date sent' ></i></span>
+                            <label for='date_sent' class='col-sm-2 control-label'>" . __('Date Created') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Date sent' ></i></span>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('date_sent', ['type' => 'text', 'class' => 'form-control dt-default', 'id' => 'date_sent', 'label' => false]);                
                         echo " </div></div>";    

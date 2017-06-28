@@ -20,6 +20,10 @@
             <td><?= $inventory->has('shipment') ? $this->Html->link($inventory->shipment->id . " - " . $inventory->shipment->item_description, ['controller' => 'Shipments', 'action' => 'view', $inventory->shipment->id]) : '' ?></td>
         </tr>
         <tr>
+            <td><?= __('Client') ?></th>
+            <td><?= $inventory->has('client') ? $this->Html->link($inventory->client->firstname." ".$inventory->client->lastname, ['controller' => 'Clients', 'action' => 'view', $inventory->client->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th><?= __('Last Sent Order Date') ?></th>
             <td><?= h($inventory->last_sent_order_date) ?></td>
         </tr>

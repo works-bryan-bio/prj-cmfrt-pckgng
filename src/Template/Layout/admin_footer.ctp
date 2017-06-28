@@ -32,10 +32,10 @@
             loadVerifyDue();
 
             //
-            $('.btn-success').click(function(){
+            // $('.btn-success').click(function(){
                 
-                $('.btn-success').prop('disabled', true);
-            });
+            //     $('.btn-success').prop('disabled', true);
+            // });
 
             // Javascript to enable link to tab
             var url = document.location.toString();
@@ -291,7 +291,7 @@
                 var shipping_purpose_id = $('#shipping_purpose_id').val();
 
                 if(shipping_purpose_id == 5){
-                     alert(shipping_purpose_id);
+                     
                     var item_description = $('#item_description').val();
                     var quantity = $('#quantity').val();
                     loadVerifyUpcPriceCombine(upc_number,combine_id,item_description,quantity);
@@ -616,6 +616,15 @@
                    $(".option-shipping-others").removeClass("hidden");
                 }else{
                    $(".option-shipping-others").addClass("hidden");
+                }
+        }
+
+        function shipmentCombineOptions(){
+              var ship =  $('.shipping-combine').is(':checked');
+                if(ship == true){
+                   $(".option-shipping-combine").removeClass("hidden");
+                }else{
+                   $(".option-shipping-combine").addClass("hidden");
                 }
         }
 
