@@ -304,6 +304,7 @@
              $('#all_shipment').change(function(){
                 var shipment_id = $('#all_shipment').val();
                  loadVerifyUpcOrderPrice(shipment_id);
+                 loadVerifySentItem(shipment_id);
                 // var shipping_purpose_id = $('#shipping_purpose_id').val();
 
                 // if(shipping_purpose_id == 5){
@@ -439,7 +440,8 @@
                 $('.shipment-sent-quantity-desc').html(sent_quantity);
                 $('.shipment-remaining-quantity-desc').html(remaining_quantity);
                 $('.shipment-status-desc').html(status);
-
+                
+                $('#remaining_val').val(remaining_quantity);
                 $('#inp_shipment_id').val(shipment_id);
                 $('#total_remaining').val(remaining_quantity);
                 $('#dropdown-shipments-list').hide();
@@ -450,6 +452,7 @@
 
             $('#btn-new-inventory-order-accordion').click(function(){
                 $('#inp_shipment_id').val($('#all_shipment').val());
+                loadVerifySentItem($('#all_shipment').val());
                 $('.single-shipment-desc').hide();
                 $('#dropdown-shipments-list').show();
                 $('.send-new-order-container').show();
@@ -581,12 +584,25 @@
                 }
                 var total_price = qty * o.per_piece;
                 $('#order_price').val(total_price);
+                total_remaining = 0;
+                var total_remaining = $('#remaining_val').val(); - qty;
+                total_remaining = total_remaining - qty;
+                $('#total_remaining').val(total_remaining);
 
                 if(total_price == 0){
                   $('#price_text').html('We will update you on price soon.');
                 }else{
                     $('#price_text').html('');
                 }
+            },"json");
+        }
+
+
+        function loadVerifySentItem(shipment_id) {
+            $.post(base_url + "shipments/load_verify_sent_item",{shipment_id:shipment_id},function(o){
+                var qty =  o.quantity;
+                $('#remaining_val').val(qty);
+                $('#total_remaining').val(qty);
             },"json");
         }
 
@@ -674,5 +690,14 @@
 
         }
 
+        function loadVerifyInvoiceDue() {
+
+            $.post(base_url + "invoice/load_verify_invoice_due",{},function(o){
+
+                $('.number-of-invoice-due').html(o.quantity);
+            },"json");
+
+
+        }
         
     </script>

@@ -926,5 +926,29 @@ class ShipmentsController extends AppController
         exit;
     }
 
+    public function load_verify_sent_item()
+    {
+        $per_piece = 0;
+        $this->request->allowMethod(['post']);
+    
+       
+        $this->Inventory = TableRegistry::get('Inventory');
+        $inventory = $this->Inventory->find('all')
+            ->where([ 'shipment_id' => $this->request->data['shipment_id'] ])
+            ->first();
+        ;
+
+
+        if($inventory){
+           
+            $quantity = $inventory->remaining_quantity;
+            
+        }
+
+        $return['quantity'] = $quantity;
+        echo json_encode($return);
+        exit;
+    }
+
 
 }
