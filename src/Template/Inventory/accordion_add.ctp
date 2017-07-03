@@ -10,7 +10,6 @@
                 <b style="margin-left:120px;">Remaining Quantity:</b> <span class="shipment-remaining-quantity-desc"></span>
                 <b style="margin-left:120px;">Status:</b> <span class="shipment-status-desc"></span>
             </div>
-
              <input type="hidden" id="remaining_val"  value=""/>
           <?= $this->Form->create($inventoryOrder,[ 'url' => '/inventory_order/add', 'class' => 'form-horizontal']) ?>
                 <input type="hidden" name="shipment_id" value="" id="inp_shipment_id">

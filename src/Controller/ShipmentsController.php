@@ -199,6 +199,8 @@ class ShipmentsController extends AppController
         $this->set(['group_id' => $group_id]); 
         $this->set('shipment', $shipment);
         $this->set('_serialize', ['shipment']);
+        // debug($shipment);
+        // exit;
     }
 
     /**

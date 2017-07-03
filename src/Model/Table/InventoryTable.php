@@ -43,6 +43,11 @@ use Cake\Validation\Validator;
             'foreignKey' => 'shipment_id',
             'joinType' => 'INNER'
         ]);
+
+         $this->belongsTo('Clients', [
+            'foreignKey' => 'client_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -69,7 +74,7 @@ use Cake\Validation\Validator;
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->existsIn(['shipment_id'], 'Shipments'));
-
+        $rules->add($rules->existsIn(['client_id'], 'Clients'));
         return $rules;
     }
 }
