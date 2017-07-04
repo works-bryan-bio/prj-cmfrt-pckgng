@@ -32,6 +32,16 @@
             <td><?= __('Shipping Purpose') ?></th>
             <td><?= $shipment->shipping_purpose->name ?></td>
         </tr> 
+        <?php if( $shipment->shipping_purpose_id == 2 ){ ?>
+          <tr>
+            <td><?= __('Amazon Shipment Date') ?></th>
+            <td><?= $shipment->amazon_shipment_date == '' ? '-' : $shipment->amazon_shipment_date ?></td>
+          </tr>   
+          <tr>
+            <td><?= __('Amazon Shipment Note') ?></th>
+            <td><?= $shipment->amazon_shipment_note == '' ? '-' : $shipment->amazon_shipment_note ?></td>
+          </tr>   
+        <?php } ?>
         <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($shipment->id) ?></td>
