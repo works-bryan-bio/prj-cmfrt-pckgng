@@ -48,6 +48,16 @@ table{
             <th><?= __('Order Quantity') ?></th>
             <td><?= $this->Number->format($inventoryOrder->order_quantity) ?></td>
         </tr>
+        <tr>
+            <th><?= __('FNSKU Label') ?></th>
+            <td>
+              <?php if( $inventoryOrder->fnsku_label != "" ){ ?>
+                <img style="height:100px;" src="<?php echo $inventoryOrder->fnsku_label; ?>" />
+              <?php }else{ ?>
+                -
+              <?php } ?>
+            </td>
+        </tr>
        
         <?php if($inventoryOrder->order_status <> "Completed") {?>
         <tr>
