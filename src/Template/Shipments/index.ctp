@@ -339,7 +339,11 @@ hr{
                             if( $shipment->status == 1 ){
                               echo "Pending";
                             }elseif($shipment->status == 4){
-                              echo "Received-Pending";
+                              if(strtotime(date("Y-m-d")) <= strtotime($shipment->amazon_shipment_date)) { 
+                                echo "Temporary Storage";
+                              }else{
+                                echo "Received-Pending";
+                              }                              
                             }else{
                               echo "Completed";
                             }

@@ -3,6 +3,7 @@ table{
     text-align: left !important;
     margin:10px;
 }
+.datepicker{z-index:9999 !important}
 </style>
 <div class="row">
     <div class="col-lg-12">
