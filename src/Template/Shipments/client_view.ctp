@@ -52,6 +52,16 @@ table{
             <th><?= __('Boxes') ?></th>
             <td><?= $this->Number->precision($shipment->boxes,2) ?></td>
         </tr>
+        <?php if($shipment->combine_in_pack== "yes"){ ?>
+          <tr>
+              <th><?= __('Quantity Per Pack') ?></th>
+              <td><?= $this->Number->precision($shipment->quantity_per_pack,2) ?></td>
+          </tr>
+          <tr>
+              <th><?= __('Packs Per Shipment') ?></th>
+              <td><?= $this->Number->precision($shipment->packs_per_shipment,2) ?></td>
+          </tr>
+        <?php }?>
         <tr>
             <th><?= __('Supplier') ?></th>
             <td><?= $shipment->supplier ?></td>

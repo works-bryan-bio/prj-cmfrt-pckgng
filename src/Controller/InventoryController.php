@@ -170,12 +170,13 @@ class InventoryController extends AppController
     public function view($id = null)
     {
         $inventory = $this->Inventory->get($id, [
-            'contain' => ['Shipments']
+            'contain' => ['Shipments', 'Clients']
         ]);
 
         $session = $this->request->session();    
         $user_data = $session->read('User.data');    
         $group_id  = $user_data->user->group_id;
+            
 
         $this->set(['group_id' => $group_id]);
         $this->set('inventory', $inventory);
