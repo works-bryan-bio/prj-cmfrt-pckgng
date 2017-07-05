@@ -122,7 +122,8 @@ class ShipmentsController extends AppController
         $this->Inventory = TableRegistry::get('Inventory');
         $receivedAndStoredShipments = $this->Inventory->find('all')
             ->contain(['Shipments' => array('ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith') ])
-            ->where(['Shipments.client_id' => $user_data->id, 'Shipments.status' => 3])
+            ->where(['Shipments.client_id' => $user_data->id, 'Shipments.status' => 3 ])
+            ->orWhere(['Shipments.status' => 4])
             ->order(['Shipments.id' => 'DESC'])
         ;
 

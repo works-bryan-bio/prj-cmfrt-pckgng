@@ -172,6 +172,12 @@ hr{
                           <?php 
                             if( $shipment->status == 1 ){
                               echo "Pending";
+                            }elseif($shipment->status == 3){
+                              echo "Received and Stored";
+                            }elseif($shipment->status == 4){
+                              echo "Received-Pending";
+                            }elseif($shipment->status == 5){
+                              echo "Cancelled";
                             }else{
                               echo "Completed";
                             }
@@ -197,6 +203,7 @@ hr{
                       <th class="" style="width:150px;">Shipping Service</th>
                       <th class="" style="width:150px;">Shipping Purpose</th>
                       <th class="" style="width:150px;">Remaining Quantity</th>
+                      <th class="" style="width:150px;">Status</th>
                       <th class="date-time" style="width:150px;">Created</th>                     
                     </tr>
                 </thead>
@@ -241,6 +248,26 @@ hr{
                         </td>
                         <td>
                           <?= $shipment->remaining_quantity  ?>
+                        </td>
+                        <td>
+                          <?php 
+                             
+                            if( $shipment->shipment->status == 1 ){
+                              echo "Pending";
+                            }elseif($shipment->shipment->status == 3){
+                              echo "Received and Stored";
+                            }elseif($shipment->shipment->status == 4){
+                              if(strtotime(date("Y-m-d")) <= strtotime($shipment->shipment->amazon_shipment_date)) { 
+                                echo "Temporary Storage";
+                              }else{
+                                echo "Received-Pending";
+                              } 
+                            }elseif($shipment->shipment->status == 5){
+                              echo "Cancelled";
+                            }else{
+                              echo "Completed";
+                            }
+                          ?>
                         </td>
                         <td><?= h($shipment->shipment->created) ?></td>                        
                     </tr>
@@ -331,6 +358,12 @@ hr{
                           <?php 
                             if( $shipment->status == 1 ){
                               echo "Pending";
+                            }elseif($shipment->status == 3){
+                              echo "Received and Stored";
+                            }elseif($shipment->status == 4){
+                              echo "Received-Pending";
+                            }elseif($shipment->status == 5){
+                              echo "Cancelled";
                             }else{
                               echo "Completed";
                             }
@@ -425,6 +458,16 @@ hr{
                           <?php 
                             if( $shipment->status == 1 ){
                               echo "Pending";
+                            }elseif($shipment->status == 3){
+                              echo "Received and Stored";
+                            }elseif($shipment->status == 4){
+                              if(strtotime(date("Y-m-d")) <= strtotime($shipment->amazon_shipment_date)) { 
+                                echo "Temporary Storage";
+                              }else{
+                                echo "Received-Pending";
+                              } 
+                            }elseif($shipment->status == 5){
+                              echo "Cancelled";
                             }else{
                               echo "Completed";
                             }

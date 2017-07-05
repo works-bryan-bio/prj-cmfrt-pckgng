@@ -32,7 +32,7 @@
             <td><?= __('Shipping Purpose') ?></th>
             <td><?= $shipment->shipping_purpose->name ?></td>
         </tr> 
-        <?php if( $shipment->shipping_purpose_id == 2 ){ ?>
+        <?php // if( $shipment->shipping_purpose_id == 2 ){ ?>
           <tr>
             <td><?= __('Amazon Shipment Date') ?></th>
             <td><?= $shipment->amazon_shipment_date == '' ? '-' : $shipment->amazon_shipment_date ?></td>
@@ -41,7 +41,29 @@
             <td><?= __('Amazon Shipment Note') ?></th>
             <td><?= $shipment->amazon_shipment_note == '' ? '-' : $shipment->amazon_shipment_note ?></td>
           </tr>   
-        <?php } ?>
+        <?php // } ?>
+          <tr>
+            <td><?= __('Status') ?></th>
+            <td><?php 
+             if( $shipment->status == 1 ){
+                      echo "Pending";
+                    }elseif($shipment->status == 3){
+                      echo "Received and Stored";
+                    }elseif($shipment->status == 4){
+                      if(strtotime(date("Y-m-d")) <= strtotime($shipment->amazon_shipment_date)) { 
+                        echo "Temporary Storage";
+                      }else{
+                        echo "Received-Pending";
+                      } 
+                    }elseif($shipment->status == 5){
+                      echo "Cancelled";
+                    }else{
+                      echo "Completed";
+                    }
+            ?>
+        </td>
+        </tr> 
+         
         <tr>
             <th><?= __('Id') ?></th>
             <td><?= $this->Number->format($shipment->id) ?></td>

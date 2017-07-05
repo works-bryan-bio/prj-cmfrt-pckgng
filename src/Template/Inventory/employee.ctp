@@ -314,7 +314,7 @@ hr{
                       <td><?= h($inventory->last_sent_order_date) ?></td>
                       <td><?= h($inventory->last_sent_destination) ?></td>
                       <td>
-                        <?php if($inventory->shipment->send_option == "send_part_of_it_to_amazon") { ?>
+                        <?php if($inventory->shipment->send_option == "send_part_of_it_to_amazon" ) { ?>
                           <?php 
                             if(strtotime(date("Y-m-d")) <= strtotime($inventory->shipment->amazon_shipment_date)) { 
                               echo "Temporary Storage";
@@ -322,7 +322,15 @@ hr{
                               echo "Storage";
                             }
                           ?>
-                        <?php }?>
+                        <?php }elseif($inventory->shipment->send_option == "send_to_amazon" ){ ?> 
+                            <?php 
+                              if(strtotime(date("Y-m-d")) <= strtotime($inventory->shipment->amazon_shipment_date)) { 
+                                echo "Temporary Storage";
+                              }else{
+                                echo "Storage";
+                              }
+                            ?>
+                        <?php }  ?>
                       </td>
                       <td><?= $inventory->shipment->comments . " " . $inventory->shipment->combine_comment ." ". $inventory->shipment->amazon_shipment_note ?></td>                      
                     </tr>
