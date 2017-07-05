@@ -52,7 +52,7 @@ table{
             <th><?= __('FNSKU Label') ?></th>
             <td>
               <?php if( $inventoryOrder->fnsku_label != "" ){ ?>
-                <img style="height:100px;" src="<?php echo $inventoryOrder->fnsku_label; ?>" />
+              	<a href="<?php echo $inventoryOrder->fnsku_label; ?>"><i class="fa fa-file-text"></i> Download</a>                
               <?php }else{ ?>
                 -
               <?php } ?>
