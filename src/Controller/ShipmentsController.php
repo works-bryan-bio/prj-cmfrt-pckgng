@@ -273,6 +273,10 @@ class ShipmentsController extends AppController
                 $this->request->data['combine_comment'] = "";
             }
 
+            if( $this->request->data['shipping_purpose_id'] != 2 ){ 
+                $this->request->data['amazon_shipment_date_client'] = "";
+            }
+
             if( $this->request->data['shipping_service_id'] != 4 ){
                 $this->request->data['other_shipping_service'] = "";
             }
@@ -434,6 +438,10 @@ class ShipmentsController extends AppController
 
             if( $this->request->data['shipping_service_id'] != 4 ){
                 $this->request->data['other_shipping_service'] = "";
+            }
+
+            if( $this->request->data['shipping_purpose_id'] != 2 ){ 
+                $this->request->data['amazon_shipment_date_client'] = "";
             }
 
             $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);

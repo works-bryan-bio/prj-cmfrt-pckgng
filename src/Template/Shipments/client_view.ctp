@@ -36,7 +36,7 @@ table{
         <?php if( $shipment->shipping_purpose_id == 2 ){ ?>
           <tr>
             <td><?= __('Amazon Shipment Date') ?></th>
-            <td><?= $shipment->amazon_shipment_date == '' ? '-' : $shipment->amazon_shipment_date ?></td>
+            <td><?= $shipment->amazon_shipment_date_client == '' ? '-' : $shipment->amazon_shipment_date_client ?></td>
           </tr>   
           <tr>
             <td><?= __('Amazon Shipment Note') ?></th>
@@ -117,7 +117,7 @@ table{
           <tr>
             <th><?= __('FNSKU label') ?></th>
             <td>
-                <a href="<?= $shipment->fnsku_label; ?>"><?= $shipment->fnsku_label; ?></a>
+                <a href="<?= $shipment->fnsku_label; ?>"><i class="fa fa-file"></i> Download</a>
             </td>
           </tr>
         <?php } ?>
@@ -125,7 +125,7 @@ table{
           <th><?= __('Uploaded shipment label') ?></th>
           <td>
             <?php if(!empty($shipment->shipment_label)) { ?>
-              <a href="<?= $shipment->shipment_label; ?>"><?= $shipment->shipment_label; ?></a>
+              <a href="<?= $shipment->shipment_label; ?>"><i class="fa fa-file"></i> Download</a>
             <?php } ?>
           </td>
         </tr>
@@ -133,7 +133,7 @@ table{
           <th><?= __('Uploaded shipment label') ?></th>
           <td>
             <?php if(!empty($shipment->shipment_label)) { ?>
-              <a href="<?= $shipment->shipment_label; ?>"><?= $shipment->shipment_label; ?></a>
+              <a href="<?= $shipment->shipment_label; ?>"><i class="fa fa-file"></i> Download</a>
             <?php } ?>
           </td>
         </tr>

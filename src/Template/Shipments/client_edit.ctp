@@ -15,6 +15,7 @@
                         $add_shipping_service_class = "";
                         $add_amazon_group_class     = "hidden";
                         $add_combine_group_class    = "hidden";
+                        $amazon_shipment_date_class = "hidden";
 
                         if( $shipment->shipping_carrier_id != 4 ){
                             $add_shipping_carrier_class = 'hidden';
@@ -27,6 +28,10 @@
                         if( $shipment->shipping_purpose_id == 3 ){
                             $add_amazon_group_class = "";
                         }   
+
+                        if( $shipment->shipping_purpose_id == 2 ){
+                            $amazon_shipment_date_class = "";
+                        }
 
                         if( $shipment->shipping_purpose_id == 5 ){
                             $add_combine_group_class = "";
@@ -134,6 +139,14 @@
                             <label for='shipping_purpose_id' class='col-sm-2 control-label'>" . __('Shipping Purpose') . "</label>
                             <div class='col-sm-6'>";
                              echo $this->Form->input('shipping_purpose_id', ['class' => 'form-control', 'id' => 'shipping_purpose_id', 'label' => false, 'options' => $shippingPurposes]);                 
+                        echo " </div></div>";
+
+                        echo "
+                        <div class='form-group amazon-shipment-date " . $amazon_shipment_date_class . "'>
+                            <label for='amazon_shipment_date_client' class='col-sm-2 control-label'>" . __('Amazon Shipment Date') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Amazon Shipment Date' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('amazon_shipment_date_client', ['type' => 'text', 'class' => 'form-control dt-default', 'id' => '', 'label' => false]); 
+                                      
                         echo " </div></div>";
 
                         echo "

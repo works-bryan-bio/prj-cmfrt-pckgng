@@ -113,18 +113,22 @@
                     $(".send-amazon-group").removeClass('hidden');
                     $(".combine-with-group").addClass('hidden');
                     $(".send-amazon-only-group").addClass('hidden');  
+                    $(".amazon-shipment-date").addClass("hidden"); 
                 }else if( selected == 5 ){                    
                     $(".combine-with-group").removeClass('hidden');
                     $(".send-amazon-group").addClass('hidden');
                     $(".send-amazon-only-group").addClass('hidden');  
+                    $(".amazon-shipment-date").addClass("hidden"); 
                 }else if( selected == 2 ){                    
                     $(".combine-with-group").addClass('hidden');
                     $(".send-amazon-group").addClass('hidden');
-                    $(".send-amazon-only-group").removeClass('hidden');    
+                    $(".send-amazon-only-group").removeClass('hidden');   
+                    $(".amazon-shipment-date").removeClass("hidden");  
                 }else{
                     $(".send-amazon-group").addClass('hidden');
                     $(".combine-with-group").addClass('hidden');
                     $(".send-amazon-only-group").addClass('hidden'); 
+                    $(".amazon-shipment-date").addClass("hidden"); 
                 } 
             });
 
