@@ -22,8 +22,12 @@ table{
             <td><?= $shipment->has('client') ? $this->Html->link($shipment->client->firstname." ".$shipment->client->lastname, ['controller' => 'Clients', 'action' => 'view', $shipment->client->id]) : '' ?></td>
         </tr>
         <tr>
-            <td><?= __('Shipping ID') ?></th>
+            <td><?= __('ID') ?></th>
             <td><?= $shipment->id ?></td>
+        </tr>
+        <tr>
+            <td><?= __('Shipping ID') ?></th>
+            <td><?= $shipment->sid ?></td>
         </tr>
         <tr>
             <td><?= __('Shipping Carrier') ?></th>

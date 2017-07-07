@@ -93,6 +93,7 @@ use Cake\Validation\Validator;
         /*$rules->add($rules->existsIn(['client_id'], 'Clients'));
         $rules->add($rules->existsIn(['shipping_carrier_id'], 'ShippingCarriers'));
         $rules->add($rules->existsIn(['shipping_service_id'], 'ShippingServices'));*/
+        $rules->add($rules->isUnique(['sid']), 'Shipment ID already taken');
 
         return $rules;
     }

@@ -36,7 +36,15 @@
                         if( $shipment->shipping_purpose_id == 5 ){
                             $add_combine_group_class = "";
                         }                    
-                                    echo "
+
+                        echo "
+                        <div class='form-group'>
+                            <label for='boxes' class='col-sm-2 control-label'>" . __('Shipment ID') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input Shipment ID' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('sid', ['type' => 'text', 'class' => 'form-control', 'id' => 'sid', 'label' => false]);                
+                        echo " </div></div>";
+
+                        echo "
                         <div class='form-group'>
                             <label for='item_description' class='col-sm-2 control-label'>" . __('Item Description') . "</label>
                             <div class='col-sm-6'>";
@@ -50,21 +58,21 @@
                             echo $this->Form->input('additional_information', ['class' => 'form-control', 'id' => 'additional_information', 'label' => false]);                
                         echo " </div></div>";
                         
-                                    echo "
+                        echo "
                         <div class='form-group'>
                             <label for='quantity' class='col-sm-2 control-label'>" . __('Quantity') . "</label>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('quantity', ['type' => 'text', 'class' => 'form-control', 'id' => 'quantity', 'label' => false]);                
                         echo " </div></div>";    
                         
-                                    echo "
+                        echo "
                         <div class='form-group'>
                             <label for='boxes' class='col-sm-2 control-label'>" . __('Boxes') . "</label>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('boxes', ['type' => 'text', 'class' => 'form-control', 'id' => 'boxes', 'label' => false]);                
                         echo " </div></div>";    
                         
-                                   echo "
+                        echo "
                         <div class='form-group'>
                             <label for='boxes' class='col-sm-2 control-label'>" . __('Supplier') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the supplier name' ></i></span>
                             <div class='col-sm-6'>";
@@ -105,29 +113,27 @@
                              echo $this->Form->input('shipment_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
                                             
                         echo " </div></div>";
-
-
                         
-                                    echo "
+                        echo "
                         <div class='form-group'>
                             <label for='shipping_carrier_id' class='col-sm-2 control-label'>" . __('Shipping Carrier') . "</label>
                             <div class='col-sm-6'>";
                              echo $this->Form->input('shipping_carrier_id', ['class' => 'form-control', 'id' => 'shipping_carrier_id', 'label' => false, 'options' => $shippingCarriers]);                 
                         echo " </div></div>";    
-                                    echo "
+                        echo "
                         <div class='form-group " . $add_shipping_carrier_class . " other-shipping-carrier'>
                             <label for='other_shipping_carrier' class='col-sm-2 control-label'>" . __('Other Shipping Carrier') . "</label>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('other_shipping_carrier', ['class' => 'form-control', 'id' => 'other_shipping_carrier', 'label' => false]);                
                         echo " </div></div>";    
                         
-                                    echo "
+                        echo "
                         <div class='form-group'>
                             <label for='shipping_service_id' class='col-sm-2 control-label'>" . __('Shipping Service') . "</label>
                             <div class='col-sm-6'>";
                              echo $this->Form->input('shipping_service_id', ['class' => 'form-control', 'id' => 'shipping_service_id', 'label' => false, 'options' => $shippingServices]);                 
                         echo " </div></div>";    
-                                    echo "
+                        echo "
                         <div class='form-group " . $add_shipping_service_class . " other-shipping-service'>
                             <label for='other_shipping_service' class='col-sm-2 control-label'>" . __('Other Shipping Service') . "</label>
                             <div class='col-sm-6'>";

@@ -21,7 +21,7 @@
                             <div class='col-sm-6'>
                                 <select id="all_shipment" class="form-control">
                                     <?php foreach($inventory as $i) { ?>
-                                        <option value="<?= $i->shipment->id; ?>"><?= $i->shipment->id ." - ". $i->shipment->item_description ?></option>
+                                        <option value="<?= $i->shipment->id; ?>"><?= "(" . $i->shipment->id . ") " . $i->shipment->sid ." - ". $i->shipment->item_description ?></option>
                                     <?php } ?>
                                 </select>
                             </div>

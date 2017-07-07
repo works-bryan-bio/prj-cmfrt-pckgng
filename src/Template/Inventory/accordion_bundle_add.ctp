@@ -53,7 +53,7 @@
                                                 <select id="all_shipment" class="form-control" name="bundle[<?php echo $x; ?>][shipment_id]" style="width:98%;">
                                                     <option value="">- Select Shipment -</option>
                                                     <?php foreach($inventory as $i) { ?>
-                                                        <option value="<?= $i->shipment->id; ?>"><?= $i->shipment->id ." - ". $i->shipment->item_description ?></option>
+                                                        <option value="<?= $i->shipment->id; ?>"><?= "(" . $i->shipment->id . ") " . $i->shipment->sid ." - ". $i->shipment->item_description ?></option>
                                                     <?php } ?>
                                                 </select>        
                                             </div>

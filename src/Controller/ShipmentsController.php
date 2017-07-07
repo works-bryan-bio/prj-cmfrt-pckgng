@@ -252,82 +252,92 @@ class ShipmentsController extends AppController
 
         if ($this->request->is('post')) {         
 
-            if(!isset($this->request->data['is_correct_quantity'])){
-                $this->request->data['is_correct_quantity'] = 0;
-            }
+            //Check if SID already taken
+            $shipmentA = $this->Shipments->find()
+                ->where(['Shipments.sid' => $this->request->data['sid']])
+                ->first()
+            ;
 
-            $this->request->data['client_id'] = $user_data->id;
-            $this->request->data['status']    = 1;
-            
-            if( $this->request->data['shipping_carrier_id'] != 4 ){
-                $this->request->data['other_shipping_carrier'] = "";
-            }
-
-            if( $this->request->data['shipping_purpose_id'] == 3 ){                
-                $this->request->data['combine_with_id'] = 0;
-                $this->request->data['combine_comment'] = "";
-            }elseif( $this->request->data['shipping_purpose_id'] == 5 ){
-                $this->request->data['send_amazon_qty'] = 0;                
+            if( $shipmentA ){
+                $this->Flash->error(__('Shipment ID already taken'));
             }else{
-                $this->request->data['send_amazon_qty'] = "";
-                $this->request->data['combine_with_id'] = 0;
-                $this->request->data['combine_comment'] = "";
-            }
+                if(!isset($this->request->data['is_correct_quantity'])){
+                    $this->request->data['is_correct_quantity'] = 0;
+                }
 
-            if( $this->request->data['shipping_purpose_id'] != 2 ){ 
-                $this->request->data['amazon_shipment_date_client'] = "";
-            }
-
-            if( $this->request->data['shipping_service_id'] != 4 ){
-                $this->request->data['other_shipping_service'] = "";
-            }
-
-            $this->request->data['shipping_instruction'] = implode(",", $this->request->data['shipping_instruction']);
-
-            if(empty($this->request->data['shipping_instruction'])){
-                $this->request->data['shipping_instruction'] = "";
-            }
-
-            if(empty($this->request->data['shipping_others'])){
-                $this->request->data['shipping_others'] = "";
-            }
-
-            $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
-            if ($result = $this->Shipments->save($shipment)) {
+                $this->request->data['client_id'] = $user_data->id;
+                $this->request->data['status']    = 1;
                 
-                $email_content = ['shipment_details' => $this->request->data, 'client' => $user_data, 'shipment_id' => $result->id];
+                if( $this->request->data['shipping_carrier_id'] != 4 ){
+                    $this->request->data['other_shipping_carrier'] = "";
+                }
 
-
-                $recipient = "works.bryan.bio@gmail.com";
-                //$recipient = "comfortpackaging@gmail.com";        
-                $email_smtp = new Email('default');
-                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                    ->template('shipment')
-                    ->emailFormat('html')
-                    ->to($recipient)                                                                                                     
-                    ->subject('Comfort Packaging : Shipment Add')
-                    ->viewVars(['edata' => $email_content])
-                    ->send();    
-                //send email to client
-                $recipient1 = $user_data->email;        
-                $email_smtp = new Email('default');
-                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                    ->template('shipment')
-                    ->emailFormat('html')
-                    ->to($recipient1)                                                                                                     
-                    ->subject('Comfort Packaging : Shipment Add')
-                    ->viewVars(['edata' => $email_content])
-                    ->send();       
-
-                $this->Flash->success(__('The shipment has been saved.'));
-                $action = $this->request->data['save'];
-                if( $action == 'save' ){
-                    return $this->redirect(['action' => 'client']);
+                if( $this->request->data['shipping_purpose_id'] == 3 ){                
+                    $this->request->data['combine_with_id'] = 0;
+                    $this->request->data['combine_comment'] = "";
+                }elseif( $this->request->data['shipping_purpose_id'] == 5 ){
+                    $this->request->data['send_amazon_qty'] = 0;                
                 }else{
-                    return $this->redirect(['action' => 'client_add']);
-                }                    
-            } else {
-                $this->Flash->error(__('The shipment could not be saved. Please, try again.'));
+                    $this->request->data['send_amazon_qty'] = "";
+                    $this->request->data['combine_with_id'] = 0;
+                    $this->request->data['combine_comment'] = "";
+                }
+
+                if( $this->request->data['shipping_purpose_id'] != 2 ){ 
+                    $this->request->data['amazon_shipment_date_client'] = "";
+                }
+
+                if( $this->request->data['shipping_service_id'] != 4 ){
+                    $this->request->data['other_shipping_service'] = "";
+                }
+
+                $this->request->data['shipping_instruction'] = implode(",", $this->request->data['shipping_instruction']);
+
+                if(empty($this->request->data['shipping_instruction'])){
+                    $this->request->data['shipping_instruction'] = "";
+                }
+
+                if(empty($this->request->data['shipping_others'])){
+                    $this->request->data['shipping_others'] = "";
+                }
+
+                $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
+                if ($result = $this->Shipments->save($shipment)) {
+                    
+                    $email_content = ['shipment_details' => $this->request->data, 'client' => $user_data, 'shipment_id' => $result->id];
+
+
+                    $recipient = "works.bryan.bio@gmail.com";
+                    //$recipient = "comfortpackaging@gmail.com";        
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('shipment')
+                        ->emailFormat('html')
+                        ->to($recipient)                                                                                                     
+                        ->subject('Comfort Packaging : Shipment Add')
+                        ->viewVars(['edata' => $email_content])
+                        ->send();    
+                    //send email to client
+                    $recipient1 = $user_data->email;        
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('shipment')
+                        ->emailFormat('html')
+                        ->to($recipient1)                                                                                                     
+                        ->subject('Comfort Packaging : Shipment Add')
+                        ->viewVars(['edata' => $email_content])
+                        ->send();       
+
+                    $this->Flash->success(__('The shipment has been saved.'));
+                    $action = $this->request->data['save'];
+                    if( $action == 'save' ){
+                        return $this->redirect(['action' => 'client']);
+                    }else{
+                        return $this->redirect(['action' => 'client_add']);
+                    }                    
+                } else {
+                    $this->Flash->error(__('The shipment could not be saved. Please, try again.'));
+                }
             }
         }
         $shippingCarriers = $this->Shipments->ShippingCarriers->find('list');
@@ -421,41 +431,51 @@ class ShipmentsController extends AppController
         $user_data = $session->read('User.data'); 
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-            
-            if( $this->request->data['shipping_carrier_id'] != 4 ){
-                $this->request->data['other_shipping_carrier'] = "";
-            }
 
-            if( $this->request->data['shipping_purpose_id'] == 3 ){                
-                $this->request->data['combine_with_id'] = 0;
-                $this->request->data['combine_comment'] = "";
-            }elseif( $this->request->data['shipping_purpose_id'] == 5 ){
-                $this->request->data['send_amazon_qty'] = 0;                
+            //CHECK IF SHIPMENT ID EXISTS
+            $shipmentA = $this->Shipments->find()
+                ->where(['Shipments.id <>' => $id, 'Shipments.sid' => $this->request->data['sid']])
+                ->first()
+            ;
+
+            if( $shipmentA ){
+                $this->Flash->error(__('Shipment ID already taken'));
             }else{
-                $this->request->data['send_amazon_qty'] = "";
-                $this->request->data['combine_with_id'] = 0;
-                $this->request->data['combine_comment'] = "";
-            }
+                if( $this->request->data['shipping_carrier_id'] != 4 ){
+                    $this->request->data['other_shipping_carrier'] = "";
+                }
 
-            if( $this->request->data['shipping_service_id'] != 4 ){
-                $this->request->data['other_shipping_service'] = "";
-            }
-
-            if( $this->request->data['shipping_purpose_id'] != 2 ){ 
-                $this->request->data['amazon_shipment_date_client'] = "";
-            }
-
-            $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
-            if ($this->Shipments->save($shipment)) {
-                $this->Flash->success(__('The shipment has been saved.'));
-                $action = 'save';
-                if( $action == 'save' ){
-                    return $this->redirect(['action' => 'client']);
+                if( $this->request->data['shipping_purpose_id'] == 3 ){                
+                    $this->request->data['combine_with_id'] = 0;
+                    $this->request->data['combine_comment'] = "";
+                }elseif( $this->request->data['shipping_purpose_id'] == 5 ){
+                    $this->request->data['send_amazon_qty'] = 0;                
                 }else{
-                    return $this->redirect(['action' => 'client_edit', $id]);
-                }         
-            } else {
-                $this->Flash->error(__('The shipment could not be saved. Please, try again.'));
+                    $this->request->data['send_amazon_qty'] = "";
+                    $this->request->data['combine_with_id'] = 0;
+                    $this->request->data['combine_comment'] = "";
+                }
+
+                if( $this->request->data['shipping_service_id'] != 4 ){
+                    $this->request->data['other_shipping_service'] = "";
+                }
+
+                if( $this->request->data['shipping_purpose_id'] != 2 ){ 
+                    $this->request->data['amazon_shipment_date_client'] = "";
+                }
+
+                $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
+                if ($this->Shipments->save($shipment)) {
+                    $this->Flash->success(__('The shipment has been saved.'));
+                    $action = 'save';
+                    if( $action == 'save' ){
+                        return $this->redirect(['action' => 'client']);
+                    }else{
+                        return $this->redirect(['action' => 'client_edit', $id]);
+                    }         
+                } else {
+                    $this->Flash->error(__('The shipment could not be saved. Please, try again.'));
+                }
             }
         }
         $shippingCarriers = $this->Shipments->ShippingCarriers->find('list');
