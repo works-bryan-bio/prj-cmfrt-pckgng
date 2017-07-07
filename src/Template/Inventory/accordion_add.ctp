@@ -87,11 +87,25 @@
                                       
                         echo " </div></div>";
 
-                                    echo "
+                        echo "
+                        <div class='form-group'>
+                            <label for='ship_location' class='col-sm-2 control-label'>" . __('Ship Location') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Ship Location' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('ship_location', ['type' => 'text', 'class' => 'form-control', 'id' => 'ship_location', 'label' => false]);                
+                        echo " </div></div>"; 
+
+                        echo "
+                        <div class='form-group'>
+                            <label for='trucking' class='col-sm-2 control-label'>" . __('Trucking') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Trucking' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('trucking', ['type' => 'text', 'class' => 'form-control', 'id' => 'trucking', 'label' => false]);                
+                        echo " </div></div>"; 
+
+                        echo "
                         <div class='form-group'>
                             <label for='date_sent' class='col-sm-2 control-label'>" . __('Date Created') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Date sent' ></i></span>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('date_sent', ['type' => 'text', 'class' => 'form-control dt-default', 'id' => 'date_sent', 'label' => false]);                
+                            echo $this->Form->input('date_sent', ['type' => 'text', 'value' => date("Y-m-d"), 'class' => 'form-control dt-default', 'id' => 'date_sent', 'label' => false]);                
                         echo " </div></div>";    
                         
                                     echo "

@@ -37,6 +37,14 @@ table{
             <td><?= $inventoryOrder->has('shipping_service') ? $this->Html->link($inventoryOrder->shipping_service->name, ['controller' => 'ShippingServices', 'action' => 'view', $inventoryOrder->shipping_service->id]) : '' ?></td>
         </tr>
         <tr>
+            <th><?= __('Ship Location') ?></th>
+            <td><?= h($inventoryOrder->ship_location) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Trucking') ?></th>
+            <td><?= h($inventoryOrder->trucking) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Order Status') ?></th>
             <td><?= h($inventoryOrder->order_status) ?></td>
         </tr>

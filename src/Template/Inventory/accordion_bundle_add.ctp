@@ -110,6 +110,28 @@
                              echo $this->Form->input('shipping_service_id', ['class' => 'form-control', 'id' => 'shipping_service_id', 'label' => false, 'options' => $shippingServices]);  
 
                         echo "
+                        <div class='form-group'>
+                            <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('add FNSKU labels') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload FNSKU labels' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('fnsku_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
+                                      
+                        echo " </div></div>";
+
+                        echo "
+                        <div class='form-group'>
+                            <label for='ship_location' class='col-sm-2 control-label'>" . __('Ship Location') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Ship Location' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('ship_location', ['type' => 'text', 'class' => 'form-control', 'id' => 'ship_location', 'label' => false]);                
+                        echo " </div></div>"; 
+
+                        echo "
+                        <div class='form-group'>
+                            <label for='trucking' class='col-sm-2 control-label'>" . __('Trucking') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Trucking' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('trucking', ['type' => 'text', 'class' => 'form-control', 'id' => 'trucking', 'label' => false]);                
+                        echo " </div></div>";
+
+                        echo "
                               </div></div>";    
                         
                         
