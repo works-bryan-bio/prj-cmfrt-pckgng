@@ -35,9 +35,9 @@ class UsersController extends AppController
             }elseif( $user_data->user->group_id == 2 ){ //Manager
                 $this->Auth->allow(['user_dashboard']);
             }elseif( $user_data->user->group_id == 3 ){ //Employee
-                $this->Auth->allow(['user_dashboard']);
+                $this->Auth->allow(['user_dashboard','user_shipment_overdue_dashboard','user_order_overdue_dashboard']);
             }elseif( $user_data->user->group_id == 4 ){ //Client
-                $this->Auth->allow(['client_dashboard']);
+                $this->Auth->allow(['client_dashboard','user_shipment_overdue_dashboard','user_order_overdue_dashboard']);
             }      
         }
         $this->set('nav_selected', $nav_selected);
