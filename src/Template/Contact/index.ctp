@@ -45,8 +45,11 @@
                         <div class="col-md-4">
                             <h3>Our Address</h3>
                             <p>
-                                500 Terry Francois Street<br />San Francisco, CA 94158
+                                1405 N Broad St, <br />Hillside, NJ 07205
                             </p>
+                            <br/> 
+                             <h3>Our Shipping Address</h3>
+                             <p>1 US Hwy 22 <br/>Hillside, NJ 07205 <br/>917.580.3131</p>
                         </div>
                         <div class="col-md-4">
                             <h3>Best Time to call Back</h3>
