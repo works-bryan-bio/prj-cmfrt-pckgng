@@ -58,7 +58,7 @@
         </div>
         <br />        
       </div>
-      <button type="submit" style="width: 100% !important;" class="btn btn-lg btn-primary btn-block"><?php echo __("Sign In"); ?></button><br style="clear:both;" />
+      <button type="submit" style="width: 100%;" class="btn btn-lg btn-primary btn-block"><?php echo __("Sign In"); ?></button><br style="clear:both;" />
       <div class="text-center m-t m-b"><?= $this->Html->link('<small>' . __('Forgot password?') . '</small>', ['controller' => 'forgot_password', 'action' => 'index'], ['escape' => false]) ?></div>      
       <div class="line line-dashed"></div>          
     <?= $this->Form->end() ?>
