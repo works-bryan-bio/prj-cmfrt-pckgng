@@ -3,7 +3,7 @@
     	<?php if($is_manager) { ?>
     		<th>Client</th>
     	<?php } ?>
-        <th width="70%">Subject</th>
+        <th width="50%">Subject</th>
         <th width="30%">Date Created</th>
     </tr>
     <?php foreach($message_header as $mh) { 

@@ -1,16 +1,19 @@
-<section class="content-header">
-    <h1><?= __('Change Password') ?></h1>
-    <ol class="breadcrumb">
-        <li><?= $this->Html->link("<i class='fa fa-dashboard'></i>" . __("Home"), ['controller' => 'users', 'action' => 'dashboard'],['escape' => false]) ?></li>        
-        <li class="active"><?= __('Change Password') ?></li>
-    </ol>
-</section>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?= __('Change Password') ?></h1>
+        <ol class="breadcrumb" style="padding-left: 25px;background-color: #f2ece1 !important;">
+            <li><?= $this->Html->link("<i class='fa fa-dashboard'></i>" . __("Home"), ['controller' => 'users', 'action' => 'dashboard'],['escape' => false]) ?></li>        
+            <li class="active"><?= __('Change Password') ?></li>
+        </ol>
+    </div>
+</div>
 
-<section class="content" style="background-color:#ffffff;">
+
+<section class="content" style="padding-top: 0px !important;padding-bottom:0px !important;background-color: white;">
     <!-- Main Row -->
     <div class="row">
         <section class="col-lg-12 ">
-            <div class="box " >
+            <div class="box " style="border-top-color: #f39c12 !important;">
                 <div class="box-header">
 
                 </div>

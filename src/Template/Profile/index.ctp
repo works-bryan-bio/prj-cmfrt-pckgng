@@ -1,19 +1,21 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"><?= __('User Profile') ?></h1>  
+        <ol class="breadcrumb" style="padding-left: 25px;background-color: #f2ece1 !important;">
+          <li><a href="<?php echo $base_url; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
+          <li class="active"><?= __('User Profile') ?></li>
+        </ol>
+    </div>
+</div>
 
-<section class="content-header">
-    <h1><?= __('User Profile') ?></h1>
-    <ol class="breadcrumb">
-        <li><a href="<?php echo $base_url; ?>"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active"><?= __('User Profile') ?></li>
-    </ol>
-</section>
 
-<section class="content" style="background-color:#ffffff;">
+<section class="content" style="padding-top: 0px !important;padding-bottom:0px !important;background-color: white;">
     <!-- Main Row -->
     <div class="row">            
         <div class="col-md-2">
             <!-- Profile Image -->
-          <div class="box box-primary">
-            <div class="box-body box-profile" style="padding:5px;">
+          <div class="box box-primary" style="box-shadow: none !important;">
+            <div class="box-body box-profile" style="padding:30px;">
               <?php 
                 if( $userEntity->photo != '' ){
                     $user_photo = $this->Url->build("/webroot/upload/users/" . $userEntity->id . "/" . $userEntity->photo);            
@@ -23,8 +25,12 @@
               ?>
               <img style="height:128px;width:128px;margin:0 auto;" src="<?php echo $user_photo; ?>" alt="User Avatar" class="profile-user-img img-responsive img-circle">                
               <br />
-              <a href="<?php echo $this->Url->build(['controller' => 'profile', 'action' => 'edit']); ?>" class="btn btn-primary btn-sm btn-block"><b><i class="fa fa-user"></i> Edit Profile</b></a>
-              <a href="<?php echo $this->Url->build(['controller' => 'profile', 'action' => 'change_password']); ?>" class="btn btn-primary btn-sm btn-block"><b><i class="fa fa-lock"></i> Change Password</b></a>              
+              <a href="<?php echo $this->Url->build(['controller' => 'profile', 'action' => 'edit']); ?>" class="btn btn-primary btn-sm btn-block"><b style="    font-size: 12px;
+    position: relative;
+    bottom: 1px;"><i class="fa fa-user"></i> Edit Profile</b></a>
+              <a href="<?php echo $this->Url->build(['controller' => 'profile', 'action' => 'change_password']); ?>" class="btn btn-primary btn-sm btn-block"><b style="font-size: 12px;
+    position: relative;
+    bottom: 1px;"><i class="fa fa-lock"></i> Edit Password</b></a>              
             </div>
             <!-- /.box-body -->
           </div>
@@ -34,11 +40,11 @@
 
           <!-- Personal Info Box -->
           <div class="box box-primary">
-            <div class="box-header with-border">
+            <div class="box-header with-border" style="padding: 15px;">
               <h3 class="box-title">Personal Information</h3>
             </div>
             <!-- /.box-header -->
-            <div class="box-body">
+            <div class="box-body"  style="padding: 15px;">
               <strong><i class="fa fa-book margin-r-5"></i> Name</strong>
               <p class="text-muted">
                 <?php echo $userEntity->firstname . " " . $userEntity->middlename . " " . $userEntity->lastname; ?>
