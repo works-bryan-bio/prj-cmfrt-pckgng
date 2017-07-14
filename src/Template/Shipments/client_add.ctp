@@ -10,7 +10,7 @@
 </div>
 
  <div class="ribbon-section">
-  
+  <img style="float:left;" src="<?php echo $this->Url->build("/webroot/images/ribbon.png"); ?>">
   <div class="ribbon-black" style="padding-top:0px !important;">
       <ul class="nav nav-tabs nav-justified">
         <li></li>  
@@ -29,7 +29,7 @@
                         <div class='form-group'>
                             <label for='boxes' class='col-sm-2 control-label'>" . __('Shipment ID') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input Shipment ID' ></i></span>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('sid', ['type' => 'text', 'class' => 'form-control', 'id' => 'sid', 'label' => false]);                
+                            echo $this->Form->input('s_id', ['type' => 'text', 'class' => 'form-control', 'id' => 's_id', 'label' => false]);                
                         echo " </div></div>";
 
                         echo "
@@ -39,21 +39,21 @@
                             echo $this->Form->input('item_description', ['class' => 'form-control', 'id' => 'item_description', 'label' => false]);                
                         echo " </div></div>";    
                         
-                        echo "
+                                  echo "
                         <div class='form-group'>
                             <label for='additional_information' class='col-sm-2 control-label'>" . __('Additional Information') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Addition Information ' ></i></span>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('additional_information', ['class' => 'form-control', 'id' => 'additional_information', 'label' => false]);                
                         echo " </div></div>";  
 
-                        echo "
+                                    echo "
                         <div class='form-group'>
                             <label for='quantity' class='col-sm-2 control-label'>" . __('Quantity') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the quantity of the items' ></i></span>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('quantity', ['type' => 'text', 'class' => 'form-control', 'id' => 'quantity', 'label' => false]);                
                         echo " </div></div>";    
                         
-                        echo "
+                                    echo "
                         <div class='form-group'>
                             <label for='boxes' class='col-sm-2 control-label'>" . __('Boxes') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the quantity of boxes included' ></i></span>
                             <div class='col-sm-6'>";
@@ -172,13 +172,13 @@
                                       
                         echo " </div></div>";
 
-                        echo "
-                        <div class='form-group send-amazon-group hidden'>
-                            <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('add FNSKU labels') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload FNSKU labels' ></i></span>
-                            <div class='col-sm-6'>";
-                             echo $this->Form->input('fnsku_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
-                                      
-                        echo " </div></div>";
+//                        echo "
+//                        <div class='form-group send-amazon-group hidden'>
+//                            <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('add FNSKU labels') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload FNSKU labels' ></i></span>
+//                            <div class='col-sm-6'>";
+//                             echo $this->Form->input('fnsku_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]);
+//
+//                        echo " </div></div>";
 
                         
                         echo "

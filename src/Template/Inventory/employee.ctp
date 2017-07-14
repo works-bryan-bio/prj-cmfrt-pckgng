@@ -156,7 +156,7 @@ hr{
                                         <p style="font-weight:400"><?= __('Are you sure you want to update the status to Completed?') ?></p>
                                         <br>
                                         <p>Current Order Quantity: <?= $inventory_order->order_quantity; ?></p> 
-                                        <p>Remaining Quantity: <?= $inventory_info->remaining_quantity; ?></p> 
+                                        <p>Remaining Quantity After Completion: <?= $inventory_info->remaining_quantity - $inventory_order->order_quantity; ?></p>
                                          <form   id="inventory-order-<?php echo $inventory_order->id; ?>" method="post" action="<?= $base_url; ?>inventory_order/update_status_to_complete/<?php echo $inventory_order->id; ?>/<?php echo $inventory_info->id; ?>" >
                                         <?php  if($inventory_info->remaining_quantity <= $inventory_order->order_quantity) { ?>
                                            
@@ -170,6 +170,8 @@ hr{
                                              } ?>
                                         </textarea></p>
                                         
+                                        <?php }else{ ?>
+                                            <p> <textarea id="completion_comment" name="completion_comment" cols="50" rows="2" placeholder="Completion Comment"></textarea></p>
                                         <?php } ?>
                                     </div>
 
@@ -314,7 +316,7 @@ hr{
                       <td><?= h($inventory->last_sent_order_date) ?></td>
                       <td><?= h($inventory->last_sent_destination) ?></td>
                       <td>
-                        <?php if($inventory->shipment->send_option == "send_part_of_it_to_amazon" ) { ?>
+                        <?php if($inventory->shipment->send_option == "send_part_of_it_to_amazon") { ?>
                           <?php 
                             if(strtotime(date("Y-m-d")) <= strtotime($inventory->shipment->amazon_shipment_date)) { 
                               echo "Temporary Storage";

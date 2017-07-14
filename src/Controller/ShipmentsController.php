@@ -200,8 +200,6 @@ class ShipmentsController extends AppController
         $this->set(['group_id' => $group_id]); 
         $this->set('shipment', $shipment);
         $this->set('_serialize', ['shipment']);
-        // debug($shipment);
-        // exit;
     }
 
     /**
@@ -250,17 +248,22 @@ class ShipmentsController extends AppController
         $session = $this->request->session();    
         $user_data = $session->read('User.data'); 
 
-        if ($this->request->is('post')) {         
+        if ($this->request->is('post')) {   
+            $post = $this->request->data;
+           
+        
 
-            //Check if SID already taken
-            $shipmentA = $this->Shipments->find()
-                ->where(['Shipments.sid' => $this->request->data['sid']])
+
+             //Check if SID already taken
+            $shipmentA = $this->Shipments->find()   
+                ->where(['Shipments.s_id' => $this->request->data['s_id']])
                 ->first()
             ;
-
-            if( $shipmentA ){
+            
+            if($shipmentA){
                 $this->Flash->error(__('Shipment ID already taken'));
             }else{
+
                 if(!isset($this->request->data['is_correct_quantity'])){
                     $this->request->data['is_correct_quantity'] = 0;
                 }
@@ -304,11 +307,13 @@ class ShipmentsController extends AppController
                 $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
                 if ($result = $this->Shipments->save($shipment)) {
                     
+                    
+
                     $email_content = ['shipment_details' => $this->request->data, 'client' => $user_data, 'shipment_id' => $result->id];
 
 
-                    $recipient = "works.bryan.bio@gmail.com";
-                    //$recipient = "comfortpackaging@gmail.com";        
+                    //$recipient = "works.bryan.bio@gmail.com";
+                    $recipient = "comfortpackaging@gmail.com";        
                     $email_smtp = new Email('default');
                     $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
                         ->template('shipment')
@@ -338,7 +343,8 @@ class ShipmentsController extends AppController
                 } else {
                     $this->Flash->error(__('The shipment could not be saved. Please, try again.'));
                 }
-            }
+            }   
+
         }
         $shippingCarriers = $this->Shipments->ShippingCarriers->find('list');
         $shippingServices = $this->Shipments->ShippingServices->find('list');
@@ -431,10 +437,10 @@ class ShipmentsController extends AppController
         $user_data = $session->read('User.data'); 
 
         if ($this->request->is(['patch', 'post', 'put'])) {
-
+            
             //CHECK IF SHIPMENT ID EXISTS
             $shipmentA = $this->Shipments->find()
-                ->where(['Shipments.id <>' => $id, 'Shipments.sid' => $this->request->data['sid']])
+                ->where(['Shipments.id <>' => $id, 'Shipments.s_id' => $this->request->data['sid']])
                 ->first()
             ;
 

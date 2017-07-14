@@ -293,6 +293,17 @@ class InventoryOrderController extends AppController
             $this->Flash->success(__('Inventory order has been successfully updated the status.'));  
 
             $inventory_order->order_status = "Completed";
+            $inventory_order->date_completed = date('Y-m-d');
+            $inventory_order->completion_comment = $completion_comment;
+
+            if(isset($this->request->data['confirm_shipping_location']) && $this->request->data['confirm_shipping_location'] == 1){
+                $inventory_order->shipping_location = $this->request->data['shipping_location'];
+            }
+
+            if(isset($this->request->data['confirm_trucking']) && $this->request->data['confirm_trucking'] == 1){
+                $inventory_order->trucking = $this->request->data['trucking'];
+            }
+
             $this->InventoryOrder->save($inventory_order);
 
             $this->Inventory = TableRegistry::get('Inventory');
@@ -401,7 +412,13 @@ class InventoryOrderController extends AppController
         } else {
             $this->Flash->error(__('The data could not be saved. Please, try again.'));
         }
-        return $this->redirect(['controller' => 'inventory', 'action' => 'admin']);
+
+        if($user_data->user->group_id == 3){
+            //employee
+            return $this->redirect(['controller' => 'inventory', 'action' => 'employee']);
+        }else{
+            return $this->redirect(['controller' => 'inventory', 'action' => 'admin']);
+        }
     }
 
     /**

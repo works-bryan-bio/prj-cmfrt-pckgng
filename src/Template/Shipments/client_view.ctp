@@ -27,7 +27,7 @@ table{
         </tr>
         <tr>
             <td><?= __('Shipping ID') ?></th>
-            <td><?= $shipment->sid ?></td>
+            <td><?= $shipment->s_id ?></td>
         </tr>
         <tr>
             <td><?= __('Shipping Carrier') ?></th>
@@ -151,14 +151,6 @@ table{
             </td>
           </tr>
         <?php } ?>
-        <tr>
-          <th><?= __('Uploaded shipment label') ?></th>
-          <td>
-            <?php if(!empty($shipment->shipment_label)) { ?>
-              <a href="<?= $shipment->shipment_label; ?>"><i class="fa fa-file"></i> Download</a>
-            <?php } ?>
-          </td>
-        </tr>
         <tr>
           <th><?= __('Uploaded shipment label') ?></th>
           <td>

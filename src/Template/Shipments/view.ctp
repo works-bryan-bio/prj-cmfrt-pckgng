@@ -69,6 +69,10 @@
             <td><?= $this->Number->format($shipment->id) ?></td>
         </tr>
         <tr>
+            <th><?= __('Shipment Id') ?></th>
+            <td><?= $shipment->s_id ?></td>
+        </tr>
+        <tr>
             <th><?= __('Client Id') ?></th>
             <td><?= $this->Number->format($shipment->client_id) . " - " . $shipment->client->firstname . " " . $shipment->client->lastname  ?></td>
         </tr>
@@ -156,7 +160,7 @@
       <tr>
         <th><?= __('FNSKU label') ?></th>
         <td>
-            <a href="<?= $shipment->fnsku_label; ?>"><?= $shipment->fnsku_label; ?></a>
+           <a href="<?= $shipment->fnsku_label; ?>"><i class="fa fa-file"></i> Download</a>
         </td>
       </tr>
     <?php } ?>
@@ -164,19 +168,11 @@
       <th><?= __('Uploaded shipment label') ?></th>
       <td>
         <?php if(!empty($shipment->shipment_label)) { ?>
-          <a href="<?= $shipment->shipment_label; ?>"><?= $shipment->shipment_label; ?></a>
+          <a href="<?= $shipment->shipment_label; ?>"><i class="fa fa-file"></i> Download</a>
         <?php } ?>
       </td>
     </tr>
-    <tr>
-      <th><?= __('Uploaded shipment label') ?></th>
-      <td>
-        <?php if(!empty($shipment->shipment_label)) { ?>
-          <a href="<?= $shipment->shipment_label; ?>"><?= $shipment->shipment_label; ?></a>
-        <?php } ?>
-      </td>
-    </tr>
-    
+      
         <tr>
             <th><?= __('Created') ?></th>
             <td><?= h($shipment->created) ?></td>

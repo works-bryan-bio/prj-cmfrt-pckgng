@@ -84,12 +84,16 @@ table{
         <td><?= $this->Text->autoParagraph(h($inventoryOrder->combine_comment)); ?></td>        
     </tr>
         <tr>
-            <th><?= __('Date Created') ?></th>
+            <th><?= __('Order Due date') ?></th>
             <td><?= h($inventoryOrder->date_created) ?></td>
         </tr>
         <tr>
-            <th><?= __('Date Sent') ?></th>
+            <th><?= __('Date Created') ?></th>
             <td><?= h($inventoryOrder->date_sent) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Date Sent') ?></th>
+            <td><?= h($inventoryOrder->date_completed) ?></td>
         </tr>
     </tbody>
     </table>
