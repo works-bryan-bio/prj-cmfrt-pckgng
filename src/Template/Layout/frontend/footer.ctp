@@ -40,6 +40,7 @@ echo $this->Html->script('frontend/bootstrapper.js');
 ?>
 
 <script>
+var base_url = "<?php echo $base_url; ?>";
     $(document).ready(function () {
         $('#cp-gallery-list li:lt(8)').fadeIn();
         $('.cf-less').fadeOut();
@@ -58,6 +59,23 @@ echo $this->Html->script('frontend/bootstrapper.js');
             $('#cp-gallery-list li').not(':lt(8)').fadeOut(300);
             $('.cf-more').fadeIn();
             $('.cf-less').fadeOut();
+        });
+        $("#frm-contact-form").submit(function(e) {
+            $.ajax({
+                 type: "POST",
+                 url: base_url + 'contact/ajax_send_inquiry',      
+                 dataType: "json",
+                 data: $("#frm-contact-form").serialize(), 
+                 success: function(o)
+                 {
+                    if( o.is_success ){
+                        $('#frm-contact-form').trigger("reset");
+                    }
+
+                    $(".info-message").html(o.message);                              
+                 }
+            });
+            e.preventDefault();
         });
     });
 </script>

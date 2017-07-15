@@ -14,20 +14,21 @@
         <div class="row">
 
             <div class="col-sm-6">
-                <form>
+                <form id="frm-contact-form">                    
                     <div class="form-group">
-                        <input type="text" placeholder="Name" class="form-control" required />
+                        <input type="text" placeholder="Name" name="contact_name" class="form-control" required />
                     </div>
                     <div class="form-group">
-                        <input type="email" placeholder="Email" class="form-control" required />
+                        <input type="email" placeholder="Email" name="contact_email" class="form-control" required />
                     </div>
                     <div class="form-group">
-                        <input type="text" placeholder="Subject" class="form-control" required />
+                        <input type="text" placeholder="Subject" name="contact_subject" class="form-control" required />
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="Message" required></textarea>
+                        <textarea class="form-control" name="contact_message" placeholder="Message" required></textarea>
                     </div>
-                    <button class="btn btn-primary">Submit</button>
+                    <div class="info-message"></div>
+                    <button class="btn btn-primary btn-contact-send">Submit</button>
                 </form>
 
             </div>

@@ -1,22 +1,22 @@
 <p>Hi,</p> 
-<p>Someone made an inquiry via our website. Below are the details</p>
+<p>Someone send an inquiry via our website. Below are the details :</p>
 <table border="0">
 	<tr>
 		<td>Name</td>
-		<td>: <?php echo $inquiry['name']; ?></td>
-	</tr>
+		</td>: <?php echo $edata['name']; ?></tr>
+	</tr>	
 	<tr>
 		<td>Email</td>
-		<td>: <?php echo $inquiry['email']; ?></td>
-	</tr>
+		</td>: <?php echo $edata['email']; ?></tr>
+	</tr>	
 	<tr>
 		<td>Subject</td>
-		<td>: <?php echo $inquiry['subject']; ?></td>
-	</tr>
+		</td>: <?php echo $edata['phone']; ?></tr>
+	</tr>	
 	<tr>
 		<td>Message</td>
-		<td>: <?php echo $inquiry['msg']; ?></td>
+		</td>: <?php echo $edata['message']; ?></tr>
 	</tr>	
 </table>
-<br/><br/>
-<p>This email was sent by <a href="http://broproweb.com/">broproweb.com</a></p>
+<br />
+<p>Thank you and have a great day!</p>

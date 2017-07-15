@@ -7,6 +7,7 @@ use Cake\Event\Event;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\CellTrait;
 use Cake\Routing\Router;
+use Cake\Network\Email\Email;
 
 class ContactController extends AppController
 {
@@ -16,8 +17,7 @@ class ContactController extends AppController
     use CellTrait;
 
     /**
-     * Initialize Method
-     *  ID : CA-01
+     * Initialize Method     
      * 
      */
     public function initialize()
@@ -26,7 +26,7 @@ class ContactController extends AppController
         $nav_selected = ["contact"];
         $this->set('nav_selected', $nav_selected);
         $this->set('website_title', 'Comfort Packaging');
-        $this->set('page_title', 'Contact');
+        $this->set('page_title', 'Contact');        
     }    
     
     /**
@@ -37,12 +37,11 @@ class ContactController extends AppController
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
-        $this->Auth->allow(['index','filter']);
+        $this->Auth->allow(['index','filter','ajax_send_inquiry']);
     }
 
     /**
-     * Index method for homepage
-     *  ID : CA-03
+     * Index method for homepage     
      * @return void
      */
 
@@ -50,6 +49,36 @@ class ContactController extends AppController
     {
         //return $this->redirect(['controller' => 'users', 'action' => 'login']);
         $this->viewBuilder()->layout('frontend/default');        
+    }
+
+    /**
+     * Ajax Send Inquiry Method     
+     * 
+     */
+    public function ajax_send_inquiry()
+    {
+        $edata = [
+            'email' => $this->request->data['contact_email'],
+            'name' => $this->request->data['contact_name'],
+            'subject' => $this->request->data['contact_subject'],
+            'message' => $this->request->data['contact_message']
+        ];
+        $recipient = "comfortpackaging@gmail.com";                                
+        $email_smtp = new Email('default');
+        $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+            ->template('contact_us')
+            ->emailFormat('html')
+            ->to($recipient)                                                                                                     
+            ->subject('Comfort Packaging : Inquiry Add')
+            ->viewVars(['edata' => $edata])
+            ->send(); 
+
+        $json_data['is_success'] = true;
+        $json_data['message']    = "<div class='alert alert-success'>Email was successfully sent!</div>";
+
+        echo json_encode($json_data);
+        $this->viewBuilder()->layout('');
+        exit;  
     }
 
 }
