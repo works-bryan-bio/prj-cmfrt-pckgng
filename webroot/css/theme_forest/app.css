@@ -3729,7 +3729,7 @@ fieldset[disabled] .i-checks input + i:before {
 }
 @media (max-width: 916px) {
   .ribbon-black {
-    width: 92% !important;
+    width: 100% !important;
   }
   .nav > li.dropdown > a > div{
         margin-left: 0px !important;
@@ -3737,7 +3737,7 @@ fieldset[disabled] .i-checks input + i:before {
 }
 @media (max-width: 809px) {
   .ribbon-black {
-    width: 91% !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 724px) {
@@ -3745,62 +3745,37 @@ fieldset[disabled] .i-checks input + i:before {
     float: left;
   }
   .nav-tabs.nav-justified > li > a {
-    font-size: 18px !important;
+    font-size: 13px !important;
+    padding-top: 21px;
   }
   .ribbon-black {
-    width: 89% !important;
-  }
-  .panel{
-    margin-left:33px !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 600px) {
   .ribbon-black {
-    width: 88% !important;
-  }
-  .panel{
-    margin-left:33px !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 555px) {
   .ribbon-black {
-    width: 86% !important;
-  }
-  .panel{
-    margin-left:33px !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 483px) {
   .ribbon-black {
-    width: 84% !important;
-  }
-  .panel{
-    margin-left:33px !important;
-  }
-  h3{
-    margin-left: -5px !important;
+    width: 100% !important;
   }
 }
 @media (max-width: 428px) {
   .ribbon-black {
-    width: 83% !important;
+    width: 100% !important;
   }
-  .panel{
-    margin-left:33px !important;
-  }
-  h3{
-    margin-left: -5px !important;
-  }
+
 }
 @media (max-width: 405px) {
   .ribbon-black {
-    width: 82% !important;
-  }
-  .panel{
-    margin-left:33px !important;
-  }
-  h3{
-    margin-left: -5px !important;
+    width: 100% !important;
   }
 }
 #ribbon{
@@ -3965,4 +3940,40 @@ button.btn.btn-default{
     height: 30px;
     padding: 6px 12px 6px 5px;
     float: none;
+}
+
+section.statistics{
+      height: 70px;
+}
+.left-30{
+  padding-left: 30px;
+}
+
+@media (max-width: 993px) {
+  .col-md-4 {
+      width: 100% !important;
+  }
+  ul.navbar-nav.navbar-notification.m-n.hidden-xs.nav-user.user.open {
+    display: none !important;
+  }
+  section.statistics{
+        height: 234px !important;
+        padding-top:20px !important;
+  }
+  .left-30{
+    padding-left: 10px;
+  }
+  section.content{
+    margin-top:20px !important;
+  }
+  table{
+    display: block !important;
+    overflow-x: auto !important;
+  }
+  section.hbox.stretch {
+    background-color: #f2ece1 !important;
+  }
+.input-group{
+    display: none !important;
+  }
 }

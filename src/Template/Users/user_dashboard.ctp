@@ -4,7 +4,7 @@ $this->Shipments = TableRegistry::get('Shipments');
 $this->InventoryOrder = TableRegistry::get('InventoryOrder');
 $this->Inventory = TableRegistry::get('Inventory');
 ?>
-<style>
+<style> 
 #DataTables_Table_0_filter, #DataTables_Table_0_info, #DataTables_Table_0_length, #DataTables_Table_1_filter, #DataTables_Table_1_info, #DataTables_Table_1_length{
   display: none;
 }
@@ -31,7 +31,7 @@ table.dataTable{
   padding-top: 58px !important;
 }
 </style>
-<section class="statistics" style="padding-bottom: 0px !important;height: 70px;">
+<section class="statistics" style="padding-bottom: 0px !important;">
  <div class="row">
     <div class="col-sm-12">
       <div class="panel" style="box-shadow: none;background-color: #ffa400;padding-top: 3px !important;padding-bottom: 5px !important;">
@@ -48,7 +48,7 @@ table.dataTable{
               </span>
             </a>
           </div>
-          <div class="col-md-4 b-b" style="padding-left: 30px;border: 0px;">
+          <div class="col-md-4 b-b left-30" style="border: 0px;">
             <a href="<?php echo $base_url ."shipments#completed"; ?>" class="block padder-v hover">
               <span class="i-s i-s-2x pull-left m-r-sm">
                 <i class="i i-hexagon2 i-s-base text-success-lt hover-rotate"></i>

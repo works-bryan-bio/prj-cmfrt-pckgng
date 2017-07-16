@@ -20,7 +20,6 @@
         echo $this->Html->css('theme_forest/datepicker/datepicker.css');
         echo $this->Html->css('colorbox/colorbox.css');
         echo $this->Html->css('jquery.dataTables.css');
- 
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');
@@ -45,7 +44,7 @@
     </div>
 
       <div class="navbar-header aside-md dk">
-        <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html">
+        <a class="btn btn-link visible-xs" data-toggle="dropdown" data-target=".menu-nav"> <!-- <a class="btn btn-link visible-xs" data-toggle="class:nav-off-screen,open" data-target="#nav,html"> -->
           <i class="fa fa-bars"></i>
         </a>
         <a class="navbar-brand" href="<?php echo $this->Url->build("/main/index"); ?>"><span class="hidden-nav-xs"><img style="" src="<?php echo $this->Url->build("/webroot/images/logo.png"); ?>"/></span></a>        
@@ -55,6 +54,96 @@
       </div>    
 
 
+      <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user menu-nav" style="display: none;padding-right: 0px;padding-left: 0px;padding-top: 0px;">                
+        
+        <?php if($hdr_user_data->user->group_id ==  1) { ?>
+          <li class="dropdown" style="height:100%;width: 100%;">
+             <?= $this->Html->link('<i class="glyphicon glyphicon-dashboard icon icon-big white"></i><span> Dashboard</span>',["controller" => "users", "action" => "dashboard"],["class" => "auto", "escape" => false]) ?>
+          </li>
+          <li class="dropdown" style="height:100%;width: 100%;">
+              <?= $this->Html->link('<i class="fa fa-truck icon-big white"></i><span> Shipments</span>',["controller" => "shipments", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i><span> Shipping Carriers</span>',["controller" => "shipping_carriers", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i><span> Shipping Services</span>',["controller" => "shipping_services", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i><span> Shipping Purposes</span>',["controller" => "shipping_purposes", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>     
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-user icon icon-big white"></i><span> Clients</span>',["controller" => "clients", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>   
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-user icon icon-big white"></i><span> Users</span>',["controller" => "user_entities", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>  
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-list-alt icon icon-big white"></i><span> Groups</span>',["controller" => "groups", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>      
+        <?php }elseif($hdr_user_data->user->group_id == 2) { ?>
+          <li class="dropdown" style="height:100%;width: 100%;">
+             <?= $this->Html->link('<i class="glyphicon glyphicon-dashboard icon icon-big white"></i><span> Dashboard</span>',["controller" => "users", "action" => "user_dashboard"],["class" => "auto", "escape" => false]) ?>
+          </li>    
+          <li class="dropdown" style="height:100%;width: 100%;">
+             <?= $this->Html->link('<i class="fa fa-truck icon icon-big white"></i><span> Shipments</span>',["controller" => "shipments", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>    
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i><span> Inventory</span>',["controller" => "inventory", "action" => "admin"],["class" => "auto", "escape" => false]) ?>
+          </li>    
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-money icon icon-big white"></i><span> Billing</span>',["controller" => "invoice", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li> 
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-user icon icon-big white"></i><span> Employees</span>',["controller" => "user_entities", "action" => "employees"],["class" => "auto", "escape" => false]) ?>
+          </li>  
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-user icon icon-big white"></i><span> Clients</span>',["controller" => "clients", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>  
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-inbox icon icon-big white"></i> <span> Messages</span>',["controller" => "message", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>  
+        <?php }elseif($hdr_user_data->user->group_id == 3) { ?>
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="glyphicon glyphicon-dashboard icon icon-big white"></i><span> Dashboard</span>',["controller" => "users", "action" => "user_dashboard"],["class" => "auto", "escape" => false]) ?>
+          </li>  
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-truck icon icon-big white"></i><span> Shipment</span>',["controller" => "shipments", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>  
+          <li class="dropdown" style="height:100%;width: 100%;">
+             <?php if($hdr_user_data->user->group_id == 4) { ?>
+             <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i><span> Inventory</span>',["controller" => "inventory", "action" => "employee"],["class" => "auto", "escape" => false]) ?>
+            <?php }else{?>
+             <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i><span> Inventory</span><span  class="label label-danger" >' .  $shipmentsOrder . ' </span>',["controller" => "inventory", "action" => "employee"],["class" => "auto", "escape" => false]) ?>
+            <?php } ?>
+            <!--    
+
+                <?php if($hdr_user_data->user->group_id == 4) { ?>
+             <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i> <span class="font-bold font-size-r">' . __('Inventory') . ' </span>',["controller" => "inventory", "action" => "employee"],["class" => "auto", "escape" => false]) ?>
+            <?php }else{?>
+             <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i> <span class="font-bold font-size-r">' . __('Inventory') . ' </span>  <span  class="label label-danger" >' .  $shipmentsOrder . ' </span>',["controller" => "inventory", "action" => "employee"],["class" => "auto", "escape" => false]) ?>
+            <?php } ?>
+
+            --> 
+          </li>  
+        <?php }elseif($hdr_user_data->user->group_id == 4) { ?>    
+          <li class="dropdown" style="height:100%;width: 100%;">
+             <?= $this->Html->link('<i class="glyphicon glyphicon-dashboard icon icon-big white"></i><span> Dashboard</span>',["controller" => "users", "action" => "client_dashboard"],["class" => "auto", "escape" => false]) ?>
+          </li>  
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i><span> Shipments</span>',["controller" => "shipments", "action" => "client"],["class" => "auto", "escape" => false]) ?>
+          </li> 
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-money icon icon-big white"></i> <span> Billing</span>',["controller" => "invoice", "action" => "client"],["class" => "auto", "escape" => false]) ?>
+          </li>
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-truck icon icon-big white"></i> <span> Inventory</span>',["controller" => "inventory", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>    
+          <li class="dropdown" style="height:100%;width: 100%;">
+            <?= $this->Html->link('<i class="fa fa-fw fa-inbox icon icon-big white"></i> <span> Messages</span>',["controller" => "message", "action" => "index"],["class" => "auto", "escape" => false]) ?>
+          </li>  
+        <?php } ?>
+      </ul> 
 
    
 
