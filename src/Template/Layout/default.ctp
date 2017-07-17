@@ -20,6 +20,9 @@
         echo $this->Html->css('theme_forest/datepicker/datepicker.css');
         echo $this->Html->css('colorbox/colorbox.css');
         echo $this->Html->css('jquery.dataTables.css');
+        echo $this->Html->css('chosen.min.css');
+        echo $this->Html->script('theme_forest/jquery.min.js');
+
         echo $this->fetch('meta');
         echo $this->fetch('css');
         echo $this->fetch('script');
@@ -53,8 +56,7 @@
         </a>
       </div>    
 
-
-      <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user menu-nav" style="display: none;padding-right: 0px;padding-left: 0px;padding-top: 0px;">                
+     <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user menu-nav" style="display: none;padding-right: 0px;padding-left: 0px;padding-top: 0px;">                
         
         <?php if($hdr_user_data->user->group_id ==  1) { ?>
           <li class="dropdown" style="height:100%;width: 100%;">
@@ -145,6 +147,7 @@
         <?php } ?>
       </ul> 
 
+
    
 
       <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">                
@@ -193,6 +196,15 @@
               <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
 Order overdue: <span class="number-of-order-due label label-danger"></span> ' . __(''),["controller" => "users", "action" => "user_order_overdue_dashboard"],["escape" => false]); ?>                    
             </li>
+
+              <?php if($hdr_user_data->user->group_id == 4){ ?>
+                  <li class="divider"></li>
+                  <li>
+                      <?= $this->Html->link('<i class="fa fa-inbox white"></i> 
+New Invoices: <span class="number-of-invoice-due label label-danger"></span> ' . __(''),["controller" => "invoice", "action" => "client"],["escape" => false]); ?>
+                  </li>
+              <?php }?>
+
             <?php if($hdr_user_data->user->group_id != 3){ ?>
             <li class="divider"></li>
             <li>
