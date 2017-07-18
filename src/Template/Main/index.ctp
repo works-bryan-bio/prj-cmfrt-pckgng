@@ -158,13 +158,13 @@
 
 
                             <ul id="video-gallery" class="list-unstyled">
-                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" data-sub-html="video caption1" data-html="#testi1">
+                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" data-sub-html="OUTSTANDING EFFICIENCY AND PROFESSIONALISM! - KEN HENDERSOHN" data-html="#testi1">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
-                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" data-sub-html="video caption2" data-html="#testi2">
+                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" data-sub-html="ROUND THE CLOCK CUSTOMER CARE! - LEO ROSSI" data-html="#testi2">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
-                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" data-sub-html="video caption3" data-html="#testi3">
+                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" data-sub-html="MY SALES HAVE INCREASED BY 30%! - ANDREW CONNELLI" data-html="#testi3">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
                             </ul>
@@ -183,17 +183,34 @@
                                 </ol>-->
                                 <!-- Carousel items -->
                                 <div class="carousel-inner">
-
-                                <div class="active item">
+                                <div class="item active">
                                     <blockquote>
-                                        <p>Wow! My business has taken such a turn for the better since I signed up with Comfort Packaging! </p>
-                                        <h4>-Frank A.</h4>
+                                        <p style="text-transform: uppercase;"> "OUTSTANDING EFFICIENCY AND PROFESSIONALISM!" </p>
+                                        <h4  style="text-transform: uppercase;">-KEN HENDERSOHN</h4>
                                     </blockquote>
                                 </div>
                                 <div class="item">
                                     <blockquote>
-                                        <p> Ever since Comfort Packaging has taken shipping off my hands, business couldn't be better! </p>
-                                        <h4>-Lisa M.</h4>
+                                        <p style="text-transform: uppercase;"> "MY SALES HAVE INCREASED BY 30%!" </p>
+                                        <h4  style="text-transform: uppercase;">-ANDREW CONNELLI</h4>
+                                    </blockquote>
+                                </div>
+                                <div class="item">
+                                    <blockquote>
+                                        <p style="text-transform: uppercase;"> "ROUND THE CLOCK CUSTOMER CARE!" </p>
+                                        <h4  style="text-transform: uppercase;">-LEO ROSSI</h4>
+                                    </blockquote>
+                                </div>
+                                <div class="item">
+                                    <blockquote>
+                                        <p style="text-transform: uppercase;"> "Wow! My business has taken such a turn for the better since I signed up with Comfort Packaging!" </p>
+                                        <h4  style="text-transform: uppercase;">-Frank A.</h4>
+                                    </blockquote>
+                                </div>
+                                <div class="item">
+                                    <blockquote>
+                                        <p style="text-transform: uppercase;"> "Ever since Comfort Packaging has taken shipping off my hands, business couldn't be better!" </p>
+                                        <h4  style="text-transform: uppercase;">-Lisa M.</h4>
                                     </blockquote>
                                 </div>
                             </div>

@@ -32,15 +32,15 @@
                 </form>
 
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6" style="padding-left: 0px !important;">
                 <div class="cp-contact-info ">
                     <div class="row">
                         <div class="col-md-4">
                             <h3>Call Us</h3>
                             <ul class="list-unstyled">
-                                <li>Free Call: 1-800-000-0000 </li>
-                                <li>Tel: 123-456-7890</li>
-                                <li>Fax: 123-456-7890</li>
+                                <li>Tel: 917.580.3131</li>
+                                <li>info@comfortpackaging.com</li>
+                                <li>Monday thru Friday<br/>9:00AM - 5:00PM</li>
                             </ul>
                         </div>
                         <div class="col-md-4">
@@ -48,15 +48,11 @@
                             <p>
                                 1405 N Broad St, <br />Hillside, NJ 07205
                             </p>
-                            <br/> 
-                             <h3>Our Shipping Address</h3>
-                             <p>1 US Hwy 22 <br/>Hillside, NJ 07205 <br/>917.580.3131</p>
                         </div>
                         <div class="col-md-4">
-                            <h3>Best Time to call Back</h3>
+                            <h3>Our Shipping Address</h3>
                             <p>
-                                Monday thru Friday<br />
-                                9:00AM - 5:00PM
+                                1 US Hwy 22 <br/>Hillside, NJ 07205
                             </p>
                         </div>
                     </div>
