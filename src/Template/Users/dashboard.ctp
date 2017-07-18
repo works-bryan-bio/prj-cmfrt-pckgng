@@ -45,7 +45,7 @@ table.dataTable{
               </span>
             </a>
           </div>
-          <div class="col-md-4 b-b" style="padding-left: 30px;border: 0px;">
+          <div class="col-md-4 b-b left-30" style="border: 0px;">
             <a href="#" class="block padder-v hover">
               <span class="i-s i-s-2x pull-left m-r-sm">
                 <i class="i i-hexagon2 i-s-base text-success-lt hover-rotate"></i>

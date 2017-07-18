@@ -56,8 +56,7 @@
         </a>
       </div>    
 
-
-      <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user menu-nav" style="display: none;padding-right: 0px;padding-left: 0px;padding-top: 0px;">                
+     <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user menu-nav" style="display: none;padding-right: 0px;padding-left: 0px;padding-top: 0px;">                
         
         <?php if($hdr_user_data->user->group_id ==  1) { ?>
           <li class="dropdown" style="height:100%;width: 100%;">
@@ -147,6 +146,7 @@
           </li>  
         <?php } ?>
       </ul> 
+
 
    
 
