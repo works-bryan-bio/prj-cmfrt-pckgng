@@ -158,13 +158,13 @@
 
 
                             <ul id="video-gallery" class="list-unstyled">
-                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" data-sub-html="OUTSTANDING EFFICIENCY AND PROFESSIONALISM! - KEN HENDERSOHN" data-html="#testi1">
+                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" data-sub-html="&#8220;OUTSTANDING EFFICIENCY AND PROFESSIONALISM! - KEN HENDERSOHN&#8221;" data-html="#testi1">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_01.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
-                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" data-sub-html="ROUND THE CLOCK CUSTOMER CARE! - LEO ROSSI" data-html="#testi2">
+                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" data-sub-html="&#8220;ROUND THE CLOCK CUSTOMER CARE! - LEO ROSSI&#8221;" data-html="#testi2">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_02.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
-                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" data-sub-html="MY SALES HAVE INCREASED BY 30%! - ANDREW CONNELLI" data-html="#testi3">
+                                <li data-poster="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" data-sub-html="&#8220;MY SALES HAVE INCREASED BY 30%! - ANDREW CONNELLI&#8221;" data-html="#testi3">
                                     <img src="<?php echo $this->Url->build("/webroot/frontend/assets/images/testivid_03.jpg"); ?>" class="img-responsive" alt="" />
                                 </li>
                             </ul>
