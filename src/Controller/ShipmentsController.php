@@ -705,17 +705,39 @@ class ShipmentsController extends AppController
                     ->viewVars(['edata' => $email_content])
                     ->send();
 
-                if($data['amazon_confirmation_receipt']){    
-                // send to client    
-                $recipient2 = $client_email;        
-                $email_smtp = new Email('default');
-                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                    ->template('employee_received')
-                    ->emailFormat('html')
-                    ->to($recipient2)                                                                                                     
-                    ->subject('Comfort Packaging : your amazon shipment was sent on: '. date("M d, Y", strtotime(  $data['amazon_shipment_date']))  )
-                    ->viewVars(['edata' => $email_content])
-                    ->send();
+                if($data['amazon_confirmation_receipt']==1){    
+                 //send origin
+                    //$recipient = "comfortpackaging@gmail.com";  
+                    $recipient = "works.bryan.bio@gmail.com";
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('shipment_completion')
+                        ->emailFormat('html')
+                        ->to($recipient)                                                                                                     
+                        ->subject('Comfort Packaging : Shipment Completed')
+                        ->viewVars(['edata' => $email_content])
+                        ->send();
+
+                    // send to client    
+                    /*$recipient2 = $client_email;        
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('employee_received')
+                        ->emailFormat('html')
+                        ->to($recipient2)                                                                                                     
+                        ->subject('Comfort Packaging : your amazon shipment was sent on: '. date("M d, Y", strtotime(  $data['amazon_shipment_date']))  )
+                        ->viewVars(['edata' => $email_content])
+                        ->send();*/
+
+                    $recipient2 = $client_email;        
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('shipment_completion')
+                        ->emailFormat('html')
+                        ->to($recipient2)                                                                                                     
+                        ->subject('Comfort Packaging : Shipment Completed on: '. date("M d, Y", strtotime(  $data['amazon_shipment_date']))  )
+                        ->viewVars(['edata' => $email_content])
+                        ->send();
 
                 
                 }else{

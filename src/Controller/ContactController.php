@@ -74,7 +74,7 @@ class ContactController extends AppController
             ->send(); 
 
         $json_data['is_success'] = true;
-        $json_data['message']    = "<div class='alert alert-success'>Email was successfully sent!</div>";
+        $json_data['message']    = "<div class='alert alert-success'>Thank you for contacting Comfort Packaging, We will reach out to you shortly.</div>";
 
         echo json_encode($json_data);
         $this->viewBuilder()->layout('');
