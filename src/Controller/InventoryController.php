@@ -50,7 +50,16 @@ class InventoryController extends AppController
     {
         $session = $this->request->session();    
         $user_data = $session->read('User.data');  
+        $this->Shipments = TableRegistry::get('Shipments');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder'); 
+        
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.client_id' => $user_data->id ,'InventoryOrder.order_status' => 'Pending'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
 
+       
         $inventory = $this->Inventory->find('all')
             ->contain(['Shipments'])
             ->where(['Inventory.client_id' => $user_data->id , 'Inventory.remaining_quantity <>' => '> 0'])
@@ -63,13 +72,15 @@ class InventoryController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
-        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+        
         $inventoryOrder = $this->InventoryOrder->newEntity();
         $shippingCarriers = $this->InventoryOrder->ShippingCarriers->find('list', ['limit' => 200]);
         $shippingServices = $this->InventoryOrder->ShippingServices->find('list', ['limit' => 200]);
         $inventoryOrders = $this->InventoryOrder->find('list', ['limit' => 200]);
         $this->set(compact('inventoryOrder', 'shippingCarriers', 'shippingServices', 'inventoryOrders'));
 
+        $this->set('group_id' , $user_data->user->group_id);
+        $this->set('inventory_order', $inventory_order);
         $this->set('inventory', $inventory);
         $this->set('inventoryCompleted', $inventoryCompleted);
         $this->set('_serialize', ['inventory']);
@@ -80,24 +91,67 @@ class InventoryController extends AppController
      *
      * @return void
      */
+//    public function admin()
+//    {
+//        $session = $this->request->session();
+//        $user_data = $session->read('User.data');
+//
+//        $inventory = $this->Inventory->find('all')
+//            ->contain(['Shipments', 'Clients'])
+//            ->where(['Inventory.remaining_quantity <>' => '> 0'])
+//            ->order(['Shipments.id' => 'DESC'])
+//        ;
+//
+//        $inventory_completed = $this->Inventory->find('all')
+//            ->contain(['Shipments', 'Clients'])
+//            ->where(['Inventory.remaining_quantity' => '0'])
+//            ->order(['Shipments.id' => 'DESC'])
+//        ;
+//
+//        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+//        $inventoryOrder = $this->InventoryOrder->newEntity();
+//        $shippingCarriers = $this->InventoryOrder->ShippingCarriers->find('list', ['limit' => 200]);
+//        $shippingServices = $this->InventoryOrder->ShippingServices->find('list', ['limit' => 200]);
+//        $inventoryOrders = $this->InventoryOrder->find('list', ['limit' => 200]);
+//        $this->set(compact('inventoryOrder', 'shippingCarriers', 'shippingServices', 'inventoryOrders'));
+//
+//        $this->set('group_id' , $user_data->user->group_id);
+//        $this->set('inventory', $inventory);
+//        $this->set('inventory_completed', $inventory_completed);
+//        $this->set('_serialize', ['inventory']);
+//    }
+
     public function admin()
     {
-        $session = $this->request->session();    
-        $user_data = $session->read('User.data');  
+        $session = $this->request->session();
+        $user_data = $session->read('User.data');
+        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+
+        $inventory_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Pending'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
 
         $inventory = $this->Inventory->find('all')
-            ->contain(['Shipments', 'Clients'])
+            ->contain(['Shipments'])
             ->where(['Inventory.remaining_quantity <>' => '> 0'])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
         $inventory_completed = $this->Inventory->find('all')
-            ->contain(['Shipments', 'Clients'])
+            ->contain(['Shipments'])
             ->where(['Inventory.remaining_quantity' => '0'])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
-        $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+        $cancelled_order = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.order_status' => 'Cancelled'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+
         $inventoryOrder = $this->InventoryOrder->newEntity();
         $shippingCarriers = $this->InventoryOrder->ShippingCarriers->find('list', ['limit' => 200]);
         $shippingServices = $this->InventoryOrder->ShippingServices->find('list', ['limit' => 200]);
@@ -105,6 +159,8 @@ class InventoryController extends AppController
         $this->set(compact('inventoryOrder', 'shippingCarriers', 'shippingServices', 'inventoryOrders'));
 
         $this->set('group_id' , $user_data->user->group_id);
+        $this->set('cancelled_order', $cancelled_order);
+        $this->set('inventory_order', $inventory_order);
         $this->set('inventory', $inventory);
         $this->set('inventory_completed', $inventory_completed);
         $this->set('_serialize', ['inventory']);
