@@ -440,7 +440,7 @@ class ShipmentsController extends AppController
             
             //CHECK IF SHIPMENT ID EXISTS
             $shipmentA = $this->Shipments->find()
-                ->where(['Shipments.id <>' => $id, 'Shipments.s_id' => $this->request->data['sid']])
+                ->where(['Shipments.id <>' => $id, 'Shipments.s_id' => $this->request->data['s_id']])
                 ->first()
             ;
 

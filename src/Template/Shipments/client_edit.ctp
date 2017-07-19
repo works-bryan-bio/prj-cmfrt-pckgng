@@ -41,7 +41,7 @@
                         <div class='form-group'>
                             <label for='boxes' class='col-sm-2 control-label'>" . __('Shipment ID') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input Shipment ID' ></i></span>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('sid', ['type' => 'text', 'class' => 'form-control', 'id' => 'sid', 'label' => false]);                
+                            echo $this->Form->input('s_id', ['type' => 'text', 'class' => 'form-control', 'id' => 's_id', 'label' => false]);                
                         echo " </div></div>";
 
                         echo "
