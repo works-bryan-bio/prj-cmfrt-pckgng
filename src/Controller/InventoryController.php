@@ -66,11 +66,17 @@ class InventoryController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
-        $inventoryCompleted = $this->Inventory->find('all')
+        $inventoryCompletedOrders = $this->InventoryOrder->find('all')
+            ->contain(['Shipments', 'Clients'])
+            ->where(['InventoryOrder.client_id' => $user_data->id ,'InventoryOrder.order_status' => 'Completed'])
+            ->order(['Shipments.id' => 'DESC'])
+        ;
+
+        /*$inventoryCompleted = $this->Inventory->find('all')
             ->contain(['Shipments'])
             ->where(['Inventory.client_id' => $user_data->id , 'Inventory.remaining_quantity' => '0'])
             ->order(['Shipments.id' => 'DESC'])
-        ;
+        ;*/
 
         
         $inventoryOrder = $this->InventoryOrder->newEntity();
@@ -82,7 +88,8 @@ class InventoryController extends AppController
         $this->set('group_id' , $user_data->user->group_id);
         $this->set('inventory_order', $inventory_order);
         $this->set('inventory', $inventory);
-        $this->set('inventoryCompleted', $inventoryCompleted);
+        $this->set('inventoryCompletedOrders', $inventoryCompletedOrders);
+        //$this->set('inventoryCompleted', $inventoryCompleted);
         $this->set('_serialize', ['inventory']);
     }
 
