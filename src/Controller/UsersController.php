@@ -257,6 +257,9 @@ class UsersController extends AppController
         $this->Inventory = TableRegistry::get('Inventory');
         $this->InventoryOrder = TableRegistry::get('InventoryOrder');
 
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+
         $pendingShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
@@ -280,11 +283,23 @@ class UsersController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
-         $order_overdue = $this->InventoryOrder->find('all')
+        if($user_data->user->group_id == 4){
+            $order_overdue = $this->InventoryOrder->find('all')
             ->contain(['Clients', 'Shipments'])
             ->where([ 'order_status' => 'Pending' ])
+            ->andWhere(['InventoryOrder.client_id' => $user_data->id])
             ->andWhere(['date_created <=' => date('Y-m-d')])
-            ; 
+            ;
+        }else{
+            $order_overdue = $this->InventoryOrder->find('all')
+            ->contain(['Clients', 'Shipments'])
+            ->where([ 'order_status' => 'Pending' ])
+
+            ->andWhere(['date_created <=' => date('Y-m-d')])
+            ;
+
+        }    
+          
          
        
         
@@ -441,7 +456,8 @@ class UsersController extends AppController
             ->contain(['Clients', 'ShippingCarriers', 'ShippingServices', 'ShippingPurposes'])
             ->where(['Shipments.status IN' => $ids])
             ->andWhere(['Shipments.shipping_purpose_id' => 2])
-            ->andWhere(['Shipments.amazon_shipment_date <' => $date])
+            ->andWhere(['Shipments.amazon_shipment_date <=' => $date])
+            //->andWhere(['Shipments.amazon_shipment_date_client <=' => $date])
          ;
 
           //debug($send_to_amazon);

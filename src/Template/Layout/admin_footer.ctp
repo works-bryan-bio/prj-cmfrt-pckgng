@@ -675,7 +675,7 @@
                        
             $.post(base_url + "shipments/load_verify_order_due",{},function(o){
                 
-                $('.number-of-order-due').html(o.quantity);
+               // $('.number-of-order-due').html(o.quantity);
             },"json");
 
 
@@ -689,6 +689,8 @@
                 $('.number-of-message').html(o.message);
                 $('.total-notification').html(o.total_notification);
                 $('.number-of-amazon').html(o.amazon_count);
+                $('.number-of-invoice-due').html(o.invoices_count);
+                
             },"json");
 
 

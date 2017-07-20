@@ -123,7 +123,14 @@ table.dataTable{
                             if( $send_to_amazon->status == 1 ){
                               echo "Pending";
                             }elseif($send_to_amazon->status == 4 || $send_to_amazon->status == 3 ){
-                              echo "Received-Pending";
+                              
+                              if(strtotime(date("Y-m-d")) <= strtotime($send_to_amazon->amazon_shipment_date) || strtotime(date("Y-m-d")) <= strtotime($send_to_amazon->amazon_shipment_date_client) ) { 
+                                echo "Temporary Storage";
+                              }else{
+                                echo "Received-Pending";
+                              }
+                           
+                              
                             }else{
                               echo "Completed";
                             }

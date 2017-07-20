@@ -707,8 +707,7 @@ class ShipmentsController extends AppController
 
                 if($data['amazon_confirmation_receipt']==1){    
                  //send origin
-                    //$recipient = "comfortpackaging@gmail.com";  
-                    $recipient = "works.bryan.bio@gmail.com";
+                   $recipient = "comfortpackaging@gmail.com";  
                     $email_smtp = new Email('default');
                     $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
                         ->template('shipment_completion')
@@ -901,6 +900,8 @@ class ShipmentsController extends AppController
              ->where([ 'clients_id' => $user_data->id ])
              ->count();
 
+        
+
       }else{
           $order = $this->InventoryOrder->find('all')
             ->where([ 'order_status' => 'Pending' ])
@@ -972,6 +973,7 @@ class ShipmentsController extends AppController
         $return['shipment_quantity'] = $shipment;
         $return['message'] = $message;
         $return['amazon_count'] = $amazon_count;
+        $return['invoices_count'] = $invoices;
         if($user_data->user->group_id == 3){
             $return['total_notification'] = $order + $shipment + $amazon_count;
         }
