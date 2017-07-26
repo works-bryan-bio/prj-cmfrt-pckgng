@@ -1,9 +1,7 @@
-
 <?php
-	echo $this->Html->script('theme_forest/jquery.min.js');
 
 	echo $this->Html->script('theme_forest/bootstrap.js');
-
+    echo $this->Html->script('chosen.jquery.min.js');
 	//echo $this->Html->script('theme_forest/app.js');	
     echo $this->Html->script('theme_forest/datepicker/bootstrap-datepicker.js');
 	echo $this->Html->script('theme_forest/slimscroll/jquery.slimscroll.min.js');
@@ -30,12 +28,12 @@
             refreshShippingPurpose();
             loadVerifyOrderDue();
             loadVerifyDue();
-
-            //
-            // $('.btn-success').click(function(){
+            loadVerifyInvoiceDue();
+            //add shipment 
+           // $('.btn-success').click(function(){
                 
-            //     $('.btn-success').prop('disabled', true);
-            // });
+            //    $('.btn-success').prop('disabled', true);
+          //  });
 
             // Javascript to enable link to tab
             var url = document.location.toString();
@@ -54,13 +52,12 @@
 
             //Datatable
             $('.zero-config-datatable').DataTable({
-                
                 "fnDrawCallback": function( settings ) {
                     redrawnFunction();
                 }
             });
 
-            $('.zero-config-datatable-employee-pending').DataTable({
+			$('.zero-config-datatable-employee-pending').DataTable({
                 "order": [[ 10, "desc" ]],
                 "fnDrawCallback": function( settings ) {
                     redrawnFunction();
@@ -397,7 +394,7 @@
 
         function redrawnFunction()
         {
-            $('.dt-default').datepicker({"format" : "yyyy-mm-dd"});
+            $('.dt-default').datepicker({"format" : "yyyy-mm-dd", "todayBtn": "linked"});
 
             $('.send_option').change(function(){
                 var send_option = $(this).val();
@@ -601,8 +598,7 @@
             },"json");
         }
 
-
-        function loadVerifySentItem(shipment_id) {
+		function loadVerifySentItem(shipment_id) {
             $.post(base_url + "shipments/load_verify_sent_item",{shipment_id:shipment_id},function(o){
                 var qty =  o.quantity;
                 $('#remaining_val').val(qty);
