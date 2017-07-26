@@ -30,6 +30,10 @@ table{
             <td><?= $shipment->s_id ?></td>
         </tr>
         <tr>
+            <td><?= __('FBA Shipping ID') ?></th>
+            <td><?= $shipment->fba_shipment_id ?></td>
+        </tr>
+        <tr>
             <td><?= __('Shipping Carrier') ?></th>
             <td><?= $shipment->shipping_carrier->name ?></td>
         </tr>
