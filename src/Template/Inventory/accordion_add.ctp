@@ -29,7 +29,15 @@
                     </div>
 
                     <?php                  
-                                    echo "
+                    
+                     echo "
+                        <div class='form-group'>
+                            <label for='order_number' class='col-sm-2 control-label'>" . __('FBA Shipment ID') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the FBA Shipment ID' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('fba_shipment_id', ['type' => 'text', 'class' => 'form-control', 'id' => 'order_number', 'label' => false]);
+                      echo " </div></div>";        
+
+                      echo "
                         <div class='form-group'>
                             <label for='order_number' class='col-sm-2 control-label'>" . __('Order Number') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Order Number' ></i></span>
                             <div class='col-sm-6'>";

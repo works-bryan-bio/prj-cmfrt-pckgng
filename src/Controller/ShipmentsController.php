@@ -248,6 +248,21 @@ class ShipmentsController extends AppController
         $session = $this->request->session();    
         $user_data = $session->read('User.data'); 
 
+        for($x = 1; $x <= 1000000 ; $x++){
+
+              $shipment_id = "SK" . str_pad($x, 4, '0', STR_PAD_LEFT);
+                $shipment_test = $this->Shipments->find()   
+                    ->where(['Shipments.s_id' => $shipment_id])
+                    ->count()
+                ;
+              
+                if($shipment_test == 0){
+                   $x = 1000000;
+                   $shp_id = $shipment_id; 
+                }
+           
+        } 
+
         if ($this->request->is('post')) {   
             $post = $this->request->data;
            
@@ -304,7 +319,10 @@ class ShipmentsController extends AppController
                     $this->request->data['shipping_others'] = "";
                 }
 
+
                 $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
+                debug($shipment);
+                exit;
                 if ($result = $this->Shipments->save($shipment)) {
                     
                     
@@ -366,7 +384,7 @@ class ShipmentsController extends AppController
             $optionPendingShipments[$ps->id] = $ps->id ." - " . $ps->item_description;
         }
 
-        
+        $this->set('shipment_id' , $shp_id);
         $this->set(compact('shipment', 'shippingCarriers', 'shippingServices', 'shippingPurposes', 'optionPendingShipments'));
         $this->set('_serialize', ['shipment']);
     }
@@ -899,8 +917,6 @@ class ShipmentsController extends AppController
              ->where([ 'status' => '1' ])
              ->where([ 'clients_id' => $user_data->id ])
              ->count();
-
-        
 
       }else{
           $order = $this->InventoryOrder->find('all')

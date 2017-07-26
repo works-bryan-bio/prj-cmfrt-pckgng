@@ -33,16 +33,16 @@ class UsersController extends AppController
             if( $user_data->user->group_id == 1 ){ //Company
                 $this->Auth->allow();
             }elseif( $user_data->user->group_id == 2 ){ //Manager
-                $this->Auth->allow(['user_dashboard']);
+                $this->Auth->allow(['user_dashboard','user_shipment_overdue_dashboard', 'user_order_overdue_dashboard','user_send_to_amazon_dashboard']);
             }elseif( $user_data->user->group_id == 3 ){ //Employee
-                $this->Auth->allow(['user_dashboard','user_shipment_overdue_dashboard','user_order_overdue_dashboard']);
+                $this->Auth->allow(['user_dashboard','user_shipment_overdue_dashboard','user_order_overdue_dashboard', 'user_send_to_amazon_dashboard']);
             }elseif( $user_data->user->group_id == 4 ){ //Client
                 $this->Auth->allow(['client_dashboard','user_shipment_overdue_dashboard','user_order_overdue_dashboard']);
-            }      
+            }        
         }
         $this->set('nav_selected', $nav_selected);
 
-        $this->Auth->allow();
+        //$this->Auth->allow();
     }
 
     /**
@@ -81,7 +81,8 @@ class UsersController extends AppController
         $pendingShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
-            ->orWhere(['Shipments.status' => 4])            
+            ->orWhere(['Shipments.status' => 4])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
         ;
 
         $completedShipments = $this->Shipments->find('all')
@@ -126,6 +127,7 @@ class UsersController extends AppController
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
             ->orWhere(['Shipments.status' => 4])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
             ->order(['Shipments.id' => 'DESC'])
         ;
 
@@ -158,7 +160,8 @@ class UsersController extends AppController
         $pendingShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
-            ->orWhere(['Shipments.status' => 4])            
+            ->orWhere(['Shipments.status' => 4])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
         ;
        
 
@@ -203,10 +206,14 @@ class UsersController extends AppController
         $this->Inventory = TableRegistry::get('Inventory');
         $this->InventoryOrder = TableRegistry::get('InventoryOrder');
 
+        $session = $this->request->session();    
+        $user_data = $session->read('User.data');
+
         $pendingShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
-            ->orWhere(['Shipments.status' => 4])            
+            ->orWhere(['Shipments.status' => 4])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
         ;
        
 
@@ -226,15 +233,20 @@ class UsersController extends AppController
             ->order(['Shipments.id' => 'DESC'])
         ;
 
-        $shipment_overdue = $this->Shipments->find('all')
+         if($user_data->user->group_id == 4){
+            $shipment_overdue = $this->Shipments->find('all')
             ->contain(['Clients','ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
             ->where([ 'Shipments.status' => 1 ])
-        ;
-         
+            ->andWhere([ 'Shipments.client_id' => $user_data->id ])
+            ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) ']);
+        }else{
+            $shipment_overdue = $this->Shipments->find('all')
+            ->contain(['Clients','ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith'])
+            ->where([ 'Shipments.status' => 1 ])
+            ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) ']);
+        }
         
-        // debug($shipment_overdue);
-        // exit;
-         
+
             
         $this->set([
             'pendingShipments' => $pendingShipments,
@@ -263,7 +275,8 @@ class UsersController extends AppController
         $pendingShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
-            ->orWhere(['Shipments.status' => 4])            
+            ->orWhere(['Shipments.status' => 4])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
         ;
        
 
@@ -336,7 +349,8 @@ class UsersController extends AppController
         $pendingShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
-            ->orWhere(['Shipments.status' => 4])            
+            ->orWhere(['Shipments.status' => 4])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
         ;
        
         $completedShipments = $this->Shipments->find('all')
@@ -425,7 +439,8 @@ class UsersController extends AppController
         $pendingShipments = $this->Shipments->find('all')
             ->contain(['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients'])
             ->where(['Shipments.status' => 1])
-            ->orWhere(['Shipments.status' => 4])            
+            ->orWhere(['Shipments.status' => 4])
+               ->andWhere([' (Shipments.combine_with_id = 0 OR Shipments.combine_with_id IS NULL) '])
         ;
        
 
@@ -457,7 +472,6 @@ class UsersController extends AppController
             ->where(['Shipments.status IN' => $ids])
             ->andWhere(['Shipments.shipping_purpose_id' => 2])
             ->andWhere(['Shipments.amazon_shipment_date <=' => $date])
-            //->andWhere(['Shipments.amazon_shipment_date_client <=' => $date])
          ;
 
           //debug($send_to_amazon);

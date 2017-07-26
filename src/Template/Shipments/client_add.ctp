@@ -25,13 +25,7 @@
           <?= $this->Form->create($shipment,['class' => 'form-horizontal']) ?>
                 <fieldset>        
                     <?php          
-                        echo "
-                        <div class='form-group'>
-                            <label for='boxes' class='col-sm-2 control-label'>" . __('Shipment ID') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input Shipment ID' ></i></span>
-                            <div class='col-sm-6'>";
-                            echo $this->Form->input('s_id', ['type' => 'text', 'class' => 'form-control', 'id' => 's_id', 'label' => false]);                
-                        echo " </div></div>";
-
+                      
                         echo "
                         <div class='form-group'>
                             <label for='item_description' class='col-sm-2 control-label'>" . __('Item Description') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Item Description' ></i></span> 
@@ -164,6 +158,22 @@
                                       
                         echo " </div></div>";
 
+                         echo "
+                        <div class='form-group amazon-shipment-date hidden'>
+                            <label for='amazon_shipment_date_client' class='col-sm-2 control-label'>" . __('Amazon Shipment Notes') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Amazon Shipment Notes' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('amazon_shipment_note', ['type' => 'text', 'class' => 'form-control', 'id' => 'amazon_shipment_note', 'label' => false]); 
+                                      
+                        echo " </div></div>";
+
+                         echo "
+                        <div class='form-group amazon-shipment-date hidden'>
+                            <label for='fba_shipment_id' class='col-sm-2 control-label'>" . __('FBA Shipment ID') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='FBA Shipment ID' ></i></span>
+                            <div class='col-sm-6'>";
+                           echo $this->Form->input('fba_shipment_id', ['type' => 'text', 'class' => 'form-control', 'id' => 'fba_shipment_id', 'label' => false]); 
+                                      
+                        echo " </div></div>";
+
                         echo "
                         <div class='form-group send-amazon-only-group hidden'>
                             <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('add FNSKU labels') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload FNSKU labels' ></i></span>
@@ -180,7 +190,22 @@
 //
 //                        echo " </div></div>";
 
-                        
+                         echo "
+                        <div class='form-group send-amazon-group hidden'>
+                            <label for='amazon_shipment_date_client' class='col-sm-2 control-label'>" . __('Amazon Shipment Date') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Amazon Shipment Date' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('amazon_shipment_date_client', ['type' => 'text', 'class' => 'form-control dt-default', 'id' => '', 'label' => false]); 
+                                      
+                        echo " </div></div>";
+
+                        echo "
+                        <div class='form-group send-amazon-group hidden'>
+                            <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('add FNSKU labels') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Upload FNSKU labels' ></i></span>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('fnsku_label', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => '', 'label' => false]); 
+                                      
+                        echo " </div></div>";
+
                         echo "
                         <div class='form-group send-amazon-group hidden'>
                             <label for='send_amazon_qty' class='col-sm-2 control-label'>" . __('How many?') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input the Quantity of items you want to send to amazon' ></i></span>
@@ -241,6 +266,13 @@
                             <div class='col-sm-6'>";
                             echo $this->Form->input('comments', ['type' => 'text', 'class' => 'form-control', 'id' => 'comments', 'label' => false]);                
                         echo " </div></div>";    
+
+                          echo "
+                        <div class='form-group'>
+                            <label for='boxes' class='col-sm-2 control-label'>" . __('Shipment ID') . "</label><span style='padding: 25px;'><i class='glyphicon glyphicon-info-sign' data-toggle='tooltip' data-placement='right' title='Input Shipment ID' ></i></span>
+                            <div class='col-sm-6'>";
+                            echo $this->Form->input('s_id', ['type' => 'text', 'class' => 'form-control', 'id' => 's_id', 'label' => false, 'value' => $shipment_id]);                
+                        echo " </div></div>";
                         
                                 ?>
                 </fieldset>
