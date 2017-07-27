@@ -697,9 +697,9 @@ class ShipmentsController extends AppController
 
             }
 
+            $s = $this->Shipments->get($data['shipment_id'],['contain' => ['ShippingCarriers', 'ShippingServices', 'ShippingPurposes', 'CombineWith', 'Clients']]);
 
-
-            $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $data['correct_quantity_comment']  , 'client' => $user_data, 'shipment_id' => $shipment->id];
+            $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $data['correct_quantity_comment']  , 'client' => $user_data, 'shipment_id' => $shipment->id, 'shipment' => $s];
 
                 //send origin
                 $recipient = "comfortpackaging@gmail.com";        
@@ -749,10 +749,10 @@ class ShipmentsController extends AppController
                     $recipient2 = $client_email;        
                     $email_smtp = new Email('default');
                     $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                        ->template('shipment_completion')
+                        ->template('shipment_completion_client')
                         ->emailFormat('html')
                         ->to($recipient2)                                                                                                     
-                        ->subject('Comfort Packaging : Shipment Completed on: '. date("M d, Y", strtotime(  $data['amazon_shipment_date']))  )
+                        ->subject('Your shipment has been complete')
                         ->viewVars(['edata' => $email_content])
                         ->send();
 
@@ -762,10 +762,10 @@ class ShipmentsController extends AppController
                 $recipient2 = $client_email;        
                 $email_smtp = new Email('default');
                 $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                    ->template('employee_received')
+                    ->template('employee_received_client')
                     ->emailFormat('html')
                     ->to($recipient2)                                                                                                     
-                    ->subject('Comfort Packaging : Shipment received')
+                    ->subject('Your shipment has been receive')
                     ->viewVars(['edata' => $email_content])
                     ->send();  
 
