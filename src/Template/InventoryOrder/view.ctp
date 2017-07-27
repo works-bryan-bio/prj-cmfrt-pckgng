@@ -1,3 +1,7 @@
+<?php
+use Cake\ORM\TableRegistry;
+$this->Inventory = TableRegistry::get('Inventory');
+?>
 <style>
 table{
     text-align: left !important;
@@ -18,7 +22,7 @@ table{
     <tbody>
         <tr>
             <td><?= __('Client') ?></th>
-            <td><?= $inventoryOrder->has('client') ? $this->Html->link($inventoryOrder->client->id, ['controller' => 'Clients', 'action' => 'view', $inventoryOrder->client->id]) : '' ?></td>
+            <td><?= $inventoryOrder->has('client') ? $this->Html->link($inventoryOrder->client->firstname." ".$inventoryOrder->client->lastname, ['controller' => 'Clients', 'action' => 'view', $inventoryOrder->client->id]) : '' ?></td>
         </tr>
         <tr>
             <td><?= __('Shipment') ?></th>
@@ -27,6 +31,10 @@ table{
         <tr>
             <th><?= __('Order Number') ?></th>
             <td><?= h($inventoryOrder->order_number) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('FBA Shipment ID') ?></th>
+            <td><?= h($inventoryOrder->fba_shipment_id) ?></td>
         </tr>
         <tr>
             <td><?= __('Shipping Carrier') ?></th>
@@ -60,7 +68,7 @@ table{
             <th><?= __('FNSKU Label') ?></th>
             <td>
               <?php if( $inventoryOrder->fnsku_label != "" ){ ?>
-              	<a href="<?php echo $inventoryOrder->fnsku_label; ?>"><i class="fa fa-file-text"></i> Download</a>                
+                <a href="<?php echo $inventoryOrder->fnsku_label; ?>"><i class="fa fa-file-text"></i> Download</a>                
               <?php }else{ ?>
                 -
               <?php } ?>
@@ -83,6 +91,12 @@ table{
         <th><?= __('Combine Comment') ?></th>
         <td><?= $this->Text->autoParagraph(h($inventoryOrder->combine_comment)); ?></td>        
     </tr>
+        <?php if($inventoryOrder->date_completed != null){ ?>
+        <tr>
+            <th><?= __('Completion Comment') ?></th>
+            <td><?= $this->Text->autoParagraph(h($inventoryOrder->completion_comment)); ?></td>
+        </tr>
+        <?php } ?>
         <tr>
             <th><?= __('Order Due date') ?></th>
             <td><?= h($inventoryOrder->date_created) ?></td>
@@ -164,9 +178,81 @@ table{
     <div class="col-sm-offset-2 col-sm-10">
         <div class="action-fixed-bottom">        
         <a href="javascript:void(0);" class="btn btn-warning" onclick="history.go(-1);" ><i class="fa fa-angle-left"> </i> Back To list</a>
-        </div><br>
+        </div>
+
+        <?php
+        if($group_id != 4 && $inventoryOrder->order_status == "Pending") {
+            $inventory_info = array();
+            $inventory_info = $this->Inventory->find('all')->where(['Inventory.shipment_id' => $inventoryOrder->shipment->id])->first();
+        ?>
+        <a href='#modalStatus-<?php echo $inventoryOrder->id; ?>' title="Update" class="btn btn-info" data-toggle="modal"><i class="fa fa-eye"></i> Update</a>
+
+            <div id="modalStatus-<?=$inventoryOrder->id?>" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h4 class="modal-title">Update Confirmation</h4>
+                        </div>
+                        <div class="modal-body wrapper-lg">
+                            <p style="font-weight:400"><?= __('Are you sure you want to update the status to Completed?') ?></p>
+                            <br>
+                            <p>Current Order Quantity: <?= $inventoryOrder->order_quantity; ?></p>
+                            <p>Remaining Quantity After Completion: <?= $inventory_info->remaining_quantity - $inventoryOrder->order_quantity; ?></p>
+                            <form   id="inventory-order-<?php echo $inventoryOrder->id; ?>" method="post" action="<?= $base_url; ?>inventory_order/update_status_to_complete/<?php echo $inventoryOrder->id; ?>/<?php echo $inventory_info->id; ?>" >
+
+                                <p>Confirm Shipping Location: <input type="checkbox" name="confirm_ship_location" class="confirm_ship_location" value="1" /></p>
+                                <p>
+                                    <input type="text" name="ship_location" value="<?= $inventoryOrder->ship_location ?>" disabled />
+                                </p>
+
+                                <p>Confirm Trucking: <input type="checkbox" name="confirm_trucking" class="confirm_trucking" value="1" /></p>
+                                <p>
+                                    <input type="text" name="trucking" value="<?= $inventoryOrder->trucking ?>" disabled />
+                                </p>
+
+                                <?php  if($inventory_info->remaining_quantity == $inventoryOrder->order_quantity) { ?>
+
+                                    <p> <label><input id="send_to_client" name="send_to_client" type="checkbox" value="yes" /> Send to client?</label> </p>
+                                    <p> <textarea id="completion_comment" name="completion_comment" cols="50" rows="2" placeholder="Completion Comment"></textarea></p>
+
+                                <?php }else{ ?>
+                                    <p> <textarea id="completion_comment" name="completion_comment" cols="50" rows="2" placeholder="Completion Comment"></textarea></p>
+                                <?php } ?>
+                        </div>
+
+
+                        <div class="modal-footer">
+
+                            <button type="button" data-dismiss="modal" class="btn btn-default">No</button>
+                            <button type="submit" class="btn btn-primary">Yes</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php } ?>
+
     </div>
     </div>
     </section>
   </div>
 </div>
+
+<script>
+    $('.confirm_trucking').change(function () {
+        if($(this).is(":checked")){
+            $(this).parent().parent().find('[name="trucking"]').prop("disabled", false);
+        }else{
+            $(this).parent().parent().find('[name="trucking"]').prop("disabled", true);
+        }
+    });
+
+    $('.confirm_ship_location').change(function () {
+        if($(this).is(":checked")){
+            $(this).parent().parent().find('[name="ship_location"]').prop("disabled", false);
+        }else{
+            $(this).parent().parent().find('[name="ship_location"]').prop("disabled", true);
+        }
+    });
+</script>
