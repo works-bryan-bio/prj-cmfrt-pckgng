@@ -112,7 +112,7 @@
         <?php if($group_id <> 3) {?>
         <tr>
             <th><?= __('Price') ?></th>
-            <td><?= $shipment->price ?></td>
+            <td><?= "$ " .  $shipment->price ?></td>
         </tr>
         <?php } ?>
 

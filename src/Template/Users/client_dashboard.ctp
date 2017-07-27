@@ -78,7 +78,69 @@ table.dataTable{
     <div class="icon">
       <i class="ion ion-person-add"></i>
     </div>
-    <a href="<?php echo $this->Url->build('/shipments/client'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+    <a href="<?php echo $this->Url->build('/shipments/client#completed'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
   </div>
 </div>
+
+<!-- ./col -->
+<div class="col-lg-4 col-xs-6 block-client">
+  <!-- small box -->
+  <div class="small-box bg-orange">
+    <div class="inner">
+      <h3><?php //echo $completedShipments->count(); ?></h3>
+
+      <p>Pay My Bill</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-person-add"></i>
+    </div>
+    <a href="<?php echo $this->Url->build('/invoice/client#pending'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-4 col-xs-6 block-client">
+  <!-- small box -->
+  <div class="small-box bg-red-active">
+    <div class="inner">
+      <h3><?php //echo $pendingInvoice->count(); ?></h3>
+
+      <p>Create Shipment</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-stats-bars"></i>
+    </div>
+    <a href="<?php echo $this->Url->build('/shipments/client_add'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-4 col-xs-6 block-client">
+  <!-- small box -->
+  <div class="small-box bg-teal">
+    <div class="inner">
+      <h3><?php //echo $completedShipments->count(); ?></h3>
+
+      <p>Create Inventory Order</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-person-add"></i>
+    </div>
+    <a href="<?php echo $this->Url->build('/inventory'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+<!-- ./col -->
+<div class="col-lg-4 col-xs-6 block-client">
+  <!-- small box -->
+  <div class="small-box bg-navy">
+    <div class="inner">
+      <h3><?php //echo $completedShipments->count(); ?></h3>
+
+      <p>Edit Pending Shipment</p>
+    </div>
+    <div class="icon">
+      <i class="ion ion-person-add"></i>
+    </div>
+    <a href="<?php echo $this->Url->build('/shipments/client#pending'); ?>" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+  </div>
+</div>
+
 </section>

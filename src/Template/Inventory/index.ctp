@@ -207,7 +207,7 @@ hr{
                                    
                                   <?php } ?>
 
-                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['title' => 'View', 'escape' => false]) ?></li>                       
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View Orders'), ['controller' => 'inventory_order' , 'action' => 'view', $inventory_order->id],['title' => 'View', 'escape' => false]) ?></li>                       
                                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Delete'), '#modal-'. $inventory_order->id,['title' => 'Delete', 'data-toggle' => 'modal','escape' => false]) ?></li>
                                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-ban"></i> ' . __('Cancel Order'), '#modalCancel-'.$inventoryOrder->id,['title' => 'Cancel', 'escape' => false, 'data-toggle' => 'modal']) ?>      </li> 
                               </ul>
@@ -346,7 +346,7 @@ hr{
                               </button>
                               <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">      
 
-                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['controller' => 'inventory_order' , 'action' => 'view', $inventoryCompletedOrders->id],['title' => 'View', 'escape' => false]) ?></li>                       
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View Orders'), ['controller' => 'inventory_order' , 'action' => 'view', $inventoryCompletedOrders->id],['title' => 'View', 'escape' => false]) ?></li>                       
                               </ul>
                             </div>
                        
