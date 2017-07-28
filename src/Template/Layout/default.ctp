@@ -229,7 +229,7 @@ For send to amazon: <span class="number-of-amazon label label-danger"></span> ' 
       <ul class="nav navbar-nav navbar-right m-n hidden-xs nav-user user">
           <li>  
              <?= $this->Form->create(null,[
-                          'type' => 'post',  
+                          'type' => 'get',  
                           'class' => 'cp-search-box',
                           'role' => 'search',              
                           'url' => ['controller' => 'Pages', 'action' => 'search_admin']
@@ -240,7 +240,7 @@ For send to amazon: <span class="number-of-amazon label label-danger"></span> ' 
                       <div class="input-group-btn">
                           <button class="btn btn-default" style="width: auto !important;" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                       </div>
-                      <input type="text" class="search-box-black form-control" placeholder="Search" name="query">
+                      <input type="text" class="search-box-black form-control" value="<?php echo(isset($query_search) ? $query_search : '') ?>" placeholder="Search" name="query">
                   </div>
 
               <?= $this->Form->end() ?>
