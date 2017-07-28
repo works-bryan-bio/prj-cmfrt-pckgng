@@ -232,19 +232,22 @@
                 <div class="col-sm-4">
                     <ul class="cp-list-left fa-ul">
                         <li>
-                            You can use our warehouse to storage your inventory. We keep it organized and free up
-                            space in your home. <i class="fa-li fa-2x fa fa-chevron-circle-left" aria-hidden="true"></i>
+                            You can use our warehouse to storage your inventory.We keep it organized and free up space in your home.
+                            <i style="float:left;" class="fa-ri fa-2x fa fa-chevron-circle-left" aria-hidden="true"></i>
                         </li>
                         <li>
                             Your inventory is stored in your own zone, so there is no confusion when it comes to shipping
-                            to your customer. It's yours, you own it and we handle it.  <i class="fa-li fa-2x fa fa-chevron-circle-left" aria-hidden="true"></i>
+                            to your customer. It's yours, you own it and we handle it.  
+                            <i style="float:left;" class="fa-ri fa-2x fa fa-chevron-circle-left" aria-hidden="true"></i>
                         </li>
                         <li>
-                            We ship all over the world for the cheapest prices!  <i class="fa-li fa-2x fa fa-chevron-circle-left" aria-hidden="true"></i>
+                            We ship all over the world for the cheapest prices!  
+                            <i style="float:left;" class="fa-ri fa-2x fa fa-chevron-circle-left" aria-hidden="true"></i>
                         </li>
                         <li>
-                            <i class="fa-li fa-2x fa fa-chevron-circle-left" aria-hidden="true"></i> Amazon's rules and regulations are complicated. We have experience with every rule in the
+                            Amazon's rules and regulations are complicated. We have experience with every rule in the
                             book, thus ensuring your business does not get suspended.
+                            <i style="float:left;" class="fa-ri fa-2x fa fa-chevron-circle-left" aria-hidden="true"></i>
                         </li>
                     </ul>
                 </div>

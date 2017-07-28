@@ -2,7 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-5">
-                <span class="cp-copyr">@ Copy Right 2017 Comfort Packaging- All Rights Reserved</span>
+                <span class="cp-copyr">@ Copy Right 2017 Comfort Packaging- All Rights Reserved</span><br/>
+                <span class="cp-copyr">Designed and Developed by: <a href="http://broproweb.com">BROPROWEB.COM</a></span>
             </div>
             <div class="col-sm-3">
                 <span>Email: <a href="mailto:info@comfortpackaging.com">info@comfortpackaging.com</a></span>
