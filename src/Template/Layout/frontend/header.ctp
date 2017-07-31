@@ -11,7 +11,7 @@
     <title>Comfort Packaging</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,500,700" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-
+<link rel="shortcut icon" type="image/png" href="<?php echo $this->Url->build("/webroot/frontend/assets/images/favicon.png"); ?>"/>
     <?php
         echo $this->Html->css('frontend/vendors/lightgallery.css');
         echo $this->Html->css('frontend/main.min.css');
