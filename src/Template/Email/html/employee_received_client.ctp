@@ -73,7 +73,7 @@ $shipment = $edata['shipment'];
 	            }elseif($shipment->shipment->status == 5){
 	              echo "Cancelled";
 	            }else{
-	              echo "Completed";
+	              echo "Received and Stored";
 	            }
 	        ?>
 		</td>
