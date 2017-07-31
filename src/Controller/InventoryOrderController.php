@@ -140,8 +140,14 @@ class InventoryOrderController extends AppController
             $inventoryOrder = $this->InventoryOrder->patchEntity($inventoryOrder, $this->request->data);
             if ($result = $this->InventoryOrder->save($inventoryOrder)) {
                 $this->Flash->success(__('The inventory order has been saved.'));
+
+                $o = $this->InventoryOrder->find('all')
+                    ->contain(['Clients', 'Shipments', 'ShippingCarriers', 'ShippingServices'])
+                    ->where(['InventoryOrder.id' => $result->id])
+                    ->order(['InventoryOrder.id' => 'DESC'])->first();
+                ;
                 
-                 $email_content = ['client' => $user_data, 'shipment_id' => $shipment_id, 'order_id' => $result->id];
+                 $email_content = ['client' => $user_data, 'shipment_id' => $shipment_id, 'order_id' => $result->id, 'order' => $o];
 
                 
                 $recipient = "comfortpackaging@gmail.com";        
@@ -158,10 +164,10 @@ class InventoryOrderController extends AppController
                 $recipient = $client_email;        
                 $email_smtp = new Email('default');
                 $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                    ->template('order')
+                    ->template('order_client')
                     ->emailFormat('html')
                     ->to($recipient)                                                                                                     
-                    ->subject('Comfort Packaging : Shipment Add order')
+                    ->subject('Your order has been added')
                     ->viewVars(['edata' => $email_content])
                     ->send();     
 
@@ -372,8 +378,15 @@ class InventoryOrderController extends AppController
                     }
 
                 }else{
+
+                    $o = $this->InventoryOrder->find('all')
+                        ->contain(['Clients', 'Shipments', 'ShippingCarriers', 'ShippingServices'])
+                        ->where(['InventoryOrder.id' => $result->id])
+                        ->order(['InventoryOrder.id' => 'DESC'])->first();
+                    ;
+
                      //sending of email for order updates
-                     $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $completion_comment  , 'shipment_id' => $shipment->id];
+                     $email_content = ['shipment_details' => $shipment->item_description, 'comment' => $completion_comment  , 'shipment_id' => $shipment->id, 'order' => $o];
                      //send origin
                     $recipient = "comfortpackaging@gmail.com";        
                     $email_smtp = new Email('default');
@@ -400,10 +413,10 @@ class InventoryOrderController extends AppController
                     $recipient2 = $client_email;        
                     $email_smtp = new Email('default');
                     $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                        ->template('order_completion')
+                        ->template('order_completion_client')
                         ->emailFormat('html')
                         ->to($recipient2)                                                                                                     
-                        ->subject('Comfort Packaging : Order was sent')
+                        ->subject('Your order has been completed')
                         ->viewVars(['edata' => $email_content])
                         ->send();                              
                 }
