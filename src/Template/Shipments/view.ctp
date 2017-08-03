@@ -81,6 +81,10 @@
             <td><?= $this->Number->format($shipment->quantity) ?></td>
         </tr>
         <tr>
+            <th><?= __('Price') ?></th>
+            <td>$ <?= $this->Number->precision($shipment->price,2) ?></td>
+        </tr>
+        <tr>
             <th><?= __('Boxes') ?></th>
             <td><?= $this->Number->format($shipment->boxes) ?></td>
         </tr>
@@ -143,7 +147,7 @@
     </tr>                    
     <tr>
         <th><?= __('Comments') ?></th>
-        <td><?= $this->Text->autoParagraph(h($shipment->comments. "  " . $shipment->combine_comment ." ". $shipment->correct_quantity_comment)); ?></td>        
+        <td><?= (($shipment->comments. "<br> " . $shipment->combine_comment ."<br>". $shipment->correct_quantity_comment)); ?></td>
     </tr>
 
      <?php if($shipment->send_option == 'send_part_of_it_to_amazon') { ?>
@@ -181,6 +185,24 @@
             <th><?= __('Modified') ?></th>
             <td><?= h($shipment->modified) ?></td>
         </tr>
+
+    <?php
+        $this->Shipments = Cake\ORM\TableRegistry::get('Shipments');
+        $combined_shipment = array();
+        $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $shipment->id]);
+
+//        pr($combined_shipment->count());die();
+
+        if($combined_shipment->count() > 0) {
+            echo "<tr><th>".__('Combined Shipments') ."</th><td>";
+            foreach($combined_shipment as $cs) {
+    //                                            echo $cs->item_description . " - " . $cs->id . "<br>";
+                echo $cs->id . " - " . $cs->item_description . "<br>";
+            }
+            echo "</td></tr>";
+        }
+    ?>
+
     </tbody>
     </table>
 

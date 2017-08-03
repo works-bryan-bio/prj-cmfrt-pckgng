@@ -302,7 +302,12 @@ class ShipmentsController extends AppController
                 }
 
                 if( $this->request->data['shipping_purpose_id'] != 2 ){ 
-                    $this->request->data['amazon_shipment_date_client'] = "";
+                    $this->request->data['amazon_shipment_date'] = "";
+                }
+
+                if( $this->request->data['shipping_purpose_id'] == 3 ){ 
+                    $this->request->data['amazon_shipment_date'] = $this->request->data['amazon_shipment_date1'];
+                    $this->request->data['fba_shipment_id'] = $this->request->data['fba_shipment_id1'];
                 }
 
                 if( $this->request->data['shipping_service_id'] != 4 ){
@@ -321,8 +326,8 @@ class ShipmentsController extends AppController
 
 
                 $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
-                debug($shipment);
-                exit;
+                // debug($shipment);
+                // exit;
                 if ($result = $this->Shipments->save($shipment)) {
                     
                     
@@ -485,7 +490,12 @@ class ShipmentsController extends AppController
                 }
 
                 if( $this->request->data['shipping_purpose_id'] != 2 ){ 
-                    $this->request->data['amazon_shipment_date_client'] = "";
+                    $this->request->data['amazon_shipment_date'] = "";
+                }
+
+                if( $this->request->data['shipping_purpose_id'] == 3 ){ 
+                    $this->request->data['amazon_shipment_date'] = $this->request->data['amazon_shipment_date1'];
+                    $this->request->data['fba_shipment_id'] = $this->request->data['fba_shipment_id1'];
                 }
 
                 $shipment = $this->Shipments->patchEntity($shipment, $this->request->data);
@@ -752,7 +762,7 @@ class ShipmentsController extends AppController
                         ->template('shipment_completion_client')
                         ->emailFormat('html')
                         ->to($recipient2)                                                                                                     
-                        ->subject('Your shipment has been complete')
+                        ->subject('Comfort Packaging : Shipment Completed on: '. date("M d, Y", strtotime(  $data['amazon_shipment_date']))  )
                         ->viewVars(['edata' => $email_content])
                         ->send();
 
@@ -912,6 +922,12 @@ class ShipmentsController extends AppController
             ->andWhere(['client_id' => $user_data->id])
             ->count();
 
+         $orderToday = $this->InventoryOrder->find('all')
+             ->where([ 'order_status' => 'Pending' ])
+             ->andWhere(['DATE(date_created)' => date('Y-m-d')])
+             ->andWhere(['client_id' => $user_data->id])
+             ->count();
+
          $this->Invoice = TableRegistry::get('Invoice');
          $invoices = $this->Invoice->find('all')
              ->where([ 'status' => '1' ])
@@ -922,7 +938,12 @@ class ShipmentsController extends AppController
           $order = $this->InventoryOrder->find('all')
             ->where([ 'order_status' => 'Pending' ])
             ->andWhere(['date_created <=' => date('Y-m-d')])
-            ->count(); 
+            ->count();
+
+         $orderToday = $this->InventoryOrder->find('all')
+             ->where([ 'order_status' => 'Pending' ])
+             ->andWhere(['DATE(date_created)' => date('Y-m-d')])
+             ->count();
       }  
 
        
@@ -934,11 +955,24 @@ class ShipmentsController extends AppController
             ->andWhere(['client_id' => $user_data->id])
             ->count();
 
+          $shipmentToday = $this->Shipments->find('all')
+              ->where([ 'status' => 1 ])
+              ->andWhere(['DATE(created)' => date('Y-m-d')])
+              //->orWhere([ 'status' => 4 ])
+              ->andWhere(['client_id' => $user_data->id])
+              ->count();
+
       }else{
          $shipment = $this->Shipments->find('all')
             ->where([ 'status' => 1 ])
             //->orWhere([ 'status' => 4 ])
             ->count();
+
+          $shipmentToday = $this->Shipments->find('all')
+              ->where([ 'status' => 1 ])
+              ->andWhere(['DATE(created)' => date('Y-m-d')])
+              //->orWhere([ 'status' => 4 ])
+              ->count();
       }
 
       $conn = ConnectionManager::get('default');
@@ -981,14 +1015,27 @@ class ShipmentsController extends AppController
                     $amazon_count++;
           }
 
+
+          $sql_send_to_amazon_today = 'SELECT * FROM `shipments` WHERE status IN(3,4) AND shipping_purpose_id = 2 AND  DATE(`amazon_shipment_date`) = "'. $date .'" ';
+
+          $stmt_today       = $conn->query($sql_send_to_amazon_today);
+          $send_to_amazon_count_today = $stmt_today->fetchAll('assoc');
+          $amazon_count_today = 0;
+          foreach ($send_to_amazon_count_today as $value) {
+              $amazon_count_today++;
+          }
+
       }else{
           $amazon_count = 0;
       }
 
         $return['quantity'] = $order;
+        $return['quantity_today'] = $orderToday;
         $return['shipment_quantity'] = $shipment;
+        $return['shipment_quantity_today'] = $shipmentToday;
         $return['message'] = $message;
         $return['amazon_count'] = $amazon_count;
+	$return['amazon_count_today'] = $amazon_count_today;
         $return['invoices_count'] = $invoices;
         if($user_data->user->group_id == 3){
             $return['total_notification'] = $order + $shipment + $amazon_count;

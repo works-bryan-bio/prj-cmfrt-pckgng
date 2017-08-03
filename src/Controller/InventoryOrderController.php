@@ -96,6 +96,11 @@ class InventoryOrderController extends AppController
         $inventoryOrder = $this->InventoryOrder->get($id, [
             'contain' => ['Clients', 'Shipments', 'ShippingCarriers', 'ShippingServices']
         ]);
+
+        $session = $this->request->session();
+        $user_data = $session->read('User.data');
+        $group_id  = $user_data->user->group_id;
+        $this->set('group_id' , $group_id);
         $this->set('inventoryOrder', $inventoryOrder);
         $this->set('_serialize', ['inventoryOrder']);
     }
@@ -302,8 +307,8 @@ class InventoryOrderController extends AppController
             $inventory_order->date_completed = date('Y-m-d');
             $inventory_order->completion_comment = $completion_comment;
 
-            if(isset($this->request->data['confirm_shipping_location']) && $this->request->data['confirm_shipping_location'] == 1){
-                $inventory_order->shipping_location = $this->request->data['shipping_location'];
+            if(isset($this->request->data['confirm_ship_location']) && $this->request->data['confirm_ship_location'] == 1){
+                $inventory_order->ship_location = $this->request->data['ship_location'];
             }
 
             if(isset($this->request->data['confirm_trucking']) && $this->request->data['confirm_trucking'] == 1){

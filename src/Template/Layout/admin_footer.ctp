@@ -26,7 +26,7 @@
         $(function(){
             $(".modalImage").colorbox({transition:"fade"});
             refreshShippingPurpose();
-            loadVerifyOrderDue();
+//            loadVerifyOrderDue();
             loadVerifyDue();
             loadVerifyInvoiceDue();
             //add shipment 
@@ -58,7 +58,8 @@
             });
 
 			$('.zero-config-datatable-employee-pending').DataTable({
-                "order": [[ 10, "desc" ]],
+                "order": [[ 9, "desc" ]],
+                /* "searching": true,*/
                 "fnDrawCallback": function( settings ) {
                     redrawnFunction();
                 }
@@ -680,11 +681,11 @@
          function loadVerifyDue() {
                
             $.post(base_url + "shipments/load_verify_due",{},function(o){
-                $('.shipment-order-due').html(o.shipment_quantity);
-                $('.number-of-order-due').html(o.quantity);
+                $('.shipment-order-due').html(o.shipment_quantity+" (Today - "+o.shipment_quantity_today+")");
+                $('.number-of-order-due').html(o.quantity+" (Today - "+o.quantity_today+")");
                 $('.number-of-message').html(o.message);
                 $('.total-notification').html(o.total_notification);
-                $('.number-of-amazon').html(o.amazon_count);
+                $('.number-of-amazon').html(o.amazon_count+" (Today - "+o.amazon_count_today+")");
                 $('.number-of-invoice-due').html(o.invoices_count);
                 
             },"json");

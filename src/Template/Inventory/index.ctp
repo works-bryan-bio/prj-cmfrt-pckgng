@@ -102,7 +102,7 @@ hr{
                                   Action <span class="caret"></span>
                               </button>
                               <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
-                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['controller' => 'inventory_order', 'action' => 'index', $inventory->shipment->id, $inventory->id],['title' => 'View', 'escape' => false]) ?></li>
+                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View Orders'), ['controller' => 'inventory_order', 'action' => 'index', $inventory->shipment->id, $inventory->id],['title' => 'View', 'escape' => false]) ?></li>
                                   <li role="presentation"><a href="javascript:void(0);" class="btn-show-order-form" data-shipment-id="<?= $inventory->shipment->id ?>" data-remaining-quantity="<?= $inventory->remaining_quantity ?>" data-shipment-desc="<?= $inventory->shipment->id ." - ". $inventory->shipment->item_description ?>" data-sent-quantity="<?= $inventory->sent_quantity ?>" data-shipment-status="<?= $status; ?>"><i class="fa fa-pencil"></i> Send New Order</a></li>     
                                   <!-- <li role="presentation"><?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Cancel Order'), [ 'action' => 'View', $inventory->id],['title' => 'Cancel Order', 'escape' => false]) ?>  </li> -->                           
                               </ul>

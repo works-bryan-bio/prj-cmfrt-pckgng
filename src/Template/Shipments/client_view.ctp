@@ -48,7 +48,8 @@ table{
         <?php //if( $shipment->shipping_purpose_id == 2 ){ ?>
           <tr>
             <td><?= __('Amazon Shipment Date') ?></th>
-            <td><?= $shipment->amazon_shipment_date_client == '' ? '-' : $shipment->amazon_shipment_date_client ?></td>
+<!--            <td>--><?//= $shipment->amazon_shipment_date_client == '' ? '-' : $shipment->amazon_shipment_date_client ?><!--</td>-->
+            <td><?= $shipment->amazon_shipment_date == '' ? '-' : $shipment->amazon_shipment_date ?></td>
           </tr>   
           <tr>
             <td><?= __('Amazon Shipment Note') ?></th>
@@ -81,6 +82,10 @@ table{
         <tr>
             <th><?= __('Quantity') ?></th>
             <td><?= $this->Number->precision($shipment->quantity,2) ?></td>
+        </tr>
+        <tr>
+            <th><?= __('Price') ?></th>
+            <td>$ <?= $this->Number->precision($shipment->price,2) ?></td>
         </tr>
         <tr>
             <th><?= __('Boxes') ?></th>
@@ -135,7 +140,7 @@ table{
         </tr>                    
         <tr>
             <th><?= __('Detailed shipment instruction') ?></th>
-            <td><?= $this->Text->autoParagraph(h($shipment->comments. "  " . $shipment->combine_comment ." ". $shipment->correct_quantity_comment)); ?></td>        
+            <td><?= $shipment->comments. "<br>" . $shipment->combine_comment ."<br>". $shipment->correct_quantity_comment ?></td>
         </tr>
         <?php if($shipment->shipping_purpose_id == 3) { ?>
           <tr>
@@ -177,6 +182,23 @@ table{
             <td><?= h($shipment->date_completed)   ?></td>
         </tr> 
         <?php } ?>
+
+        <?php
+        $this->Shipments = Cake\ORM\TableRegistry::get('Shipments');
+        $combined_shipment = array();
+        $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $shipment->id]);
+
+        //        pr($combined_shipment->count());die();
+
+        if($combined_shipment->count() > 0) {
+            echo "<tr><th>".__('Combined Shipments') ."</th><td>";
+            foreach($combined_shipment as $cs) {
+                //                                            echo $cs->item_description . " - " . $cs->id . "<br>";
+                echo $cs->id . " - " . $cs->item_description . "<br>";
+            }
+            echo "</td></tr>";
+        }
+        ?>
 
     </tbody>
     </table>
@@ -276,7 +298,7 @@ table{
                                           <label for="amazon_shipment_note" class="col-sm-4 control-label" style="margin-top:5px">How shipment was sent</label>
                                           <div class="col-sm-6">
                                             <div class="input text required">
-                                              <input name="amazon_shipment_note" value="<?= $shipment->amazon_shipment_note; ?>" class="form-control" id="amazon_shipment_note" type="text">
+                                              <input name="amazon_shipment_note" value="<?//= $shipment->amazon_shipment_note; ?>" class="form-control" id="amazon_shipment_note" type="text">
                                             </div> 
                                           </div>
                                         </div>
