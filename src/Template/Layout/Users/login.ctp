@@ -34,10 +34,9 @@
     <br/><br/><br/><br/><br/><br/>
     <!-- footer -->
     <footer id="footer">
-        <div class="text-center padder">
-            <p>
-                <small>&copy; Copyright ©  2016 Comfort Packaging. All Rights Reserved.</small>
-            </p>
+        <div class="text-center padder">            
+            <span style="color:#a3a3a3;font-size: 13px;">All Rights Reserved</span><br/>
+            <span style="color:#a3a3a3;font-size: 13px;">Designed and Developed by: <a href="http://broproweb.com" target="_new">BROPROWEB.COM</a></span>        
         </div>
     </footer>
   <!-- / footer -->
