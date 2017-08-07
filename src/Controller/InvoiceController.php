@@ -156,16 +156,40 @@ class InvoiceController extends AppController
 
 //                echo "<pre>";print_r($resultInvoice->id);die();
 
+                if($invoice->shipment_order == 0){
+                    $this->Shipments = TableRegistry::get('Shipments');
+                    $shipment = $this->Shipments->get($invoice->shipments_id, [
+                        'contain' => []
+                    ]);
+
+                    $recipient2 = $client_email;
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('invoice_shipment')
+                        ->emailFormat('html')
+                        ->to($recipient2)
+                        ->subject('Comfort Packaging : New Invoice#'.$resultInvoice->id)
+                        ->viewVars(['edata' => $resultInvoice, 'shipment_details' => $shipment, 'client' => $client])
+                        ->send();
+                }else{
+                    $this->InventoryOrder = TableRegistry::get('InventoryOrder');
+                    $order = $this->InventoryOrder->get($invoice->inventory_order_id, [
+                        'contain' => []
+                    ]);
+
+                    $recipient2 = $client_email;
+                    $email_smtp = new Email('default');
+                    $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                        ->template('invoice_order')
+                        ->emailFormat('html')
+                        ->to($recipient2)
+                        ->subject('Comfort Packaging : New Invoice#'.$resultInvoice->id)
+                        ->viewVars(['edata' => $resultInvoice, 'order_details' => $order, 'client' => $client])
+                        ->send();
+                }
+
                 // send to client
-                $recipient2 = $client_email;
-                $email_smtp = new Email('default');
-                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                    ->template('invoice')
-                    ->emailFormat('html')
-                    ->to($recipient2)
-                    ->subject('Comfort Packaging : New Invoice#'.$resultInvoice->id)
-                    ->viewVars(['edata' => $resultInvoice])
-                    ->send();
+                
 
 
                 $this->Flash->success(__('The invoice has been saved.'));

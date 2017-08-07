@@ -25,14 +25,7 @@ hr{
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Invoice'), ['action' => 'add'], ['escape' => false]) ?></li>
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Price List'), ['controller' => 'PriceList', 'action' => 'index'], ['escape' => false]) ?></li>
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Price List'), ['controller' => 'PriceList', 'action' => 'add'], ['escape' => false]) ?></li>
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Shipments'), ['controller' => 'Shipments', 'action' => 'index'], ['escape' => false]) ?></li>
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Shipment'), ['controller' => 'Shipments', 'action' => 'add'], ['escape' => false]) ?></li>
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Clients'), ['controller' => 'Clients', 'action' => 'index'], ['escape' => false]) ?></li>
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Client'), ['controller' => 'Clients', 'action' => 'add'], ['escape' => false]) ?></li>
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Invoice Details'), ['controller' => 'InvoiceDetails', 'action' => 'index'], ['escape' => false]) ?></li>
-                <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Invoice Detail'), ['controller' => 'InvoiceDetails', 'action' => 'add'], ['escape' => false]) ?></li>
+                
                 <?php if( $enable_export ){ ?>
                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-file-excel-o"></i> ' . __('Export Data'), ['action' => 'export_to_excel'], ['escape' => false]) ?></li>
                 <?php } ?>
