@@ -332,14 +332,14 @@ class ShipmentsController extends AppController
                     
                     
 
-                    $email_content = ['shipment_details' => $this->request->data, 'client' => $user_data, 'shipment_id' => $result->id];
+                    $email_content = ['shipment_details' => $this->request->data, 'client' => $user_data, 'shipment_id' => $result->id , 'shipment' => $result];
 
 
                     //$recipient = "works.bryan.bio@gmail.com";
                     $recipient = "comfortpackaging@gmail.com";        
                     $email_smtp = new Email('default');
                     $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                        ->template('shipment')
+                        ->template('shipment_add_client')
                         ->emailFormat('html')
                         ->to($recipient)                                                                                                     
                         ->subject('Comfort Packaging : Shipment Add')
@@ -349,7 +349,7 @@ class ShipmentsController extends AppController
                     $recipient1 = $user_data->email;        
                     $email_smtp = new Email('default');
                     $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
-                        ->template('shipment')
+                        ->template('shipment_add_client')
                         ->emailFormat('html')
                         ->to($recipient1)                                                                                                     
                         ->subject('Comfort Packaging : Shipment Add')
