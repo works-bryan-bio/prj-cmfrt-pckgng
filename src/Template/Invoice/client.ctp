@@ -98,7 +98,23 @@ hr{
                               </div>
                             </div>
                         </td>
-                        <td><?= $invoice->shipments_id . " - " . $invoice['shipment']['item_description'] ?></td>                        
+                        <td>
+                            <?= $invoice->shipments_id . " - " . $invoice['shipment']['item_description'] ?>
+
+                            <?php
+                            $this->Shipments = Cake\ORM\TableRegistry::get('Shipments');
+                            $combined_shipment = array();
+                            $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $invoice->shipments_id]);
+                            if($combined_shipment->count() > 0) {
+                                echo "<hr>";
+                                foreach($combined_shipment as $cs) {
+//                                    echo $cs->item_description . " - " . $cs->id . "<br>";
+                                    echo $cs->id . " - " . $cs->item_description . "<br>";
+                                }
+                            }
+                            ?>
+
+                        </td>
                         <td><?= $invoice['client']['firstname'] ." ".$invoice['client']['lastname'] ?></td>
                         <td><?= $invoice->terms ?></td>
                         <td><?= h($invoice->invoice_date) ?></td>
@@ -153,7 +169,21 @@ hr{
                               </ul>
                             </div>
                         </td>
-                        <td><?= $invoice->shipments_id . " - " . $invoice['shipment']['item_description'] ?></td>                        
+                        <td>
+                            <?= $invoice->shipments_id . " - " . $invoice['shipment']['item_description'] ?>
+                            <?php
+                            $this->Shipments = Cake\ORM\TableRegistry::get('Shipments');
+                            $combined_shipment = array();
+                            $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $invoice->shipments_id]);
+                            if($combined_shipment->count() > 0) {
+                                echo "<hr>";
+                                foreach($combined_shipment as $cs) {
+//                                    echo $cs->item_description . " - " . $cs->id . "<br>";
+                                    echo $cs->id . " - " . $cs->item_description . "<br>";
+                                }
+                            }
+                            ?>
+                        </td>
                         <td><?= $invoice['client']['firstname'] ." ".$invoice['client']['lastname'] ?></td>
                         <td><?= $invoice->terms ?></td>
                         <td><?= h($invoice->invoice_date) ?></td>

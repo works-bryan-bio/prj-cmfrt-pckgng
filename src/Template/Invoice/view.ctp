@@ -7,7 +7,17 @@
 <section class="content">   
     <div class="ribbon-section">
       <img style="float:left;" src="<?php echo $this->Url->build("/webroot/images/ribbon.png"); ?>">
-      <div class="ribbon-black" style=""><h3 style="margin-left: 65px;color: white;">Invoice Details</h3></div>
+      <div class="ribbon-black" style="">
+          <h3 style="margin-left: 65px;color: white;">
+              Invoice Details
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <?= $this->Html->link(
+                      '',
+                      ['controller' => 'Invoice', 'action' => 'export_to_pdf', $invoice->id],
+                  ['class' => 'fa fa-file-pdf-o', 'target' => '_blank', 'style' => 'color:white;']
+              ) ?>
+          </h3>
+      </div>
     </div>
     <br style="clear:both;" />
     <div class="panel panel-primary">
@@ -86,8 +96,8 @@
                     </tr>
                 </tbody>
             </table>
-
-            <div id="modal-<?=$invoice->id?>" class="modal fade">
+            
+          <div id="modal-<?=$invoice->id?>" class="modal fade">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
@@ -116,8 +126,6 @@
                  <?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-'. $invoice->id,['title' => 'Payments', 'class' => 'btn btn-danger','data-toggle' => 'modal','escape' => false]) ?>
                     <?php } ?>
             </div>
-
-
 
         </div>        
     </div>   

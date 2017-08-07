@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
+use Cake\Mailer\Email;
 use Cake\I18n\Number;
 
 /**
@@ -53,7 +55,7 @@ class InvoiceController extends AppController
         } 
         
         $invoiceList = $this->Invoice->find('all')
-            ->contain(['Shipments', 'Clients'])
+            ->contain(['Shipments', 'Clients', 'InventoryOrder'])
         ;        
 
         $this->set(['enable_export' => $enable_export]);
@@ -133,7 +135,39 @@ class InvoiceController extends AppController
         $invoice = $this->Invoice->newEntity();
         if ($this->request->is('post')) {
             $invoice = $this->Invoice->patchEntity($invoice, $this->request->data);
-            if ($this->Invoice->save($invoice)) {
+            if($invoice->check_off == 1){
+                $invoice->status = 3;
+            }
+
+            if($invoice->shipment_order == 1){
+                $invoice->shipments_id = 0;
+            }else{
+                $invoice->inventory_order_id = 0;
+            }
+            if ($resultInvoice = $this->Invoice->save($invoice)) {
+
+                $client_id = $invoice->clients_id;
+
+//                echo $client_id; die();
+
+                $this->Clients = TableRegistry::get('Clients');
+                $client = $this->Clients->get($client_id);
+                $client_email = $client->email;
+
+//                echo "<pre>";print_r($resultInvoice->id);die();
+
+                // send to client
+                $recipient2 = $client_email;
+                $email_smtp = new Email('default');
+                $email_smtp->from(['comfortapplication@gmail.com' => 'WebSystem'])
+                    ->template('invoice')
+                    ->emailFormat('html')
+                    ->to($recipient2)
+                    ->subject('Comfort Packaging : New Invoice#'.$resultInvoice->id)
+                    ->viewVars(['edata' => $resultInvoice])
+                    ->send();
+
+
                 $this->Flash->success(__('The invoice has been saved.'));
                 $action = $this->request->data['save'];
                 if( $action == 'save' ){
@@ -145,10 +179,27 @@ class InvoiceController extends AppController
                 $this->Flash->error(__('The invoice could not be saved. Please, try again.'));
             }
         }
-        $shipments = $this->Invoice->Shipments->find('all'); //'list', ['limit' => 200]
+        $shipments = $this->Invoice->Shipments->find('all')
+                    ->where(['Shipments.status' => 2]) //'list', ['limit' => 200]
+                    ->orWhere(['Shipments.status' => 3]); //'list', ['limit' => 200]
+
+        $inventoryOrders = $this->Invoice->InventoryOrder->find('all')
+            ->where(['order_status' => 'Completed']);
+
+
         $optionShipments = array();
         foreach( $shipments as $s ){
-            $optionShipments[$s->id] = $s->id ." - ". $s->item_description;
+            $desc = $s->item_description;
+            if(strlen($s->item_description) > 100){
+                $desc = substr($s->item_description,0,99)."...";
+            }
+            $optionShipments[$s->id] = $s->id ." - ". $desc;
+//            $optionShipments[$s->id] = $s->id ." - ". $s->item_description;
+        }
+
+        $optionOrders = array();
+        foreach( $inventoryOrders as $o ){
+            $optionOrders[$o->id] = $o->order_number;
         }
 
         $clients = $this->Invoice->Clients->find('all');
@@ -156,7 +207,7 @@ class InvoiceController extends AppController
         foreach( $clients as $c ){
             $optionClients[$c->id] = $c->firstname . " " . $c->lastname;
         }
-        $this->set(compact('invoice', 'shipments', 'optionClients', 'optionShipments','clients'));
+        $this->set(compact('invoice', 'shipments', 'optionClients', 'optionShipments', 'optionOrders','clients'));
         $this->set('_serialize', ['invoice']);
     }
 
@@ -172,6 +223,9 @@ class InvoiceController extends AppController
         $invoice = $this->Invoice->get($id, [
             'contain' => []
         ]);
+        if($invoice->status == 3){
+            return $this->redirect(['action' => 'index']);
+        }
         if ($this->request->is(['patch', 'post', 'put'])) {
             $invoice = $this->Invoice->patchEntity($invoice, $this->request->data);
             if ($this->Invoice->save($invoice)) {
@@ -220,10 +274,6 @@ class InvoiceController extends AppController
      */
     public function payment($id = null)
     {
-
-        $session = $this->request->session();    
-        $user_data = $session->read('User.data'); 
-
         $invoice = $this->Invoice->get($id, [
             'contain' => []
         ]);
@@ -234,12 +284,7 @@ class InvoiceController extends AppController
             $invoice = $this->Invoice->patchEntity($invoice, $this->request->data);
             if ($this->Invoice->save($invoice)) {
                
-                if( $user_data->user->group_id == 4 ){ //Client
                     return $this->redirect(['action' => 'client']);
-                }else{
-                    return $this->redirect(['controller' => 'invoice']);
-                }
-                    
                
             } else {
                 $this->Flash->error(__('The invoice could not be saved. Please, try again.'));
@@ -265,6 +310,43 @@ class InvoiceController extends AppController
         $this->set('invoiceList', $invoiceList);
         $this->set('_serialize', ['invoice']);
         $this->viewBuilder()->layout('');  
+    }
+
+    public function export_to_pdf($id = null)
+    {
+        $invoice = $this->Invoice->get($id, [
+            'contain' => ['Shipments', 'Clients', 'InvoiceDetails']
+        ]);
+
+        $this->set('invoice', $invoice);
+        $this->set('_serialize', ['invoice']);
+        $this->viewBuilder()->layout('');
+    }
+
+    public function load_verify_invoice_due()
+    {
+        $this->request->allowMethod(['post']);
+        $session = $this->request->session();
+        $user_data = $session->read('User.data');
+
+//        echo "<pre>";print_r($user_data); die();
+
+        if( isset($user_data) ){
+            if( $user_data->user->group_id == 4){ //Client
+                $invoices = $this->Invoice->find('all')
+                    ->where([ 'status' => '1' ])
+                    ->where([ 'clients_id' => $user_data->id])
+                    ->count();
+
+                $return['quantity'] = $invoices;
+                echo json_encode($return);
+                exit;
+            }
+        }
+
+        $return['quantity'] = 0;
+        echo json_encode($return);
+        exit;
     }
 
 }

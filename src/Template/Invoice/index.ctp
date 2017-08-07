@@ -25,6 +25,8 @@ hr{
             </button>
             <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">        
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Invoice'), ['action' => 'add'], ['escape' => false]) ?></li>
+                <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Price List'), ['controller' => 'PriceList', 'action' => 'index'], ['escape' => false]) ?></li>
+                <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Price List'), ['controller' => 'PriceList', 'action' => 'add'], ['escape' => false]) ?></li>
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Shipments'), ['controller' => 'Shipments', 'action' => 'index'], ['escape' => false]) ?></li>
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-plus"></i> ' . __('New Shipment'), ['controller' => 'Shipments', 'action' => 'add'], ['escape' => false]) ?></li>
                 <li role="presentation"><?= $this->Html->link('<i class="fa fa-list-alt"></i> ' . __('List Clients'), ['controller' => 'Clients', 'action' => 'index'], ['escape' => false]) ?></li>
@@ -50,6 +52,7 @@ hr{
                       <th style="text-align:center;width:10px;">Actions</th>                      
                       <th class="data-id">ID</th>
                       <th class="">Shipment ID</th>
+                      <th class="">Order ID</th>
                       <th class="">Client ID</th>
                       <th class="">Terms</th>
                       <th class="">Status</th>
@@ -67,12 +70,17 @@ hr{
                               <button class="btn btn-primary dropdown-toggle" type="button" id="drpdwn" data-toggle="dropdown" aria-expanded="true">
                                   Action <span class="caret"></span>
                               </button>
-                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">   
-                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $invoice->id],['title' => 'View', 'escape' => false]) ?></li>
-                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'edit', $invoice->id],['title' => 'Edit', 'escape' => false]) ?></li>                    
-                                  <li role="presentation"><?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-payment-'. $invoice->id,['title' => 'Payments', 'data-toggle' => 'modal','escape' => false]) ?></li>       
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="drpdwn">
+                                  <?php
+                                  if($invoice->status != 3){
+                                      ?>
+                                      <li role="presentation"><?= $this->Html->link('<i class="fa fa-eye"></i> ' . __('View'), ['action' => 'view', $invoice->id],['title' => 'View', 'escape' => false]) ?></li>
+                                      <li role="presentation"><?= $this->Html->link('<i class="fa fa-pencil"></i> ' . __('Edit'), ['action' => 'edit', $invoice->id],['title' => 'Edit', 'escape' => false]) ?></li>
+                                      <?php
+                                  }
+                                  ?>
+				  <li role="presentation"><?= $this->Html->link('<i class="fa fa-money"></i> ' . __('Payments'), '#modal-payment-'. $invoice->id,['title' => 'Payments', 'data-toggle' => 'modal','escape' => false]) ?></li>
                                   <li role="presentation"><?= $this->Html->link('<i class="fa fa-trash-o"></i> ' . __('Delete'), '#modal-'. $invoice->id,['title' => 'Delete', 'data-toggle' => 'modal','escape' => false]) ?></li>
-
                               </ul>
                             </div>                            
                             <!-- Delete Modal -->
@@ -124,10 +132,64 @@ hr{
                             </div>
                       </td>                      
                       <td><?= $this->Number->format($invoice->id) ?></td>
-                      <td><?= $invoice->has('shipment') ? $this->Html->link($invoice->shipment->id ." - ". $invoice->description, ['controller' => 'Shipments', 'action' => 'view', $invoice->shipment->id]) : '' ?></td>
+                      <td>
+                          <?php
+                              if($invoice->shipment_order == 0 && $invoice->has('shipment')) {
+                                  $shipmentText = $invoice->shipment->id . " - " . $invoice->description;
+                                  if($invoice->check_off == 1){
+                                      $shipmentText = $invoice->shipment->id . " - " . $invoice->shipment->item_description;
+                                  }
+                                  echo $this->Html->link($shipmentText, ['controller' => 'Shipments', 'action' => 'view', $invoice->shipment->id]);
+//                              }
+//                              if($invoice->has('shipment')){
+                                  $this->Shipments = Cake\ORM\TableRegistry::get('Shipments');
+                                  $combined_shipment = array();
+                                  $combined_shipment = $this->Shipments->find('all')->where(['Shipments.combine_with_id' => $invoice->shipment->id]);
+                                  if($combined_shipment->count() > 0) {
+                                      echo "<hr>";
+                                      foreach($combined_shipment as $cs) {
+//                                            echo $cs->item_description . " - " . $cs->id . "<br>";
+                                            echo $cs->id . " - " . $cs->item_description . "<br>";
+                                      }
+                                  }
+                              }else{
+                                  echo "-";
+                              }
+                          ?>
+
+                      </td>
+
+                      <td>
+                          <?php
+                          if($invoice->shipment_order == 1 && $invoice->has('inventory_order')) {
+                              $orderText = $invoice->inventory_order->order_number;
+                              echo $this->Html->link($orderText, ['controller' => 'inventory_order', 'action' => 'view', $invoice->inventory_order->id]);
+                          }else{
+                              echo "-";
+                          }
+                          ?>
+                      </td>
                       <td><?= $invoice->has('client') ? $this->Html->link($invoice->client->firstname ." ". $invoice->client->lastname , ['controller' => 'Clients', 'action' => 'view', $invoice->client->id]) : '' ?></td>
                       <td><?= h($invoice->terms) ?></td>
-                      <td><?php  if($invoice->status == 1) { echo "Pending"; }else{ echo "Completed"; } ?></td>
+                      <td>
+                          <?php
+                            if($invoice->status == 1)
+                            {
+                                echo "Pending";
+                            }
+                            else if($invoice->status == 2)
+                            {
+                                echo "Completed";
+                            }
+                            else if($invoice->status == 3)
+                            {
+                                echo "Invoiced";
+                                if($invoice->invoice_doc != ""){
+                                    echo '&nbsp;&nbsp;&nbsp;<a target="_new" href="'.$invoice->invoice_doc.'" title="Download"><i class="glyphicon glyphicon-cloud-download"></i></a>';
+                                }
+                            }
+                          ?>
+                          </td>
                       <td><?= h($invoice->invoice_date) ?></td>
                       <td><?= h($invoice->due_date) ?></td>
                       <td><?= h($invoice->product_services) ?></td>

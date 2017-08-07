@@ -25,25 +25,49 @@
         </header>      
         <div class="panel-body clearfix">          
           <?= $this->Form->create($invoice,['class' => 'form-horizontal']) ?>
-                <fieldset>        
+                <fieldset>
                     <?php
-                                    echo "
-                        <div class='form-group'>
-                            <label for='shipments_id' class='col-sm-2 control-label'>" . __('Shipments') . "</label>
-                            <div class='col-sm-6'>";
-                             echo $this->Form->input('shipments_id', ['class' => 'form-control', 'id' => 'shipments_id', 'label' => false, 'options' => $optionShipments]);                 
-                        echo " </div></div>";    
-                                    echo "
+                    echo "
                         <div class='form-group'>
                             <label for='clients_id' class='col-sm-2 control-label'>" . __('Bill to') . "</label>
                             <div class='col-sm-6'>";
-                             echo $this->Form->input('clients_id', ['class' => 'form-control', 'id' => 'clients_id', 'label' => false, 'options' => $optionClients]);                 
-                        echo " </div></div>";    
+                    echo $this->Form->input('clients_id', ['class' => 'form-control', 'id' => 'clients_id', 'label' => false, 'options' => $optionClients]);
+                    echo " </div></div>";
+
+                    echo "
+                        <div class='form-group'>
+                            <label for='shipment_order' class='col-sm-2 control-label'>" . __('Bill Inventory Order?') . "</label>
+                            <div class='col-sm-6'>";
+                    echo $this->Form->input('shipment_order', ['type' => 'checkbox', 'style' => 'margin-left:100px;', 'id' => 'shipment_order', 'label' => false]);
+                    echo " </div></div>";
+
+                    echo "
+                        <div class='form-group shipmentsContainer'>
+                            <label for='shipments_id' class='col-sm-2 control-label'>" . __('Shipments') . "</label>
+                            <div class='col-sm-6'>";
+                             echo $this->Form->input('shipments_id', ['class' => 'form-control', 'id' => 'shipments_id', 'label' => false, 'options' => $optionShipments]);
+                        echo " </div></div>";
+
+                    echo "
+                        <div class='form-group ordersContainer'>
+                            <label for='shipments_id' class='col-sm-2 control-label'>" . __('Inventory Orders') . "</label>
+                            <div class='col-sm-6'>";
+                    echo $this->Form->input('inventory_order_id', ['class' => 'form-control', 'id' => 'inventory_order_id', 'label' => false, 'options' => $optionOrders]);
+                    echo " </div></div>";
+
+                    echo "
+                        <div class='form-group'>
+                            <label for='check_off' class='col-sm-2 control-label'>" . __('Invoiced') . "</label>
+                            <div class='col-sm-6'>";
+                    echo $this->Form->input('check_off', ['type' => 'checkbox', 'style' => 'margin-left:100px;', 'id' => 'check_off', 'label' => false]);
+                    echo " </div></div>";
+
+                    echo "<div class='invoice-container'>";
                                     echo "
                         <div class='form-group'>
                             <label for='billing_address' class='col-sm-2 control-label'>" . __('Billing Address') . "</label>
                             <div class='col-sm-6'>";
-                            echo $this->Form->input('billing_address', ['class' => 'form-control', 'id' => 'billing_address', 'label' => false]);                
+                            echo $this->Form->input('billing_address', ['class' => 'form-control', 'id' => 'billing_address', 'label' => false]);
                         echo " </div></div>";    
                         
                                     echo "
@@ -107,7 +131,19 @@
                             <label for='date_created'  class='col-sm-2 control-label'>" . __('date created') . "</label>
                             <div class='col-sm-6'>";
                             echo $this->Form->input('date_created', ['class' => 'form-control', 'id' => 'date_created', 'label' => false]);                
-                        echo " </div></div>";    
+                        echo " </div></div>";
+
+                        echo "</div>";
+
+
+                    echo "
+                        <div class='form-group invoiceDocument'>
+                            <label for='invoice_doc' class='col-sm-2 control-label'>" . __('Invoice Document') . "</label>
+                            <div class='col-sm-6'>";
+                    echo $this->Form->input('invoice_doc', ['type' => 'text', 'class' => 'form-control has-ck-finder', 'id' => 'invoice_doc', 'label' => false]);
+
+                    echo " </div></div>";
+
                         
                                 ?>
                 </fieldset>
@@ -125,3 +161,43 @@
     </section>
   </div>
 </div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#check_off').trigger('change');
+        $('#shipment_order').trigger('change');
+    });
+
+    $('#check_off').change(function () {
+        if($(this).is(":checked")){
+            $('.invoice-container').hide();
+            $('.invoiceDocument').show();
+//            $('#clients_id').attr('required', false);
+            $('#billing_address').attr('required', false);
+            $('#terms').attr('required', false);
+            $('#invoice_date').attr('required', false);
+            $('#due_date').attr('required', false);
+            $('#product_services').attr('required', false);
+            $('#description').attr('required', false);
+            $('#quantity').attr('required', false);
+            $('#rate').attr('required', false);
+            $('#balance_due').attr('required', false);
+
+        }else{
+            $('.invoice-container').show();
+            $('.invoiceDocument').hide();
+        }
+    });
+
+    $('#shipment_order').change(function () {
+        if(!$(this).is(":checked")){
+            $('.shipmentsContainer').show();
+            $('.ordersContainer').hide();
+
+        }else{
+            $('.shipmentsContainer').hide();
+            $('.ordersContainer').show();
+        }
+    });
+</script>

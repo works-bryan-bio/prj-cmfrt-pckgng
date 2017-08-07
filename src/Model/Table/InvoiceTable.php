@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
  * Invoice Model
  *
  * @property \Cake\ORM\Association\BelongsTo $Shipments
+ * @property \Cake\ORM\Association\BelongsTo $InventoryOrder
  * @property \Cake\ORM\Association\BelongsTo $Clients
  * @property \Cake\ORM\Association\HasMany $InvoiceDetails
  *
@@ -39,7 +40,11 @@ use Cake\Validation\Validator;
 
         $this->belongsTo('Shipments', [
             'foreignKey' => 'shipments_id',
-            'joinType' => 'INNER'
+            'joinType' => 'LEFT'
+        ]);
+        $this->belongsTo('InventoryOrder', [
+            'foreignKey' => 'inventory_order_id',
+            'joinType' => 'LEFT'
         ]);
         $this->belongsTo('Clients', [
             'foreignKey' => 'clients_id',
@@ -59,27 +64,104 @@ use Cake\Validation\Validator;
     public function validationDefault(Validator $validator)
     {
         $validator
-            ->integer('id')            ->allowEmpty('id', 'create');
+            ->integer('id')
+            ->allowEmpty('id', 'create');
         $validator
-            ->requirePresence('billing_address', 'create')            ->notEmpty('billing_address');
+            ->requirePresence('billing_address', 'create')
+            ->notEmpty('billing_address', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->requirePresence('terms', 'create')            ->notEmpty('terms');
+            ->requirePresence('terms', 'create')
+            ->notEmpty('terms', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->date('invoice_date')            ->requirePresence('invoice_date', 'create')            ->notEmpty('invoice_date');
+            ->date('invoice_date')
+            ->requirePresence('invoice_date', 'create')
+            ->notEmpty('invoice_date', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->date('due_date')            ->requirePresence('due_date', 'create')            ->notEmpty('due_date');
+            ->date('due_date')
+            ->requirePresence('due_date', 'create')
+            ->notEmpty('due_date', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->requirePresence('product_services', 'create')            ->notEmpty('product_services');
+            ->requirePresence('product_services', 'create')
+            ->notEmpty('product_services', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->requirePresence('description', 'create')            ->notEmpty('description');
+            ->requirePresence('description', 'create')
+            ->notEmpty('description', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->numeric('quantity')            ->requirePresence('quantity', 'create')            ->notEmpty('quantity');
+            ->numeric('quantity')
+            ->requirePresence('quantity', 'create')
+            ->notEmpty('quantity', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->numeric('rate')            ->requirePresence('rate', 'create')            ->notEmpty('rate');
+            ->numeric('rate')
+            ->requirePresence('rate', 'create')
+            ->notEmpty('rate', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->numeric('balance_due')            ->requirePresence('balance_due', 'create')            ->notEmpty('balance_due');
+            ->numeric('balance_due')
+            ->requirePresence('balance_due', 'create')
+            ->notEmpty('balance_due', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         $validator
-            ->dateTime('date_created')            ->requirePresence('date_created', 'create')            ->notEmpty('date_created');
+            ->dateTime('date_created')
+            ->requirePresence('date_created', 'create')
+            ->notEmpty('date_created', 'This field cannot be left empty', function ($context) {
+                $return = true;
+                if(isset($context['data']['check_off']) && $context['data']['check_off'] == 1){
+                    $return = false;
+                }
+                return $return;
+            });
         return $validator;
     }
 

@@ -8,6 +8,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $shipments_id
+ * @property int $inventory_order_id
  * @property int $clients_id
  * @property string $billing_address
  * @property string $terms
@@ -21,6 +22,7 @@ use Cake\ORM\Entity;
  * @property \Cake\I18n\Time $date_created
  *
  * @property \App\Model\Entity\Shipment $shipment
+ * @property \App\Model\Entity\InventoryOrder $inventoryOrder
  * @property \App\Model\Entity\Client $client
  * @property \App\Model\Entity\InvoiceDetail[] $invoice_details
  */class Invoice extends Entity
